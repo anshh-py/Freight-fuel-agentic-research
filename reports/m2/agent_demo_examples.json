@@ -1,0 +1,572 @@
+{
+  "pipeline": "M2.2 agent demo",
+  "generated_at": "2026-11-19T13:45:26.258390+00:00",
+  "routing_backend": "deterministic",
+  "is_llm": false,
+  "examples": [
+    {
+      "tag": "prediction",
+      "query": "Predict fuel consumption for this operating condition.",
+      "has_structured_inputs": true,
+      "response": {
+        "detected_intent": "fuel_prediction",
+        "router": {
+          "intent": "fuel_prediction",
+          "confidence": 0.85,
+          "reason": "structured vehicle inputs with a prediction request",
+          "backend": "deterministic"
+        },
+        "selected_tools": [
+          "fuel_rate_prediction"
+        ],
+        "tool_execution_results": [
+          {
+            "tool": "fuel_rate_prediction",
+            "status": "ok",
+            "result": {
+              "status": "ok",
+              "predicted_fuel_rate_lph": 52.5773,
+              "units": "L/h",
+              "feature_set": "full_operational",
+              "model": {
+                "name": "xgboost",
+                "artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\full_operational\\xgboost.joblib"
+              },
+              "preprocessor": {
+                "artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\full_operational\\preprocessor.joblib",
+                "transformed_columns": [
+                  "gross_vehicle_weight_kg",
+                  "payload_kg",
+                  "vehicle_mass_kg",
+                  "speed_kph",
+                  "acceleration_mps2",
+                  "road_grade_pct",
+                  "ignition_status",
+                  "engine_rpm",
+                  "engine_load_pct",
+                  "throttle_position_pct",
+                  "torque_nm",
+                  "coolant_temp_c",
+                  "intake_air_temp_c",
+                  "ambient_temp_c",
+                  "vehicle_class_40T",
+                  "vehicle_class_49T"
+                ]
+              },
+              "input_fields_used": {
+                "vehicle_class": "32T",
+                "gross_vehicle_weight_kg": 40000.0,
+                "payload_kg": 10000.0,
+                "vehicle_mass_kg": 30000.0,
+                "speed_kph": 75.0,
+                "acceleration_mps2": 0.1,
+                "road_grade_pct": 1.0,
+                "ignition_status": 1,
+                "engine_rpm": 1500.0,
+                "engine_load_pct": 60.0,
+                "throttle_position_pct": 40.0,
+                "torque_nm": 1200.0,
+                "coolant_temp_c": 85.0,
+                "intake_air_temp_c": 30.0,
+                "ambient_temp_c": 20.0
+              },
+              "provenance": {
+                "synthetic_training": true,
+                "model_is_estimate": true,
+                "note": "Predicted fuel rate is an estimate from a model trained on SYNTHETIC telemetry. It is not a validated real-world fuel measurement and must not be used for billing, compliance, or vehicle performance claims."
+              }
+            }
+          }
+        ],
+        "supporting_evidence": [
+          {
+            "tool": "fuel_rate_prediction",
+            "kind": "prediction",
+            "summary": {
+              "feature_set": "full_operational",
+              "predicted_fuel_rate_lph": 52.5773
+            }
+          }
+        ],
+        "limitations_and_warnings": [
+          "Routing is a deterministic rule-based baseline, not LLM reasoning or autonomous agent intelligence.",
+          "Prediction is an estimate from a synthetic-trained model; not a validated real-world fuel measurement."
+        ],
+        "final_response": "Predicted fuel rate: 52.5773 L/h (feature set: full_operational, model: xgboost). This is a synthetic-model estimate.",
+        "agent_mode": "deterministic_routing__not_llm"
+      }
+    },
+    {
+      "tag": "knowledge",
+      "query": "Why does road grade affect fuel consumption on heavy trucks?",
+      "has_structured_inputs": false,
+      "response": {
+        "detected_intent": "knowledge_query",
+        "router": {
+          "intent": "knowledge_query",
+          "confidence": 0.8,
+          "reason": "conceptual knowledge question without vehicle inputs",
+          "backend": "deterministic"
+        },
+        "selected_tools": [
+          "knowledge_retrieval"
+        ],
+        "tool_execution_results": [
+          {
+            "tool": "knowledge_retrieval",
+            "status": "ok",
+            "result": {
+              "status": "ok",
+              "query": "Why does road grade affect fuel consumption on heavy trucks?",
+              "n_results": 5,
+              "passages": [
+                {
+                  "rank": 1,
+                  "chunk_id": "doc_001__chunk_000",
+                  "document_id": "doc_001",
+                  "title": "What drives heavy-duty fuel consumption",
+                  "topic": "fuel_consumption_fundamentals",
+                  "source_type": "synthetic_educational",
+                  "source_reference": "Synthetic RAG corpus (non-OEM educational text; not manufacturer guidance)",
+                  "is_oem_manual": false,
+                  "score": 0.7204,
+                  "content_excerpt": "Fuel consumption of a heavy-duty truck is primarily driven by the power demanded at the wheels, which depends on the vehicle mass, speed, acceleration, aerodynamic drag, rolling resistance and road gradient. Higher demanded power requires more fuel per second. The fuel rate (L/h) is therefore an immediate proxy for engine load and driver demand, not a fixed vehicle property."
+                },
+                {
+                  "rank": 2,
+                  "chunk_id": "doc_012__chunk_000",
+                  "document_id": "doc_012",
+                  "title": "Aerodynamic drag grows with speed",
+                  "topic": "speed_variability_driving_behaviour",
+                  "source_type": "synthetic_educational",
+                  "source_reference": "Synthetic RAG corpus (non-OEM educational text; not manufacturer guidance)",
+                  "is_oem_manual": false,
+                  "score": 0.6325,
+                  "content_excerpt": "Aerodynamic drag rises with the square of speed, so the fuel cost per kilometre climbs quickly above about 70-80 kph. High-speed cruising consumes disproportionately more fuel than moderate-speed cruising for a heavy truck."
+                },
+                {
+                  "rank": 3,
+                  "chunk_id": "doc_007__chunk_000",
+                  "document_id": "doc_007",
+                  "title": "Payload and fuel consumption",
+                  "topic": "payload_effects",
+                  "source_type": "synthetic_educational",
+                  "source_reference": "Synthetic RAG corpus (non-OEM educational text; not manufacturer guidance)",
+                  "is_oem_manual": false,
+                  "score": 0.6248,
+                  "content_excerpt": "Adding payload increases vehicle mass, which raises rolling resistance and the force needed to accelerate and climb. Heavier loads therefore increase fuel rate, especially during acceleration and on grades. The effect is roughly proportional to mass on flat ground and stronger on gradients."
+                },
+                {
+                  "rank": 4,
+                  "chunk_id": "doc_009__chunk_000",
+                  "document_id": "doc_009",
+                  "title": "How road grade affects fuel and",
+                  "topic": "road_grade_effects",
+                  "source_type": "synthetic_educational",
+                  "source_reference": "Synthetic RAG corpus (non-OEM educational text; not manufacturer guidance)",
+                  "is_oem_manual": false,
+                  "score": 0.5985,
+                  "content_excerpt": "Climbing a grade requires extra force equal to the component of vehicle weight along the slope, which directly increases engine load and fuel rate. Descending can allow engine braking or coasting with little or no fuel. Steep, sustained uphill sections sharply increase fuel per kilometre."
+                },
+                {
+                  "rank": 5,
+                  "chunk_id": "doc_008__chunk_000",
+                  "document_id": "doc_008",
+                  "title": "Gross vehicle weight limits",
+                  "topic": "payload_effects",
+                  "source_type": "synthetic_educational",
+                  "source_reference": "Synthetic RAG corpus (non-OEM educational text; not manufacturer guidance)",
+                  "is_oem_manual": false,
+                  "score": 0.5687,
+                  "content_excerpt": "A truck's gross vehicle weight (GVW) is a rated maximum. Operating near GVW increases fuel use and drivetrain stress; operating at very low load improves fuel economy but reduces productivity per trip."
+                }
+              ],
+              "evidence_sufficiency": {
+                "insufficient": false,
+                "reason": "top passage meets similarity floor",
+                "min_score_floor": 0.45
+              },
+              "provenance": {
+                "corpus_synthetic": true,
+                "corpus_path": "data/synthetic_heavy_truck_research/rag_knowledge_corpus.jsonl",
+                "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+                "note": "All retrieved passages are SYNTHETIC educational material, not OEM/manufacturer documentation. Retrieval similarity is not proof of factual correctness.",
+                "similarity_not_proof_of_correctness": true
+              }
+            }
+          }
+        ],
+        "supporting_evidence": [
+          {
+            "tool": "knowledge_retrieval",
+            "kind": "retrieval",
+            "summary": {
+              "n_passages": 5,
+              "insufficient": false,
+              "top_document_id": "doc_001"
+            }
+          }
+        ],
+        "limitations_and_warnings": [
+          "Routing is a deterministic rule-based baseline, not LLM reasoning or autonomous agent intelligence.",
+          "Retrieval similarity is not proof of factual correctness; corpus is synthetic educational material, not OEM manuals."
+        ],
+        "final_response": "Most relevant retrieved passage: [doc_001] What drives heavy-duty fuel consumption (topic: fuel_consumption_fundamentals, similarity 0.720, synthetic source).",
+        "agent_mode": "deterministic_routing__not_llm"
+      }
+    },
+    {
+      "tag": "combined_knowledge_prediction",
+      "query": "Predict fuel consumption and explain how engine load affects it.",
+      "has_structured_inputs": true,
+      "response": {
+        "detected_intent": "combined_knowledge_prediction",
+        "router": {
+          "intent": "combined_knowledge_prediction",
+          "confidence": 0.8,
+          "reason": "structured vehicle inputs plus a knowledge-style question",
+          "backend": "deterministic"
+        },
+        "selected_tools": [
+          "knowledge_retrieval",
+          "fuel_rate_prediction"
+        ],
+        "tool_execution_results": [
+          {
+            "tool": "knowledge_retrieval",
+            "status": "ok",
+            "result": {
+              "status": "ok",
+              "query": "Predict fuel consumption and explain how engine load affects it.",
+              "n_results": 5,
+              "passages": [
+                {
+                  "rank": 1,
+                  "chunk_id": "doc_003__chunk_000",
+                  "document_id": "doc_003",
+                  "title": "Engine load and fuel demand",
+                  "topic": "engine_load_fuel_demand",
+                  "source_type": "synthetic_educational",
+                  "source_reference": "Synthetic RAG corpus (non-OEM educational text; not manufacturer guidance)",
+                  "is_oem_manual": false,
+                  "score": 0.6459,
+                  "content_excerpt": "Engine load (percent) reflects how much of the engine's rated power is being demanded. Higher load means the engine must inject more fuel to produce more torque and power. Fuel rate generally rises with engine load, roughly linearly at moderate loads and with lower efficiency at very high load."
+                },
+                {
+                  "rank": 2,
+                  "chunk_id": "doc_001__chunk_000",
+                  "document_id": "doc_001",
+                  "title": "What drives heavy-duty fuel consumption",
+                  "topic": "fuel_consumption_fundamentals",
+                  "source_type": "synthetic_educational",
+                  "source_reference": "Synthetic RAG corpus (non-OEM educational text; not manufacturer guidance)",
+                  "is_oem_manual": false,
+                  "score": 0.5708,
+                  "content_excerpt": "Fuel consumption of a heavy-duty truck is primarily driven by the power demanded at the wheels, which depends on the vehicle mass, speed, acceleration, aerodynamic drag, rolling resistance and road gradient. Higher demanded power requires more fuel per second. The fuel rate (L/h) is therefore an immediate proxy for engine load and driver demand, not a fixed vehicle property."
+                },
+                {
+                  "rank": 3,
+                  "chunk_id": "doc_021__chunk_000",
+                  "document_id": "doc_021",
+                  "title": "Do not use target-derived features",
+                  "topic": "model_limitations",
+                  "source_type": "synthetic_educational",
+                  "source_reference": "Synthetic RAG corpus (non-OEM educational text; not manufacturer guidance)",
+                  "is_oem_manual": false,
+                  "score": 0.5368,
+                  "content_excerpt": "Do not feed consumed-fuel increments or cumulative trip fuel into a model that predicts instantaneous fuel rate: these are integrals of the target and leak the answer. Exclude them, and never give the model future timestamps or future telemetry."
+                },
+                {
+                  "rank": 4,
+                  "chunk_id": "doc_007__chunk_000",
+                  "document_id": "doc_007",
+                  "title": "Payload and fuel consumption",
+                  "topic": "payload_effects",
+                  "source_type": "synthetic_educational",
+                  "source_reference": "Synthetic RAG corpus (non-OEM educational text; not manufacturer guidance)",
+                  "is_oem_manual": false,
+                  "score": 0.5005,
+                  "content_excerpt": "Adding payload increases vehicle mass, which raises rolling resistance and the force needed to accelerate and climb. Heavier loads therefore increase fuel rate, especially during acceleration and on grades. The effect is roughly proportional to mass on flat ground and stronger on gradients."
+                },
+                {
+                  "rank": 5,
+                  "chunk_id": "doc_014__chunk_000",
+                  "document_id": "doc_014",
+                  "title": "Fuel-rate units and scale",
+                  "topic": "fuel_rate_interpretation",
+                  "source_type": "synthetic_educational",
+                  "source_reference": "Synthetic RAG corpus (non-OEM educational text; not manufacturer guidance)",
+                  "is_oem_manual": false,
+                  "score": 0.4766,
+                  "content_excerpt": "In the datasets in this project, fuel rate is reported in litres per hour (L/h). Values range from near idle (a few L/h) up to well over 100 L/h during hard acceleration or climbing under load. Always convert to consistent units before comparing."
+                }
+              ],
+              "evidence_sufficiency": {
+                "insufficient": false,
+                "reason": "top passage meets similarity floor",
+                "min_score_floor": 0.45
+              },
+              "provenance": {
+                "corpus_synthetic": true,
+                "corpus_path": "data/synthetic_heavy_truck_research/rag_knowledge_corpus.jsonl",
+                "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+                "note": "All retrieved passages are SYNTHETIC educational material, not OEM/manufacturer documentation. Retrieval similarity is not proof of factual correctness.",
+                "similarity_not_proof_of_correctness": true
+              }
+            }
+          },
+          {
+            "tool": "fuel_rate_prediction",
+            "status": "ok",
+            "result": {
+              "status": "ok",
+              "predicted_fuel_rate_lph": 52.5773,
+              "units": "L/h",
+              "feature_set": "full_operational",
+              "model": {
+                "name": "xgboost",
+                "artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\full_operational\\xgboost.joblib"
+              },
+              "preprocessor": {
+                "artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\full_operational\\preprocessor.joblib",
+                "transformed_columns": [
+                  "gross_vehicle_weight_kg",
+                  "payload_kg",
+                  "vehicle_mass_kg",
+                  "speed_kph",
+                  "acceleration_mps2",
+                  "road_grade_pct",
+                  "ignition_status",
+                  "engine_rpm",
+                  "engine_load_pct",
+                  "throttle_position_pct",
+                  "torque_nm",
+                  "coolant_temp_c",
+                  "intake_air_temp_c",
+                  "ambient_temp_c",
+                  "vehicle_class_40T",
+                  "vehicle_class_49T"
+                ]
+              },
+              "input_fields_used": {
+                "vehicle_class": "32T",
+                "gross_vehicle_weight_kg": 40000.0,
+                "payload_kg": 10000.0,
+                "vehicle_mass_kg": 30000.0,
+                "speed_kph": 75.0,
+                "acceleration_mps2": 0.1,
+                "road_grade_pct": 1.0,
+                "ignition_status": 1,
+                "engine_rpm": 1500.0,
+                "engine_load_pct": 60.0,
+                "throttle_position_pct": 40.0,
+                "torque_nm": 1200.0,
+                "coolant_temp_c": 85.0,
+                "intake_air_temp_c": 30.0,
+                "ambient_temp_c": 20.0
+              },
+              "provenance": {
+                "synthetic_training": true,
+                "model_is_estimate": true,
+                "note": "Predicted fuel rate is an estimate from a model trained on SYNTHETIC telemetry. It is not a validated real-world fuel measurement and must not be used for billing, compliance, or vehicle performance claims."
+              }
+            }
+          }
+        ],
+        "supporting_evidence": [
+          {
+            "tool": "knowledge_retrieval",
+            "kind": "retrieval",
+            "summary": {
+              "n_passages": 5,
+              "insufficient": false,
+              "top_document_id": "doc_003"
+            }
+          },
+          {
+            "tool": "fuel_rate_prediction",
+            "kind": "prediction",
+            "summary": {
+              "feature_set": "full_operational",
+              "predicted_fuel_rate_lph": 52.5773
+            }
+          }
+        ],
+        "limitations_and_warnings": [
+          "Routing is a deterministic rule-based baseline, not LLM reasoning or autonomous agent intelligence.",
+          "Retrieval similarity is not proof of factual correctness; corpus is synthetic educational material, not OEM manuals.",
+          "Prediction is an estimate from a synthetic-trained model; not a validated real-world fuel measurement."
+        ],
+        "final_response": "Predicted fuel rate: 52.5773 L/h (feature set: full_operational, model: xgboost). This is a synthetic-model estimate. Most relevant retrieved passage: [doc_003] Engine load and fuel demand (topic: engine_load_fuel_demand, similarity 0.646, synthetic source).",
+        "agent_mode": "deterministic_routing__not_llm"
+      }
+    },
+    {
+      "tag": "explanation",
+      "query": "Explain this prediction.",
+      "has_structured_inputs": true,
+      "response": {
+        "detected_intent": "prediction_explanation",
+        "router": {
+          "intent": "prediction_explanation",
+          "confidence": 0.85,
+          "reason": "structured inputs present and explanation requested",
+          "backend": "deterministic"
+        },
+        "selected_tools": [
+          "prediction_explanation"
+        ],
+        "tool_execution_results": [
+          {
+            "tool": "prediction_explanation",
+            "status": "ok",
+            "result": {
+              "status": "ok",
+              "predicted_fuel_rate_lph": 52.5773,
+              "feature_set": "full_operational",
+              "model": {
+                "name": "xgboost",
+                "artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\full_operational\\xgboost.joblib"
+              },
+              "explanation_kind": "instance_level_shap",
+              "summary_statistic": "per-instance SHAP contribution (not mean |SHAP|)",
+              "top_features": 5,
+              "expected_value": 41.5477,
+              "reconstruction": {
+                "pass": true,
+                "max_abs_deviation": 1.6e-05,
+                "tolerance": 0.001
+              },
+              "most_influential_features": {
+                "top_positive_shap": [
+                  {
+                    "column": "torque_nm",
+                    "readable_label": "Torque (N\u00b7m)",
+                    "shap": 20.106273651123047
+                  },
+                  {
+                    "column": "vehicle_mass_kg",
+                    "readable_label": "Vehicle mass (kg)",
+                    "shap": 0.5922604203224182
+                  },
+                  {
+                    "column": "throttle_position_pct",
+                    "readable_label": "Throttle position (%)",
+                    "shap": 0.4134376645088196
+                  },
+                  {
+                    "column": "speed_kph",
+                    "readable_label": "Speed (kph)",
+                    "shap": 0.10839730501174927
+                  },
+                  {
+                    "column": "ambient_temp_c",
+                    "readable_label": "Ambient temp (\u00b0C)",
+                    "shap": 0.08804202824831009
+                  }
+                ],
+                "top_negative_shap": [
+                  {
+                    "column": "engine_rpm",
+                    "readable_label": "Engine speed (rpm)",
+                    "shap": -6.597177982330322
+                  },
+                  {
+                    "column": "engine_load_pct",
+                    "readable_label": "Engine load (%)",
+                    "shap": -1.785262942314148
+                  },
+                  {
+                    "column": "payload_kg",
+                    "readable_label": "Payload (kg)",
+                    "shap": -1.3258050680160522
+                  },
+                  {
+                    "column": "intake_air_temp_c",
+                    "readable_label": "Intake air temp (\u00b0C)",
+                    "shap": -0.5232276916503906
+                  },
+                  {
+                    "column": "acceleration_mps2",
+                    "readable_label": "Acceleration (m/s\u00b2)",
+                    "shap": -0.13266806304454803
+                  }
+                ]
+              },
+              "limitations": {
+                "shap_is_not_causal": true,
+                "note": "SHAP attribution describes how the model's prediction is composed from its input features. It is not a causal explanation and does not imply a real-world causal effect.",
+                "instance_scope": "This is an instance-level explanation computed from SHAP for the single input record, not a global feature-importance ranking."
+              },
+              "provenance": {
+                "synthetic_training": true,
+                "model_is_estimate": true,
+                "shap_sh_library": "shap.TreeExplainer"
+              }
+            }
+          }
+        ],
+        "supporting_evidence": [
+          {
+            "tool": "prediction_explanation",
+            "kind": "explanation",
+            "summary": {
+              "feature_set": "full_operational",
+              "predicted_fuel_rate_lph": 52.5773
+            }
+          }
+        ],
+        "limitations_and_warnings": [
+          "Routing is a deterministic rule-based baseline, not LLM reasoning or autonomous agent intelligence.",
+          "SHAP attribution is not causality."
+        ],
+        "final_response": "Instance-level SHAP for the predicted 52.5773 L/h: main positive drivers: Torque (N\u00b7m) (+20.11), Vehicle mass (kg) (+0.59), Throttle position (%) (+0.41), Speed (kph) (+0.11), Ambient temp (\u00b0C) (+0.09); main negative drivers: Engine speed (rpm) (-6.60), Engine load (%) (-1.79), Payload (kg) (-1.33), Intake air temp (\u00b0C) (-0.52), Acceleration (m/s\u00b2) (-0.13). SHAP is attribution for the model, not causality.",
+        "agent_mode": "deterministic_routing__not_llm"
+      }
+    },
+    {
+      "tag": "unsupported",
+      "query": "What is the official manufacturer torque limit for this truck?",
+      "has_structured_inputs": false,
+      "response": {
+        "detected_intent": "unsupported",
+        "router": {
+          "intent": "unsupported",
+          "confidence": 0.9,
+          "reason": "query asks for out-of-scope real-world/manufacturer information that the synthetic project cannot provide",
+          "backend": "deterministic"
+        },
+        "selected_tools": [],
+        "tool_execution_results": [],
+        "supporting_evidence": [],
+        "limitations_and_warnings": [
+          "Routing is a deterministic rule-based baseline, not LLM reasoning or autonomous agent intelligence."
+        ],
+        "final_response": "I can't answer that within this project's scope. The agent works on synthetic fuel-rate prediction, retrieval over a synthetic knowledge corpus, and model-explanation only; it does not provide real-world, manufacturer, or maintenance information.",
+        "agent_mode": "deterministic_routing__not_llm"
+      }
+    },
+    {
+      "tag": "ambiguous",
+      "query": "banana split",
+      "has_structured_inputs": false,
+      "response": {
+        "detected_intent": "ambiguous",
+        "router": {
+          "intent": "ambiguous",
+          "confidence": 0.4,
+          "reason": "no decisive intent signal",
+          "backend": "deterministic"
+        },
+        "selected_tools": [],
+        "tool_execution_results": [],
+        "supporting_evidence": [],
+        "limitations_and_warnings": [
+          "Routing is a deterministic rule-based baseline, not LLM reasoning or autonomous agent intelligence."
+        ],
+        "final_response": "I couldn't pin down a single intent. Please ask for a fuel prediction (with vehicle inputs), a knowledge question, an explanation, or a combination.",
+        "agent_mode": "deterministic_routing__not_llm"
+      }
+    }
+  ]
+}

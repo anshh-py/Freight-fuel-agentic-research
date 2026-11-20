@@ -1,0 +1,1496 @@
+{
+  "dataset": "M2.3 response-evaluation",
+  "n_scenarios": 21,
+  "n_passed": 21,
+  "n_failed": 0,
+  "all_passed": true,
+  "results": [
+    {
+      "id": "P01",
+      "category": "prediction_only",
+      "description": "Real prediction query with full_operational inputs.",
+      "build": "real",
+      "status": "ok",
+      "all_passed": true,
+      "expected_pass": {
+        "synthetic_disclaimer": true,
+        "prediction_value_preserved": true,
+        "causal_language": true,
+        "oem_mislabeling": true,
+        "failure_not_presented_as_success": true
+      },
+      "expected_violations": {},
+      "check_summary": {
+        "total": 9,
+        "passed": 9,
+        "failed": 0,
+        "failed_checks": []
+      },
+      "driver_postview_preview": "Estimated fuel rate: 52.5773 L/h (model: xgboost, feature set: full_operational).\n\nThis is an estimate from a model trained on SYNTHETIC telemetry, not a validated real-world fuel measurement. Do not use it for billing, compliance, or vehic",
+      "manual_review": "Check readability of the no-jargon driver summary.",
+      "checks": [
+        {
+          "check_id": "synthetic_disclaimer",
+          "passed": true,
+          "detail": "prediction carries the synthetic disclaimer"
+        },
+        {
+          "check_id": "causal_language",
+          "passed": true,
+          "detail": "no causal language detected; explanation carries the non-causal disclaimer"
+        },
+        {
+          "check_id": "oem_mislabeling",
+          "passed": true,
+          "detail": "no OEM/authoritative framing of synthetic corpus content"
+        },
+        {
+          "check_id": "synthetic_corpus_notice",
+          "passed": true,
+          "detail": "corpus provenance notice present where passages are cited"
+        },
+        {
+          "check_id": "source_attribution",
+          "passed": true,
+          "detail": "all cited sources correspond to retrieved document ids"
+        },
+        {
+          "check_id": "insufficient_evidence_stated",
+          "passed": true,
+          "detail": "insufficient evidence is stated explicitly"
+        },
+        {
+          "check_id": "failure_not_presented_as_success",
+          "passed": true,
+          "detail": "no tool failures to disclose"
+        },
+        {
+          "check_id": "prediction_value_preserved",
+          "passed": true,
+          "detail": "predicted value {val} preserved"
+        },
+        {
+          "check_id": "shap_value_preserved",
+          "passed": true,
+          "detail": "no explanation block"
+        }
+      ]
+    },
+    {
+      "id": "P02",
+      "category": "prediction_only",
+      "description": "Telematics-only feature set prediction.",
+      "build": "synthetic",
+      "status": "ok",
+      "all_passed": true,
+      "expected_pass": {
+        "synthetic_disclaimer": true,
+        "prediction_value_preserved": true,
+        "causal_language": true,
+        "oem_mislabeling": true
+      },
+      "expected_violations": {},
+      "check_summary": {
+        "total": 9,
+        "passed": 9,
+        "failed": 0,
+        "failed_checks": []
+      },
+      "driver_postview_preview": "Estimated fuel rate: 89.2247 L/h (model: xgboost, feature set: telematics_only).\n\nThis is an estimate from a model trained on SYNTHETIC telemetry, not a validated real-world fuel measurement. Do not use it for billing, compliance, or vehicl",
+      "manual_review": "Confirm the telematics feature set is clearly labelled.",
+      "checks": [
+        {
+          "check_id": "synthetic_disclaimer",
+          "passed": true,
+          "detail": "prediction carries the synthetic disclaimer"
+        },
+        {
+          "check_id": "causal_language",
+          "passed": true,
+          "detail": "no causal language detected; explanation carries the non-causal disclaimer"
+        },
+        {
+          "check_id": "oem_mislabeling",
+          "passed": true,
+          "detail": "no OEM/authoritative framing of synthetic corpus content"
+        },
+        {
+          "check_id": "synthetic_corpus_notice",
+          "passed": true,
+          "detail": "corpus provenance notice present where passages are cited"
+        },
+        {
+          "check_id": "source_attribution",
+          "passed": true,
+          "detail": "all cited sources correspond to retrieved document ids"
+        },
+        {
+          "check_id": "insufficient_evidence_stated",
+          "passed": true,
+          "detail": "insufficient evidence is stated explicitly"
+        },
+        {
+          "check_id": "failure_not_presented_as_success",
+          "passed": true,
+          "detail": "no tool failures to disclose"
+        },
+        {
+          "check_id": "prediction_value_preserved",
+          "passed": true,
+          "detail": "predicted value {val} preserved"
+        },
+        {
+          "check_id": "shap_value_preserved",
+          "passed": true,
+          "detail": "no explanation block"
+        }
+      ]
+    },
+    {
+      "id": "K01",
+      "category": "knowledge_only",
+      "description": "Real knowledge query.",
+      "build": "real",
+      "status": "ok",
+      "all_passed": true,
+      "expected_pass": {
+        "source_attribution": true,
+        "synthetic_corpus_notice": true,
+        "oem_mislabeling": true,
+        "insufficient_evidence_stated": true,
+        "causal_language": true
+      },
+      "expected_violations": {},
+      "check_summary": {
+        "total": 9,
+        "passed": 9,
+        "failed": 0,
+        "failed_checks": []
+      },
+      "driver_postview_preview": "Relevant knowledge (retrieved passages):\n\n  - [doc_001] What drives heavy-duty fuel consumption (topic: fuel_consumption_fundamentals; similarity 0.697).\n\n  - [doc_007] Payload and fuel consumption (topic: payload_effects; similarity 0.593)",
+      "manual_review": "Passages are clearly cited with ids and synthetic provenance.",
+      "checks": [
+        {
+          "check_id": "synthetic_disclaimer",
+          "passed": true,
+          "detail": "prediction carries the synthetic disclaimer"
+        },
+        {
+          "check_id": "causal_language",
+          "passed": true,
+          "detail": "no causal language detected; explanation carries the non-causal disclaimer"
+        },
+        {
+          "check_id": "oem_mislabeling",
+          "passed": true,
+          "detail": "no OEM/authoritative framing of synthetic corpus content"
+        },
+        {
+          "check_id": "synthetic_corpus_notice",
+          "passed": true,
+          "detail": "corpus provenance notice present where passages are cited"
+        },
+        {
+          "check_id": "source_attribution",
+          "passed": true,
+          "detail": "all cited sources correspond to retrieved document ids"
+        },
+        {
+          "check_id": "insufficient_evidence_stated",
+          "passed": true,
+          "detail": "insufficient evidence is stated explicitly"
+        },
+        {
+          "check_id": "failure_not_presented_as_success",
+          "passed": true,
+          "detail": "no tool failures to disclose"
+        },
+        {
+          "check_id": "prediction_value_preserved",
+          "passed": true,
+          "detail": "no prediction block"
+        },
+        {
+          "check_id": "shap_value_preserved",
+          "passed": true,
+          "detail": "no explanation block"
+        }
+      ]
+    },
+    {
+      "id": "E01",
+      "category": "prediction_plus_explanation",
+      "description": "Real prediction + instance SHAP explanation.",
+      "build": "synthetic",
+      "status": "ok",
+      "all_passed": true,
+      "expected_pass": {
+        "prediction_value_preserved": true,
+        "shap_value_preserved": true,
+        "synthetic_disclaimer": true,
+        "causal_language": true,
+        "oem_mislabeling": true
+      },
+      "expected_violations": {},
+      "check_summary": {
+        "total": 9,
+        "passed": 9,
+        "failed": 0,
+        "failed_checks": []
+      },
+      "driver_postview_preview": "Estimated fuel rate: 52.5773 L/h (model: xgboost, feature set: full_operational).\n\nThis is an estimate from a model trained on SYNTHETIC telemetry, not a validated real-world fuel measurement. Do not use it for billing, compliance, or vehic",
+      "manual_review": "Driver version should show estimated rate, top drivers, and limitations.",
+      "checks": [
+        {
+          "check_id": "synthetic_disclaimer",
+          "passed": true,
+          "detail": "prediction carries the synthetic disclaimer"
+        },
+        {
+          "check_id": "causal_language",
+          "passed": true,
+          "detail": "no causal language detected; explanation carries the non-causal disclaimer"
+        },
+        {
+          "check_id": "oem_mislabeling",
+          "passed": true,
+          "detail": "no OEM/authoritative framing of synthetic corpus content"
+        },
+        {
+          "check_id": "synthetic_corpus_notice",
+          "passed": true,
+          "detail": "corpus provenance notice present where passages are cited"
+        },
+        {
+          "check_id": "source_attribution",
+          "passed": true,
+          "detail": "all cited sources correspond to retrieved document ids"
+        },
+        {
+          "check_id": "insufficient_evidence_stated",
+          "passed": true,
+          "detail": "insufficient evidence is stated explicitly"
+        },
+        {
+          "check_id": "failure_not_presented_as_success",
+          "passed": true,
+          "detail": "no tool failures to disclose"
+        },
+        {
+          "check_id": "prediction_value_preserved",
+          "passed": true,
+          "detail": "predicted value {val} preserved"
+        },
+        {
+          "check_id": "shap_value_preserved",
+          "passed": true,
+          "detail": "top SHAP value +20.11 preserved"
+        }
+      ]
+    },
+    {
+      "id": "C01",
+      "category": "combined_knowledge_prediction",
+      "description": "Real combined knowledge + prediction.",
+      "build": "real",
+      "status": "ok",
+      "all_passed": true,
+      "expected_pass": {
+        "source_attribution": true,
+        "synthetic_corpus_notice": true,
+        "prediction_value_preserved": true,
+        "causal_language": true,
+        "oem_mislabeling": true
+      },
+      "expected_violations": {},
+      "check_summary": {
+        "total": 9,
+        "passed": 9,
+        "failed": 0,
+        "failed_checks": []
+      },
+      "driver_postview_preview": "Estimated fuel rate: 52.5773 L/h (model: xgboost, feature set: full_operational).\n\nThis is an estimate from a model trained on SYNTHETIC telemetry, not a validated real-world fuel measurement. Do not use it for billing, compliance, or vehic",
+      "manual_review": "Combined response must keep prediction and evidence clearly separated.",
+      "checks": [
+        {
+          "check_id": "synthetic_disclaimer",
+          "passed": true,
+          "detail": "prediction carries the synthetic disclaimer"
+        },
+        {
+          "check_id": "causal_language",
+          "passed": true,
+          "detail": "no causal language detected; explanation carries the non-causal disclaimer"
+        },
+        {
+          "check_id": "oem_mislabeling",
+          "passed": true,
+          "detail": "no OEM/authoritative framing of synthetic corpus content"
+        },
+        {
+          "check_id": "synthetic_corpus_notice",
+          "passed": true,
+          "detail": "corpus provenance notice present where passages are cited"
+        },
+        {
+          "check_id": "source_attribution",
+          "passed": true,
+          "detail": "all cited sources correspond to retrieved document ids"
+        },
+        {
+          "check_id": "insufficient_evidence_stated",
+          "passed": true,
+          "detail": "insufficient evidence is stated explicitly"
+        },
+        {
+          "check_id": "failure_not_presented_as_success",
+          "passed": true,
+          "detail": "no tool failures to disclose"
+        },
+        {
+          "check_id": "prediction_value_preserved",
+          "passed": true,
+          "detail": "predicted value {val} preserved"
+        },
+        {
+          "check_id": "shap_value_preserved",
+          "passed": true,
+          "detail": "no explanation block"
+        }
+      ]
+    },
+    {
+      "id": "U01",
+      "category": "ambiguous",
+      "description": "Ambiguous query (no decisive intent).",
+      "build": "real",
+      "status": "ok",
+      "all_passed": true,
+      "expected_pass": {
+        "unsupported_not_answered": true,
+        "causal_language": true,
+        "oem_mislabeling": true
+      },
+      "expected_violations": {},
+      "check_summary": {
+        "total": 10,
+        "passed": 10,
+        "failed": 0,
+        "failed_checks": []
+      },
+      "driver_postview_preview": "I couldn't pin down a single request. Please ask for a fuel prediction (with vehicle inputs), a knowledge question, an explanation, or a combination.\n\nRouting is a deterministic rule-based baseline, not LLM reasoning or autonomous reasoning",
+      "manual_review": "Response should ask for clarification, not guess.",
+      "checks": [
+        {
+          "check_id": "synthetic_disclaimer",
+          "passed": true,
+          "detail": "prediction carries the synthetic disclaimer"
+        },
+        {
+          "check_id": "causal_language",
+          "passed": true,
+          "detail": "no causal language detected; explanation carries the non-causal disclaimer"
+        },
+        {
+          "check_id": "oem_mislabeling",
+          "passed": true,
+          "detail": "no OEM/authoritative framing of synthetic corpus content"
+        },
+        {
+          "check_id": "synthetic_corpus_notice",
+          "passed": true,
+          "detail": "corpus provenance notice present where passages are cited"
+        },
+        {
+          "check_id": "source_attribution",
+          "passed": true,
+          "detail": "all cited sources correspond to retrieved document ids"
+        },
+        {
+          "check_id": "insufficient_evidence_stated",
+          "passed": true,
+          "detail": "insufficient evidence is stated explicitly"
+        },
+        {
+          "check_id": "failure_not_presented_as_success",
+          "passed": true,
+          "detail": "no tool failures to disclose"
+        },
+        {
+          "check_id": "prediction_value_preserved",
+          "passed": true,
+          "detail": "no prediction block"
+        },
+        {
+          "check_id": "shap_value_preserved",
+          "passed": true,
+          "detail": "no explanation block"
+        },
+        {
+          "check_id": "unsupported_not_answered",
+          "passed": true,
+          "detail": "unsupported query handled without fabricating specifications"
+        }
+      ]
+    },
+    {
+      "id": "U02",
+      "category": "unsupported_oem_spec",
+      "description": "Out-of-scope OEM specification request.",
+      "build": "real",
+      "status": "ok",
+      "all_passed": true,
+      "expected_pass": {
+        "unsupported_not_answered": true,
+        "causal_language": true,
+        "oem_mislabeling": true
+      },
+      "expected_violations": {},
+      "check_summary": {
+        "total": 10,
+        "passed": 10,
+        "failed": 0,
+        "failed_checks": []
+      },
+      "driver_postview_preview": "I can't answer that within this project's scope: the agent only works with synthetic fuel-rate prediction, retrieval over a synthetic knowledge corpus, and model explanation. It does not provide real-world, manufacturer, or maintenance info",
+      "manual_review": "Must decline without inventing a torque value.",
+      "checks": [
+        {
+          "check_id": "synthetic_disclaimer",
+          "passed": true,
+          "detail": "prediction carries the synthetic disclaimer"
+        },
+        {
+          "check_id": "causal_language",
+          "passed": true,
+          "detail": "no causal language detected; explanation carries the non-causal disclaimer"
+        },
+        {
+          "check_id": "oem_mislabeling",
+          "passed": true,
+          "detail": "no OEM/authoritative framing of synthetic corpus content"
+        },
+        {
+          "check_id": "synthetic_corpus_notice",
+          "passed": true,
+          "detail": "corpus provenance notice present where passages are cited"
+        },
+        {
+          "check_id": "source_attribution",
+          "passed": true,
+          "detail": "all cited sources correspond to retrieved document ids"
+        },
+        {
+          "check_id": "insufficient_evidence_stated",
+          "passed": true,
+          "detail": "insufficient evidence is stated explicitly"
+        },
+        {
+          "check_id": "failure_not_presented_as_success",
+          "passed": true,
+          "detail": "no tool failures to disclose"
+        },
+        {
+          "check_id": "prediction_value_preserved",
+          "passed": true,
+          "detail": "no prediction block"
+        },
+        {
+          "check_id": "shap_value_preserved",
+          "passed": true,
+          "detail": "no explanation block"
+        },
+        {
+          "check_id": "unsupported_not_answered",
+          "passed": true,
+          "detail": "unsupported query handled without fabricating specifications"
+        }
+      ]
+    },
+    {
+      "id": "F01",
+      "category": "tool_failure",
+      "description": "Invalid input causes prediction-tool failure; must be disclosed.",
+      "build": "real",
+      "status": "ok",
+      "all_passed": true,
+      "expected_pass": {
+        "failure_not_presented_as_success": true,
+        "causal_language": true
+      },
+      "expected_violations": {},
+      "check_summary": {
+        "total": 9,
+        "passed": 9,
+        "failed": 0,
+        "failed_checks": []
+      },
+      "driver_postview_preview": "One or more underlying tools failed, so I cannot provide a complete trusted answer. The failed component(s): fuel_rate_prediction. No output from a failed tool is presented as a success.\n\nNot supported by the evidence: operational driver re",
+      "manual_review": "Failure must be explicit; no predicted value fabricated.",
+      "checks": [
+        {
+          "check_id": "synthetic_disclaimer",
+          "passed": true,
+          "detail": "prediction carries the synthetic disclaimer"
+        },
+        {
+          "check_id": "causal_language",
+          "passed": true,
+          "detail": "no causal language detected; explanation carries the non-causal disclaimer"
+        },
+        {
+          "check_id": "oem_mislabeling",
+          "passed": true,
+          "detail": "no OEM/authoritative framing of synthetic corpus content"
+        },
+        {
+          "check_id": "synthetic_corpus_notice",
+          "passed": true,
+          "detail": "corpus provenance notice present where passages are cited"
+        },
+        {
+          "check_id": "source_attribution",
+          "passed": true,
+          "detail": "all cited sources correspond to retrieved document ids"
+        },
+        {
+          "check_id": "insufficient_evidence_stated",
+          "passed": true,
+          "detail": "insufficient evidence is stated explicitly"
+        },
+        {
+          "check_id": "failure_not_presented_as_success",
+          "passed": true,
+          "detail": "tool failure is disclosed, not presented as success"
+        },
+        {
+          "check_id": "prediction_value_preserved",
+          "passed": true,
+          "detail": "no prediction block"
+        },
+        {
+          "check_id": "shap_value_preserved",
+          "passed": true,
+          "detail": "no explanation block"
+        }
+      ]
+    },
+    {
+      "id": "I01",
+      "category": "insufficient_evidence",
+      "description": "Real retrieval with a high similarity floor yields insufficient evidence.",
+      "build": "real",
+      "status": "ok",
+      "all_passed": true,
+      "expected_pass": {
+        "insufficient_evidence_stated": true,
+        "causal_language": true,
+        "oem_mislabeling": true
+      },
+      "expected_violations": {},
+      "check_summary": {
+        "total": 9,
+        "passed": 9,
+        "failed": 0,
+        "failed_checks": []
+      },
+      "driver_postview_preview": "Relevant knowledge: no sufficiently supportive passage was retrieved from the synthetic corpus for this question. I will not invent information to fill the gap.\n\nNot supported by the evidence: operational driver recommendation \u2014 No sufficie",
+      "manual_review": "Response must explicitly say evidence is insufficient.",
+      "checks": [
+        {
+          "check_id": "synthetic_disclaimer",
+          "passed": true,
+          "detail": "prediction carries the synthetic disclaimer"
+        },
+        {
+          "check_id": "causal_language",
+          "passed": true,
+          "detail": "no causal language detected; explanation carries the non-causal disclaimer"
+        },
+        {
+          "check_id": "oem_mislabeling",
+          "passed": true,
+          "detail": "no OEM/authoritative framing of synthetic corpus content"
+        },
+        {
+          "check_id": "synthetic_corpus_notice",
+          "passed": true,
+          "detail": "corpus provenance notice present where passages are cited"
+        },
+        {
+          "check_id": "source_attribution",
+          "passed": true,
+          "detail": "all cited sources correspond to retrieved document ids"
+        },
+        {
+          "check_id": "insufficient_evidence_stated",
+          "passed": true,
+          "detail": "insufficient evidence is stated explicitly"
+        },
+        {
+          "check_id": "failure_not_presented_as_success",
+          "passed": true,
+          "detail": "no tool failures to disclose"
+        },
+        {
+          "check_id": "prediction_value_preserved",
+          "passed": true,
+          "detail": "no prediction block"
+        },
+        {
+          "check_id": "shap_value_preserved",
+          "passed": true,
+          "detail": "no explanation block"
+        }
+      ]
+    },
+    {
+      "id": "N01",
+      "category": "contradictory_or_prohibited",
+      "description": "Hypothetical bad response claiming a causal effect.",
+      "build": "synthetic",
+      "status": "ok",
+      "all_passed": true,
+      "expected_pass": {},
+      "expected_violations": {
+        "causal_language": true
+      },
+      "check_summary": {
+        "total": 9,
+        "passed": 6,
+        "failed": 3,
+        "failed_checks": [
+          "causal_language",
+          "shap_value_preserved",
+          "synthetic_disclaimer"
+        ]
+      },
+      "driver_postview_preview": "The torque caused the higher fuel rate; reducing torque will reduce fuel consumption by 20 L/h.",
+      "manual_review": "Validation must flag the causal claim.",
+      "checks": [
+        {
+          "check_id": "synthetic_disclaimer",
+          "passed": false,
+          "detail": "prediction present without a synthetic-trained-model disclaimer"
+        },
+        {
+          "check_id": "causal_language",
+          "passed": false,
+          "detail": "response asserts a causal/real-world effect of a feature"
+        },
+        {
+          "check_id": "oem_mislabeling",
+          "passed": true,
+          "detail": "no OEM/authoritative framing of synthetic corpus content"
+        },
+        {
+          "check_id": "synthetic_corpus_notice",
+          "passed": true,
+          "detail": "corpus provenance notice present where passages are cited"
+        },
+        {
+          "check_id": "source_attribution",
+          "passed": true,
+          "detail": "all cited sources correspond to retrieved document ids"
+        },
+        {
+          "check_id": "insufficient_evidence_stated",
+          "passed": true,
+          "detail": "insufficient evidence is stated explicitly"
+        },
+        {
+          "check_id": "failure_not_presented_as_success",
+          "passed": true,
+          "detail": "no tool failures to disclose"
+        },
+        {
+          "check_id": "prediction_value_preserved",
+          "passed": true,
+          "detail": "no prediction block"
+        },
+        {
+          "check_id": "shap_value_preserved",
+          "passed": false,
+          "detail": "explanation has no positive contributions"
+        }
+      ]
+    },
+    {
+      "id": "N02",
+      "category": "contradictory_or_prohibited",
+      "description": "Hypothetical response presenting corpus as OEM documentation.",
+      "build": "synthetic",
+      "status": "ok",
+      "all_passed": true,
+      "expected_pass": {},
+      "expected_violations": {
+        "oem_mislabeling": true
+      },
+      "check_summary": {
+        "total": 9,
+        "passed": 7,
+        "failed": 2,
+        "failed_checks": [
+          "oem_mislabeling",
+          "synthetic_corpus_notice"
+        ]
+      },
+      "driver_postview_preview": "Per the manufacturer specification in doc_001, grade raises fuel use.",
+      "manual_review": "Validation must flag OEM framing of synthetic corpus.",
+      "checks": [
+        {
+          "check_id": "synthetic_disclaimer",
+          "passed": true,
+          "detail": "prediction carries the synthetic disclaimer"
+        },
+        {
+          "check_id": "causal_language",
+          "passed": true,
+          "detail": "no causal language detected; explanation carries the non-causal disclaimer"
+        },
+        {
+          "check_id": "oem_mislabeling",
+          "passed": false,
+          "detail": "response presents synthetic corpus content as OEM/manufacturer documentation"
+        },
+        {
+          "check_id": "synthetic_corpus_notice",
+          "passed": false,
+          "detail": "passage cited without the synthetic-educational provenance notice"
+        },
+        {
+          "check_id": "source_attribution",
+          "passed": true,
+          "detail": "all cited sources correspond to retrieved document ids"
+        },
+        {
+          "check_id": "insufficient_evidence_stated",
+          "passed": true,
+          "detail": "insufficient evidence is stated explicitly"
+        },
+        {
+          "check_id": "failure_not_presented_as_success",
+          "passed": true,
+          "detail": "no tool failures to disclose"
+        },
+        {
+          "check_id": "prediction_value_preserved",
+          "passed": true,
+          "detail": "no prediction block"
+        },
+        {
+          "check_id": "shap_value_preserved",
+          "passed": true,
+          "detail": "no explanation block"
+        }
+      ]
+    },
+    {
+      "id": "N03",
+      "category": "contradictory_or_prohibited",
+      "description": "Prediction without the synthetic-trained-model disclaimer.",
+      "build": "synthetic",
+      "status": "ok",
+      "all_passed": true,
+      "expected_pass": {},
+      "expected_violations": {
+        "synthetic_disclaimer": true
+      },
+      "check_summary": {
+        "total": 9,
+        "passed": 8,
+        "failed": 1,
+        "failed_checks": [
+          "synthetic_disclaimer"
+        ]
+      },
+      "driver_postview_preview": "Estimated fuel rate: 52.5773 L/h.",
+      "manual_review": "Validation must detect the missing disclaimer.",
+      "checks": [
+        {
+          "check_id": "synthetic_disclaimer",
+          "passed": false,
+          "detail": "prediction present without a synthetic-trained-model disclaimer"
+        },
+        {
+          "check_id": "causal_language",
+          "passed": true,
+          "detail": "no causal language detected; explanation carries the non-causal disclaimer"
+        },
+        {
+          "check_id": "oem_mislabeling",
+          "passed": true,
+          "detail": "no OEM/authoritative framing of synthetic corpus content"
+        },
+        {
+          "check_id": "synthetic_corpus_notice",
+          "passed": true,
+          "detail": "corpus provenance notice present where passages are cited"
+        },
+        {
+          "check_id": "source_attribution",
+          "passed": true,
+          "detail": "all cited sources correspond to retrieved document ids"
+        },
+        {
+          "check_id": "insufficient_evidence_stated",
+          "passed": true,
+          "detail": "insufficient evidence is stated explicitly"
+        },
+        {
+          "check_id": "failure_not_presented_as_success",
+          "passed": true,
+          "detail": "no tool failures to disclose"
+        },
+        {
+          "check_id": "prediction_value_preserved",
+          "passed": true,
+          "detail": "predicted value {val} preserved"
+        },
+        {
+          "check_id": "shap_value_preserved",
+          "passed": true,
+          "detail": "no explanation block"
+        }
+      ]
+    },
+    {
+      "id": "N04",
+      "category": "contradictory_or_prohibited",
+      "description": "Response cites a source id not present in retrieved evidence.",
+      "build": "synthetic",
+      "status": "ok",
+      "all_passed": true,
+      "expected_pass": {},
+      "expected_violations": {
+        "source_attribution": true
+      },
+      "check_summary": {
+        "total": 9,
+        "passed": 7,
+        "failed": 2,
+        "failed_checks": [
+          "source_attribution",
+          "synthetic_corpus_notice"
+        ]
+      },
+      "driver_postview_preview": "Per [doc_999], grades raise fuel use.",
+      "manual_review": "Validation must flag the fabricated citation.",
+      "checks": [
+        {
+          "check_id": "synthetic_disclaimer",
+          "passed": true,
+          "detail": "prediction carries the synthetic disclaimer"
+        },
+        {
+          "check_id": "causal_language",
+          "passed": true,
+          "detail": "no causal language detected; explanation carries the non-causal disclaimer"
+        },
+        {
+          "check_id": "oem_mislabeling",
+          "passed": true,
+          "detail": "no OEM/authoritative framing of synthetic corpus content"
+        },
+        {
+          "check_id": "synthetic_corpus_notice",
+          "passed": false,
+          "detail": "passage cited without the synthetic-educational provenance notice"
+        },
+        {
+          "check_id": "source_attribution",
+          "passed": false,
+          "detail": "cited source id(s) not present in retrieved evidence: ['doc_999']"
+        },
+        {
+          "check_id": "insufficient_evidence_stated",
+          "passed": true,
+          "detail": "insufficient evidence is stated explicitly"
+        },
+        {
+          "check_id": "failure_not_presented_as_success",
+          "passed": true,
+          "detail": "no tool failures to disclose"
+        },
+        {
+          "check_id": "prediction_value_preserved",
+          "passed": true,
+          "detail": "no prediction block"
+        },
+        {
+          "check_id": "shap_value_preserved",
+          "passed": true,
+          "detail": "no explanation block"
+        }
+      ]
+    },
+    {
+      "id": "N05",
+      "category": "contradictory_or_prohibited",
+      "description": "Unsupported query answered with a fabricated specification.",
+      "build": "synthetic",
+      "status": "ok",
+      "all_passed": true,
+      "expected_pass": {},
+      "expected_violations": {
+        "unsupported_not_answered": true
+      },
+      "check_summary": {
+        "total": 10,
+        "passed": 7,
+        "failed": 3,
+        "failed_checks": [
+          "oem_mislabeling",
+          "synthetic_disclaimer",
+          "unsupported_not_answered"
+        ]
+      },
+      "driver_postview_preview": "The official torque limit is 89 L/h.",
+      "manual_review": "Validation must flag fabricated numbers under an unsupported query.",
+      "checks": [
+        {
+          "check_id": "synthetic_disclaimer",
+          "passed": false,
+          "detail": "prediction present without a synthetic-trained-model disclaimer"
+        },
+        {
+          "check_id": "causal_language",
+          "passed": true,
+          "detail": "no causal language detected; explanation carries the non-causal disclaimer"
+        },
+        {
+          "check_id": "oem_mislabeling",
+          "passed": false,
+          "detail": "response presents synthetic corpus content as OEM/manufacturer documentation"
+        },
+        {
+          "check_id": "synthetic_corpus_notice",
+          "passed": true,
+          "detail": "corpus provenance notice present where passages are cited"
+        },
+        {
+          "check_id": "source_attribution",
+          "passed": true,
+          "detail": "all cited sources correspond to retrieved document ids"
+        },
+        {
+          "check_id": "insufficient_evidence_stated",
+          "passed": true,
+          "detail": "insufficient evidence is stated explicitly"
+        },
+        {
+          "check_id": "failure_not_presented_as_success",
+          "passed": true,
+          "detail": "no tool failures to disclose"
+        },
+        {
+          "check_id": "prediction_value_preserved",
+          "passed": true,
+          "detail": "no prediction block"
+        },
+        {
+          "check_id": "shap_value_preserved",
+          "passed": true,
+          "detail": "no explanation block"
+        },
+        {
+          "check_id": "unsupported_not_answered",
+          "passed": false,
+          "detail": "unsupported query produced concrete specifications/numbers"
+        }
+      ]
+    },
+    {
+      "id": "N06",
+      "category": "contradictory_or_prohibited",
+      "description": "Insufficient evidence but the response answers anyway.",
+      "build": "synthetic",
+      "status": "ok",
+      "all_passed": true,
+      "expected_pass": {},
+      "expected_violations": {
+        "insufficient_evidence_stated": true
+      },
+      "check_summary": {
+        "total": 9,
+        "passed": 8,
+        "failed": 1,
+        "failed_checks": [
+          "insufficient_evidence_stated"
+        ]
+      },
+      "driver_postview_preview": "Here is the answer: grades always double fuel use.",
+      "manual_review": "Validation must require explicit insufficiency disclosure.",
+      "checks": [
+        {
+          "check_id": "synthetic_disclaimer",
+          "passed": true,
+          "detail": "prediction carries the synthetic disclaimer"
+        },
+        {
+          "check_id": "causal_language",
+          "passed": true,
+          "detail": "no causal language detected; explanation carries the non-causal disclaimer"
+        },
+        {
+          "check_id": "oem_mislabeling",
+          "passed": true,
+          "detail": "no OEM/authoritative framing of synthetic corpus content"
+        },
+        {
+          "check_id": "synthetic_corpus_notice",
+          "passed": true,
+          "detail": "corpus provenance notice present where passages are cited"
+        },
+        {
+          "check_id": "source_attribution",
+          "passed": true,
+          "detail": "all cited sources correspond to retrieved document ids"
+        },
+        {
+          "check_id": "insufficient_evidence_stated",
+          "passed": false,
+          "detail": "evidence was insufficient but the response did not say so"
+        },
+        {
+          "check_id": "failure_not_presented_as_success",
+          "passed": true,
+          "detail": "no tool failures to disclose"
+        },
+        {
+          "check_id": "prediction_value_preserved",
+          "passed": true,
+          "detail": "no prediction block"
+        },
+        {
+          "check_id": "shap_value_preserved",
+          "passed": true,
+          "detail": "no explanation block"
+        }
+      ]
+    },
+    {
+      "id": "N07",
+      "category": "contradictory_or_prohibited",
+      "description": "A failed tool's value is presented as a successful prediction.",
+      "build": "synthetic",
+      "status": "ok",
+      "all_passed": true,
+      "expected_pass": {},
+      "expected_violations": {
+        "failure_not_presented_as_success": true
+      },
+      "check_summary": {
+        "total": 9,
+        "passed": 7,
+        "failed": 2,
+        "failed_checks": [
+          "failure_not_presented_as_success",
+          "synthetic_disclaimer"
+        ]
+      },
+      "driver_postview_preview": "Estimated fuel rate: 52.5773 L/h.",
+      "manual_review": "Validation must flag failure presented as success.",
+      "checks": [
+        {
+          "check_id": "synthetic_disclaimer",
+          "passed": false,
+          "detail": "prediction present without a synthetic-trained-model disclaimer"
+        },
+        {
+          "check_id": "causal_language",
+          "passed": true,
+          "detail": "no causal language detected; explanation carries the non-causal disclaimer"
+        },
+        {
+          "check_id": "oem_mislabeling",
+          "passed": true,
+          "detail": "no OEM/authoritative framing of synthetic corpus content"
+        },
+        {
+          "check_id": "synthetic_corpus_notice",
+          "passed": true,
+          "detail": "corpus provenance notice present where passages are cited"
+        },
+        {
+          "check_id": "source_attribution",
+          "passed": true,
+          "detail": "all cited sources correspond to retrieved document ids"
+        },
+        {
+          "check_id": "insufficient_evidence_stated",
+          "passed": true,
+          "detail": "insufficient evidence is stated explicitly"
+        },
+        {
+          "check_id": "failure_not_presented_as_success",
+          "passed": false,
+          "detail": "tool failure not disclosed in the response"
+        },
+        {
+          "check_id": "prediction_value_preserved",
+          "passed": true,
+          "detail": "no prediction block"
+        },
+        {
+          "check_id": "shap_value_preserved",
+          "passed": true,
+          "detail": "no explanation block"
+        }
+      ]
+    },
+    {
+      "id": "N08",
+      "category": "contradictory_or_prohibited",
+      "description": "Rendered response omits the predicted value.",
+      "build": "synthetic",
+      "status": "ok",
+      "all_passed": true,
+      "expected_pass": {},
+      "expected_violations": {
+        "prediction_value_preserved": true
+      },
+      "check_summary": {
+        "total": 9,
+        "passed": 8,
+        "failed": 1,
+        "failed_checks": [
+          "prediction_value_preserved"
+        ]
+      },
+      "driver_postview_preview": "We estimated fuel consumption but hid the number.",
+      "manual_review": "Validation must flag the missing value.",
+      "checks": [
+        {
+          "check_id": "synthetic_disclaimer",
+          "passed": true,
+          "detail": "prediction carries the synthetic disclaimer"
+        },
+        {
+          "check_id": "causal_language",
+          "passed": true,
+          "detail": "no causal language detected; explanation carries the non-causal disclaimer"
+        },
+        {
+          "check_id": "oem_mislabeling",
+          "passed": true,
+          "detail": "no OEM/authoritative framing of synthetic corpus content"
+        },
+        {
+          "check_id": "synthetic_corpus_notice",
+          "passed": true,
+          "detail": "corpus provenance notice present where passages are cited"
+        },
+        {
+          "check_id": "source_attribution",
+          "passed": true,
+          "detail": "all cited sources correspond to retrieved document ids"
+        },
+        {
+          "check_id": "insufficient_evidence_stated",
+          "passed": true,
+          "detail": "insufficient evidence is stated explicitly"
+        },
+        {
+          "check_id": "failure_not_presented_as_success",
+          "passed": true,
+          "detail": "no tool failures to disclose"
+        },
+        {
+          "check_id": "prediction_value_preserved",
+          "passed": false,
+          "detail": "predicted value 52.5773 missing from response"
+        },
+        {
+          "check_id": "shap_value_preserved",
+          "passed": true,
+          "detail": "no explanation block"
+        }
+      ]
+    },
+    {
+      "id": "N09",
+      "category": "contradictory_or_prohibited",
+      "description": "Explanation rendered without the top SHAP contribution.",
+      "build": "synthetic",
+      "status": "ok",
+      "all_passed": true,
+      "expected_pass": {},
+      "expected_violations": {
+        "shap_value_preserved": true
+      },
+      "check_summary": {
+        "total": 9,
+        "passed": 7,
+        "failed": 2,
+        "failed_checks": [
+          "causal_language",
+          "shap_value_preserved"
+        ]
+      },
+      "driver_postview_preview": "The explanation omitted the top SHAP magnitude.",
+      "manual_review": "Validation must flag the dropped SHAP value.",
+      "checks": [
+        {
+          "check_id": "synthetic_disclaimer",
+          "passed": true,
+          "detail": "prediction carries the synthetic disclaimer"
+        },
+        {
+          "check_id": "causal_language",
+          "passed": false,
+          "detail": "explanation present but the non-causal disclaimer is missing"
+        },
+        {
+          "check_id": "oem_mislabeling",
+          "passed": true,
+          "detail": "no OEM/authoritative framing of synthetic corpus content"
+        },
+        {
+          "check_id": "synthetic_corpus_notice",
+          "passed": true,
+          "detail": "corpus provenance notice present where passages are cited"
+        },
+        {
+          "check_id": "source_attribution",
+          "passed": true,
+          "detail": "all cited sources correspond to retrieved document ids"
+        },
+        {
+          "check_id": "insufficient_evidence_stated",
+          "passed": true,
+          "detail": "insufficient evidence is stated explicitly"
+        },
+        {
+          "check_id": "failure_not_presented_as_success",
+          "passed": true,
+          "detail": "no tool failures to disclose"
+        },
+        {
+          "check_id": "prediction_value_preserved",
+          "passed": true,
+          "detail": "no prediction block"
+        },
+        {
+          "check_id": "shap_value_preserved",
+          "passed": false,
+          "detail": "top SHAP value +20.11 missing"
+        }
+      ]
+    },
+    {
+      "id": "C02",
+      "category": "contradictory_or_prohibited",
+      "description": "Contradictory retrieved passages \u2014 presented with provenance, not resolved by invention.",
+      "build": "synthetic",
+      "status": "ok",
+      "all_passed": true,
+      "expected_pass": {
+        "source_attribution": true,
+        "synthetic_corpus_notice": true,
+        "oem_mislabeling": true
+      },
+      "expected_violations": {},
+      "check_summary": {
+        "total": 9,
+        "passed": 9,
+        "failed": 0,
+        "failed_checks": []
+      },
+      "driver_postview_preview": "Relevant knowledge (retrieved passages):\n  - [doc_001] A (similarity 0.720).\n  - [doc_002] B (similarity 0.600).\nRetrieved passages are SYNTHETIC educational material (not OEM or manufacturer documentation). Retrieval similarity is not proo",
+      "manual_review": "Both passages cited with provenance; no fabricated resolution.",
+      "checks": [
+        {
+          "check_id": "synthetic_disclaimer",
+          "passed": true,
+          "detail": "prediction carries the synthetic disclaimer"
+        },
+        {
+          "check_id": "causal_language",
+          "passed": true,
+          "detail": "no causal language detected; explanation carries the non-causal disclaimer"
+        },
+        {
+          "check_id": "oem_mislabeling",
+          "passed": true,
+          "detail": "no OEM/authoritative framing of synthetic corpus content"
+        },
+        {
+          "check_id": "synthetic_corpus_notice",
+          "passed": true,
+          "detail": "corpus provenance notice present where passages are cited"
+        },
+        {
+          "check_id": "source_attribution",
+          "passed": true,
+          "detail": "all cited sources correspond to retrieved document ids"
+        },
+        {
+          "check_id": "insufficient_evidence_stated",
+          "passed": true,
+          "detail": "insufficient evidence is stated explicitly"
+        },
+        {
+          "check_id": "failure_not_presented_as_success",
+          "passed": true,
+          "detail": "no tool failures to disclose"
+        },
+        {
+          "check_id": "prediction_value_preserved",
+          "passed": true,
+          "detail": "no prediction block"
+        },
+        {
+          "check_id": "shap_value_preserved",
+          "passed": true,
+          "detail": "no explanation block"
+        }
+      ]
+    },
+    {
+      "id": "M01",
+      "category": "tool_failure",
+      "description": "Missing required input field causes prediction-tool failure; must be disclosed.",
+      "build": "real",
+      "status": "ok",
+      "all_passed": true,
+      "expected_pass": {
+        "failure_not_presented_as_success": true,
+        "causal_language": true,
+        "oem_mislabeling": true
+      },
+      "expected_violations": {},
+      "check_summary": {
+        "total": 9,
+        "passed": 9,
+        "failed": 0,
+        "failed_checks": []
+      },
+      "driver_postview_preview": "One or more underlying tools failed, so I cannot provide a complete trusted answer. The failed component(s): fuel_rate_prediction. No output from a failed tool is presented as a success.\n\nNot supported by the evidence: operational driver re",
+      "manual_review": "Failure must be explicit; no predicted value fabricated from missing data.",
+      "checks": [
+        {
+          "check_id": "synthetic_disclaimer",
+          "passed": true,
+          "detail": "prediction carries the synthetic disclaimer"
+        },
+        {
+          "check_id": "causal_language",
+          "passed": true,
+          "detail": "no causal language detected; explanation carries the non-causal disclaimer"
+        },
+        {
+          "check_id": "oem_mislabeling",
+          "passed": true,
+          "detail": "no OEM/authoritative framing of synthetic corpus content"
+        },
+        {
+          "check_id": "synthetic_corpus_notice",
+          "passed": true,
+          "detail": "corpus provenance notice present where passages are cited"
+        },
+        {
+          "check_id": "source_attribution",
+          "passed": true,
+          "detail": "all cited sources correspond to retrieved document ids"
+        },
+        {
+          "check_id": "insufficient_evidence_stated",
+          "passed": true,
+          "detail": "insufficient evidence is stated explicitly"
+        },
+        {
+          "check_id": "failure_not_presented_as_success",
+          "passed": true,
+          "detail": "tool failure is disclosed, not presented as success"
+        },
+        {
+          "check_id": "prediction_value_preserved",
+          "passed": true,
+          "detail": "no prediction block"
+        },
+        {
+          "check_id": "shap_value_preserved",
+          "passed": true,
+          "detail": "no explanation block"
+        }
+      ]
+    },
+    {
+      "id": "E02",
+      "category": "prediction_plus_explanation",
+      "description": "Telematics-only prediction + instance SHAP explanation (real tool outputs).",
+      "build": "synthetic",
+      "status": "ok",
+      "all_passed": true,
+      "expected_pass": {
+        "prediction_value_preserved": true,
+        "shap_value_preserved": true,
+        "synthetic_disclaimer": true,
+        "causal_language": true,
+        "oem_mislabeling": true
+      },
+      "expected_violations": {},
+      "check_summary": {
+        "total": 9,
+        "passed": 9,
+        "failed": 0,
+        "failed_checks": []
+      },
+      "driver_postview_preview": "Estimated fuel rate: 89.2247 L/h (model: xgboost, feature set: telematics_only).\n\nThis is an estimate from a model trained on SYNTHETIC telemetry, not a validated real-world fuel measurement. Do not use it for billing, compliance, or vehicl",
+      "manual_review": "Telematics feature set clearly labelled; SHAP caveat present.",
+      "checks": [
+        {
+          "check_id": "synthetic_disclaimer",
+          "passed": true,
+          "detail": "prediction carries the synthetic disclaimer"
+        },
+        {
+          "check_id": "causal_language",
+          "passed": true,
+          "detail": "no causal language detected; explanation carries the non-causal disclaimer"
+        },
+        {
+          "check_id": "oem_mislabeling",
+          "passed": true,
+          "detail": "no OEM/authoritative framing of synthetic corpus content"
+        },
+        {
+          "check_id": "synthetic_corpus_notice",
+          "passed": true,
+          "detail": "corpus provenance notice present where passages are cited"
+        },
+        {
+          "check_id": "source_attribution",
+          "passed": true,
+          "detail": "all cited sources correspond to retrieved document ids"
+        },
+        {
+          "check_id": "insufficient_evidence_stated",
+          "passed": true,
+          "detail": "insufficient evidence is stated explicitly"
+        },
+        {
+          "check_id": "failure_not_presented_as_success",
+          "passed": true,
+          "detail": "no tool failures to disclose"
+        },
+        {
+          "check_id": "prediction_value_preserved",
+          "passed": true,
+          "detail": "predicted value {val} preserved"
+        },
+        {
+          "check_id": "shap_value_preserved",
+          "passed": true,
+          "detail": "top SHAP value +21.44 preserved"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "These checks are deterministic heuristics, not an LLM judge and not proof of human-level quality.",
+    "Subjective readability/completeness is only noted manually, never scored numerically.",
+    "Negative scenarios (N01-N09) deliberately inject bad responses to prove the validator rejects them."
+  ]
+}

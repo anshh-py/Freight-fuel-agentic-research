@@ -1,0 +1,348 @@
+{
+  "columns": {
+    "0": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 0,
+      "name": "record_id",
+      "numeric_max_sample": 2.6591809551070116e+27,
+      "numeric_min_sample": 1.6591809551070116e+27,
+      "numeric_seen_sample": 5000
+    },
+    "1": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 1,
+      "name": "ems_value"
+    },
+    "10": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 10,
+      "name": "gps_latitude",
+      "numeric_max_sample": 30.10617,
+      "numeric_min_sample": 22.945911,
+      "numeric_seen_sample": 5000
+    },
+    "11": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 11,
+      "name": "gps_longitude",
+      "numeric_max_sample": 114.19131,
+      "numeric_min_sample": 104.597099,
+      "numeric_seen_sample": 5000
+    },
+    "12": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 12,
+      "name": "speed_kmh",
+      "numeric_max_sample": 359.0,
+      "numeric_min_sample": 0.0,
+      "numeric_seen_sample": 5000
+    },
+    "13": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 13,
+      "name": "event_time2"
+    },
+    "14": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 14,
+      "name": "province"
+    },
+    "15": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 15,
+      "name": "city"
+    },
+    "16": {
+      "blank_count_sample": 477,
+      "blank_rate_sample": 0.0954,
+      "index": 16,
+      "name": "unknown_outer_16"
+    },
+    "17": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 17,
+      "name": "address"
+    },
+    "18": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 18,
+      "name": "road_name"
+    },
+    "19": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 19,
+      "name": "road_type"
+    },
+    "2": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 2,
+      "name": "event_time_str"
+    },
+    "20": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 20,
+      "name": "file_date"
+    },
+    "3": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 3,
+      "name": "imei"
+    },
+    "4": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 4,
+      "name": "imei_suffix"
+    },
+    "5": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 5,
+      "name": "device_hex_id"
+    },
+    "6": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 6,
+      "name": "road_route_id",
+      "numeric_max_sample": 977.0,
+      "numeric_min_sample": 977.0,
+      "numeric_seen_sample": 5000
+    },
+    "7": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 7,
+      "name": "device_type"
+    },
+    "8": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 8,
+      "name": "license_plate"
+    },
+    "9": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 9,
+      "name": "plate_other_id"
+    }
+  },
+  "duplicates": {
+    "exact_line_hashes_in_sample": 0,
+    "sample_rows": 5000
+  },
+  "input_path": "data\\interim\\dwa_inceptio_ems_detail_location_manual.csv",
+  "json_fields": {
+    "date": {
+      "max": 1575216008635.0,
+      "mean": 1575179116074.1375,
+      "median": 1575180199938.5,
+      "min": 1575130244377.0,
+      "missing_in_sample": 0,
+      "p05": 1575137556270.7,
+      "p95": 1575213025219.0,
+      "present_in_sample": 5000,
+      "present_rate_sample": 1.0,
+      "sample_n": 5000
+    },
+    "ems_type": {
+      "max": 6.0,
+      "mean": 6.0,
+      "median": 6.0,
+      "min": 6.0,
+      "missing_in_sample": 0,
+      "p05": 6.0,
+      "p95": 6.0,
+      "present_in_sample": 5000,
+      "present_rate_sample": 1.0,
+      "sample_n": 5000
+    },
+    "imei": {
+      "missing_in_sample": 0,
+      "present_in_sample": 5000,
+      "present_rate_sample": 1.0,
+      "sample_n": 0
+    },
+    "x006C": {
+      "missing_in_sample": 553,
+      "present_in_sample": 4447,
+      "present_rate_sample": 0.8894,
+      "sample_n": 0
+    },
+    "x7000": {
+      "missing_in_sample": 0,
+      "present_in_sample": 5000,
+      "present_rate_sample": 1.0,
+      "sample_n": 0
+    },
+    "x7001": {
+      "missing_in_sample": 0,
+      "present_in_sample": 5000,
+      "present_rate_sample": 1.0,
+      "sample_n": 0,
+      "suspicious": {
+        "gt_1000": 0,
+        "gt_500": 0,
+        "negative": 0,
+        "zero": 0
+      }
+    },
+    "x7002": {
+      "missing_in_sample": 93,
+      "present_in_sample": 4907,
+      "present_rate_sample": 0.9814,
+      "sample_n": 0
+    },
+    "x7003": {
+      "missing_in_sample": 0,
+      "present_in_sample": 5000,
+      "present_rate_sample": 1.0,
+      "sample_n": 0
+    },
+    "x7004": {
+      "missing_in_sample": 0,
+      "present_in_sample": 5000,
+      "present_rate_sample": 1.0,
+      "sample_n": 0
+    },
+    "x7005": {
+      "missing_in_sample": 0,
+      "present_in_sample": 5000,
+      "present_rate_sample": 1.0,
+      "sample_n": 0
+    },
+    "x7006": {
+      "missing_in_sample": 0,
+      "present_in_sample": 5000,
+      "present_rate_sample": 1.0,
+      "sample_n": 0
+    },
+    "x7007": {
+      "missing_in_sample": 3,
+      "present_in_sample": 4997,
+      "present_rate_sample": 0.9994,
+      "sample_n": 0
+    },
+    "x7035": {
+      "missing_in_sample": 0,
+      "present_in_sample": 5000,
+      "present_rate_sample": 1.0,
+      "sample_n": 0
+    },
+    "x7091": {
+      "missing_in_sample": 0,
+      "present_in_sample": 5000,
+      "present_rate_sample": 1.0,
+      "sample_n": 0
+    },
+    "x7095": {
+      "missing_in_sample": 0,
+      "present_in_sample": 5000,
+      "present_rate_sample": 1.0,
+      "sample_n": 0
+    }
+  },
+  "json_sample": {
+    "failure_rate_sample": 0.0,
+    "keys": {
+      "date": 5000,
+      "ems_type": 5000,
+      "imei": 5000,
+      "x000B": 5000,
+      "x006C": 4447,
+      "x7000": 5000,
+      "x7001": 5000,
+      "x7002": 4907,
+      "x7003": 5000,
+      "x7004": 5000,
+      "x7005": 5000,
+      "x7006": 5000,
+      "x7007": 4997,
+      "x7035": 5000,
+      "x7091": 5000,
+      "x7095": 5000
+    },
+    "parse_failures_sample": 0,
+    "rows_examined_sample": 5000
+  },
+  "meta": {
+    "generated_utc": "2026-11-19T09:29:12Z",
+    "json_sample_size": 5000,
+    "profiler": "src/data/profile_ems1.py",
+    "seed": 20240501
+  },
+  "metrics_scope": {
+    "exact": [
+      "lines_total",
+      "bytes_read",
+      "zero_len_lines",
+      "unique_trucks",
+      "records_per_truck",
+      "date_min",
+      "date_max",
+      "date_missing",
+      "chronology_global",
+      "chronology_per_truck",
+      "json_structural_fail"
+    ],
+    "sample": [
+      "outer_column_numeric_minmax",
+      "outer_column_blank_rates",
+      "json_keys",
+      "json_subfield_stats",
+      "x7001_suspicious",
+      "x7002_monotonicity",
+      "duplicate_line_hashes",
+      "pii_identifier_consistency"
+    ]
+  },
+  "pii": {
+    "multi_outer_plate_to_truck_sample": 0,
+    "sample_outer_imei_pairs": 2
+  },
+  "scan": {
+    "bytes_read_exact": 57284858,
+    "date_max_ms_exact": 1575216013248,
+    "date_min_ms_exact": 1575130244377,
+    "date_missing_rows_exact": 0,
+    "date_nondecrease_global_exact": 974,
+    "date_nondecrease_per_truck_exact": 973,
+    "json_empty_exact": 0,
+    "json_structural_fail_exact": 0,
+    "lines_total_exact": 100001,
+    "scan_seconds": 1.09,
+    "zero_len_lines_exact": 0
+  },
+  "trucks": {
+    "distinct_exact": 2,
+    "records_exact": [
+      {
+        "records": 61808,
+        "truck": "truck_001"
+      },
+      {
+        "records": 38192,
+        "truck": "truck_002"
+      }
+    ]
+  },
+  "x7002": {
+    "sample_decreases": 0,
+    "sample_rows_with_counter": 0
+  }
+}

@@ -1,0 +1,68 @@
+# Data — keep raw and derived dataset files ignored, but track .gitkeep placeholders
+data/**
+!data/**/
+!data/**/.gitkeep
+*.csv
+*.parquet
+*.feather
+*.h5
+*.hdf5
+*.pkl
+*.joblib
+
+# Models and artefacts
+models/
+reports/figures/
+*.png
+*.svg
+runs/
+mlruns/
+
+# Notebooks
+.ipynb_checkpoints/
+*.nbconvert.ipynb
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+env/
+.python-version
+
+# Tooling
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env
+.env.*
+*.key
+
+# Scratch / local investigation (not research content)
+headers.txt
+drive_page.html
+tmp_shape.py
+tmp_verify_m63.py
+tmp_verify_ref.py
+tmp_verify_ref2.py
+tmp_wordcount.js
+_audit_tmp.py
+_phys_smoke.py
+scripts/synthetic_heavy_truck/_audit_tmp2.py
+
+# Node.js dependencies (any depth)
+node_modules/

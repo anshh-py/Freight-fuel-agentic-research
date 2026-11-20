@@ -1,0 +1,32 @@
+{
+  "agent": "truck_fuel_rate_agent_v1",
+  "milestone": "M2.2",
+  "routing": {
+    "backend": "deterministic",
+    "is_llm": false,
+    "note": "Deterministic rule-based intent routing baseline. No LLM provider is configured. This is not LLM reasoning or autonomous agent intelligence."
+  },
+  "tools": {
+    "fuel_rate_prediction": {
+      "model_artifacts_dir": "reports/m1/artifacts",
+      "feature_sets": ["full_operational", "telematics_only"]
+    },
+    "knowledge_retrieval": {
+      "corpus_path": "data/synthetic_heavy_truck_research/rag_knowledge_corpus.jsonl",
+      "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+      "top_k": 5,
+      "min_score_floor": 0.45
+    },
+    "prediction_explanation": {
+      "model_artifacts_dir": "reports/m1/artifacts",
+      "top_features": 5
+    }
+  },
+  "provenance": {
+    "synthetic_telemetry": true,
+    "predictions_are_synthetic_model_estimates": true,
+    "corpus_is_synthetic_educational_material": true,
+    "retrieval_similarity_is_not_factual_proof": true,
+    "shap_is_not_causality": true
+  }
+}

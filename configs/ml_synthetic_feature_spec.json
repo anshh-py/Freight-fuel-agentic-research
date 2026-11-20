@@ -1,0 +1,74 @@
+{
+  "experiment": "M1_ML_baselines_cross_truck_fuel_rate",
+  "dataset": "synthetic_heavy_truck_research",
+  "telemetry_path": "data/synthetic_heavy_truck_research/telemetry_master_963697.csv.gz",
+  "truck_metadata_path": "data/synthetic_heavy_truck_research/truck_metadata.csv",
+  "split_manifest_path": "data/synthetic_heavy_truck_research/truckwise_split_manifest.csv",
+  "target_column": "fuel_rate_lph",
+  "id_columns_excluded": ["record_id", "timestamp_utc", "truck_id", "trip_id", "latitude", "longitude"],
+  "target_derived_excluded": ["fuel_consumed_l_increment", "cumulative_fuel_l_trip"],
+  "proxy_excluded": ["synthetic_efficiency_factor"],
+
+  "feature_sets": {
+    "full_operational": {
+      "description": "Engine-bus + telematics + static truck attributes (primary baseline set).",
+      "features": [
+        "vehicle_class",
+        "gross_vehicle_weight_kg",
+        "payload_kg",
+        "vehicle_mass_kg",
+        "speed_kph",
+        "acceleration_mps2",
+        "road_grade_pct",
+        "ignition_status",
+        "engine_rpm",
+        "engine_load_pct",
+        "throttle_position_pct",
+        "torque_nm",
+        "coolant_temp_c",
+        "intake_air_temp_c",
+        "ambient_temp_c"
+      ]
+    },
+    "telematics_only": {
+      "description": "No engine-internal signals (for driver-feedback / explainability ablation).",
+      "features": [
+        "vehicle_class",
+        "gross_vehicle_weight_kg",
+        "payload_kg",
+        "vehicle_mass_kg",
+        "speed_kph",
+        "acceleration_mps2",
+        "road_grade_pct",
+        "ignition_status",
+        "coolant_temp_c",
+        "intake_air_temp_c",
+        "ambient_temp_c"
+      ]
+    }
+  },
+
+  "categorical_encoding": {
+    "vehicle_class": ["32T", "40T", "49T"],
+    "encoding": "one-hot (drop='first') or ordinal [32T=0,40T=1,49T=2]"
+  },
+
+  "split_contract": {
+    "level": "truck",
+    "manifest": "data/synthetic_heavy_truck_research/truckwise_split_manifest.csv",
+    "train_trucks": 20,
+    "val_trucks": 4,
+    "test_trucks": 5,
+    "rule": "join telemetry rows by truck_id; a truck appears in exactly one split; never shuffle rows across split"
+  },
+
+  "leakage_rules": [
+    "No target-derived fields as inputs (fuel increment, cumulative fuel).",
+    "No target column as an input.",
+    "No truck_id/trip_id/record_id/timestamp as inputs (identity leakage).",
+    "No GPS coordinates as inputs (route/trip identity leakage).",
+    "No synthetic_efficiency_factor as input (per-truck fuel proxy).",
+    "No future timestamps/future telemetry; only lag features strictly behind the current record are allowed.",
+    "Hyperparameters tuned only on validation trucks; test trucks touched exactly once."
+  ]
+}

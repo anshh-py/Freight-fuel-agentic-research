@@ -1,0 +1,295 @@
+{
+  "experiment": "M5.3_prediction_explanation_reliability",
+  "milestone": "M5.3",
+  "protocol": "evaluate the real FuelRatePredictionTool and PredictionExplanationTool on canonical valid inputs plus a small deterministic held-out segment sample; saved M1.2 models and preprocessors only; no retraining; deterministic; synthetic-data constrained",
+  "non_duplication": {
+    "m1_3_metrics_referenced": true,
+    "m1_4_reconstruction_referenced": true,
+    "m3_4_robustness_referenced": true,
+    "note": "Pooled/per-truck/per-condition regression metrics and global SHAP importance are already reported in M1.3/M1.4; M5.3 does not duplicate them and instead audits the agent tool layer."
+  },
+  "tool_evaluation": {
+    "full_operational": {
+      "feature_set": "full_operational",
+      "segment": "uphill",
+      "prediction": {
+        "repeated_consistency": {
+          "repeats": 3,
+          "values": [
+            60.3901,
+            60.3901,
+            60.3901
+          ],
+          "all_identical": true,
+          "value": 60.3901
+        },
+        "finite_valid": {
+          "status_ok": true,
+          "finite": true,
+          "non_negative": true,
+          "pass": true
+        },
+        "tool_vs_direct_model_agreement": {
+          "tool_value": 60.3901,
+          "direct_model_value": 60.39008712768555,
+          "abs_deviation": 1.2872314449907662e-05,
+          "within_tolerance": true,
+          "tolerance": 0.0001
+        },
+        "invalid_input_rejection": {
+          "n_cases": 7,
+          "n_rejected": 7,
+          "n_raised_tool_input_error": 7,
+          "cases": {
+            "missing_field": {
+              "raised_tool_input_error": true,
+              "returned_status": null,
+              "rejected": true
+            },
+            "out_of_range": {
+              "raised_tool_input_error": true,
+              "returned_status": null,
+              "rejected": true
+            },
+            "non_numeric": {
+              "raised_tool_input_error": true,
+              "returned_status": null,
+              "rejected": true
+            },
+            "boolean_as_number": {
+              "raised_tool_input_error": true,
+              "returned_status": null,
+              "rejected": true
+            },
+            "unknown_field": {
+              "raised_tool_input_error": true,
+              "returned_status": null,
+              "rejected": true
+            },
+            "non_finite": {
+              "raised_tool_input_error": true,
+              "returned_status": null,
+              "rejected": true
+            },
+            "wrong_feature_set_shape": {
+              "raised_tool_input_error": true,
+              "returned_status": null,
+              "rejected": true
+            }
+          }
+        }
+      },
+      "explanation": {
+        "reconstruction": {
+          "pass": true,
+          "max_abs_deviation": 3.2e-05,
+          "tolerance": 0.001,
+          "within_tolerance": true,
+          "ok": true
+        },
+        "attribution_direction": {
+          "positive_nonempty": true,
+          "negative_nonempty": true,
+          "positive_sign_ok": true,
+          "negative_sign_ok": true,
+          "ok": true
+        },
+        "safety": {
+          "shap_is_not_causal": true,
+          "instance_scope_note": true,
+          "synthetic_training_disclosed": true,
+          "no_guaranteed_savings_claim": true,
+          "ok": true
+        },
+        "prediction_consistency": {
+          "prediction_tool_value": 60.3901,
+          "explanation_tool_value": 60.3901,
+          "abs_deviation": 0.0,
+          "within_tolerance": true,
+          "tolerance": 1e-06
+        }
+      }
+    },
+    "telematics_only": {
+      "feature_set": "telematics_only",
+      "segment": "uphill",
+      "prediction": {
+        "repeated_consistency": {
+          "repeats": 3,
+          "values": [
+            112.0655,
+            112.0655,
+            112.0655
+          ],
+          "all_identical": true,
+          "value": 112.0655
+        },
+        "finite_valid": {
+          "status_ok": true,
+          "finite": true,
+          "non_negative": true,
+          "pass": true
+        },
+        "tool_vs_direct_model_agreement": {
+          "tool_value": 112.0655,
+          "direct_model_value": 112.06546783447266,
+          "abs_deviation": 3.216552734386369e-05,
+          "within_tolerance": true,
+          "tolerance": 0.0001
+        },
+        "invalid_input_rejection": {
+          "n_cases": 7,
+          "n_rejected": 7,
+          "n_raised_tool_input_error": 7,
+          "cases": {
+            "missing_field": {
+              "raised_tool_input_error": true,
+              "returned_status": null,
+              "rejected": true
+            },
+            "out_of_range": {
+              "raised_tool_input_error": true,
+              "returned_status": null,
+              "rejected": true
+            },
+            "non_numeric": {
+              "raised_tool_input_error": true,
+              "returned_status": null,
+              "rejected": true
+            },
+            "boolean_as_number": {
+              "raised_tool_input_error": true,
+              "returned_status": null,
+              "rejected": true
+            },
+            "unknown_field": {
+              "raised_tool_input_error": true,
+              "returned_status": null,
+              "rejected": true
+            },
+            "non_finite": {
+              "raised_tool_input_error": true,
+              "returned_status": null,
+              "rejected": true
+            },
+            "wrong_feature_set_shape": {
+              "raised_tool_input_error": true,
+              "returned_status": null,
+              "rejected": true
+            }
+          }
+        }
+      },
+      "explanation": {
+        "reconstruction": {
+          "pass": true,
+          "max_abs_deviation": 1.1e-05,
+          "tolerance": 0.001,
+          "within_tolerance": true,
+          "ok": true
+        },
+        "attribution_direction": {
+          "positive_nonempty": true,
+          "negative_nonempty": true,
+          "positive_sign_ok": true,
+          "negative_sign_ok": true,
+          "ok": true
+        },
+        "safety": {
+          "shap_is_not_causal": true,
+          "instance_scope_note": true,
+          "synthetic_training_disclosed": true,
+          "no_guaranteed_savings_claim": true,
+          "ok": true
+        },
+        "prediction_consistency": {
+          "prediction_tool_value": 112.0655,
+          "explanation_tool_value": 112.0655,
+          "abs_deviation": 0.0,
+          "within_tolerance": true,
+          "tolerance": 1e-06
+        }
+      }
+    }
+  },
+  "segment_sample": {
+    "full_operational": {
+      "segments": {
+        "highway": {
+          "n": 6,
+          "n_within_tolerance": 6,
+          "agreement_rate": 1.0
+        },
+        "acceleration": {
+          "n": 6,
+          "n_within_tolerance": 6,
+          "agreement_rate": 1.0
+        },
+        "idle_stopped": {
+          "n": 6,
+          "n_within_tolerance": 6,
+          "agreement_rate": 1.0
+        },
+        "uphill": {
+          "n": 6,
+          "n_within_tolerance": 6,
+          "agreement_rate": 1.0
+        }
+      },
+      "n_total": 24
+    },
+    "telematics_only": {
+      "segments": {
+        "highway": {
+          "n": 6,
+          "n_within_tolerance": 6,
+          "agreement_rate": 1.0
+        },
+        "acceleration": {
+          "n": 6,
+          "n_within_tolerance": 6,
+          "agreement_rate": 1.0
+        },
+        "idle_stopped": {
+          "n": 6,
+          "n_within_tolerance": 6,
+          "agreement_rate": 1.0
+        },
+        "uphill": {
+          "n": 6,
+          "n_within_tolerance": 6,
+          "agreement_rate": 1.0
+        }
+      },
+      "n_total": 24
+    }
+  },
+  "summary": {
+    "full_operational": {
+      "prediction_consistent": true,
+      "prediction_finite_valid": true,
+      "tool_model_agreement": true,
+      "invalid_rejection_rate": 1.0,
+      "explanation_reconstruction_ok": true,
+      "attribution_direction_ok": true,
+      "explanation_safety_ok": true,
+      "explanation_prediction_consistent": true
+    },
+    "telematics_only": {
+      "prediction_consistent": true,
+      "prediction_finite_valid": true,
+      "tool_model_agreement": true,
+      "invalid_rejection_rate": 1.0,
+      "explanation_reconstruction_ok": true,
+      "attribution_direction_ok": true,
+      "explanation_safety_ok": true,
+      "explanation_prediction_consistent": true
+    }
+  },
+  "plots": {
+    "files": [
+      "tool_agreement_by_segment.png"
+    ],
+    "dir": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m5\\m5_3\\plots"
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "corpus_path": "data/synthetic_heavy_truck_research/rag_knowledge_corpus.jsonl",
+  "rows_parsed": 21,
+  "valid_documents": 21,
+  "synthetic_status": "SYNTHETIC corpus; no document is OEM/manufacturer guidance",
+  "oem_manual_count": 0,
+  "source_type_counts": {
+    "synthetic_educational": 21
+  },
+  "topic_counts": {
+    "fuel_consumption_fundamentals": 2,
+    "engine_load_fuel_demand": 2,
+    "rpm_torque_relationships": 2,
+    "payload_effects": 2,
+    "road_grade_effects": 2,
+    "speed_variability_driving_behaviour": 2,
+    "fuel_rate_interpretation": 2,
+    "shap_interpretation": 2,
+    "driver_feedback_safety": 2,
+    "model_limitations": 3
+  },
+  "uniqueness": {
+    "total_documents": 21,
+    "duplicate_ids": []
+  },
+  "malformed": {
+    "malformed_records": []
+  },
+  "fields": {
+    "missing_fields": [],
+    "empty_content_records": []
+  },
+  "claims": {
+    "ambiguous_claims": [
+      {
+        "document_id": "doc_003",
+        "line_index": 2,
+        "hedge_tokens": [
+          "roughly",
+          "generally"
+        ],
+        "note": "contains approximating/hedging language; review before quoting as fact"
+      },
+      {
+        "document_id": "doc_005",
+        "line_index": 4,
+        "hedge_tokens": [
+          "can",
+          "generally"
+        ],
+        "note": "contains approximating/hedging language; review before quoting as fact"
+      },
+      {
+        "document_id": "doc_006",
+        "line_index": 5,
+        "hedge_tokens": [
+          "usually",
+          "tends"
+        ],
+        "note": "contains approximating/hedging language; review before quoting as fact"
+      },
+      {
+        "document_id": "doc_007",
+        "line_index": 6,
+        "hedge_tokens": [
+          "roughly"
+        ],
+        "note": "contains approximating/hedging language; review before quoting as fact"
+      },
+      {
+        "document_id": "doc_009",
+        "line_index": 8,
+        "hedge_tokens": [
+          "can"
+        ],
+        "note": "contains approximating/hedging language; review before quoting as fact"
+      },
+      {
+        "document_id": "doc_010",
+        "line_index": 9,
+        "hedge_tokens": [
+          "can",
+          "often"
+        ],
+        "note": "contains approximating/hedging language; review before quoting as fact"
+      },
+      {
+        "document_id": "doc_012",
+        "line_index": 11,
+        "hedge_tokens": [
+          "about"
+        ],
+        "note": "contains approximating/hedging language; review before quoting as fact"
+      },
+      {
+        "document_id": "doc_015",
+        "line_index": 14,
+        "hedge_tokens": [
+          "usually"
+        ],
+        "note": "contains approximating/hedging language; review before quoting as fact"
+      },
+      {
+        "document_id": "doc_019",
+        "line_index": 18,
+        "hedge_tokens": [
+          "can"
+        ],
+        "note": "contains approximating/hedging language; review before quoting as fact"
+      },
+      {
+        "document_id": "doc_020",
+        "line_index": 19,
+        "hedge_tokens": [
+          "can"
+        ],
+        "note": "contains approximating/hedging language; review before quoting as fact"
+      }
+    ]
+  },
+  "validation_passed": true
+}

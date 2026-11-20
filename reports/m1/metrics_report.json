@@ -1,0 +1,262 @@
+{
+  "experiment": "M1.2_baselines_cross_truck_fuel_rate",
+  "milestone": "M1.2",
+  "protocol": "train on 20 trucks, validate on 4 trucks; test untouched",
+  "random_state": 20240617,
+  "environment": {
+    "python": "3.13.14",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "numpy": "2.3.2",
+    "pandas": "3.1.0",
+    "sklearn": "1.9.1",
+    "xgboost": "3.4.1",
+    "random_state": "20240617"
+  },
+  "split": {
+    "train_trucks": [
+      "truck_002",
+      "truck_006",
+      "truck_007",
+      "truck_008",
+      "truck_009",
+      "truck_010",
+      "truck_011",
+      "truck_012",
+      "truck_013",
+      "truck_015",
+      "truck_016",
+      "truck_018",
+      "truck_019",
+      "truck_021",
+      "truck_022",
+      "truck_023",
+      "truck_024",
+      "truck_025",
+      "truck_026",
+      "truck_029"
+    ],
+    "val_trucks": [
+      "truck_003",
+      "truck_005",
+      "truck_014",
+      "truck_027"
+    ],
+    "test_trucks": [
+      "truck_001",
+      "truck_004",
+      "truck_017",
+      "truck_020",
+      "truck_028"
+    ],
+    "train_rows": 657336,
+    "val_rows": 133072,
+    "test_rows": 173289
+  },
+  "feature_sets": {
+    "full_operational": {
+      "feature_set": "full_operational",
+      "columns": [
+        "gross_vehicle_weight_kg",
+        "payload_kg",
+        "vehicle_mass_kg",
+        "speed_kph",
+        "acceleration_mps2",
+        "road_grade_pct",
+        "ignition_status",
+        "engine_rpm",
+        "engine_load_pct",
+        "throttle_position_pct",
+        "torque_nm",
+        "coolant_temp_c",
+        "intake_air_temp_c",
+        "ambient_temp_c",
+        "vehicle_class_40T",
+        "vehicle_class_49T"
+      ],
+      "n_features": 16,
+      "train_n_rows": 657336,
+      "val_n_rows": 133072,
+      "models": {
+        "mean_dummy": {
+          "label": "Mean Dummy Regressor",
+          "fit_seconds": 0.005,
+          "predict_seconds": 0.001,
+          "metrics": {
+            "mae": 38.443411,
+            "rmse": 42.435593,
+            "r2": -3.6e-05,
+            "mape": 777.6169126215137,
+            "mape_n": 131949,
+            "mape_coverage": 0.991561
+          },
+          "artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\full_operational\\mean_dummy.joblib",
+          "artifact_size_bytes": 588
+        },
+        "median_dummy": {
+          "label": "Median Dummy Regressor",
+          "fit_seconds": 0.017,
+          "predict_seconds": 0.001,
+          "metrics": {
+            "mae": 37.171296,
+            "rmse": 47.362757,
+            "r2": -0.245745,
+            "mape": 387.08646646340424,
+            "mape_n": 131949,
+            "mape_coverage": 0.991561
+          },
+          "artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\full_operational\\median_dummy.joblib",
+          "artifact_size_bytes": 588
+        },
+        "random_forest": {
+          "label": "Random Forest Regressor",
+          "config": {"n_estimators": 150, "max_depth": 20, "min_samples_leaf": 8, "max_features": "sqrt"},
+          "fit_seconds": 83.87,
+          "predict_seconds": 0.62,
+          "metrics": {
+            "mae": 3.77144,
+            "rmse": 5.809599,
+            "r2": 0.981257,
+            "mape": 9.3172159694518,
+            "mape_n": 131949,
+            "mape_coverage": 0.991561
+          },
+          "artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\full_operational\\random_forest.joblib",
+          "artifact_size_bytes": 171409056
+        },
+        "ridge": {
+          "label": "Ridge Regression",
+          "fit_seconds": 0.256,
+          "predict_seconds": 0.019,
+          "metrics": {
+            "mae": 5.181035,
+            "rmse": 6.942182,
+            "r2": 0.973236,
+            "mape": 68.10235263647758,
+            "mape_n": 131949,
+            "mape_coverage": 0.991561
+          },
+          "artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\full_operational\\ridge.joblib",
+          "artifact_size_bytes": 851
+        },
+        "xgboost": {
+          "label": "XGBoost Regressor",
+          "fit_seconds": 12.323,
+          "predict_seconds": 0.204,
+          "metrics": {
+            "mae": 3.621111,
+            "rmse": 5.884971,
+            "r2": 0.980767,
+            "mape": 9.85354999804012,
+            "mape_n": 131949,
+            "mape_coverage": 0.991561
+          },
+          "artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\full_operational\\xgboost.joblib",
+          "artifact_size_bytes": 469059
+        }
+      },
+      "preprocessor_artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\full_operational\\preprocessor.joblib",
+      "preprocessor_size_bytes": 865
+    },
+    "telematics_only": {
+      "feature_set": "telematics_only",
+      "columns": [
+        "gross_vehicle_weight_kg",
+        "payload_kg",
+        "vehicle_mass_kg",
+        "speed_kph",
+        "acceleration_mps2",
+        "road_grade_pct",
+        "ignition_status",
+        "coolant_temp_c",
+        "intake_air_temp_c",
+        "ambient_temp_c",
+        "vehicle_class_40T",
+        "vehicle_class_49T"
+      ],
+      "n_features": 12,
+      "train_n_rows": 657336,
+      "val_n_rows": 133072,
+      "models": {
+        "mean_dummy": {
+          "label": "Mean Dummy Regressor",
+          "fit_seconds": 0.004,
+          "predict_seconds": 0.001,
+          "metrics": {
+            "mae": 38.443411,
+            "rmse": 42.435593,
+            "r2": -3.6e-05,
+            "mape": 777.6169126215137,
+            "mape_n": 131949,
+            "mape_coverage": 0.991561
+          },
+          "artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\telematics_only\\mean_dummy.joblib",
+          "artifact_size_bytes": 557
+        },
+        "median_dummy": {
+          "label": "Median Dummy Regressor",
+          "fit_seconds": 0.017,
+          "predict_seconds": 0.001,
+          "metrics": {
+            "mae": 37.171296,
+            "rmse": 47.362757,
+            "r2": -0.245745,
+            "mape": 387.08646646340424,
+            "mape_n": 131949,
+            "mape_coverage": 0.991561
+          },
+          "artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\telematics_only\\median_dummy.joblib",
+          "artifact_size_bytes": 554
+        },
+        "random_forest": {
+          "label": "Random Forest Regressor",
+          "config": {"n_estimators": 150, "max_depth": 20, "min_samples_leaf": 8, "max_features": "sqrt"},
+          "fit_seconds": 49.365,
+          "predict_seconds": 0.548,
+          "metrics": {
+            "mae": 4.77361,
+            "rmse": 7.507695,
+            "r2": 0.968698,
+            "mape": 21.254847435904946,
+            "mape_n": 131949,
+            "mape_coverage": 0.991561
+          },
+          "artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\telematics_only\\random_forest.joblib",
+          "artifact_size_bytes": 160179732
+        },
+        "ridge": {
+          "label": "Ridge Regression",
+          "fit_seconds": 0.136,
+          "predict_seconds": 0.016,
+          "metrics": {
+            "mae": 19.21738,
+            "rmse": 23.691811,
+            "r2": 0.688289,
+            "mape": 406.99491214873814,
+            "mape_n": 131949,
+            "mape_coverage": 0.991561
+          },
+          "artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\telematics_only\\ridge.joblib",
+          "artifact_size_bytes": 766
+        },
+        "xgboost": {
+          "label": "XGBoost Regressor",
+          "fit_seconds": 11.938,
+          "predict_seconds": 0.214,
+          "metrics": {
+            "mae": 4.292624,
+            "rmse": 6.622761,
+            "r2": 0.975642,
+            "mape": 17.60163910524586,
+            "mape_n": 131949,
+            "mape_coverage": 0.991561
+          },
+          "artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\telematics_only\\xgboost.joblib",
+          "artifact_size_bytes": 468595
+        }
+      },
+      "preprocessor_artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\telematics_only\\preprocessor.joblib",
+      "preprocessor_size_bytes": 813
+    }
+  },
+  "total_clock_seconds": 204.71
+}

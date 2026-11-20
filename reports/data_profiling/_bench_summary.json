@@ -1,0 +1,422 @@
+{
+  "columns": {
+    "0": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 0,
+      "name": "record_id",
+      "numeric_max_sample": 2.6591809551070116e+27,
+      "numeric_min_sample": 1.6591809551070116e+27,
+      "numeric_seen_sample": 100000
+    },
+    "1": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 1,
+      "name": "ems_value"
+    },
+    "10": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 10,
+      "name": "gps_latitude",
+      "numeric_max_sample": 30.10617,
+      "numeric_min_sample": 22.945775,
+      "numeric_seen_sample": 100000
+    },
+    "11": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 11,
+      "name": "gps_longitude",
+      "numeric_max_sample": 114.19131,
+      "numeric_min_sample": 104.59639,
+      "numeric_seen_sample": 100000
+    },
+    "12": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 12,
+      "name": "speed_kmh",
+      "numeric_max_sample": 359.0,
+      "numeric_min_sample": 0.0,
+      "numeric_seen_sample": 100000
+    },
+    "13": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 13,
+      "name": "event_time2"
+    },
+    "14": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 14,
+      "name": "province"
+    },
+    "15": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 15,
+      "name": "city"
+    },
+    "16": {
+      "blank_count_sample": 9250,
+      "blank_rate_sample": 0.0925,
+      "index": 16,
+      "name": "unknown_outer_16"
+    },
+    "17": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 17,
+      "name": "address"
+    },
+    "18": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 18,
+      "name": "road_name"
+    },
+    "19": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 19,
+      "name": "road_type"
+    },
+    "2": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 2,
+      "name": "event_time_str"
+    },
+    "20": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 20,
+      "name": "file_date"
+    },
+    "3": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 3,
+      "name": "imei"
+    },
+    "4": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 4,
+      "name": "imei_suffix"
+    },
+    "5": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 5,
+      "name": "device_hex_id"
+    },
+    "6": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 6,
+      "name": "road_route_id",
+      "numeric_max_sample": 977.0,
+      "numeric_min_sample": 977.0,
+      "numeric_seen_sample": 100000
+    },
+    "7": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 7,
+      "name": "device_type"
+    },
+    "8": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 8,
+      "name": "license_plate"
+    },
+    "9": {
+      "blank_count_sample": 0,
+      "blank_rate_sample": 0.0,
+      "index": 9,
+      "name": "plate_other_id"
+    }
+  },
+  "duplicates": {
+    "exact_line_hashes_in_sample": 0,
+    "sample_rows": 100000
+  },
+  "input_path": "data\\interim\\dwa_inceptio_ems_detail_location_manual.csv",
+  "json_fields": {
+    "date": {
+      "max": 1575216013248.0,
+      "mean": 1575178932301.059,
+      "median": 1575180223641.0,
+      "min": 1575130244377.0,
+      "missing_in_sample": 0,
+      "p05": 1575137330942.0,
+      "p95": 1575212732250.0,
+      "present_in_sample": 100000,
+      "present_rate_sample": 1.0,
+      "sample_n": 100000
+    },
+    "ems_type": {
+      "max": 6.0,
+      "mean": 6.0,
+      "median": 6.0,
+      "min": 6.0,
+      "missing_in_sample": 0,
+      "p05": 6.0,
+      "p95": 6.0,
+      "present_in_sample": 100000,
+      "present_rate_sample": 1.0,
+      "sample_n": 100000
+    },
+    "imei": {
+      "missing_in_sample": 0,
+      "present_in_sample": 100000,
+      "present_rate_sample": 1.0,
+      "sample_n": 0
+    },
+    "x006C": {
+      "max": 124.1,
+      "mean": 60.27716560294084,
+      "median": 68.8,
+      "min": 0.0,
+      "missing_in_sample": 11318,
+      "p05": 0.0,
+      "p95": 86.7,
+      "present_in_sample": 88682,
+      "present_rate_sample": 0.88682,
+      "sample_n": 88682
+    },
+    "x7000": {
+      "max": 1952.0,
+      "mean": 1066.54108,
+      "median": 1085.0,
+      "min": 0.0,
+      "missing_in_sample": 0,
+      "p05": 600.0,
+      "p95": 1321.0,
+      "present_in_sample": 100000,
+      "present_rate_sample": 1.0,
+      "sample_n": 100000
+    },
+    "x7001": {
+      "max": 88.4,
+      "mean": 23.122795,
+      "median": 20.95,
+      "min": 0.0,
+      "missing_in_sample": 0,
+      "p05": 0.0,
+      "p95": 59.8,
+      "present_in_sample": 100000,
+      "present_rate_sample": 1.0,
+      "sample_n": 100000,
+      "suspicious": {
+        "gt_1000": 0,
+        "gt_500": 0,
+        "negative": 0,
+        "zero": 23728
+      }
+    },
+    "x7002": {
+      "max": 46936.0,
+      "mean": 38588.54420514283,
+      "median": 33773.5,
+      "min": 33479.5,
+      "missing_in_sample": 1844,
+      "p05": 33486.5,
+      "p95": 46870.0,
+      "present_in_sample": 98156,
+      "present_rate_sample": 0.98156,
+      "sample_n": 98156
+    },
+    "x7003": {
+      "max": 1.0,
+      "mean": 0.04911,
+      "median": 0.0,
+      "min": 0.0,
+      "missing_in_sample": 0,
+      "p05": 0.0,
+      "p95": 0.0,
+      "present_in_sample": 100000,
+      "present_rate_sample": 1.0,
+      "sample_n": 100000
+    },
+    "x7004": {
+      "max": 103.0,
+      "mean": 61.79847,
+      "median": 70.0,
+      "min": 0.0,
+      "missing_in_sample": 0,
+      "p05": 0.0,
+      "p95": 88.0,
+      "present_in_sample": 100000,
+      "present_rate_sample": 1.0,
+      "sample_n": 100000
+    },
+    "x7005": {
+      "max": 123937.1,
+      "mean": 104640.054505,
+      "median": 93488.7,
+      "min": 92641.3,
+      "missing_in_sample": 0,
+      "p05": 92660.5,
+      "p95": 123759.80500000001,
+      "present_in_sample": 100000,
+      "present_rate_sample": 1.0,
+      "sample_n": 100000
+    },
+    "x7006": {
+      "max": 100.0,
+      "mean": 33.37762,
+      "median": 38.0,
+      "min": 0.0,
+      "missing_in_sample": 0,
+      "p05": 0.0,
+      "p95": 72.0,
+      "present_in_sample": 100000,
+      "present_rate_sample": 1.0,
+      "sample_n": 100000
+    },
+    "x7007": {
+      "max": 99.0,
+      "mean": 78.66255790453131,
+      "median": 79.0,
+      "min": 0.0,
+      "missing_in_sample": 51,
+      "p05": 73.0,
+      "p95": 85.0,
+      "present_in_sample": 99949,
+      "present_rate_sample": 0.99949,
+      "sample_n": 99949
+    },
+    "x7035": {
+      "max": 1.0,
+      "mean": 0.0474,
+      "median": 0.0,
+      "min": 0.0,
+      "missing_in_sample": 0,
+      "p05": 0.0,
+      "p95": 0.0,
+      "present_in_sample": 100000,
+      "present_rate_sample": 1.0,
+      "sample_n": 100000
+    },
+    "x7091": {
+      "max": 10.0,
+      "mean": 5.228905999999999,
+      "median": 5.2,
+      "min": 0.0,
+      "missing_in_sample": 0,
+      "p05": 0.7,
+      "p95": 9.5,
+      "present_in_sample": 100000,
+      "present_rate_sample": 1.0,
+      "sample_n": 100000
+    },
+    "x7095": {
+      "max": 2.0,
+      "mean": 2.0,
+      "median": 2.0,
+      "min": 2.0,
+      "missing_in_sample": 0,
+      "p05": 2.0,
+      "p95": 2.0,
+      "present_in_sample": 100000,
+      "present_rate_sample": 1.0,
+      "sample_n": 100000
+    }
+  },
+  "json_sample": {
+    "failure_rate_sample": 0.0,
+    "keys": {
+      "date": 100000,
+      "ems_type": 100000,
+      "imei": 100000,
+      "x000B": 100000,
+      "x006C": 88682,
+      "x7000": 100000,
+      "x7001": 100000,
+      "x7002": 98156,
+      "x7003": 100000,
+      "x7004": 100000,
+      "x7005": 100000,
+      "x7006": 100000,
+      "x7007": 99949,
+      "x7035": 100000,
+      "x7091": 100000,
+      "x7095": 100000
+    },
+    "parse_failures_sample": 0,
+    "rows_examined_sample": 100000
+  },
+  "meta": {
+    "generated_utc": "2026-11-19T09:37:00Z",
+    "json_sample_size": 300000,
+    "profiler": "src/data/profile_ems1.py",
+    "seed": 20240501
+  },
+  "metrics_scope": {
+    "exact": [
+      "lines_total",
+      "bytes_read",
+      "zero_len_lines",
+      "unique_trucks",
+      "records_per_truck",
+      "date_min",
+      "date_max",
+      "date_missing",
+      "chronology_global",
+      "chronology_per_truck",
+      "json_structural_fail"
+    ],
+    "sample": [
+      "outer_column_numeric_minmax",
+      "outer_column_blank_rates",
+      "json_keys",
+      "json_subfield_stats",
+      "x7001_suspicious",
+      "x7002_monotonicity",
+      "duplicate_line_hashes",
+      "pii_identifier_consistency"
+    ]
+  },
+  "pii": {
+    "multi_outer_plate_to_truck_sample": 0,
+    "outer_json_imei_mismatch_sample": 0,
+    "sample_outer_imei_pairs": 2
+  },
+  "row_col_count_neq_21_sample": 0,
+  "scan": {
+    "bytes_read_exact": 57284858,
+    "date_max_ms_exact": 1575216013248,
+    "date_min_ms_exact": 1575130244377,
+    "date_missing_rows_exact": 0,
+    "date_nondecrease_global_exact": 974,
+    "date_nondecrease_per_truck_exact": 973,
+    "json_empty_exact": 0,
+    "json_structural_fail_exact": 0,
+    "lines_total_exact": 100001,
+    "scan_seconds": 1.09,
+    "zero_len_lines_exact": 0
+  },
+  "trucks": {
+    "distinct_exact": 2,
+    "records_exact": [
+      {
+        "records": 61808,
+        "truck": "truck_001"
+      },
+      {
+        "records": 38192,
+        "truck": "truck_002"
+      }
+    ]
+  },
+  "x7002": {
+    "sample_decreases": 905,
+    "sample_rows_with_counter": 2
+  }
+}

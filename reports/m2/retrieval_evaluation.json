@@ -1,0 +1,153 @@
+{
+  "pipeline": "M2.1 RAG knowledge base retrieval",
+  "generated_at": "2026-11-19T18:49:40+05:30",
+  "embedding": {
+    "model": "sentence-transformers/all-MiniLM-L6-v2",
+    "dimension": 384,
+    "pooling": "mean",
+    "normalization": "L2 (cosine similarity)",
+    "local": true,
+    "download_required": false
+  },
+  "retrieval": {
+    "top_k": 5,
+    "similarity": "cosine (dot product of L2-normalized embeddings)",
+    "metadata_filters": "supported (dict or predicate) in VectorStore.search"
+  },
+  "corpus": {
+    "path": "data/synthetic_heavy_truck_research/rag_knowledge_corpus.jsonl",
+    "valid_documents": 21,
+    "chunk_count": 21,
+    "synthetic": true,
+    "oem_manual_count": 0
+  },
+  "ground_truth": {
+    "labeled_topics": {
+      "engine_load_fuel_demand": 27,
+      "road_grade_effects": 28
+    },
+    "relevant_documents_per_topic": {
+      "engine_load_fuel_demand": [
+        "doc_003__chunk_000",
+        "doc_004__chunk_000"
+      ],
+      "road_grade_effects": [
+        "doc_009__chunk_000",
+        "doc_010__chunk_000"
+      ]
+    },
+    "all_topics_resolved": true
+  },
+  "evaluation": {
+    "n_queries_evaluated": 55,
+    "recall@1": 0.2455,
+    "precision@1": 0.4909,
+    "ndcg@1": 0.4909,
+    "recall@3": 0.2455,
+    "precision@3": 0.1636,
+    "ndcg@3": 0.4909,
+    "recall@5": 0.5,
+    "precision@5": 0.2,
+    "ndcg@5": 0.7102,
+    "mrr": 0.6182,
+    "coverage": {
+      "n_labeled_queries": 55,
+      "n_evaluated": 55,
+      "topic_out_of_corpus": 0
+    }
+  },
+  "examples": {
+    "successful": [
+      {
+        "case_id": "case_0386",
+        "query": "Explain how road grade affects fuel consumption on heavy-duty trucks.",
+        "topic": "road_grade_effects",
+        "relevant_count": 2,
+        "top1_relevant": false,
+        "retrieved_ids": [
+          "doc_001__chunk_000",
+          "doc_007__chunk_000",
+          "doc_012__chunk_000",
+          "doc_009__chunk_000",
+          "doc_008__chunk_000"
+        ],
+        "scores": [
+          0.7331,
+          0.6102,
+          0.6099,
+          0.5932,
+          0.5734
+        ]
+      },
+      {
+        "case_id": "case_0387",
+        "query": "What does engine load have to do with fuel demand?",
+        "topic": "engine_load_fuel_demand",
+        "relevant_count": 2,
+        "top1_relevant": true,
+        "retrieved_ids": [
+          "doc_003__chunk_000",
+          "doc_001__chunk_000",
+          "doc_007__chunk_000",
+          "doc_005__chunk_000",
+          "doc_012__chunk_000"
+        ],
+        "scores": [
+          0.7179,
+          0.6203,
+          0.5477,
+          0.4722,
+          0.4433
+        ]
+      },
+      {
+        "case_id": "case_0388",
+        "query": "Explain how road grade affects fuel consumption on heavy-duty trucks.",
+        "topic": "road_grade_effects",
+        "relevant_count": 2,
+        "top1_relevant": false,
+        "retrieved_ids": [
+          "doc_001__chunk_000",
+          "doc_007__chunk_000",
+          "doc_012__chunk_000",
+          "doc_009__chunk_000",
+          "doc_008__chunk_000"
+        ],
+        "scores": [
+          0.7331,
+          0.6102,
+          0.6099,
+          0.5932,
+          0.5734
+        ]
+      },
+      {
+        "case_id": "case_0389",
+        "query": "What does engine load have to do with fuel demand?",
+        "topic": "engine_load_fuel_demand",
+        "relevant_count": 2,
+        "top1_relevant": true,
+        "retrieved_ids": [
+          "doc_003__chunk_000",
+          "doc_001__chunk_000",
+          "doc_007__chunk_000",
+          "doc_005__chunk_000",
+          "doc_012__chunk_000"
+        ],
+        "scores": [
+          0.7179,
+          0.6203,
+          0.5477,
+          0.4722,
+          0.4433
+        ]
+      }
+    ],
+    "failed": []
+  },
+  "caveats": {
+    "corpus_is_synthetic": "All documents are synthetic educational texts (is_oem_manual=false); results explain retrieval over synthetic content, not verified manufacturer documentation.",
+    "relevance_is_topic_based": "Ground truth is a topic-level mapping from query labels to corpus documents; it is not a human-judged relevance gold standard.",
+    "fixed_corpus": "The corpus is fixed; retrieval does not mutate it."
+  }
+}

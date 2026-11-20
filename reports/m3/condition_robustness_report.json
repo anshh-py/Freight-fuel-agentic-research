@@ -1,0 +1,1258 @@
+{
+  "experiment": "M3.2_operating_condition_robustness",
+  "milestone": "M3.2",
+  "protocol": "read-only: reuse frozen 5-truck test split and saved M1.2 artifacts; no training/refitting/tuning; no test-set-driven model selection",
+  "analysis_frame": "conditional on the five frozen test trucks; descriptive only; no hypothesis tests or significance claims",
+  "selected_models_from_validation": {
+    "full_operational": {
+      "model": "xgboost",
+      "basis": "validation MAE (M1.2) — test data not used",
+      "validation_mae": 3.621111,
+      "validation_mae_all_models": {
+        "mean_dummy": 38.443411,
+        "median_dummy": 37.171296,
+        "random_forest": 3.77144,
+        "ridge": 5.181035,
+        "xgboost": 3.621111
+      }
+    },
+    "telematics_only": {
+      "model": "xgboost",
+      "basis": "validation MAE (M1.2) — test data not used",
+      "validation_mae": 4.292624,
+      "validation_mae_all_models": {
+        "mean_dummy": 38.443411,
+        "median_dummy": 37.171296,
+        "random_forest": 4.77361,
+        "ridge": 19.21738,
+        "xgboost": 4.292624
+      }
+    }
+  },
+  "verification": {
+    "test_rows": 173289,
+    "test_trucks": [
+      "truck_001",
+      "truck_004",
+      "truck_017",
+      "truck_020",
+      "truck_028"
+    ],
+    "all_expected_test_trucks_present": true,
+    "n_test_trips": 96,
+    "n_test_trips_expected": 96,
+    "full_and_telematics_same_rows": true,
+    "per_feature_set_row_counts_match": {
+      "full_operational": 173289,
+      "telematics_only": 173289
+    },
+    "operating_column_attach_no_missing": true,
+    "preprocessors_loaded_not_refitted": true,
+    "models_loaded_not_refitted": true
+  },
+  "feature_sets": {
+    "full_operational": {
+      "n_rows": 173289,
+      "n_trips": 96,
+      "n_trucks": 5,
+      "route_type_table": [
+        {
+          "route_type": "highway",
+          "n_rows": 25919,
+          "n_trips": 14,
+          "n_trucks": 5,
+          "mae": 3.579685,
+          "rmse": 5.295479
+        },
+        {
+          "route_type": "urban",
+          "n_rows": 30815,
+          "n_trips": 16,
+          "n_trucks": 5,
+          "mae": 2.751009,
+          "rmse": 4.647013
+        },
+        {
+          "route_type": "mountainous",
+          "n_rows": 33550,
+          "n_trips": 19,
+          "n_trucks": 5,
+          "mae": 2.719909,
+          "rmse": 4.815936
+        },
+        {
+          "route_type": "mixed",
+          "n_rows": 42286,
+          "n_trips": 26,
+          "n_trucks": 5,
+          "mae": 2.499401,
+          "rmse": 4.346691
+        },
+        {
+          "route_type": "city",
+          "n_rows": 40719,
+          "n_trips": 21,
+          "n_trucks": 4,
+          "mae": 1.733425,
+          "rmse": 3.783074
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "all",
+          "n_rows": 173289,
+          "n_trips": 96,
+          "n_trucks": 5,
+          "mae": 2.568427,
+          "rmse": 4.527482,
+          "support_status": "descriptive_full_truck_coverage",
+          "limited_truck_coverage": false,
+          "insufficient_support": false
+        },
+        {
+          "condition": "engine_on",
+          "n_rows": 172057,
+          "n_trips": 96,
+          "n_trucks": 5,
+          "mae": 2.585928,
+          "rmse": 4.54364,
+          "support_status": "descriptive_full_truck_coverage",
+          "limited_truck_coverage": false,
+          "insufficient_support": false
+        },
+        {
+          "condition": "engine_off",
+          "n_rows": 1232,
+          "n_trips": 95,
+          "n_trucks": 5,
+          "mae": 0.124233,
+          "rmse": 0.168578,
+          "support_status": "descriptive_full_truck_coverage",
+          "limited_truck_coverage": false,
+          "insufficient_support": false
+        },
+        {
+          "condition": "speed_ge_60_highway",
+          "n_rows": 24445,
+          "n_trips": 16,
+          "n_trucks": 5,
+          "mae": 3.657974,
+          "rmse": 5.335614,
+          "support_status": "descriptive_full_truck_coverage",
+          "limited_truck_coverage": false,
+          "insufficient_support": false
+        },
+        {
+          "condition": "idle_engine_on_stopped",
+          "n_rows": 8044,
+          "n_trips": 96,
+          "n_trucks": 5,
+          "mae": 0.155918,
+          "rmse": 0.200346,
+          "support_status": "descriptive_full_truck_coverage",
+          "limited_truck_coverage": false,
+          "insufficient_support": false
+        },
+        {
+          "condition": "engine_off_stopped",
+          "n_rows": 1232,
+          "n_trips": 95,
+          "n_trucks": 5,
+          "mae": 0.124233,
+          "rmse": 0.168578,
+          "support_status": "descriptive_full_truck_coverage",
+          "limited_truck_coverage": false,
+          "insufficient_support": false
+        },
+        {
+          "condition": "accel_ge_0.5_accelerating",
+          "n_rows": 30201,
+          "n_trips": 95,
+          "n_trucks": 5,
+          "mae": 6.555219,
+          "rmse": 8.002232,
+          "support_status": "descriptive_full_truck_coverage",
+          "limited_truck_coverage": false,
+          "insufficient_support": false
+        },
+        {
+          "condition": "accel_le_-0.5_braking",
+          "n_rows": 27117,
+          "n_trips": 96,
+          "n_trucks": 5,
+          "mae": 0.201828,
+          "rmse": 0.269764,
+          "support_status": "descriptive_full_truck_coverage",
+          "limited_truck_coverage": false,
+          "insufficient_support": false
+        },
+        {
+          "condition": "grade_ge_1.5_steep_uphill",
+          "n_rows": 3028,
+          "n_trips": 14,
+          "n_trucks": 5,
+          "mae": 5.164791,
+          "rmse": 6.127211,
+          "support_status": "descriptive_full_truck_coverage",
+          "limited_truck_coverage": false,
+          "insufficient_support": false
+        },
+        {
+          "condition": "payload_light_le_0.33",
+          "n_rows": 158889,
+          "n_trips": 88,
+          "n_trucks": 5,
+          "mae": 2.642105,
+          "rmse": 4.644908,
+          "support_status": "descriptive_full_truck_coverage",
+          "limited_truck_coverage": false,
+          "insufficient_support": false
+        },
+        {
+          "condition": "payload_medium_gt0.33_le0.66",
+          "n_rows": 14400,
+          "n_trips": 8,
+          "n_trucks": 3,
+          "mae": 1.755463,
+          "rmse": 2.934909,
+          "support_status": "descriptive_limited_truck_coverage",
+          "limited_truck_coverage": true,
+          "insufficient_support": false
+        },
+        {
+          "condition": "payload_heavy_gt0.66",
+          "n_rows": 0,
+          "n_trips": 0,
+          "n_trucks": 0,
+          "mae": NaN,
+          "rmse": NaN,
+          "support_status": "empty",
+          "limited_truck_coverage": false,
+          "insufficient_support": true
+        },
+        {
+          "condition": "payload_invalid_gvw",
+          "n_rows": 0,
+          "n_trips": 0,
+          "n_trucks": 0,
+          "mae": NaN,
+          "rmse": NaN,
+          "support_status": "empty",
+          "limited_truck_coverage": false,
+          "insufficient_support": true
+        },
+        {
+          "condition": "combined_highway_heavy_payload",
+          "n_rows": 0,
+          "n_trips": 0,
+          "n_trucks": 0,
+          "mae": NaN,
+          "rmse": NaN,
+          "support_status": "empty",
+          "limited_truck_coverage": false,
+          "insufficient_support": true
+        },
+        {
+          "condition": "combined_uphill_accelerating",
+          "n_rows": 539,
+          "n_trips": 27,
+          "n_trucks": 5,
+          "mae": 7.823063,
+          "rmse": 9.287055,
+          "support_status": "descriptive_full_truck_coverage",
+          "limited_truck_coverage": false,
+          "insufficient_support": false
+        },
+        {
+          "condition": "combined_downhill_braking",
+          "n_rows": 1246,
+          "n_trips": 37,
+          "n_trucks": 5,
+          "mae": 0.215029,
+          "rmse": 0.285985,
+          "support_status": "descriptive_full_truck_coverage",
+          "limited_truck_coverage": false,
+          "insufficient_support": false
+        },
+        {
+          "condition": "combined_steep_uphill_heavy_payload",
+          "n_rows": 0,
+          "n_trips": 0,
+          "n_trucks": 0,
+          "mae": NaN,
+          "rmse": NaN,
+          "support_status": "empty",
+          "limited_truck_coverage": false,
+          "insufficient_support": true
+        }
+      ],
+      "error_concentration": [
+        {
+          "condition": "accel_ge_0.5_accelerating",
+          "squared_error_share": 0.544451,
+          "row_share": 0.174281,
+          "squared_error_sum": 1933942.567538,
+          "n_rows": 30201,
+          "mae": 6.555219,
+          "rmse": 8.002232
+        },
+        {
+          "condition": "speed_ge_60_highway",
+          "squared_error_share": 0.195918,
+          "row_share": 0.141065,
+          "squared_error_sum": 695919.199348,
+          "n_rows": 24445,
+          "mae": 3.657974,
+          "rmse": 5.335614
+        },
+        {
+          "condition": "grade_ge_1.5_steep_uphill",
+          "squared_error_share": 0.032003,
+          "row_share": 0.017474,
+          "squared_error_sum": 113679.338734,
+          "n_rows": 3028,
+          "mae": 5.164791,
+          "rmse": 6.127211
+        },
+        {
+          "condition": "combined_uphill_accelerating",
+          "squared_error_share": 0.013088,
+          "row_share": 0.00311,
+          "squared_error_sum": 46488.423346,
+          "n_rows": 539,
+          "mae": 7.823063,
+          "rmse": 9.287055
+        },
+        {
+          "condition": "accel_le_-0.5_braking",
+          "squared_error_share": 0.000556,
+          "row_share": 0.156484,
+          "squared_error_sum": 1973.367853,
+          "n_rows": 27117,
+          "mae": 0.201828,
+          "rmse": 0.269764
+        },
+        {
+          "condition": "idle_engine_on_stopped",
+          "squared_error_share": 9.1e-05,
+          "row_share": 0.04642,
+          "squared_error_sum": 322.874326,
+          "n_rows": 8044,
+          "mae": 0.155918,
+          "rmse": 0.200346
+        },
+        {
+          "condition": "combined_downhill_braking",
+          "squared_error_share": 2.9e-05,
+          "row_share": 0.00719,
+          "squared_error_sum": 101.90686,
+          "n_rows": 1246,
+          "mae": 0.215029,
+          "rmse": 0.285985
+        },
+        {
+          "condition": "engine_off_stopped",
+          "squared_error_share": 1e-05,
+          "row_share": 0.00711,
+          "squared_error_sum": 35.011654,
+          "n_rows": 1232,
+          "mae": 0.124233,
+          "rmse": 0.168578
+        },
+        {
+          "condition": "payload_heavy_gt0.66",
+          "squared_error_share": 0.0,
+          "row_share": 0.0,
+          "squared_error_sum": 0.0,
+          "n_rows": 0,
+          "mae": null,
+          "rmse": null
+        },
+        {
+          "condition": "combined_highway_heavy_payload",
+          "squared_error_share": 0.0,
+          "row_share": 0.0,
+          "squared_error_sum": 0.0,
+          "n_rows": 0,
+          "mae": null,
+          "rmse": null
+        },
+        {
+          "condition": "combined_steep_uphill_heavy_payload",
+          "squared_error_share": 0.0,
+          "row_share": 0.0,
+          "squared_error_sum": 0.0,
+          "n_rows": 0,
+          "mae": null,
+          "rmse": null
+        }
+      ],
+      "per_truck_condition": {
+        "speed_ge_60_highway": {
+          "n_rows": 24445,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 4014,
+              "mae": 2.579592,
+              "rmse": 3.367131
+            },
+            "truck_004": {
+              "n_rows": 6394,
+              "mae": 1.975446,
+              "rmse": 2.856798
+            },
+            "truck_017": {
+              "n_rows": 5533,
+              "mae": 3.433995,
+              "rmse": 4.574935
+            },
+            "truck_020": {
+              "n_rows": 3730,
+              "mae": 7.059143,
+              "rmse": 9.353942
+            },
+            "truck_028": {
+              "n_rows": 4774,
+              "mae": 4.42036,
+              "rmse": 5.71748
+            }
+          }
+        },
+        "idle_engine_on_stopped": {
+          "n_rows": 8044,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 1502,
+              "mae": 0.088008,
+              "rmse": 0.098514
+            },
+            "truck_004": {
+              "n_rows": 805,
+              "mae": 0.139394,
+              "rmse": 0.178914
+            },
+            "truck_017": {
+              "n_rows": 1513,
+              "mae": 0.090364,
+              "rmse": 0.121163
+            },
+            "truck_020": {
+              "n_rows": 1863,
+              "mae": 0.135754,
+              "rmse": 0.159039
+            },
+            "truck_028": {
+              "n_rows": 2361,
+              "mae": 0.262675,
+              "rmse": 0.300498
+            }
+          }
+        },
+        "engine_off_stopped": {
+          "n_rows": 1232,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 222,
+              "mae": 0.067519,
+              "rmse": 0.098655
+            },
+            "truck_004": {
+              "n_rows": 153,
+              "mae": 0.101556,
+              "rmse": 0.142642
+            },
+            "truck_017": {
+              "n_rows": 314,
+              "mae": 0.13474,
+              "rmse": 0.182432
+            },
+            "truck_020": {
+              "n_rows": 330,
+              "mae": 0.120477,
+              "rmse": 0.154731
+            },
+            "truck_028": {
+              "n_rows": 213,
+              "mae": 0.189961,
+              "rmse": 0.231213
+            }
+          }
+        },
+        "accel_ge_0.5_accelerating": {
+          "n_rows": 30201,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 5143,
+              "mae": 3.005023,
+              "rmse": 3.407128
+            },
+            "truck_004": {
+              "n_rows": 5799,
+              "mae": 4.302415,
+              "rmse": 4.510538
+            },
+            "truck_017": {
+              "n_rows": 7203,
+              "mae": 5.880374,
+              "rmse": 6.511871
+            },
+            "truck_020": {
+              "n_rows": 5725,
+              "mae": 9.082335,
+              "rmse": 9.982177
+            },
+            "truck_028": {
+              "n_rows": 6331,
+              "mae": 9.985297,
+              "rmse": 11.792172
+            }
+          }
+        },
+        "accel_le_-0.5_braking": {
+          "n_rows": 27117,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 4776,
+              "mae": 0.107921,
+              "rmse": 0.132032
+            },
+            "truck_004": {
+              "n_rows": 4947,
+              "mae": 0.128183,
+              "rmse": 0.161444
+            },
+            "truck_017": {
+              "n_rows": 5910,
+              "mae": 0.169211,
+              "rmse": 0.198349
+            },
+            "truck_020": {
+              "n_rows": 5252,
+              "mae": 0.225583,
+              "rmse": 0.285068
+            },
+            "truck_028": {
+              "n_rows": 6232,
+              "mae": 0.343168,
+              "rmse": 0.420484
+            }
+          }
+        },
+        "grade_ge_1.5_steep_uphill": {
+          "n_rows": 3028,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 820,
+              "mae": 4.20564,
+              "rmse": 4.374451
+            },
+            "truck_004": {
+              "n_rows": 646,
+              "mae": 3.466387,
+              "rmse": 4.077538
+            },
+            "truck_017": {
+              "n_rows": 635,
+              "mae": 4.959729,
+              "rmse": 5.407212
+            },
+            "truck_020": {
+              "n_rows": 255,
+              "mae": 12.267902,
+              "rmse": 13.197354
+            },
+            "truck_028": {
+              "n_rows": 672,
+              "mae": 5.466268,
+              "rmse": 6.009403
+            }
+          }
+        },
+        "payload_heavy_gt0.66": {
+          "n_rows": 0,
+          "per_truck": {}
+        },
+        "combined_highway_heavy_payload": {
+          "n_rows": 0,
+          "per_truck": {}
+        },
+        "combined_uphill_accelerating": {
+          "n_rows": 539,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 22,
+              "mae": 4.112553,
+              "rmse": 4.235522
+            },
+            "truck_004": {
+              "n_rows": 157,
+              "mae": 4.353605,
+              "rmse": 4.635343
+            },
+            "truck_017": {
+              "n_rows": 137,
+              "mae": 5.52152,
+              "rmse": 6.276855
+            },
+            "truck_020": {
+              "n_rows": 89,
+              "mae": 11.729111,
+              "rmse": 11.936792
+            },
+            "truck_028": {
+              "n_rows": 134,
+              "mae": 12.255969,
+              "rmse": 13.560641
+            }
+          }
+        },
+        "combined_downhill_braking": {
+          "n_rows": 1246,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 201,
+              "mae": 0.086811,
+              "rmse": 0.112167
+            },
+            "truck_004": {
+              "n_rows": 337,
+              "mae": 0.125307,
+              "rmse": 0.159152
+            },
+            "truck_017": {
+              "n_rows": 246,
+              "mae": 0.228354,
+              "rmse": 0.269139
+            },
+            "truck_020": {
+              "n_rows": 187,
+              "mae": 0.286576,
+              "rmse": 0.390083
+            },
+            "truck_028": {
+              "n_rows": 275,
+              "mae": 0.358124,
+              "rmse": 0.402574
+            }
+          }
+        },
+        "combined_steep_uphill_heavy_payload": {
+          "n_rows": 0,
+          "per_truck": {}
+        }
+      },
+      "insufficient_support_note": "Support is classified, not a single boolean. A subgroup is 'insufficient' (insufficient_support=True) when it is empty, has fewer than 500 rows, or spans fewer than 2 distinct trucks. A subgroup with enough rows and at least 2 trucks but fewer than all 5 test trucks is reported DESCRIPTIVELY with limited_truck_coverage=True and an explicit warning: it does not support population-level generalization. Row count alone never proves reliability.",
+      "payload_bin_edges": [
+        0.33,
+        0.66
+      ],
+      "note": "All metrics are descriptive; no hypothesis tests. The combined conditions reuse M1.3 band edges (speed>=60, grade>=0.3 / <=-0.3 / >=1.5, accel>=0.5 / <=-0.5). Payload load factor = payload_kg / gross_vehicle_weight_kg; invalid denominators are bucketed separately (never dropped)."
+    },
+    "telematics_only": {
+      "n_rows": 173289,
+      "n_trips": 96,
+      "n_trucks": 5,
+      "route_type_table": [
+        {
+          "route_type": "highway",
+          "n_rows": 25919,
+          "n_trips": 14,
+          "n_trucks": 5,
+          "mae": 3.683215,
+          "rmse": 5.370086
+        },
+        {
+          "route_type": "mountainous",
+          "n_rows": 33550,
+          "n_trips": 19,
+          "n_trucks": 5,
+          "mae": 2.781362,
+          "rmse": 5.286884
+        },
+        {
+          "route_type": "urban",
+          "n_rows": 30815,
+          "n_trips": 16,
+          "n_trucks": 5,
+          "mae": 2.61308,
+          "rmse": 4.615697
+        },
+        {
+          "route_type": "mixed",
+          "n_rows": 42286,
+          "n_trips": 26,
+          "n_trucks": 5,
+          "mae": 2.220111,
+          "rmse": 3.455597
+        },
+        {
+          "route_type": "city",
+          "n_rows": 40719,
+          "n_trips": 21,
+          "n_trucks": 4,
+          "mae": 2.000811,
+          "rmse": 3.377714
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "all",
+          "n_rows": 173289,
+          "n_trips": 96,
+          "n_trucks": 5,
+          "mae": 2.56596,
+          "rmse": 4.371276,
+          "support_status": "descriptive_full_truck_coverage",
+          "limited_truck_coverage": false,
+          "insufficient_support": false
+        },
+        {
+          "condition": "engine_on",
+          "n_rows": 172057,
+          "n_trips": 96,
+          "n_trucks": 5,
+          "mae": 2.581941,
+          "rmse": 4.386741,
+          "support_status": "descriptive_full_truck_coverage",
+          "limited_truck_coverage": false,
+          "insufficient_support": false
+        },
+        {
+          "condition": "engine_off",
+          "n_rows": 1232,
+          "n_trips": 95,
+          "n_trucks": 5,
+          "mae": 0.334102,
+          "rmse": 0.438992,
+          "support_status": "descriptive_full_truck_coverage",
+          "limited_truck_coverage": false,
+          "insufficient_support": false
+        },
+        {
+          "condition": "speed_ge_60_highway",
+          "n_rows": 24445,
+          "n_trips": 16,
+          "n_trucks": 5,
+          "mae": 3.732962,
+          "rmse": 5.38352,
+          "support_status": "descriptive_full_truck_coverage",
+          "limited_truck_coverage": false,
+          "insufficient_support": false
+        },
+        {
+          "condition": "idle_engine_on_stopped",
+          "n_rows": 8044,
+          "n_trips": 96,
+          "n_trucks": 5,
+          "mae": 0.468666,
+          "rmse": 1.17481,
+          "support_status": "descriptive_full_truck_coverage",
+          "limited_truck_coverage": false,
+          "insufficient_support": false
+        },
+        {
+          "condition": "engine_off_stopped",
+          "n_rows": 1232,
+          "n_trips": 95,
+          "n_trucks": 5,
+          "mae": 0.334102,
+          "rmse": 0.438992,
+          "support_status": "descriptive_full_truck_coverage",
+          "limited_truck_coverage": false,
+          "insufficient_support": false
+        },
+        {
+          "condition": "accel_ge_0.5_accelerating",
+          "n_rows": 30201,
+          "n_trips": 95,
+          "n_trucks": 5,
+          "mae": 5.505101,
+          "rmse": 7.552094,
+          "support_status": "descriptive_full_truck_coverage",
+          "limited_truck_coverage": false,
+          "insufficient_support": false
+        },
+        {
+          "condition": "accel_le_-0.5_braking",
+          "n_rows": 27117,
+          "n_trips": 96,
+          "n_trucks": 5,
+          "mae": 0.532843,
+          "rmse": 0.739052,
+          "support_status": "descriptive_full_truck_coverage",
+          "limited_truck_coverage": false,
+          "insufficient_support": false
+        },
+        {
+          "condition": "grade_ge_1.5_steep_uphill",
+          "n_rows": 3028,
+          "n_trips": 14,
+          "n_trucks": 5,
+          "mae": 4.576376,
+          "rmse": 6.216342,
+          "support_status": "descriptive_full_truck_coverage",
+          "limited_truck_coverage": false,
+          "insufficient_support": false
+        },
+        {
+          "condition": "payload_light_le_0.33",
+          "n_rows": 158889,
+          "n_trips": 88,
+          "n_trucks": 5,
+          "mae": 2.620473,
+          "rmse": 4.471467,
+          "support_status": "descriptive_full_truck_coverage",
+          "limited_truck_coverage": false,
+          "insufficient_support": false
+        },
+        {
+          "condition": "payload_medium_gt0.33_le0.66",
+          "n_rows": 14400,
+          "n_trips": 8,
+          "n_trucks": 3,
+          "mae": 1.964463,
+          "rmse": 3.0549,
+          "support_status": "descriptive_limited_truck_coverage",
+          "limited_truck_coverage": true,
+          "insufficient_support": false
+        },
+        {
+          "condition": "payload_heavy_gt0.66",
+          "n_rows": 0,
+          "n_trips": 0,
+          "n_trucks": 0,
+          "mae": NaN,
+          "rmse": NaN,
+          "support_status": "empty",
+          "limited_truck_coverage": false,
+          "insufficient_support": true
+        },
+        {
+          "condition": "payload_invalid_gvw",
+          "n_rows": 0,
+          "n_trips": 0,
+          "n_trucks": 0,
+          "mae": NaN,
+          "rmse": NaN,
+          "support_status": "empty",
+          "limited_truck_coverage": false,
+          "insufficient_support": true
+        },
+        {
+          "condition": "combined_highway_heavy_payload",
+          "n_rows": 0,
+          "n_trips": 0,
+          "n_trucks": 0,
+          "mae": NaN,
+          "rmse": NaN,
+          "support_status": "empty",
+          "limited_truck_coverage": false,
+          "insufficient_support": true
+        },
+        {
+          "condition": "combined_uphill_accelerating",
+          "n_rows": 539,
+          "n_trips": 27,
+          "n_trucks": 5,
+          "mae": 6.756941,
+          "rmse": 8.924021,
+          "support_status": "descriptive_full_truck_coverage",
+          "limited_truck_coverage": false,
+          "insufficient_support": false
+        },
+        {
+          "condition": "combined_downhill_braking",
+          "n_rows": 1246,
+          "n_trips": 37,
+          "n_trucks": 5,
+          "mae": 0.699678,
+          "rmse": 0.952358,
+          "support_status": "descriptive_full_truck_coverage",
+          "limited_truck_coverage": false,
+          "insufficient_support": false
+        },
+        {
+          "condition": "combined_steep_uphill_heavy_payload",
+          "n_rows": 0,
+          "n_trips": 0,
+          "n_trucks": 0,
+          "mae": NaN,
+          "rmse": NaN,
+          "support_status": "empty",
+          "limited_truck_coverage": false,
+          "insufficient_support": true
+        }
+      ],
+      "error_concentration": [
+        {
+          "condition": "accel_ge_0.5_accelerating",
+          "squared_error_share": 0.520198,
+          "row_share": 0.174281,
+          "squared_error_sum": 1722487.614955,
+          "n_rows": 30201,
+          "mae": 5.505101,
+          "rmse": 7.552094
+        },
+        {
+          "condition": "speed_ge_60_highway",
+          "squared_error_share": 0.213961,
+          "row_share": 0.141065,
+          "squared_error_sum": 708472.041999,
+          "n_rows": 24445,
+          "mae": 3.732962,
+          "rmse": 5.38352
+        },
+        {
+          "condition": "grade_ge_1.5_steep_uphill",
+          "squared_error_share": 0.035338,
+          "row_share": 0.017474,
+          "squared_error_sum": 117010.740928,
+          "n_rows": 3028,
+          "mae": 4.576376,
+          "rmse": 6.216342
+        },
+        {
+          "condition": "combined_uphill_accelerating",
+          "squared_error_share": 0.012964,
+          "row_share": 0.00311,
+          "squared_error_sum": 42924.95907,
+          "n_rows": 539,
+          "mae": 6.756941,
+          "rmse": 8.924021
+        },
+        {
+          "condition": "accel_le_-0.5_braking",
+          "squared_error_share": 0.004473,
+          "row_share": 0.156484,
+          "squared_error_sum": 14811.23443,
+          "n_rows": 27117,
+          "mae": 0.532843,
+          "rmse": 0.739052
+        },
+        {
+          "condition": "idle_engine_on_stopped",
+          "squared_error_share": 0.003353,
+          "row_share": 0.04642,
+          "squared_error_sum": 11102.162208,
+          "n_rows": 8044,
+          "mae": 0.468666,
+          "rmse": 1.17481
+        },
+        {
+          "condition": "combined_downhill_braking",
+          "squared_error_share": 0.000341,
+          "row_share": 0.00719,
+          "squared_error_sum": 1130.104173,
+          "n_rows": 1246,
+          "mae": 0.699678,
+          "rmse": 0.952358
+        },
+        {
+          "condition": "engine_off_stopped",
+          "squared_error_share": 7.2e-05,
+          "row_share": 0.00711,
+          "squared_error_sum": 237.423383,
+          "n_rows": 1232,
+          "mae": 0.334102,
+          "rmse": 0.438992
+        },
+        {
+          "condition": "payload_heavy_gt0.66",
+          "squared_error_share": 0.0,
+          "row_share": 0.0,
+          "squared_error_sum": 0.0,
+          "n_rows": 0,
+          "mae": null,
+          "rmse": null
+        },
+        {
+          "condition": "combined_highway_heavy_payload",
+          "squared_error_share": 0.0,
+          "row_share": 0.0,
+          "squared_error_sum": 0.0,
+          "n_rows": 0,
+          "mae": null,
+          "rmse": null
+        },
+        {
+          "condition": "combined_steep_uphill_heavy_payload",
+          "squared_error_share": 0.0,
+          "row_share": 0.0,
+          "squared_error_sum": 0.0,
+          "n_rows": 0,
+          "mae": null,
+          "rmse": null
+        }
+      ],
+      "per_truck_condition": {
+        "speed_ge_60_highway": {
+          "n_rows": 24445,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 4014,
+              "mae": 2.411503,
+              "rmse": 3.110967
+            },
+            "truck_004": {
+              "n_rows": 6394,
+              "mae": 2.439519,
+              "rmse": 3.215939
+            },
+            "truck_017": {
+              "n_rows": 5533,
+              "mae": 2.480715,
+              "rmse": 3.594469
+            },
+            "truck_020": {
+              "n_rows": 3730,
+              "mae": 6.516915,
+              "rmse": 8.226042
+            },
+            "truck_028": {
+              "n_rows": 4774,
+              "mae": 5.852598,
+              "rmse": 7.653024
+            }
+          }
+        },
+        "idle_engine_on_stopped": {
+          "n_rows": 8044,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 1502,
+              "mae": 0.22698,
+              "rmse": 0.36501
+            },
+            "truck_004": {
+              "n_rows": 805,
+              "mae": 0.298676,
+              "rmse": 0.386179
+            },
+            "truck_017": {
+              "n_rows": 1513,
+              "mae": 0.373073,
+              "rmse": 0.982728
+            },
+            "truck_020": {
+              "n_rows": 1863,
+              "mae": 0.332865,
+              "rmse": 0.436212
+            },
+            "truck_028": {
+              "n_rows": 2361,
+              "mae": 0.848793,
+              "rmse": 1.948763
+            }
+          }
+        },
+        "engine_off_stopped": {
+          "n_rows": 1232,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 222,
+              "mae": 0.180215,
+              "rmse": 0.222213
+            },
+            "truck_004": {
+              "n_rows": 153,
+              "mae": 0.243748,
+              "rmse": 0.284105
+            },
+            "truck_017": {
+              "n_rows": 314,
+              "mae": 0.342875,
+              "rmse": 0.416479
+            },
+            "truck_020": {
+              "n_rows": 330,
+              "mae": 0.290191,
+              "rmse": 0.361811
+            },
+            "truck_028": {
+              "n_rows": 213,
+              "mae": 0.614493,
+              "rmse": 0.739393
+            }
+          }
+        },
+        "accel_ge_0.5_accelerating": {
+          "n_rows": 30201,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 5143,
+              "mae": 4.049117,
+              "rmse": 4.86372
+            },
+            "truck_004": {
+              "n_rows": 5799,
+              "mae": 2.349499,
+              "rmse": 3.1287
+            },
+            "truck_017": {
+              "n_rows": 7203,
+              "mae": 4.588998,
+              "rmse": 5.735975
+            },
+            "truck_020": {
+              "n_rows": 5725,
+              "mae": 4.781055,
+              "rmse": 5.52286
+            },
+            "truck_028": {
+              "n_rows": 6331,
+              "mae": 11.275331,
+              "rmse": 13.37436
+            }
+          }
+        },
+        "accel_le_-0.5_braking": {
+          "n_rows": 27117,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 4776,
+              "mae": 0.339506,
+              "rmse": 0.468108
+            },
+            "truck_004": {
+              "n_rows": 4947,
+              "mae": 0.432783,
+              "rmse": 0.546145
+            },
+            "truck_017": {
+              "n_rows": 5910,
+              "mae": 0.473033,
+              "rmse": 0.673414
+            },
+            "truck_020": {
+              "n_rows": 5252,
+              "mae": 0.473359,
+              "rmse": 0.626657
+            },
+            "truck_028": {
+              "n_rows": 6232,
+              "mae": 0.867287,
+              "rmse": 1.100426
+            }
+          }
+        },
+        "grade_ge_1.5_steep_uphill": {
+          "n_rows": 3028,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 820,
+              "mae": 2.362922,
+              "rmse": 2.985917
+            },
+            "truck_004": {
+              "n_rows": 646,
+              "mae": 2.542716,
+              "rmse": 3.263018
+            },
+            "truck_017": {
+              "n_rows": 635,
+              "mae": 3.922537,
+              "rmse": 5.296361
+            },
+            "truck_020": {
+              "n_rows": 255,
+              "mae": 8.171152,
+              "rmse": 8.894029
+            },
+            "truck_028": {
+              "n_rows": 672,
+              "mae": 8.486041,
+              "rmse": 9.822653
+            }
+          }
+        },
+        "payload_heavy_gt0.66": {
+          "n_rows": 0,
+          "per_truck": {}
+        },
+        "combined_highway_heavy_payload": {
+          "n_rows": 0,
+          "per_truck": {}
+        },
+        "combined_uphill_accelerating": {
+          "n_rows": 539,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 22,
+              "mae": 4.365568,
+              "rmse": 4.79702
+            },
+            "truck_004": {
+              "n_rows": 157,
+              "mae": 2.725056,
+              "rmse": 3.573361
+            },
+            "truck_017": {
+              "n_rows": 137,
+              "mae": 3.792532,
+              "rmse": 4.692019
+            },
+            "truck_020": {
+              "n_rows": 89,
+              "mae": 7.764762,
+              "rmse": 8.102675
+            },
+            "truck_028": {
+              "n_rows": 134,
+              "mae": 14.234883,
+              "rmse": 15.34547
+            }
+          }
+        },
+        "combined_downhill_braking": {
+          "n_rows": 1246,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 201,
+              "mae": 0.475309,
+              "rmse": 0.66166
+            },
+            "truck_004": {
+              "n_rows": 337,
+              "mae": 0.421753,
+              "rmse": 0.549073
+            },
+            "truck_017": {
+              "n_rows": 246,
+              "mae": 0.990185,
+              "rmse": 1.254091
+            },
+            "truck_020": {
+              "n_rows": 187,
+              "mae": 0.850923,
+              "rmse": 1.016317
+            },
+            "truck_028": {
+              "n_rows": 275,
+              "mae": 0.841536,
+              "rmse": 1.144888
+            }
+          }
+        },
+        "combined_steep_uphill_heavy_payload": {
+          "n_rows": 0,
+          "per_truck": {}
+        }
+      },
+      "insufficient_support_note": "Support is classified, not a single boolean. A subgroup is 'insufficient' (insufficient_support=True) when it is empty, has fewer than 500 rows, or spans fewer than 2 distinct trucks. A subgroup with enough rows and at least 2 trucks but fewer than all 5 test trucks is reported DESCRIPTIVELY with limited_truck_coverage=True and an explicit warning: it does not support population-level generalization. Row count alone never proves reliability.",
+      "payload_bin_edges": [
+        0.33,
+        0.66
+      ],
+      "note": "All metrics are descriptive; no hypothesis tests. The combined conditions reuse M1.3 band edges (speed>=60, grade>=0.3 / <=-0.3 / >=1.5, accel>=0.5 / <=-0.5). Payload load factor = payload_kg / gross_vehicle_weight_kg; invalid denominators are bucketed separately (never dropped)."
+    }
+  },
+  "limitations": [
+    "Synthetic telemetry: results are pipeline validation, not observed real-world Indian truck telemetry.",
+    "Payload load-factor ceiling: across the entire synthetic dataset (all 963,697 rows) the load factor payload_kg / gross_vehicle_weight_kg never exceeds 0.3886. There is therefore NO heavy-payload regime (LF > 0.66) in the data; the heavy and combined-heavy cells are empty by construction, not by an error, and cannot be evaluated. Only the light (<= 0.33) and medium (0.33-0.66) regimes are populated.",
+    "Only five test trucks: any truck-level or per-condition breakdown is descriptive and unstable; not a population estimate.",
+    "49T is represented by a single held-out truck; its per-condition results are descriptive only and are NOT generalized to the 49T population.",
+    "Combined-condition subgroups are small; they are reported with explicit insufficient-support flags and must not be over-interpreted.",
+    "Payload load factor uses payload_kg / gross_vehicle_weight_kg (intra-trip constant); invalid denominators are bucketed separately.",
+    "Insufficient-support flag is a combined caution (rows AND trucks), not a proof of reliability."
+  ]
+}

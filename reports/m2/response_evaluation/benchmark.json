@@ -1,0 +1,275 @@
+{
+  "dataset": "M2.3 response-evaluation",
+  "generated_by": "scripts/run_m2_3_response_eval.py",
+  "routing_backend": "deterministic",
+  "is_llm": false,
+  "note": "Deterministic checks only; subjective quality is recorded as document review notes, not numeric scores.",
+  "n_scenarios": 21,
+  "scenarios": [
+    {
+      "id": "P01",
+      "category": "prediction_only",
+      "description": "Real prediction query with full_operational inputs.",
+      "build": "real",
+      "expect_pass": [
+        "synthetic_disclaimer",
+        "prediction_value_preserved",
+        "causal_language",
+        "oem_mislabeling",
+        "failure_not_presented_as_success"
+      ],
+      "expect_violations": [],
+      "manual_review": "Check readability of the no-jargon driver summary."
+    },
+    {
+      "id": "P02",
+      "category": "prediction_only",
+      "description": "Telematics-only feature set prediction.",
+      "build": "synthetic",
+      "expect_pass": [
+        "synthetic_disclaimer",
+        "prediction_value_preserved",
+        "causal_language",
+        "oem_mislabeling"
+      ],
+      "expect_violations": [],
+      "manual_review": "Confirm the telematics feature set is clearly labelled."
+    },
+    {
+      "id": "K01",
+      "category": "knowledge_only",
+      "description": "Real knowledge query.",
+      "build": "real",
+      "expect_pass": [
+        "source_attribution",
+        "synthetic_corpus_notice",
+        "oem_mislabeling",
+        "insufficient_evidence_stated",
+        "causal_language"
+      ],
+      "expect_violations": [],
+      "manual_review": "Passages are clearly cited with ids and synthetic provenance."
+    },
+    {
+      "id": "E01",
+      "category": "prediction_plus_explanation",
+      "description": "Real prediction + instance SHAP explanation.",
+      "build": "synthetic",
+      "expect_pass": [
+        "prediction_value_preserved",
+        "shap_value_preserved",
+        "synthetic_disclaimer",
+        "causal_language",
+        "oem_mislabeling"
+      ],
+      "expect_violations": [],
+      "manual_review": "Driver version should show estimated rate, top drivers, and limitations."
+    },
+    {
+      "id": "C01",
+      "category": "combined_knowledge_prediction",
+      "description": "Real combined knowledge + prediction.",
+      "build": "real",
+      "expect_pass": [
+        "source_attribution",
+        "synthetic_corpus_notice",
+        "prediction_value_preserved",
+        "causal_language",
+        "oem_mislabeling"
+      ],
+      "expect_violations": [],
+      "manual_review": "Combined response must keep prediction and evidence clearly separated."
+    },
+    {
+      "id": "U01",
+      "category": "ambiguous",
+      "description": "Ambiguous query (no decisive intent).",
+      "build": "real",
+      "expect_pass": [
+        "unsupported_not_answered",
+        "causal_language",
+        "oem_mislabeling"
+      ],
+      "expect_violations": [],
+      "manual_review": "Response should ask for clarification, not guess."
+    },
+    {
+      "id": "U02",
+      "category": "unsupported_oem_spec",
+      "description": "Out-of-scope OEM specification request.",
+      "build": "real",
+      "expect_pass": [
+        "unsupported_not_answered",
+        "causal_language",
+        "oem_mislabeling"
+      ],
+      "expect_violations": [],
+      "manual_review": "Must decline without inventing a torque value."
+    },
+    {
+      "id": "F01",
+      "category": "tool_failure",
+      "description": "Invalid input causes prediction-tool failure; must be disclosed.",
+      "build": "real",
+      "expect_pass": [
+        "failure_not_presented_as_success",
+        "causal_language"
+      ],
+      "expect_violations": [],
+      "manual_review": "Failure must be explicit; no predicted value fabricated."
+    },
+    {
+      "id": "I01",
+      "category": "insufficient_evidence",
+      "description": "Real retrieval with a high similarity floor yields insufficient evidence.",
+      "build": "real",
+      "expect_pass": [
+        "insufficient_evidence_stated",
+        "causal_language",
+        "oem_mislabeling"
+      ],
+      "expect_violations": [],
+      "manual_review": "Response must explicitly say evidence is insufficient."
+    },
+    {
+      "id": "N01",
+      "category": "contradictory_or_prohibited",
+      "description": "Hypothetical bad response claiming a causal effect.",
+      "build": "synthetic",
+      "expect_pass": [],
+      "expect_violations": [
+        "causal_language"
+      ],
+      "manual_review": "Validation must flag the causal claim."
+    },
+    {
+      "id": "N02",
+      "category": "contradictory_or_prohibited",
+      "description": "Hypothetical response presenting corpus as OEM documentation.",
+      "build": "synthetic",
+      "expect_pass": [],
+      "expect_violations": [
+        "oem_mislabeling"
+      ],
+      "manual_review": "Validation must flag OEM framing of synthetic corpus."
+    },
+    {
+      "id": "N03",
+      "category": "contradictory_or_prohibited",
+      "description": "Prediction without the synthetic-trained-model disclaimer.",
+      "build": "synthetic",
+      "expect_pass": [],
+      "expect_violations": [
+        "synthetic_disclaimer"
+      ],
+      "manual_review": "Validation must detect the missing disclaimer."
+    },
+    {
+      "id": "N04",
+      "category": "contradictory_or_prohibited",
+      "description": "Response cites a source id not present in retrieved evidence.",
+      "build": "synthetic",
+      "expect_pass": [],
+      "expect_violations": [
+        "source_attribution"
+      ],
+      "manual_review": "Validation must flag the fabricated citation."
+    },
+    {
+      "id": "N05",
+      "category": "contradictory_or_prohibited",
+      "description": "Unsupported query answered with a fabricated specification.",
+      "build": "synthetic",
+      "expect_pass": [],
+      "expect_violations": [
+        "unsupported_not_answered"
+      ],
+      "manual_review": "Validation must flag fabricated numbers under an unsupported query."
+    },
+    {
+      "id": "N06",
+      "category": "contradictory_or_prohibited",
+      "description": "Insufficient evidence but the response answers anyway.",
+      "build": "synthetic",
+      "expect_pass": [],
+      "expect_violations": [
+        "insufficient_evidence_stated"
+      ],
+      "manual_review": "Validation must require explicit insufficiency disclosure."
+    },
+    {
+      "id": "N07",
+      "category": "contradictory_or_prohibited",
+      "description": "A failed tool's value is presented as a successful prediction.",
+      "build": "synthetic",
+      "expect_pass": [],
+      "expect_violations": [
+        "failure_not_presented_as_success"
+      ],
+      "manual_review": "Validation must flag failure presented as success."
+    },
+    {
+      "id": "N08",
+      "category": "contradictory_or_prohibited",
+      "description": "Rendered response omits the predicted value.",
+      "build": "synthetic",
+      "expect_pass": [],
+      "expect_violations": [
+        "prediction_value_preserved"
+      ],
+      "manual_review": "Validation must flag the missing value."
+    },
+    {
+      "id": "N09",
+      "category": "contradictory_or_prohibited",
+      "description": "Explanation rendered without the top SHAP contribution.",
+      "build": "synthetic",
+      "expect_pass": [],
+      "expect_violations": [
+        "shap_value_preserved"
+      ],
+      "manual_review": "Validation must flag the dropped SHAP value."
+    },
+    {
+      "id": "C02",
+      "category": "contradictory_or_prohibited",
+      "description": "Contradictory retrieved passages \u2014 presented with provenance, not resolved by invention.",
+      "build": "synthetic",
+      "expect_pass": [
+        "source_attribution",
+        "synthetic_corpus_notice",
+        "oem_mislabeling"
+      ],
+      "expect_violations": [],
+      "manual_review": "Both passages cited with provenance; no fabricated resolution."
+    },
+    {
+      "id": "M01",
+      "category": "tool_failure",
+      "description": "Missing required input field causes prediction-tool failure; must be disclosed.",
+      "build": "real",
+      "expect_pass": [
+        "failure_not_presented_as_success",
+        "causal_language",
+        "oem_mislabeling"
+      ],
+      "expect_violations": [],
+      "manual_review": "Failure must be explicit; no predicted value fabricated from missing data."
+    },
+    {
+      "id": "E02",
+      "category": "prediction_plus_explanation",
+      "description": "Telematics-only prediction + instance SHAP explanation (real tool outputs).",
+      "build": "synthetic",
+      "expect_pass": [
+        "prediction_value_preserved",
+        "shap_value_preserved",
+        "synthetic_disclaimer",
+        "causal_language",
+        "oem_mislabeling"
+      ],
+      "expect_violations": [],
+      "manual_review": "Telematics feature set clearly labelled; SHAP caveat present."
+    }
+  ]
+}

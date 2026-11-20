@@ -1,0 +1,2372 @@
+{
+  "experiment": "M3.4_missing_noisy_corrupted_telemetry_robustness",
+  "milestone": "M3.4",
+  "protocol": "read-only: reuse frozen 5-truck test split and saved M1.2 artifacts; corruption applied to copies of the final model-input feature matrices after feature construction and before preprocessing; no training/refitting/tuning",
+  "analysis_frame": "synthetic corruption applied to copies of the model-input feature matrices; results are descriptive pipeline validation, NOT observed real-world sensor-failure data",
+  "selected_models_from_validation": {
+    "full_operational": {
+      "model": "xgboost",
+      "basis": "validation MAE (M1.2) — test data not used",
+      "validation_mae": 3.621111,
+      "validation_mae_all_models": {
+        "mean_dummy": 38.443411,
+        "median_dummy": 37.171296,
+        "random_forest": 3.77144,
+        "ridge": 5.181035,
+        "xgboost": 3.621111
+      }
+    },
+    "telematics_only": {
+      "model": "xgboost",
+      "basis": "validation MAE (M1.2) — test data not used",
+      "validation_mae": 4.292624,
+      "validation_mae_all_models": {
+        "mean_dummy": 38.443411,
+        "median_dummy": 37.171296,
+        "random_forest": 4.77361,
+        "ridge": 19.21738,
+        "xgboost": 4.292624
+      }
+    }
+  },
+  "verification": {
+    "test_rows": 173289,
+    "test_trucks": [
+      "truck_001",
+      "truck_004",
+      "truck_017",
+      "truck_020",
+      "truck_028"
+    ],
+    "n_test_trips": 96,
+    "clean_baseline_reproduces_m1_3": {
+      "full_operational": {
+        "reference_model": "xgboost",
+        "matched_model": true,
+        "abs_diffs": {
+          "mae": 0.0,
+          "rmse": 0.0,
+          "r2": 0.0
+        },
+        "within_tolerance": true,
+        "tolerance": 0.001
+      },
+      "telematics_only": {
+        "reference_model": "xgboost",
+        "matched_model": true,
+        "abs_diffs": {
+          "mae": 0.0,
+          "rmse": 0.0,
+          "r2": 0.0
+        },
+        "within_tolerance": true,
+        "tolerance": 0.001
+      }
+    },
+    "per_truck_reconciliation": {
+      "full_operational": {
+        "pooled_mae": 2.568427,
+        "per_truck_weighted_mae": 2.568427,
+        "max_abs_diff": 2.97e-07,
+        "reconciles": true
+      },
+      "telematics_only": {
+        "pooled_mae": 2.56596,
+        "per_truck_weighted_mae": 2.56596,
+        "max_abs_diff": 2.98e-07,
+        "reconciles": true
+      }
+    },
+    "preprocessors_loaded_not_refitted": true,
+    "models_loaded_not_refitted": true,
+    "corruption_applied_to_copies_after_feature_construction_before_preprocessing": true,
+    "raw_telemetry_and_feature_columns_not_modified": true,
+    "prediction_failures_counted_not_silently_discarded": true,
+    "categorical_and_binary_columns_preserved": true,
+    "synthetic_corruption_distinct_from_real_world_sensor_validation": true
+  },
+  "corruption_conventions": {
+    "seed_base": 20240617,
+    "preserved_categorical": [
+      "vehicle_class"
+    ],
+    "preserved_binary": [
+      "ignition_status"
+    ],
+    "spike_multiplier": 8.0,
+    "spike_fraction": 0.005,
+    "gaussian_noise_severities": [
+      0.25,
+      0.5
+    ],
+    "missingness_fractions": [
+      0.05,
+      0.1,
+      0.2,
+      0.3
+    ],
+    "clip_bounds": {
+      "gross_vehicle_weight_kg": [
+        15000.0,
+        60000.0
+      ],
+      "payload_kg": [
+        0.0,
+        40000.0
+      ],
+      "vehicle_mass_kg": [
+        15000.0,
+        60000.0
+      ],
+      "speed_kph": [
+        0.0,
+        90.0
+      ],
+      "acceleration_mps2": [
+        -5.0,
+        5.0
+      ],
+      "road_grade_pct": [
+        -10.0,
+        10.0
+      ],
+      "engine_rpm": [
+        0.0,
+        5000.0
+      ],
+      "engine_load_pct": [
+        0.0,
+        100.0
+      ],
+      "throttle_position_pct": [
+        0.0,
+        100.0
+      ],
+      "torque_nm": [
+        0.0,
+        4000.0
+      ],
+      "coolant_temp_c": [
+        0.0,
+        120.0
+      ],
+      "intake_air_temp_c": [
+        -40.0,
+        100.0
+      ],
+      "ambient_temp_c": [
+        -40.0,
+        60.0
+      ]
+    },
+    "training_statistics_provenance": {
+      "source": "training_split_only",
+      "description": "Gaussian-noise sigma and spike reference statistics (median, std) are derived exclusively from the training split of the frozen split manifest; never from validation or test data. Severity multipliers, bias magnitudes and clipping bounds are predefined documented constants."
+    },
+    "random_stream": {
+      "kind": "per_column_deterministic",
+      "description": "Each affected column uses an independent RNG seeded deterministically from the scenario seed plus a stable hash of the column name; shared columns receive identical corruption across feature sets (same scenario, same row indices)."
+    },
+    "combined_scenario": {
+      "note": "The combined missingness+noise scenario uses an independent realization from the standalone 20% missingness and 0.25-noise scenarios (separate seeds), not a superset of them."
+    }
+  },
+  "clean_baselines": {
+    "full_operational": {
+      "model": "xgboost",
+      "n_rows": 173289,
+      "mae": 2.568427,
+      "rmse": 4.527482,
+      "r2": 0.987788,
+      "r2_flag": "ok"
+    },
+    "telematics_only": {
+      "model": "xgboost",
+      "n_rows": 173289,
+      "mae": 2.56596,
+      "rmse": 4.371276,
+      "r2": 0.988616,
+      "r2_flag": "ok"
+    }
+  },
+  "feature_sets": {
+    "full_operational": {
+      "n_rows": 173289,
+      "model": "xgboost",
+      "features": [
+        "vehicle_class",
+        "gross_vehicle_weight_kg",
+        "payload_kg",
+        "vehicle_mass_kg",
+        "speed_kph",
+        "acceleration_mps2",
+        "road_grade_pct",
+        "ignition_status",
+        "engine_rpm",
+        "engine_load_pct",
+        "throttle_position_pct",
+        "torque_nm",
+        "coolant_temp_c",
+        "intake_air_temp_c",
+        "ambient_temp_c"
+      ],
+      "numeric_features": [
+        "gross_vehicle_weight_kg",
+        "payload_kg",
+        "vehicle_mass_kg",
+        "speed_kph",
+        "acceleration_mps2",
+        "road_grade_pct",
+        "engine_rpm",
+        "engine_load_pct",
+        "throttle_position_pct",
+        "torque_nm",
+        "coolant_temp_c",
+        "intake_air_temp_c",
+        "ambient_temp_c"
+      ],
+      "clean_baseline": {
+        "model": "xgboost",
+        "n_rows": 173289,
+        "mae": 2.568427,
+        "rmse": 4.527482,
+        "r2": 0.987788,
+        "r2_flag": "ok"
+      },
+      "scenarios": [
+        {
+          "name": "random_missingness_05pct",
+          "kind": "random_missingness",
+          "description": "0.05 of cells set to NaN per affected numeric feature, selected uniformly at random per column",
+          "fraction": 0.05,
+          "columns": [
+            "gross_vehicle_weight_kg",
+            "payload_kg",
+            "vehicle_mass_kg",
+            "speed_kph",
+            "acceleration_mps2",
+            "road_grade_pct",
+            "engine_rpm",
+            "engine_load_pct",
+            "throttle_position_pct",
+            "torque_nm",
+            "coolant_temp_c",
+            "intake_air_temp_c",
+            "ambient_temp_c"
+          ],
+          "seed": 20240618,
+          "applied": true,
+          "affected_columns": [
+            "gross_vehicle_weight_kg",
+            "payload_kg",
+            "vehicle_mass_kg",
+            "speed_kph",
+            "acceleration_mps2",
+            "road_grade_pct",
+            "engine_rpm",
+            "engine_load_pct",
+            "throttle_position_pct",
+            "torque_nm",
+            "coolant_temp_c",
+            "intake_air_temp_c",
+            "ambient_temp_c"
+          ],
+          "cells_changed": 112632,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 5.763374,
+          "rmse": 14.445803,
+          "r2": 0.875679,
+          "delta_mae": 3.194947,
+          "mae_degradation_ratio": 2.243931,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 4.687467,
+              "clean_mae": 1.302266,
+              "delta_mae": 3.385201
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 5.085305,
+              "clean_mae": 1.549199,
+              "delta_mae": 3.536106
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 5.393955,
+              "clean_mae": 2.245159,
+              "delta_mae": 3.148796
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 6.495351,
+              "clean_mae": 3.866037,
+              "delta_mae": 2.629314
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 6.892615,
+              "clean_mae": 3.596619,
+              "delta_mae": 3.295996
+            }
+          }
+        },
+        {
+          "name": "random_missingness_10pct",
+          "kind": "random_missingness",
+          "description": "0.10 of cells set to NaN per affected numeric feature, selected uniformly at random per column",
+          "fraction": 0.1,
+          "columns": [
+            "gross_vehicle_weight_kg",
+            "payload_kg",
+            "vehicle_mass_kg",
+            "speed_kph",
+            "acceleration_mps2",
+            "road_grade_pct",
+            "engine_rpm",
+            "engine_load_pct",
+            "throttle_position_pct",
+            "torque_nm",
+            "coolant_temp_c",
+            "intake_air_temp_c",
+            "ambient_temp_c"
+          ],
+          "seed": 20240619,
+          "applied": true,
+          "affected_columns": [
+            "gross_vehicle_weight_kg",
+            "payload_kg",
+            "vehicle_mass_kg",
+            "speed_kph",
+            "acceleration_mps2",
+            "road_grade_pct",
+            "engine_rpm",
+            "engine_load_pct",
+            "throttle_position_pct",
+            "torque_nm",
+            "coolant_temp_c",
+            "intake_air_temp_c",
+            "ambient_temp_c"
+          ],
+          "cells_changed": 225277,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 9.211178,
+          "rmse": 21.04589,
+          "r2": 0.736126,
+          "delta_mae": 6.642751,
+          "mae_degradation_ratio": 3.586311,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 8.266877,
+              "clean_mae": 1.302266,
+              "delta_mae": 6.964611
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 8.895543,
+              "clean_mae": 1.549199,
+              "delta_mae": 7.346344
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 8.855948,
+              "clean_mae": 2.245159,
+              "delta_mae": 6.610789
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 9.498086,
+              "clean_mae": 3.866037,
+              "delta_mae": 5.632049
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 10.307988,
+              "clean_mae": 3.596619,
+              "delta_mae": 6.711369
+            }
+          }
+        },
+        {
+          "name": "random_missingness_20pct",
+          "kind": "random_missingness",
+          "description": "0.20 of cells set to NaN per affected numeric feature, selected uniformly at random per column",
+          "fraction": 0.2,
+          "columns": [
+            "gross_vehicle_weight_kg",
+            "payload_kg",
+            "vehicle_mass_kg",
+            "speed_kph",
+            "acceleration_mps2",
+            "road_grade_pct",
+            "engine_rpm",
+            "engine_load_pct",
+            "throttle_position_pct",
+            "torque_nm",
+            "coolant_temp_c",
+            "intake_air_temp_c",
+            "ambient_temp_c"
+          ],
+          "seed": 20240620,
+          "applied": true,
+          "affected_columns": [
+            "gross_vehicle_weight_kg",
+            "payload_kg",
+            "vehicle_mass_kg",
+            "speed_kph",
+            "acceleration_mps2",
+            "road_grade_pct",
+            "engine_rpm",
+            "engine_load_pct",
+            "throttle_position_pct",
+            "torque_nm",
+            "coolant_temp_c",
+            "intake_air_temp_c",
+            "ambient_temp_c"
+          ],
+          "cells_changed": 450554,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 16.821615,
+          "rmse": 32.742409,
+          "r2": 0.36132,
+          "delta_mae": 14.253188,
+          "mae_degradation_ratio": 6.549384,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 16.384964,
+              "clean_mae": 1.302266,
+              "delta_mae": 15.082698
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 16.713195,
+              "clean_mae": 1.549199,
+              "delta_mae": 15.163996
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 16.655144,
+              "clean_mae": 2.245159,
+              "delta_mae": 14.409985
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 16.484855,
+              "clean_mae": 3.866037,
+              "delta_mae": 12.618818
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 17.707509,
+              "clean_mae": 3.596619,
+              "delta_mae": 14.11089
+            }
+          }
+        },
+        {
+          "name": "random_missingness_30pct",
+          "kind": "random_missingness",
+          "description": "0.30 of cells set to NaN per affected numeric feature, selected uniformly at random per column",
+          "fraction": 0.3,
+          "columns": [
+            "gross_vehicle_weight_kg",
+            "payload_kg",
+            "vehicle_mass_kg",
+            "speed_kph",
+            "acceleration_mps2",
+            "road_grade_pct",
+            "engine_rpm",
+            "engine_load_pct",
+            "throttle_position_pct",
+            "torque_nm",
+            "coolant_temp_c",
+            "intake_air_temp_c",
+            "ambient_temp_c"
+          ],
+          "seed": 20240621,
+          "applied": true,
+          "affected_columns": [
+            "gross_vehicle_weight_kg",
+            "payload_kg",
+            "vehicle_mass_kg",
+            "speed_kph",
+            "acceleration_mps2",
+            "road_grade_pct",
+            "engine_rpm",
+            "engine_load_pct",
+            "throttle_position_pct",
+            "torque_nm",
+            "coolant_temp_c",
+            "intake_air_temp_c",
+            "ambient_temp_c"
+          ],
+          "cells_changed": 675831,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 25.278947,
+          "rmse": 43.351197,
+          "r2": -0.119603,
+          "delta_mae": 22.71052,
+          "mae_degradation_ratio": 9.84219,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 25.655123,
+              "clean_mae": 1.302266,
+              "delta_mae": 24.352857
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 25.591371,
+              "clean_mae": 1.549199,
+              "delta_mae": 24.042172
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 24.684488,
+              "clean_mae": 2.245159,
+              "delta_mae": 22.439329
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 24.40845,
+              "clean_mae": 3.866037,
+              "delta_mae": 20.542413
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 26.042928,
+              "clean_mae": 3.596619,
+              "delta_mae": 22.446309
+            }
+          }
+        },
+        {
+          "name": "complete_sensor_failure_engine_rpm",
+          "kind": "complete_sensor_failure",
+          "description": "entire column 'engine_rpm' set to NaN (simulated complete sensor failure); column is kept so the schema is preserved",
+          "columns": [
+            "engine_rpm"
+          ],
+          "seed": null,
+          "applied": true,
+          "affected_columns": [
+            "engine_rpm"
+          ],
+          "cells_changed": 173289,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 5.584046,
+          "rmse": 7.786316,
+          "r2": 0.963882,
+          "delta_mae": 3.015619,
+          "mae_degradation_ratio": 2.174111,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 2.789594,
+              "clean_mae": 1.302266,
+              "delta_mae": 1.487328
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 5.641626,
+              "clean_mae": 1.549199,
+              "delta_mae": 4.092427
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 6.583625,
+              "clean_mae": 2.245159,
+              "delta_mae": 4.338466
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 3.863991,
+              "clean_mae": 3.866037,
+              "delta_mae": -0.002046
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 8.287941,
+              "clean_mae": 3.596619,
+              "delta_mae": 4.691322
+            }
+          }
+        },
+        {
+          "name": "complete_sensor_failure_throttle_position_pct",
+          "kind": "complete_sensor_failure",
+          "description": "entire column 'throttle_position_pct' set to NaN (simulated complete sensor failure); column is kept so the schema is preserved",
+          "columns": [
+            "throttle_position_pct"
+          ],
+          "seed": null,
+          "applied": true,
+          "affected_columns": [
+            "throttle_position_pct"
+          ],
+          "cells_changed": 173289,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 2.722289,
+          "rmse": 4.553105,
+          "r2": 0.98765,
+          "delta_mae": 0.153862,
+          "mae_degradation_ratio": 1.059905,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 1.293164,
+              "clean_mae": 1.302266,
+              "delta_mae": -0.009102
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 1.752541,
+              "clean_mae": 1.549199,
+              "delta_mae": 0.203342
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 2.582049,
+              "clean_mae": 2.245159,
+              "delta_mae": 0.33689
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 3.710569,
+              "clean_mae": 3.866037,
+              "delta_mae": -0.155468
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 3.932865,
+              "clean_mae": 3.596619,
+              "delta_mae": 0.336246
+            }
+          }
+        },
+        {
+          "name": "complete_sensor_failure_speed_kph",
+          "kind": "complete_sensor_failure",
+          "description": "entire column 'speed_kph' set to NaN (simulated complete sensor failure); column is kept so the schema is preserved",
+          "columns": [
+            "speed_kph"
+          ],
+          "seed": null,
+          "applied": true,
+          "affected_columns": [
+            "speed_kph"
+          ],
+          "cells_changed": 173289,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 2.722769,
+          "rmse": 4.727998,
+          "r2": 0.986683,
+          "delta_mae": 0.154342,
+          "mae_degradation_ratio": 1.060092,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 1.252073,
+              "clean_mae": 1.302266,
+              "delta_mae": -0.050193
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 1.77753,
+              "clean_mae": 1.549199,
+              "delta_mae": 0.228331
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 2.371774,
+              "clean_mae": 2.245159,
+              "delta_mae": 0.126615
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 3.794223,
+              "clean_mae": 3.866037,
+              "delta_mae": -0.071814
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 4.073756,
+              "clean_mae": 3.596619,
+              "delta_mae": 0.477137
+            }
+          }
+        },
+        {
+          "name": "complete_sensor_failure_coolant_temp_c",
+          "kind": "complete_sensor_failure",
+          "description": "entire column 'coolant_temp_c' set to NaN (simulated complete sensor failure); column is kept so the schema is preserved",
+          "columns": [
+            "coolant_temp_c"
+          ],
+          "seed": null,
+          "applied": true,
+          "affected_columns": [
+            "coolant_temp_c"
+          ],
+          "cells_changed": 173289,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 2.56659,
+          "rmse": 4.526953,
+          "r2": 0.987791,
+          "delta_mae": -0.001837,
+          "mae_degradation_ratio": 0.999285,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 1.282752,
+              "clean_mae": 1.302266,
+              "delta_mae": -0.019514
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 1.557666,
+              "clean_mae": 1.549199,
+              "delta_mae": 0.008467
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 2.24931,
+              "clean_mae": 2.245159,
+              "delta_mae": 0.004151
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 3.847898,
+              "clean_mae": 3.866037,
+              "delta_mae": -0.018139
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 3.608641,
+              "clean_mae": 3.596619,
+              "delta_mae": 0.012022
+            }
+          }
+        },
+        {
+          "name": "gaussian_noise_severity_25pct",
+          "kind": "gaussian_noise",
+          "description": "additive Gaussian noise with sigma = 0.25 x each affected feature's clean standard deviation (feature-scaled severity)",
+          "severity": 0.25,
+          "columns": [
+            "gross_vehicle_weight_kg",
+            "payload_kg",
+            "vehicle_mass_kg",
+            "speed_kph",
+            "acceleration_mps2",
+            "road_grade_pct",
+            "engine_rpm",
+            "engine_load_pct",
+            "throttle_position_pct",
+            "torque_nm",
+            "coolant_temp_c",
+            "intake_air_temp_c",
+            "ambient_temp_c"
+          ],
+          "seed": 20240718,
+          "applied": true,
+          "affected_columns": [
+            "gross_vehicle_weight_kg",
+            "payload_kg",
+            "vehicle_mass_kg",
+            "speed_kph",
+            "acceleration_mps2",
+            "road_grade_pct",
+            "engine_rpm",
+            "engine_load_pct",
+            "throttle_position_pct",
+            "torque_nm",
+            "coolant_temp_c",
+            "intake_air_temp_c",
+            "ambient_temp_c"
+          ],
+          "cells_changed": 2252757,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 6.570537,
+          "rmse": 9.474818,
+          "r2": 0.946518,
+          "delta_mae": 4.00211,
+          "mae_degradation_ratio": 2.558195,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 6.174599,
+              "clean_mae": 1.302266,
+              "delta_mae": 4.872333
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 6.408879,
+              "clean_mae": 1.549199,
+              "delta_mae": 4.85968
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 6.287149,
+              "clean_mae": 2.245159,
+              "delta_mae": 4.04199
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 7.495826,
+              "clean_mae": 3.866037,
+              "delta_mae": 3.629789
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 6.483144,
+              "clean_mae": 3.596619,
+              "delta_mae": 2.886525
+            }
+          }
+        },
+        {
+          "name": "gaussian_noise_severity_50pct",
+          "kind": "gaussian_noise",
+          "description": "additive Gaussian noise with sigma = 0.50 x each affected feature's clean standard deviation (feature-scaled severity)",
+          "severity": 0.5,
+          "columns": [
+            "gross_vehicle_weight_kg",
+            "payload_kg",
+            "vehicle_mass_kg",
+            "speed_kph",
+            "acceleration_mps2",
+            "road_grade_pct",
+            "engine_rpm",
+            "engine_load_pct",
+            "throttle_position_pct",
+            "torque_nm",
+            "coolant_temp_c",
+            "intake_air_temp_c",
+            "ambient_temp_c"
+          ],
+          "seed": 20240719,
+          "applied": true,
+          "affected_columns": [
+            "gross_vehicle_weight_kg",
+            "payload_kg",
+            "vehicle_mass_kg",
+            "speed_kph",
+            "acceleration_mps2",
+            "road_grade_pct",
+            "engine_rpm",
+            "engine_load_pct",
+            "throttle_position_pct",
+            "torque_nm",
+            "coolant_temp_c",
+            "intake_air_temp_c",
+            "ambient_temp_c"
+          ],
+          "cells_changed": 2252757,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 11.81613,
+          "rmse": 16.749863,
+          "r2": 0.832858,
+          "delta_mae": 9.247703,
+          "mae_degradation_ratio": 4.600532,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 11.702229,
+              "clean_mae": 1.302266,
+              "delta_mae": 10.399963
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 12.205322,
+              "clean_mae": 1.549199,
+              "delta_mae": 10.656123
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 11.651879,
+              "clean_mae": 2.245159,
+              "delta_mae": 9.40672
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 12.47626,
+              "clean_mae": 3.866037,
+              "delta_mae": 8.610223
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 11.164619,
+              "clean_mae": 3.596619,
+              "delta_mae": 7.568
+            }
+          }
+        },
+        {
+          "name": "fixed_bias_engine_rpm_plus200",
+          "kind": "fixed_bias",
+          "description": "fixed additive bias of +200 applied to column 'engine_rpm' (physical units)",
+          "bias": 200.0,
+          "columns": [
+            "engine_rpm"
+          ],
+          "seed": null,
+          "applied": true,
+          "affected_columns": [
+            "engine_rpm"
+          ],
+          "cells_changed": 173289,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 4.01464,
+          "rmse": 6.241363,
+          "r2": 0.976793,
+          "delta_mae": 1.446213,
+          "mae_degradation_ratio": 1.563073,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 1.52892,
+              "clean_mae": 1.302266,
+              "delta_mae": 0.226654
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 4.036405,
+              "clean_mae": 1.549199,
+              "delta_mae": 2.487206
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 4.748256,
+              "clean_mae": 2.245159,
+              "delta_mae": 2.503097
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 2.427213,
+              "clean_mae": 3.866037,
+              "delta_mae": -1.438824
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 6.641981,
+              "clean_mae": 3.596619,
+              "delta_mae": 3.045362
+            }
+          }
+        },
+        {
+          "name": "fixed_bias_ambient_temp_c_plus5",
+          "kind": "fixed_bias",
+          "description": "fixed additive bias of +5 applied to column 'ambient_temp_c' (physical units)",
+          "bias": 5.0,
+          "columns": [
+            "ambient_temp_c"
+          ],
+          "seed": null,
+          "applied": true,
+          "affected_columns": [
+            "ambient_temp_c"
+          ],
+          "cells_changed": 173289,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 2.533123,
+          "rmse": 4.498276,
+          "r2": 0.987945,
+          "delta_mae": -0.035304,
+          "mae_degradation_ratio": 0.986255,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 1.250152,
+              "clean_mae": 1.302266,
+              "delta_mae": -0.052114
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 1.508859,
+              "clean_mae": 1.549199,
+              "delta_mae": -0.04034
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 2.241255,
+              "clean_mae": 2.245159,
+              "delta_mae": -0.003904
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 3.8609,
+              "clean_mae": 3.866037,
+              "delta_mae": -0.005137
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 3.522743,
+              "clean_mae": 3.596619,
+              "delta_mae": -0.073876
+            }
+          }
+        },
+        {
+          "name": "fixed_bias_speed_kph_plus10",
+          "kind": "fixed_bias",
+          "description": "fixed additive bias of +10 applied to column 'speed_kph' (physical units)",
+          "bias": 10.0,
+          "columns": [
+            "speed_kph"
+          ],
+          "seed": null,
+          "applied": true,
+          "affected_columns": [
+            "speed_kph"
+          ],
+          "cells_changed": 173289,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 2.584717,
+          "rmse": 4.539926,
+          "r2": 0.987721,
+          "delta_mae": 0.01629,
+          "mae_degradation_ratio": 1.006342,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 1.273261,
+              "clean_mae": 1.302266,
+              "delta_mae": -0.029005
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 1.60581,
+              "clean_mae": 1.549199,
+              "delta_mae": 0.056611
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 2.283706,
+              "clean_mae": 2.245159,
+              "delta_mae": 0.038547
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 3.834242,
+              "clean_mae": 3.866037,
+              "delta_mae": -0.031795
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 3.635752,
+              "clean_mae": 3.596619,
+              "delta_mae": 0.039133
+            }
+          }
+        },
+        {
+          "name": "isolated_extreme_spikes_engine_load_pct",
+          "kind": "spikes",
+          "description": "0.005 of rows in column 'engine_load_pct' set to an extreme value = median + 8 x std (an isolated 6+ sigma-style spike)",
+          "spike_fraction": 0.005,
+          "spike_multiplier": 8.0,
+          "columns": [
+            "engine_load_pct"
+          ],
+          "seed": 20240818,
+          "applied": true,
+          "affected_columns": [
+            "engine_load_pct"
+          ],
+          "cells_changed": 866,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 2.597918,
+          "rmse": 4.567457,
+          "r2": 0.987572,
+          "delta_mae": 0.029491,
+          "mae_degradation_ratio": 1.011482,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 1.325999,
+              "clean_mae": 1.302266,
+              "delta_mae": 0.023733
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 1.57821,
+              "clean_mae": 1.549199,
+              "delta_mae": 0.029011
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 2.275801,
+              "clean_mae": 2.245159,
+              "delta_mae": 0.030642
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 3.889259,
+              "clean_mae": 3.866037,
+              "delta_mae": 0.023222
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 3.63541,
+              "clean_mae": 3.596619,
+              "delta_mae": 0.038791
+            }
+          }
+        },
+        {
+          "name": "isolated_extreme_spikes_speed_kph",
+          "kind": "spikes",
+          "description": "0.005 of rows in column 'speed_kph' set to an extreme value = median + 8 x std (an isolated 6+ sigma-style spike)",
+          "spike_fraction": 0.005,
+          "spike_multiplier": 8.0,
+          "columns": [
+            "speed_kph"
+          ],
+          "seed": 20240819,
+          "applied": true,
+          "affected_columns": [
+            "speed_kph"
+          ],
+          "cells_changed": 866,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 2.569152,
+          "rmse": 4.528203,
+          "r2": 0.987784,
+          "delta_mae": 0.000725,
+          "mae_degradation_ratio": 1.000282,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 1.301851,
+              "clean_mae": 1.302266,
+              "delta_mae": -0.000415
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 1.550407,
+              "clean_mae": 1.549199,
+              "delta_mae": 0.001208
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 2.246097,
+              "clean_mae": 2.245159,
+              "delta_mae": 0.000938
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 3.865552,
+              "clean_mae": 3.866037,
+              "delta_mae": -0.000485
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 3.598693,
+              "clean_mae": 3.596619,
+              "delta_mae": 0.002074
+            }
+          }
+        },
+        {
+          "name": "isolated_extreme_spikes_torque_nm",
+          "kind": "spikes",
+          "description": "0.005 of rows in column 'torque_nm' set to an extreme value = median + 8 x std (an isolated 6+ sigma-style spike)",
+          "spike_fraction": 0.005,
+          "spike_multiplier": 8.0,
+          "columns": [
+            "torque_nm"
+          ],
+          "seed": 20240820,
+          "applied": true,
+          "affected_columns": [
+            "torque_nm"
+          ],
+          "cells_changed": 866,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 2.830058,
+          "rmse": 6.066665,
+          "r2": 0.978074,
+          "delta_mae": 0.261631,
+          "mae_degradation_ratio": 1.101864,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 1.588407,
+              "clean_mae": 1.302266,
+              "delta_mae": 0.286141
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 1.855148,
+              "clean_mae": 1.549199,
+              "delta_mae": 0.305949
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 2.489658,
+              "clean_mae": 2.245159,
+              "delta_mae": 0.244499
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 4.125997,
+              "clean_mae": 3.866037,
+              "delta_mae": 0.25996
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 3.819732,
+              "clean_mae": 3.596619,
+              "delta_mae": 0.223113
+            }
+          }
+        },
+        {
+          "name": "clipping_physical_bounds",
+          "kind": "clipping",
+          "description": "clip affected numeric features to their documented physical bounds (see CLIP_BOUNDS)",
+          "columns": [
+            "acceleration_mps2",
+            "ambient_temp_c",
+            "coolant_temp_c",
+            "engine_load_pct",
+            "engine_rpm",
+            "gross_vehicle_weight_kg",
+            "intake_air_temp_c",
+            "payload_kg",
+            "road_grade_pct",
+            "speed_kph",
+            "throttle_position_pct",
+            "torque_nm",
+            "vehicle_mass_kg"
+          ],
+          "seed": null,
+          "applied": true,
+          "affected_columns": [
+            "acceleration_mps2",
+            "ambient_temp_c",
+            "coolant_temp_c",
+            "engine_load_pct",
+            "engine_rpm",
+            "gross_vehicle_weight_kg",
+            "intake_air_temp_c",
+            "payload_kg",
+            "road_grade_pct",
+            "speed_kph",
+            "throttle_position_pct",
+            "torque_nm",
+            "vehicle_mass_kg"
+          ],
+          "cells_changed": 11,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 2.568427,
+          "rmse": 4.527482,
+          "r2": 0.987788,
+          "delta_mae": 0.0,
+          "mae_degradation_ratio": 1.0,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 1.302266,
+              "clean_mae": 1.302266,
+              "delta_mae": 0.0
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 1.549199,
+              "clean_mae": 1.549199,
+              "delta_mae": 0.0
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 2.245159,
+              "clean_mae": 2.245159,
+              "delta_mae": 0.0
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 3.866037,
+              "clean_mae": 3.866037,
+              "delta_mae": 0.0
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 3.596619,
+              "clean_mae": 3.596619,
+              "delta_mae": 0.0
+            }
+          }
+        },
+        {
+          "name": "combined_missingness20pct_noise0.25",
+          "kind": "combined",
+          "description": "combined scenario: random missingness 20% + Gaussian noise severity 0.25 on the same numeric features",
+          "fraction": 0.2,
+          "severity": 0.25,
+          "columns": [
+            "gross_vehicle_weight_kg",
+            "payload_kg",
+            "vehicle_mass_kg",
+            "speed_kph",
+            "acceleration_mps2",
+            "road_grade_pct",
+            "engine_rpm",
+            "engine_load_pct",
+            "throttle_position_pct",
+            "torque_nm",
+            "coolant_temp_c",
+            "intake_air_temp_c",
+            "ambient_temp_c"
+          ],
+          "seed": 20240918,
+          "applied": true,
+          "affected_columns": [
+            "gross_vehicle_weight_kg",
+            "payload_kg",
+            "vehicle_mass_kg",
+            "speed_kph",
+            "acceleration_mps2",
+            "road_grade_pct",
+            "engine_rpm",
+            "engine_load_pct",
+            "throttle_position_pct",
+            "torque_nm",
+            "coolant_temp_c",
+            "intake_air_temp_c",
+            "ambient_temp_c"
+          ],
+          "cells_changed": 2703311,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 19.311018,
+          "rmse": 33.394445,
+          "r2": 0.335629,
+          "delta_mae": 16.742591,
+          "mae_degradation_ratio": 7.518617,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 19.838419,
+              "clean_mae": 1.302266,
+              "delta_mae": 18.536153
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 19.501801,
+              "clean_mae": 1.549199,
+              "delta_mae": 17.952602
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 19.043405,
+              "clean_mae": 2.245159,
+              "delta_mae": 16.798246
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 19.002483,
+              "clean_mae": 3.866037,
+              "delta_mae": 15.136446
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 19.257997,
+              "clean_mae": 3.596619,
+              "delta_mae": 15.661378
+            }
+          }
+        }
+      ]
+    },
+    "telematics_only": {
+      "n_rows": 173289,
+      "model": "xgboost",
+      "features": [
+        "vehicle_class",
+        "gross_vehicle_weight_kg",
+        "payload_kg",
+        "vehicle_mass_kg",
+        "speed_kph",
+        "acceleration_mps2",
+        "road_grade_pct",
+        "ignition_status",
+        "coolant_temp_c",
+        "intake_air_temp_c",
+        "ambient_temp_c"
+      ],
+      "numeric_features": [
+        "gross_vehicle_weight_kg",
+        "payload_kg",
+        "vehicle_mass_kg",
+        "speed_kph",
+        "acceleration_mps2",
+        "road_grade_pct",
+        "coolant_temp_c",
+        "intake_air_temp_c",
+        "ambient_temp_c"
+      ],
+      "clean_baseline": {
+        "model": "xgboost",
+        "n_rows": 173289,
+        "mae": 2.56596,
+        "rmse": 4.371276,
+        "r2": 0.988616,
+        "r2_flag": "ok"
+      },
+      "scenarios": [
+        {
+          "name": "random_missingness_05pct",
+          "kind": "random_missingness",
+          "description": "0.05 of cells set to NaN per affected numeric feature, selected uniformly at random per column",
+          "fraction": 0.05,
+          "columns": [
+            "gross_vehicle_weight_kg",
+            "payload_kg",
+            "vehicle_mass_kg",
+            "speed_kph",
+            "acceleration_mps2",
+            "road_grade_pct",
+            "coolant_temp_c",
+            "intake_air_temp_c",
+            "ambient_temp_c"
+          ],
+          "seed": 20240618,
+          "applied": true,
+          "affected_columns": [
+            "gross_vehicle_weight_kg",
+            "payload_kg",
+            "vehicle_mass_kg",
+            "speed_kph",
+            "acceleration_mps2",
+            "road_grade_pct",
+            "coolant_temp_c",
+            "intake_air_temp_c",
+            "ambient_temp_c"
+          ],
+          "cells_changed": 77976,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 8.168445,
+          "rmse": 21.176096,
+          "r2": 0.732851,
+          "delta_mae": 5.602485,
+          "mae_degradation_ratio": 3.183388,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 6.348709,
+              "clean_mae": 1.883201,
+              "delta_mae": 4.465508
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 6.426725,
+              "clean_mae": 1.535812,
+              "delta_mae": 4.890913
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 8.050658,
+              "clean_mae": 2.052657,
+              "delta_mae": 5.998001
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 8.001219,
+              "clean_mae": 2.930522,
+              "delta_mae": 5.070697
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 11.312781,
+              "clean_mae": 4.133711,
+              "delta_mae": 7.17907
+            }
+          }
+        },
+        {
+          "name": "random_missingness_10pct",
+          "kind": "random_missingness",
+          "description": "0.10 of cells set to NaN per affected numeric feature, selected uniformly at random per column",
+          "fraction": 0.1,
+          "columns": [
+            "gross_vehicle_weight_kg",
+            "payload_kg",
+            "vehicle_mass_kg",
+            "speed_kph",
+            "acceleration_mps2",
+            "road_grade_pct",
+            "coolant_temp_c",
+            "intake_air_temp_c",
+            "ambient_temp_c"
+          ],
+          "seed": 20240619,
+          "applied": true,
+          "affected_columns": [
+            "gross_vehicle_weight_kg",
+            "payload_kg",
+            "vehicle_mass_kg",
+            "speed_kph",
+            "acceleration_mps2",
+            "road_grade_pct",
+            "coolant_temp_c",
+            "intake_air_temp_c",
+            "ambient_temp_c"
+          ],
+          "cells_changed": 155961,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 13.984148,
+          "rmse": 30.657559,
+          "r2": 0.440066,
+          "delta_mae": 11.418188,
+          "mae_degradation_ratio": 5.44987,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 11.416674,
+              "clean_mae": 1.883201,
+              "delta_mae": 9.533473
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 11.636744,
+              "clean_mae": 1.535812,
+              "delta_mae": 10.100932
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 14.16814,
+              "clean_mae": 2.052657,
+              "delta_mae": 12.115483
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 13.110903,
+              "clean_mae": 2.930522,
+              "delta_mae": 10.180381
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 18.549944,
+              "clean_mae": 4.133711,
+              "delta_mae": 14.416233
+            }
+          }
+        },
+        {
+          "name": "random_missingness_20pct",
+          "kind": "random_missingness",
+          "description": "0.20 of cells set to NaN per affected numeric feature, selected uniformly at random per column",
+          "fraction": 0.2,
+          "columns": [
+            "gross_vehicle_weight_kg",
+            "payload_kg",
+            "vehicle_mass_kg",
+            "speed_kph",
+            "acceleration_mps2",
+            "road_grade_pct",
+            "coolant_temp_c",
+            "intake_air_temp_c",
+            "ambient_temp_c"
+          ],
+          "seed": 20240620,
+          "applied": true,
+          "affected_columns": [
+            "gross_vehicle_weight_kg",
+            "payload_kg",
+            "vehicle_mass_kg",
+            "speed_kph",
+            "acceleration_mps2",
+            "road_grade_pct",
+            "coolant_temp_c",
+            "intake_air_temp_c",
+            "ambient_temp_c"
+          ],
+          "cells_changed": 311922,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 26.315686,
+          "rmse": 46.26448,
+          "r2": -0.275138,
+          "delta_mae": 23.749726,
+          "mae_degradation_ratio": 10.255688,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 22.097659,
+              "clean_mae": 1.883201,
+              "delta_mae": 20.214458
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 22.783141,
+              "clean_mae": 1.535812,
+              "delta_mae": 21.247329
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 26.80732,
+              "clean_mae": 2.052657,
+              "delta_mae": 24.754663
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 24.961719,
+              "clean_mae": 2.930522,
+              "delta_mae": 22.031197
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 33.29704,
+              "clean_mae": 4.133711,
+              "delta_mae": 29.163329
+            }
+          }
+        },
+        {
+          "name": "random_missingness_30pct",
+          "kind": "random_missingness",
+          "description": "0.30 of cells set to NaN per affected numeric feature, selected uniformly at random per column",
+          "fraction": 0.3,
+          "columns": [
+            "gross_vehicle_weight_kg",
+            "payload_kg",
+            "vehicle_mass_kg",
+            "speed_kph",
+            "acceleration_mps2",
+            "road_grade_pct",
+            "coolant_temp_c",
+            "intake_air_temp_c",
+            "ambient_temp_c"
+          ],
+          "seed": 20240621,
+          "applied": true,
+          "affected_columns": [
+            "gross_vehicle_weight_kg",
+            "payload_kg",
+            "vehicle_mass_kg",
+            "speed_kph",
+            "acceleration_mps2",
+            "road_grade_pct",
+            "coolant_temp_c",
+            "intake_air_temp_c",
+            "ambient_temp_c"
+          ],
+          "cells_changed": 467883,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 39.58018,
+          "rmse": 60.483856,
+          "r2": -1.17942,
+          "delta_mae": 37.01422,
+          "mae_degradation_ratio": 15.425096,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 34.907559,
+              "clean_mae": 1.883201,
+              "delta_mae": 33.024358
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 35.175029,
+              "clean_mae": 1.535812,
+              "delta_mae": 33.639217
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 39.949643,
+              "clean_mae": 2.052657,
+              "delta_mae": 37.896986
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 37.655888,
+              "clean_mae": 2.930522,
+              "delta_mae": 34.725366
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 48.258577,
+              "clean_mae": 4.133711,
+              "delta_mae": 44.124866
+            }
+          }
+        },
+        {
+          "name": "complete_sensor_failure_speed_kph",
+          "kind": "complete_sensor_failure",
+          "description": "entire column 'speed_kph' set to NaN (simulated complete sensor failure); column is kept so the schema is preserved",
+          "columns": [
+            "speed_kph"
+          ],
+          "seed": null,
+          "applied": true,
+          "affected_columns": [
+            "speed_kph"
+          ],
+          "cells_changed": 173289,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 25.137235,
+          "rmse": 37.213989,
+          "r2": 0.174961,
+          "delta_mae": 22.571275,
+          "mae_degradation_ratio": 9.796425,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 18.785125,
+              "clean_mae": 1.883201,
+              "delta_mae": 16.901924
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 14.566277,
+              "clean_mae": 1.535812,
+              "delta_mae": 13.030465
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 25.338814,
+              "clean_mae": 2.052657,
+              "delta_mae": 23.286157
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 25.002989,
+              "clean_mae": 2.930522,
+              "delta_mae": 22.072467
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 38.878986,
+              "clean_mae": 4.133711,
+              "delta_mae": 34.745275
+            }
+          }
+        },
+        {
+          "name": "complete_sensor_failure_coolant_temp_c",
+          "kind": "complete_sensor_failure",
+          "description": "entire column 'coolant_temp_c' set to NaN (simulated complete sensor failure); column is kept so the schema is preserved",
+          "columns": [
+            "coolant_temp_c"
+          ],
+          "seed": null,
+          "applied": true,
+          "affected_columns": [
+            "coolant_temp_c"
+          ],
+          "cells_changed": 173289,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 2.603848,
+          "rmse": 4.368625,
+          "r2": 0.98863,
+          "delta_mae": 0.037888,
+          "mae_degradation_ratio": 1.014766,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 2.09646,
+              "clean_mae": 1.883201,
+              "delta_mae": 0.213259
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 1.574457,
+              "clean_mae": 1.535812,
+              "delta_mae": 0.038645
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 2.231688,
+              "clean_mae": 2.052657,
+              "delta_mae": 0.179031
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 2.967762,
+              "clean_mae": 2.930522,
+              "delta_mae": 0.03724
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 3.898915,
+              "clean_mae": 4.133711,
+              "delta_mae": -0.234796
+            }
+          }
+        },
+        {
+          "name": "gaussian_noise_severity_25pct",
+          "kind": "gaussian_noise",
+          "description": "additive Gaussian noise with sigma = 0.25 x each affected feature's clean standard deviation (feature-scaled severity)",
+          "severity": 0.25,
+          "columns": [
+            "gross_vehicle_weight_kg",
+            "payload_kg",
+            "vehicle_mass_kg",
+            "speed_kph",
+            "acceleration_mps2",
+            "road_grade_pct",
+            "coolant_temp_c",
+            "intake_air_temp_c",
+            "ambient_temp_c"
+          ],
+          "seed": 20240718,
+          "applied": true,
+          "affected_columns": [
+            "gross_vehicle_weight_kg",
+            "payload_kg",
+            "vehicle_mass_kg",
+            "speed_kph",
+            "acceleration_mps2",
+            "road_grade_pct",
+            "coolant_temp_c",
+            "intake_air_temp_c",
+            "ambient_temp_c"
+          ],
+          "cells_changed": 1559601,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 9.465225,
+          "rmse": 15.515822,
+          "r2": 0.856579,
+          "delta_mae": 6.899265,
+          "mae_degradation_ratio": 3.688766,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 7.8257,
+              "clean_mae": 1.883201,
+              "delta_mae": 5.942499
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 8.426315,
+              "clean_mae": 1.535812,
+              "delta_mae": 6.890503
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 9.435254,
+              "clean_mae": 2.052657,
+              "delta_mae": 7.382597
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 10.147935,
+              "clean_mae": 2.930522,
+              "delta_mae": 7.217413
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 11.060273,
+              "clean_mae": 4.133711,
+              "delta_mae": 6.926562
+            }
+          }
+        },
+        {
+          "name": "gaussian_noise_severity_50pct",
+          "kind": "gaussian_noise",
+          "description": "additive Gaussian noise with sigma = 0.50 x each affected feature's clean standard deviation (feature-scaled severity)",
+          "severity": 0.5,
+          "columns": [
+            "gross_vehicle_weight_kg",
+            "payload_kg",
+            "vehicle_mass_kg",
+            "speed_kph",
+            "acceleration_mps2",
+            "road_grade_pct",
+            "coolant_temp_c",
+            "intake_air_temp_c",
+            "ambient_temp_c"
+          ],
+          "seed": 20240719,
+          "applied": true,
+          "affected_columns": [
+            "gross_vehicle_weight_kg",
+            "payload_kg",
+            "vehicle_mass_kg",
+            "speed_kph",
+            "acceleration_mps2",
+            "road_grade_pct",
+            "coolant_temp_c",
+            "intake_air_temp_c",
+            "ambient_temp_c"
+          ],
+          "cells_changed": 1559601,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 16.364784,
+          "rmse": 26.513888,
+          "r2": 0.581198,
+          "delta_mae": 13.798824,
+          "mae_degradation_ratio": 6.377646,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 13.823898,
+              "clean_mae": 1.883201,
+              "delta_mae": 11.940697
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 14.648631,
+              "clean_mae": 1.535812,
+              "delta_mae": 13.112819
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 16.583856,
+              "clean_mae": 2.052657,
+              "delta_mae": 14.531199
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 16.802389,
+              "clean_mae": 2.930522,
+              "delta_mae": 13.871867
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 19.211835,
+              "clean_mae": 4.133711,
+              "delta_mae": 15.078124
+            }
+          }
+        },
+        {
+          "name": "fixed_bias_ambient_temp_c_plus5",
+          "kind": "fixed_bias",
+          "description": "fixed additive bias of +5 applied to column 'ambient_temp_c' (physical units)",
+          "bias": 5.0,
+          "columns": [
+            "ambient_temp_c"
+          ],
+          "seed": null,
+          "applied": true,
+          "affected_columns": [
+            "ambient_temp_c"
+          ],
+          "cells_changed": 173289,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 2.57325,
+          "rmse": 4.387124,
+          "r2": 0.988534,
+          "delta_mae": 0.00729,
+          "mae_degradation_ratio": 1.002841,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 1.767659,
+              "clean_mae": 1.883201,
+              "delta_mae": -0.115542
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 1.543378,
+              "clean_mae": 1.535812,
+              "delta_mae": 0.007566
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 2.084931,
+              "clean_mae": 2.052657,
+              "delta_mae": 0.032274
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 3.002413,
+              "clean_mae": 2.930522,
+              "delta_mae": 0.071891
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 4.15792,
+              "clean_mae": 4.133711,
+              "delta_mae": 0.024209
+            }
+          }
+        },
+        {
+          "name": "fixed_bias_speed_kph_plus10",
+          "kind": "fixed_bias",
+          "description": "fixed additive bias of +10 applied to column 'speed_kph' (physical units)",
+          "bias": 10.0,
+          "columns": [
+            "speed_kph"
+          ],
+          "seed": null,
+          "applied": true,
+          "affected_columns": [
+            "speed_kph"
+          ],
+          "cells_changed": 173289,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 7.210479,
+          "rmse": 11.875086,
+          "r2": 0.915989,
+          "delta_mae": 4.644519,
+          "mae_degradation_ratio": 2.810051,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 4.212608,
+              "clean_mae": 1.883201,
+              "delta_mae": 2.329407
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 4.364733,
+              "clean_mae": 1.535812,
+              "delta_mae": 2.828921
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 8.055339,
+              "clean_mae": 2.052657,
+              "delta_mae": 6.002682
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 5.785652,
+              "clean_mae": 2.930522,
+              "delta_mae": 2.85513
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 12.382371,
+              "clean_mae": 4.133711,
+              "delta_mae": 8.24866
+            }
+          }
+        },
+        {
+          "name": "isolated_extreme_spikes_speed_kph",
+          "kind": "spikes",
+          "description": "0.005 of rows in column 'speed_kph' set to an extreme value = median + 8 x std (an isolated 6+ sigma-style spike)",
+          "spike_fraction": 0.005,
+          "spike_multiplier": 8.0,
+          "columns": [
+            "speed_kph"
+          ],
+          "seed": 20240819,
+          "applied": true,
+          "affected_columns": [
+            "speed_kph"
+          ],
+          "cells_changed": 866,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 2.678567,
+          "rmse": 5.066239,
+          "r2": 0.984709,
+          "delta_mae": 0.112607,
+          "mae_degradation_ratio": 1.043885,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 1.969126,
+              "clean_mae": 1.883201,
+              "delta_mae": 0.085925
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 1.606306,
+              "clean_mae": 1.535812,
+              "delta_mae": 0.070494
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 2.172119,
+              "clean_mae": 2.052657,
+              "delta_mae": 0.119462
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 3.031433,
+              "clean_mae": 2.930522,
+              "delta_mae": 0.100911
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 4.306097,
+              "clean_mae": 4.133711,
+              "delta_mae": 0.172386
+            }
+          }
+        },
+        {
+          "name": "clipping_physical_bounds",
+          "kind": "clipping",
+          "description": "clip affected numeric features to their documented physical bounds (see CLIP_BOUNDS)",
+          "columns": [
+            "acceleration_mps2",
+            "ambient_temp_c",
+            "coolant_temp_c",
+            "gross_vehicle_weight_kg",
+            "intake_air_temp_c",
+            "payload_kg",
+            "road_grade_pct",
+            "speed_kph",
+            "vehicle_mass_kg"
+          ],
+          "seed": null,
+          "applied": true,
+          "affected_columns": [
+            "acceleration_mps2",
+            "ambient_temp_c",
+            "coolant_temp_c",
+            "gross_vehicle_weight_kg",
+            "intake_air_temp_c",
+            "payload_kg",
+            "road_grade_pct",
+            "speed_kph",
+            "vehicle_mass_kg"
+          ],
+          "cells_changed": 11,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 2.56596,
+          "rmse": 4.371276,
+          "r2": 0.988616,
+          "delta_mae": 0.0,
+          "mae_degradation_ratio": 1.0,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 1.883201,
+              "clean_mae": 1.883201,
+              "delta_mae": 0.0
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 1.535812,
+              "clean_mae": 1.535812,
+              "delta_mae": 0.0
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 2.052657,
+              "clean_mae": 2.052657,
+              "delta_mae": 0.0
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 2.930522,
+              "clean_mae": 2.930522,
+              "delta_mae": 0.0
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 4.133711,
+              "clean_mae": 4.133711,
+              "delta_mae": 0.0
+            }
+          }
+        },
+        {
+          "name": "combined_missingness20pct_noise0.25",
+          "kind": "combined",
+          "description": "combined scenario: random missingness 20% + Gaussian noise severity 0.25 on the same numeric features",
+          "fraction": 0.2,
+          "severity": 0.25,
+          "columns": [
+            "gross_vehicle_weight_kg",
+            "payload_kg",
+            "vehicle_mass_kg",
+            "speed_kph",
+            "acceleration_mps2",
+            "road_grade_pct",
+            "coolant_temp_c",
+            "intake_air_temp_c",
+            "ambient_temp_c"
+          ],
+          "seed": 20240918,
+          "applied": true,
+          "affected_columns": [
+            "gross_vehicle_weight_kg",
+            "payload_kg",
+            "vehicle_mass_kg",
+            "speed_kph",
+            "acceleration_mps2",
+            "road_grade_pct",
+            "coolant_temp_c",
+            "intake_air_temp_c",
+            "ambient_temp_c"
+          ],
+          "cells_changed": 1871523,
+          "n_rows_target": 173289,
+          "prediction_aborted": false,
+          "n_prediction_failures": 0,
+          "prediction_failure_rate": 0.0,
+          "n_rows_evaluated": 173289,
+          "mae": 28.603251,
+          "rmse": 46.212417,
+          "r2": -0.27227,
+          "delta_mae": 26.037291,
+          "mae_degradation_ratio": 11.147193,
+          "per_truck": {
+            "truck_001": {
+              "n_rows": 30817,
+              "mae": 25.309492,
+              "clean_mae": 1.883201,
+              "delta_mae": 23.426291
+            },
+            "truck_004": {
+              "n_rows": 32480,
+              "mae": 25.562296,
+              "clean_mae": 1.535812,
+              "delta_mae": 24.026484
+            },
+            "truck_017": {
+              "n_rows": 37073,
+              "mae": 28.566772,
+              "clean_mae": 2.052657,
+              "delta_mae": 26.514115
+            },
+            "truck_020": {
+              "n_rows": 33901,
+              "mae": 27.072833,
+              "clean_mae": 2.930522,
+              "delta_mae": 24.142311
+            },
+            "truck_028": {
+              "n_rows": 39018,
+              "mae": 35.100486,
+              "clean_mae": 4.133711,
+              "delta_mae": 30.966775
+            }
+          }
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "Synthetic telemetry: these are pipeline-corruption experiments on synthetic data, not observed real-world sensor-failure validation. They characterize model sensitivity to the injected corruptions only.",
+    "Only five test trucks: all per-truck breakdowns are descriptive and unstable; not population estimates.",
+    "Corruption is restricted to numeric model-input features; categorical vehicle_class and binary ignition_status are kept unchanged. Real-world sensor failures may also affect other signal classes.",
+    "No feature columns are removed; complete sensor failure is simulated with all-NaN values while preserving the model's expected schema.",
+    "Prediction failures (aborted, NaN, +inf or -inf predictions) are counted and reported as a failure rate; metrics are computed on the surviving finite rows and should always be read alongside the failure rate.",
+    "The clipping bounds are documented physical limits; they are already satisfied by most data, so the clipping scenario primarily measures the effect of the bound enforcement itself.",
+    "MAE degradation is reported against each feature set's own clean baseline; cross-feature-set ratios are not directly comparable because baselines differ."
+  ]
+}

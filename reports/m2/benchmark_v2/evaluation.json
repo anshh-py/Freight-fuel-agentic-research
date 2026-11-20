@@ -1,0 +1,1119 @@
+{
+  "pipeline": "M2.1-B RAG Benchmark v2 (diverse, document-level)",
+  "generated_at": "2026-11-19T18:59:20+05:30",
+  "embedding": {
+    "model": "sentence-transformers/all-MiniLM-L6-v2",
+    "dimension": 384,
+    "normalization": "L2 (cosine similarity)",
+    "local": true,
+    "download_required": false
+  },
+  "corpus": {
+    "path": "data/synthetic_heavy_truck_research/rag_knowledge_corpus.jsonl",
+    "valid_documents": 21,
+    "chunk_count": 21,
+    "synthetic": true,
+    "oem_manual_count": 0,
+    "notice": "All corpus content is synthetic educational material, not OEM/manufacturer documentation."
+  },
+  "baseline_preserved": {
+    "n_queries": 55,
+    "unique_query_strings": 2,
+    "road_grade_effects_count": 28,
+    "engine_load_fuel_demand_count": 27
+  },
+  "benchmark_validation": {
+    "total_queries": 28,
+    "unique_query_strings": 28,
+    "answerable": 24,
+    "unanswerable": 4,
+    "validation_passed": true,
+    "problems": []
+  },
+  "evaluation": {
+    "n_unique_queries": 28,
+    "n_answerable": 24,
+    "n_unanswerable": 4,
+    "n_answerable_evaluated": 24,
+    "zero_relevant_result_count": 0,
+    "recall@1": 0.8333,
+    "recall@3": 0.9375,
+    "recall@5": 0.9792,
+    "precision@1": 1.0,
+    "precision@3": 0.4028,
+    "precision@5": 0.2583,
+    "ndcg@1": 1.0,
+    "ndcg@3": 0.9483,
+    "ndcg@5": 0.9692,
+    "mrr": 1.0
+  },
+  "per_topic": {
+    "driver_feedback_safety": {
+      "n_queries": 2,
+      "recall@1": 0.75,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "precision@1": 1.0,
+      "precision@3": 0.5,
+      "precision@5": 0.3,
+      "ndcg@5": 1.0,
+      "mrr": 1.0,
+      "n_failed": 0
+    },
+    "engine_load_fuel_demand": {
+      "n_queries": 3,
+      "recall@1": 1.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "precision@1": 1.0,
+      "precision@3": 0.3333,
+      "precision@5": 0.2,
+      "ndcg@5": 1.0,
+      "mrr": 1.0,
+      "n_failed": 0
+    },
+    "fuel_consumption_fundamentals": {
+      "n_queries": 2,
+      "recall@1": 1.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "precision@1": 1.0,
+      "precision@3": 0.3333,
+      "precision@5": 0.2,
+      "ndcg@5": 1.0,
+      "mrr": 1.0,
+      "n_failed": 0
+    },
+    "fuel_rate_interpretation": {
+      "n_queries": 1,
+      "recall@1": 1.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "precision@1": 1.0,
+      "precision@3": 0.3333,
+      "precision@5": 0.2,
+      "ndcg@5": 1.0,
+      "mrr": 1.0,
+      "n_failed": 0
+    },
+    "model_limitations": {
+      "n_queries": 3,
+      "recall@1": 0.8333,
+      "recall@3": 0.8333,
+      "recall@5": 1.0,
+      "precision@1": 1.0,
+      "precision@3": 0.3333,
+      "precision@5": 0.2667,
+      "ndcg@5": 0.9501,
+      "mrr": 1.0,
+      "n_failed": 0
+    },
+    "payload_effects": {
+      "n_queries": 2,
+      "recall@1": 1.0,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "precision@1": 1.0,
+      "precision@3": 0.3333,
+      "precision@5": 0.2,
+      "ndcg@5": 1.0,
+      "mrr": 1.0,
+      "n_failed": 0
+    },
+    "road_grade_effects": {
+      "n_queries": 3,
+      "recall@1": 0.5,
+      "recall@3": 0.8333,
+      "recall@5": 1.0,
+      "precision@1": 1.0,
+      "precision@3": 0.5556,
+      "precision@5": 0.4,
+      "ndcg@5": 0.9591,
+      "mrr": 1.0,
+      "n_failed": 0
+    },
+    "rpm_torque_relationships": {
+      "n_queries": 2,
+      "recall@1": 0.75,
+      "recall@3": 0.75,
+      "recall@5": 0.75,
+      "precision@1": 1.0,
+      "precision@3": 0.3333,
+      "precision@5": 0.2,
+      "ndcg@5": 0.8065,
+      "mrr": 1.0,
+      "n_failed": 0
+    },
+    "shap_interpretation": {
+      "n_queries": 2,
+      "recall@1": 0.75,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "precision@1": 1.0,
+      "precision@3": 0.5,
+      "precision@5": 0.3,
+      "ndcg@5": 1.0,
+      "mrr": 1.0,
+      "n_failed": 0
+    },
+    "speed_variability_driving_behaviour": {
+      "n_queries": 4,
+      "recall@1": 0.875,
+      "recall@3": 1.0,
+      "recall@5": 1.0,
+      "precision@1": 1.0,
+      "precision@3": 0.4166,
+      "precision@5": 0.25,
+      "ndcg@5": 0.9799,
+      "mrr": 1.0,
+      "n_failed": 0
+    }
+  },
+  "per_query": [
+    {
+      "query_id": "bq_01",
+      "topic": "fuel_consumption_fundamentals",
+      "answerable": true,
+      "n_relevant": 1,
+      "retrieved_doc_ids": [
+        "doc_001",
+        "doc_012",
+        "doc_008",
+        "doc_013",
+        "doc_004"
+      ],
+      "scores": [
+        0.7455,
+        0.6354,
+        0.5473,
+        0.5366,
+        0.5317
+      ],
+      "scored": true,
+      "first_relevant_rank": 1,
+      "matched": true,
+      "recall@1": 1.0,
+      "precision@1": 1.0,
+      "ndcg@1": 1.0,
+      "recall@3": 1.0,
+      "precision@3": 0.3333,
+      "ndcg@3": 1.0,
+      "recall@5": 1.0,
+      "precision@5": 0.2,
+      "ndcg@5": 1.0
+    },
+    {
+      "query_id": "bq_02",
+      "topic": "fuel_rate_interpretation",
+      "answerable": true,
+      "n_relevant": 1,
+      "retrieved_doc_ids": [
+        "doc_013",
+        "doc_002",
+        "doc_001",
+        "doc_017",
+        "doc_021"
+      ],
+      "scores": [
+        0.8299,
+        0.5564,
+        0.5391,
+        0.5274,
+        0.5222
+      ],
+      "scored": true,
+      "first_relevant_rank": 1,
+      "matched": true,
+      "recall@1": 1.0,
+      "precision@1": 1.0,
+      "ndcg@1": 1.0,
+      "recall@3": 1.0,
+      "precision@3": 0.3333,
+      "ndcg@3": 1.0,
+      "recall@5": 1.0,
+      "precision@5": 0.2,
+      "ndcg@5": 1.0
+    },
+    {
+      "query_id": "bq_03",
+      "topic": "fuel_consumption_fundamentals",
+      "answerable": true,
+      "n_relevant": 1,
+      "retrieved_doc_ids": [
+        "doc_002",
+        "doc_021",
+        "doc_013",
+        "doc_001",
+        "doc_014"
+      ],
+      "scores": [
+        0.8396,
+        0.6388,
+        0.6136,
+        0.5685,
+        0.5612
+      ],
+      "scored": true,
+      "first_relevant_rank": 1,
+      "matched": true,
+      "recall@1": 1.0,
+      "precision@1": 1.0,
+      "ndcg@1": 1.0,
+      "recall@3": 1.0,
+      "precision@3": 0.3333,
+      "ndcg@3": 1.0,
+      "recall@5": 1.0,
+      "precision@5": 0.2,
+      "ndcg@5": 1.0
+    },
+    {
+      "query_id": "bq_04",
+      "topic": "engine_load_fuel_demand",
+      "answerable": true,
+      "n_relevant": 1,
+      "retrieved_doc_ids": [
+        "doc_003",
+        "doc_007",
+        "doc_001",
+        "doc_009",
+        "doc_010"
+      ],
+      "scores": [
+        0.7033,
+        0.6033,
+        0.5931,
+        0.4865,
+        0.4815
+      ],
+      "scored": true,
+      "first_relevant_rank": 1,
+      "matched": true,
+      "recall@1": 1.0,
+      "precision@1": 1.0,
+      "ndcg@1": 1.0,
+      "recall@3": 1.0,
+      "precision@3": 0.3333,
+      "ndcg@3": 1.0,
+      "recall@5": 1.0,
+      "precision@5": 0.2,
+      "ndcg@5": 1.0
+    },
+    {
+      "query_id": "bq_05",
+      "topic": "rpm_torque_relationships",
+      "answerable": true,
+      "n_relevant": 1,
+      "retrieved_doc_ids": [
+        "doc_006",
+        "doc_011",
+        "doc_001",
+        "doc_012",
+        "doc_010"
+      ],
+      "scores": [
+        0.6821,
+        0.5312,
+        0.4967,
+        0.4559,
+        0.4389
+      ],
+      "scored": true,
+      "first_relevant_rank": 1,
+      "matched": true,
+      "recall@1": 1.0,
+      "precision@1": 1.0,
+      "ndcg@1": 1.0,
+      "recall@3": 1.0,
+      "precision@3": 0.3333,
+      "ndcg@3": 1.0,
+      "recall@5": 1.0,
+      "precision@5": 0.2,
+      "ndcg@5": 1.0
+    },
+    {
+      "query_id": "bq_06",
+      "topic": "payload_effects",
+      "answerable": true,
+      "n_relevant": 1,
+      "retrieved_doc_ids": [
+        "doc_007",
+        "doc_001",
+        "doc_012",
+        "doc_003",
+        "doc_008"
+      ],
+      "scores": [
+        0.8036,
+        0.5959,
+        0.5766,
+        0.5106,
+        0.4775
+      ],
+      "scored": true,
+      "first_relevant_rank": 1,
+      "matched": true,
+      "recall@1": 1.0,
+      "precision@1": 1.0,
+      "ndcg@1": 1.0,
+      "recall@3": 1.0,
+      "precision@3": 0.3333,
+      "ndcg@3": 1.0,
+      "recall@5": 1.0,
+      "precision@5": 0.2,
+      "ndcg@5": 1.0
+    },
+    {
+      "query_id": "bq_07",
+      "topic": "road_grade_effects",
+      "answerable": true,
+      "n_relevant": 2,
+      "retrieved_doc_ids": [
+        "doc_009",
+        "doc_007",
+        "doc_012",
+        "doc_010",
+        "doc_001"
+      ],
+      "scores": [
+        0.8344,
+        0.6195,
+        0.5741,
+        0.5584,
+        0.5262
+      ],
+      "scored": true,
+      "first_relevant_rank": 1,
+      "matched": true,
+      "recall@1": 0.5,
+      "precision@1": 1.0,
+      "ndcg@1": 1.0,
+      "recall@3": 0.5,
+      "precision@3": 0.3333,
+      "ndcg@3": 0.6131,
+      "recall@5": 1.0,
+      "precision@5": 0.4,
+      "ndcg@5": 0.8772
+    },
+    {
+      "query_id": "bq_08",
+      "topic": "engine_load_fuel_demand",
+      "answerable": true,
+      "n_relevant": 1,
+      "retrieved_doc_ids": [
+        "doc_004",
+        "doc_001",
+        "doc_011",
+        "doc_010",
+        "doc_012"
+      ],
+      "scores": [
+        0.7624,
+        0.6345,
+        0.5679,
+        0.4958,
+        0.4785
+      ],
+      "scored": true,
+      "first_relevant_rank": 1,
+      "matched": true,
+      "recall@1": 1.0,
+      "precision@1": 1.0,
+      "ndcg@1": 1.0,
+      "recall@3": 1.0,
+      "precision@3": 0.3333,
+      "ndcg@3": 1.0,
+      "recall@5": 1.0,
+      "precision@5": 0.2,
+      "ndcg@5": 1.0
+    },
+    {
+      "query_id": "bq_09",
+      "topic": "road_grade_effects",
+      "answerable": true,
+      "n_relevant": 2,
+      "retrieved_doc_ids": [
+        "doc_009",
+        "doc_010",
+        "doc_007",
+        "doc_012",
+        "doc_001"
+      ],
+      "scores": [
+        0.7494,
+        0.6541,
+        0.583,
+        0.5692,
+        0.554
+      ],
+      "scored": true,
+      "first_relevant_rank": 1,
+      "matched": true,
+      "recall@1": 0.5,
+      "precision@1": 1.0,
+      "ndcg@1": 1.0,
+      "recall@3": 1.0,
+      "precision@3": 0.6667,
+      "ndcg@3": 1.0,
+      "recall@5": 1.0,
+      "precision@5": 0.4,
+      "ndcg@5": 1.0
+    },
+    {
+      "query_id": "bq_10",
+      "topic": "engine_load_fuel_demand",
+      "answerable": true,
+      "n_relevant": 1,
+      "retrieved_doc_ids": [
+        "doc_004",
+        "doc_001",
+        "doc_021",
+        "doc_002",
+        "doc_014"
+      ],
+      "scores": [
+        0.6718,
+        0.5668,
+        0.4959,
+        0.4792,
+        0.4667
+      ],
+      "scored": true,
+      "first_relevant_rank": 1,
+      "matched": true,
+      "recall@1": 1.0,
+      "precision@1": 1.0,
+      "ndcg@1": 1.0,
+      "recall@3": 1.0,
+      "precision@3": 0.3333,
+      "ndcg@3": 1.0,
+      "recall@5": 1.0,
+      "precision@5": 0.2,
+      "ndcg@5": 1.0
+    },
+    {
+      "query_id": "bq_11",
+      "topic": "speed_variability_driving_behaviour",
+      "answerable": true,
+      "n_relevant": 1,
+      "retrieved_doc_ids": [
+        "doc_012",
+        "doc_001",
+        "doc_006",
+        "doc_011",
+        "doc_010"
+      ],
+      "scores": [
+        0.698,
+        0.5954,
+        0.566,
+        0.5182,
+        0.4866
+      ],
+      "scored": true,
+      "first_relevant_rank": 1,
+      "matched": true,
+      "recall@1": 1.0,
+      "precision@1": 1.0,
+      "ndcg@1": 1.0,
+      "recall@3": 1.0,
+      "precision@3": 0.3333,
+      "ndcg@3": 1.0,
+      "recall@5": 1.0,
+      "precision@5": 0.2,
+      "ndcg@5": 1.0
+    },
+    {
+      "query_id": "bq_12",
+      "topic": "speed_variability_driving_behaviour",
+      "answerable": true,
+      "n_relevant": 1,
+      "retrieved_doc_ids": [
+        "doc_011",
+        "doc_010",
+        "doc_001",
+        "doc_012",
+        "doc_007"
+      ],
+      "scores": [
+        0.7071,
+        0.4884,
+        0.4677,
+        0.4044,
+        0.3973
+      ],
+      "scored": true,
+      "first_relevant_rank": 1,
+      "matched": true,
+      "recall@1": 1.0,
+      "precision@1": 1.0,
+      "ndcg@1": 1.0,
+      "recall@3": 1.0,
+      "precision@3": 0.3333,
+      "ndcg@3": 1.0,
+      "recall@5": 1.0,
+      "precision@5": 0.2,
+      "ndcg@5": 1.0
+    },
+    {
+      "query_id": "bq_13",
+      "topic": "rpm_torque_relationships",
+      "answerable": true,
+      "n_relevant": 2,
+      "retrieved_doc_ids": [
+        "doc_006",
+        "doc_011",
+        "doc_010",
+        "doc_012",
+        "doc_001"
+      ],
+      "scores": [
+        0.6442,
+        0.5351,
+        0.5346,
+        0.5105,
+        0.478
+      ],
+      "scored": true,
+      "first_relevant_rank": 1,
+      "matched": true,
+      "recall@1": 0.5,
+      "precision@1": 1.0,
+      "ndcg@1": 1.0,
+      "recall@3": 0.5,
+      "precision@3": 0.3333,
+      "ndcg@3": 0.6131,
+      "recall@5": 0.5,
+      "precision@5": 0.2,
+      "ndcg@5": 0.6131
+    },
+    {
+      "query_id": "bq_14",
+      "topic": "road_grade_effects",
+      "answerable": true,
+      "n_relevant": 2,
+      "retrieved_doc_ids": [
+        "doc_009",
+        "doc_007",
+        "doc_001",
+        "doc_012",
+        "doc_008"
+      ],
+      "scores": [
+        0.6394,
+        0.6335,
+        0.5756,
+        0.5662,
+        0.5625
+      ],
+      "scored": true,
+      "first_relevant_rank": 1,
+      "matched": true,
+      "recall@1": 0.5,
+      "precision@1": 1.0,
+      "ndcg@1": 1.0,
+      "recall@3": 1.0,
+      "precision@3": 0.6667,
+      "ndcg@3": 1.0,
+      "recall@5": 1.0,
+      "precision@5": 0.4,
+      "ndcg@5": 1.0
+    },
+    {
+      "query_id": "bq_15",
+      "topic": "speed_variability_driving_behaviour",
+      "answerable": true,
+      "n_relevant": 2,
+      "retrieved_doc_ids": [
+        "doc_011",
+        "doc_017",
+        "doc_012",
+        "doc_010",
+        "doc_001"
+      ],
+      "scores": [
+        0.6299,
+        0.5504,
+        0.5124,
+        0.4673,
+        0.4357
+      ],
+      "scored": true,
+      "first_relevant_rank": 1,
+      "matched": true,
+      "recall@1": 0.5,
+      "precision@1": 1.0,
+      "ndcg@1": 1.0,
+      "recall@3": 1.0,
+      "precision@3": 0.6667,
+      "ndcg@3": 0.9197,
+      "recall@5": 1.0,
+      "precision@5": 0.4,
+      "ndcg@5": 0.9197
+    },
+    {
+      "query_id": "bq_16",
+      "topic": "payload_effects",
+      "answerable": true,
+      "n_relevant": 1,
+      "retrieved_doc_ids": [
+        "doc_008",
+        "doc_020",
+        "doc_001",
+        "doc_007",
+        "doc_012"
+      ],
+      "scores": [
+        0.6686,
+        0.5492,
+        0.5212,
+        0.4854,
+        0.4563
+      ],
+      "scored": true,
+      "first_relevant_rank": 1,
+      "matched": true,
+      "recall@1": 1.0,
+      "precision@1": 1.0,
+      "ndcg@1": 1.0,
+      "recall@3": 1.0,
+      "precision@3": 0.3333,
+      "ndcg@3": 1.0,
+      "recall@5": 1.0,
+      "precision@5": 0.2,
+      "ndcg@5": 1.0
+    },
+    {
+      "query_id": "bq_17",
+      "topic": "driver_feedback_safety",
+      "answerable": true,
+      "n_relevant": 1,
+      "retrieved_doc_ids": [
+        "doc_017",
+        "doc_010",
+        "doc_009",
+        "doc_011",
+        "doc_012"
+      ],
+      "scores": [
+        0.7014,
+        0.5172,
+        0.4852,
+        0.4806,
+        0.4374
+      ],
+      "scored": true,
+      "first_relevant_rank": 1,
+      "matched": true,
+      "recall@1": 1.0,
+      "precision@1": 1.0,
+      "ndcg@1": 1.0,
+      "recall@3": 1.0,
+      "precision@3": 0.3333,
+      "ndcg@3": 1.0,
+      "recall@5": 1.0,
+      "precision@5": 0.2,
+      "ndcg@5": 1.0
+    },
+    {
+      "query_id": "bq_18",
+      "topic": "driver_feedback_safety",
+      "answerable": true,
+      "n_relevant": 2,
+      "retrieved_doc_ids": [
+        "doc_018",
+        "doc_017",
+        "doc_010",
+        "doc_011",
+        "doc_020"
+      ],
+      "scores": [
+        0.7244,
+        0.616,
+        0.4349,
+        0.3666,
+        0.3071
+      ],
+      "scored": true,
+      "first_relevant_rank": 1,
+      "matched": true,
+      "recall@1": 0.5,
+      "precision@1": 1.0,
+      "ndcg@1": 1.0,
+      "recall@3": 1.0,
+      "precision@3": 0.6667,
+      "ndcg@3": 1.0,
+      "recall@5": 1.0,
+      "precision@5": 0.4,
+      "ndcg@5": 1.0
+    },
+    {
+      "query_id": "bq_19",
+      "topic": "shap_interpretation",
+      "answerable": true,
+      "n_relevant": 2,
+      "retrieved_doc_ids": [
+        "doc_015",
+        "doc_016",
+        "doc_003",
+        "doc_001",
+        "doc_010"
+      ],
+      "scores": [
+        0.8024,
+        0.5467,
+        0.526,
+        0.4535,
+        0.4037
+      ],
+      "scored": true,
+      "first_relevant_rank": 1,
+      "matched": true,
+      "recall@1": 0.5,
+      "precision@1": 1.0,
+      "ndcg@1": 1.0,
+      "recall@3": 1.0,
+      "precision@3": 0.6667,
+      "ndcg@3": 1.0,
+      "recall@5": 1.0,
+      "precision@5": 0.4,
+      "ndcg@5": 1.0
+    },
+    {
+      "query_id": "bq_20",
+      "topic": "model_limitations",
+      "answerable": true,
+      "n_relevant": 2,
+      "retrieved_doc_ids": [
+        "doc_019",
+        "doc_021",
+        "doc_013",
+        "doc_017",
+        "doc_020"
+      ],
+      "scores": [
+        0.8109,
+        0.5466,
+        0.4892,
+        0.4765,
+        0.4722
+      ],
+      "scored": true,
+      "first_relevant_rank": 1,
+      "matched": true,
+      "recall@1": 0.5,
+      "precision@1": 1.0,
+      "ndcg@1": 1.0,
+      "recall@3": 0.5,
+      "precision@3": 0.3333,
+      "ndcg@3": 0.6131,
+      "recall@5": 1.0,
+      "precision@5": 0.4,
+      "ndcg@5": 0.8503
+    },
+    {
+      "query_id": "bq_21",
+      "topic": "model_limitations",
+      "answerable": true,
+      "n_relevant": 1,
+      "retrieved_doc_ids": [
+        "doc_021",
+        "doc_002",
+        "doc_013",
+        "doc_011",
+        "doc_001"
+      ],
+      "scores": [
+        0.8164,
+        0.6759,
+        0.6227,
+        0.5157,
+        0.496
+      ],
+      "scored": true,
+      "first_relevant_rank": 1,
+      "matched": true,
+      "recall@1": 1.0,
+      "precision@1": 1.0,
+      "ndcg@1": 1.0,
+      "recall@3": 1.0,
+      "precision@3": 0.3333,
+      "ndcg@3": 1.0,
+      "recall@5": 1.0,
+      "precision@5": 0.2,
+      "ndcg@5": 1.0
+    },
+    {
+      "query_id": "bq_22",
+      "topic": "shap_interpretation",
+      "answerable": true,
+      "n_relevant": 1,
+      "retrieved_doc_ids": [
+        "doc_015",
+        "doc_016",
+        "doc_017",
+        "doc_021",
+        "doc_013"
+      ],
+      "scores": [
+        0.8684,
+        0.6201,
+        0.3769,
+        0.3737,
+        0.3514
+      ],
+      "scored": true,
+      "first_relevant_rank": 1,
+      "matched": true,
+      "recall@1": 1.0,
+      "precision@1": 1.0,
+      "ndcg@1": 1.0,
+      "recall@3": 1.0,
+      "precision@3": 0.3333,
+      "ndcg@3": 1.0,
+      "recall@5": 1.0,
+      "precision@5": 0.2,
+      "ndcg@5": 1.0
+    },
+    {
+      "query_id": "bq_23",
+      "topic": "speed_variability_driving_behaviour",
+      "answerable": true,
+      "n_relevant": 1,
+      "retrieved_doc_ids": [
+        "doc_012",
+        "doc_009",
+        "doc_014",
+        "doc_001",
+        "doc_021"
+      ],
+      "scores": [
+        0.6932,
+        0.555,
+        0.4495,
+        0.3825,
+        0.3688
+      ],
+      "scored": true,
+      "first_relevant_rank": 1,
+      "matched": true,
+      "recall@1": 1.0,
+      "precision@1": 1.0,
+      "ndcg@1": 1.0,
+      "recall@3": 1.0,
+      "precision@3": 0.3333,
+      "ndcg@3": 1.0,
+      "recall@5": 1.0,
+      "precision@5": 0.2,
+      "ndcg@5": 1.0
+    },
+    {
+      "query_id": "bq_24",
+      "topic": "model_limitations",
+      "answerable": true,
+      "n_relevant": 1,
+      "retrieved_doc_ids": [
+        "doc_019",
+        "doc_016",
+        "doc_020",
+        "doc_018",
+        "doc_015"
+      ],
+      "scores": [
+        0.6826,
+        0.3073,
+        0.2858,
+        0.2103,
+        0.1592
+      ],
+      "scored": true,
+      "first_relevant_rank": 1,
+      "matched": true,
+      "recall@1": 1.0,
+      "precision@1": 1.0,
+      "ndcg@1": 1.0,
+      "recall@3": 1.0,
+      "precision@3": 0.3333,
+      "ndcg@3": 1.0,
+      "recall@5": 1.0,
+      "precision@5": 0.2,
+      "ndcg@5": 1.0
+    },
+    {
+      "query_id": "bq_25",
+      "topic": "unanswerable",
+      "answerable": false,
+      "n_relevant": 0,
+      "retrieved_doc_ids": [
+        "doc_001",
+        "doc_014",
+        "doc_008",
+        "doc_012",
+        "doc_013"
+      ],
+      "scores": [
+        0.4383,
+        0.4125,
+        0.4062,
+        0.3857,
+        0.3681
+      ],
+      "scored": false
+    },
+    {
+      "query_id": "bq_26",
+      "topic": "unanswerable",
+      "answerable": false,
+      "n_relevant": 0,
+      "retrieved_doc_ids": [
+        "doc_006",
+        "doc_005",
+        "doc_021",
+        "doc_020",
+        "doc_013"
+      ],
+      "scores": [
+        0.2716,
+        0.2615,
+        0.2152,
+        0.1593,
+        0.1551
+      ],
+      "scored": false
+    },
+    {
+      "query_id": "bq_27",
+      "topic": "unanswerable",
+      "answerable": false,
+      "n_relevant": 0,
+      "retrieved_doc_ids": [
+        "doc_012",
+        "doc_014",
+        "doc_001",
+        "doc_008",
+        "doc_013"
+      ],
+      "scores": [
+        0.575,
+        0.5724,
+        0.5381,
+        0.4294,
+        0.3996
+      ],
+      "scored": false
+    },
+    {
+      "query_id": "bq_28",
+      "topic": "unanswerable",
+      "answerable": false,
+      "n_relevant": 0,
+      "retrieved_doc_ids": [
+        "doc_014",
+        "doc_001",
+        "doc_008",
+        "doc_004",
+        "doc_005"
+      ],
+      "scores": [
+        0.289,
+        0.2819,
+        0.2253,
+        0.2233,
+        0.2124
+      ],
+      "scored": false
+    }
+  ],
+  "imperfect_retrieval": [
+    {
+      "query_id": "bq_13",
+      "topic": "rpm_torque_relationships",
+      "query": "Which gear/RPM strategy reduces fuel use when cruising at a set road speed?",
+      "relevant_doc_ids": [
+        "doc_006",
+        "doc_005"
+      ],
+      "retrieved_doc_ids": [
+        "doc_006",
+        "doc_011",
+        "doc_010",
+        "doc_012",
+        "doc_001"
+      ],
+      "recall@5": 0.5
+    }
+  ],
+  "examples": {
+    "successful_retrieval": [
+      {
+        "query_id": "bq_01",
+        "topic": "fuel_consumption_fundamentals",
+        "query": "What factors determine how much fuel a heavy-duty truck consumes at any given moment?",
+        "relevant_doc_ids": [
+          "doc_001"
+        ],
+        "retrieved_doc_ids": [
+          "doc_001",
+          "doc_012",
+          "doc_008",
+          "doc_013",
+          "doc_004"
+        ],
+        "first_relevant_rank": 1
+      },
+      {
+        "query_id": "bq_02",
+        "topic": "fuel_rate_interpretation",
+        "query": "Why should a single instantaneous fuel-rate reading not be used to judge a driver or a truck?",
+        "relevant_doc_ids": [
+          "doc_013"
+        ],
+        "retrieved_doc_ids": [
+          "doc_013",
+          "doc_002",
+          "doc_001",
+          "doc_017",
+          "doc_021"
+        ],
+        "first_relevant_rank": 1
+      },
+      {
+        "query_id": "bq_03",
+        "topic": "fuel_consumption_fundamentals",
+        "query": "What is the difference between instantaneous fuel rate and the total fuel used over a trip?",
+        "relevant_doc_ids": [
+          "doc_002"
+        ],
+        "retrieved_doc_ids": [
+          "doc_002",
+          "doc_021",
+          "doc_013",
+          "doc_001",
+          "doc_014"
+        ],
+        "first_relevant_rank": 1
+      },
+      {
+        "query_id": "bq_04",
+        "topic": "engine_load_fuel_demand",
+        "query": "Why does fuel rate go up when engine load increases?",
+        "relevant_doc_ids": [
+          "doc_003"
+        ],
+        "retrieved_doc_ids": [
+          "doc_003",
+          "doc_007",
+          "doc_001",
+          "doc_009",
+          "doc_010"
+        ],
+        "first_relevant_rank": 1
+      }
+    ],
+    "failed_retrieval": []
+  },
+  "caveats": {
+    "relevance_is_content_based": "Relevance labels are assigned from actual document content (not topic metadata alone); each label carries a short explanation.",
+    "unanswerable_treated_separately": "Unanswerable queries have no assigned relevant documents and are excluded from metric aggregates.",
+    "fixed_corpus": "The synthetic corpus is unchanged; retrieval parameters were not tuned against this benchmark."
+  }
+}

@@ -1,0 +1,2904 @@
+{
+  "experiment": "M1.3_unseen_truck_final_evaluation",
+  "milestone": "M1.3",
+  "protocol": "evaluate saved M1.2 models on the 5 held-out test trucks only; test data never used for fitting/tuning/selection",
+  "selected_models_from_validation": {
+    "full_operational": {
+      "model": "xgboost",
+      "basis": "validation MAE (M1.2) \u2014 test data not used",
+      "validation_mae": 3.621111,
+      "validation_mae_all_models": {
+        "mean_dummy": 38.443411,
+        "median_dummy": 37.171296,
+        "random_forest": 3.77144,
+        "ridge": 5.181035,
+        "xgboost": 3.621111
+      }
+    },
+    "telematics_only": {
+      "model": "xgboost",
+      "basis": "validation MAE (M1.2) \u2014 test data not used",
+      "validation_mae": 4.292624,
+      "validation_mae_all_models": {
+        "mean_dummy": 38.443411,
+        "median_dummy": 37.171296,
+        "random_forest": 4.77361,
+        "ridge": 19.21738,
+        "xgboost": 4.292624
+      }
+    }
+  },
+  "environment": {
+    "python": "3.13.14",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "numpy": "2.3.2",
+    "pandas": "3.1.0",
+    "sklearn": "1.9.1",
+    "xgboost": "3.4.1"
+  },
+  "verification": {
+    "test_trucks_evaluated": [
+      "truck_001",
+      "truck_004",
+      "truck_017",
+      "truck_020",
+      "truck_028"
+    ],
+    "all_expected_test_trucks_present": true,
+    "train_or_val_truck_in_test_evaluation": false,
+    "test_rows": 173289,
+    "preprocessors_loaded_from_disk_not_refitted": true,
+    "generated_outputs_under": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1"
+  },
+  "feature_sets": {
+    "full_operational": {
+      "feature_set": "full_operational",
+      "columns": [
+        "gross_vehicle_weight_kg",
+        "payload_kg",
+        "vehicle_mass_kg",
+        "speed_kph",
+        "acceleration_mps2",
+        "road_grade_pct",
+        "ignition_status",
+        "engine_rpm",
+        "engine_load_pct",
+        "throttle_position_pct",
+        "torque_nm",
+        "coolant_temp_c",
+        "intake_air_temp_c",
+        "ambient_temp_c",
+        "vehicle_class_40T",
+        "vehicle_class_49T"
+      ],
+      "n_features": 16,
+      "test_n_rows": 173289,
+      "models": {
+        "mean_dummy": {
+          "artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\full_operational\\mean_dummy.joblib",
+          "artifact_size_bytes": 588,
+          "pooled": {
+            "mae": 37.186187,
+            "rmse": 41.070842,
+            "r2": -0.004915,
+            "mape": 825.0981380834826,
+            "mape_n": 172057,
+            "mape_coverage": 0.99289,
+            "count": 173289
+          },
+          "per_truck_metrics": {
+            "truck_001": {
+              "count": 30817,
+              "mae": 32.794764,
+              "rmse": 35.153432,
+              "r2": -0.060789,
+              "mape": 932.491081260748,
+              "mape_n": 30595,
+              "mape_coverage": 0.992796
+            },
+            "truck_004": {
+              "count": 32480,
+              "mae": 33.283339,
+              "rmse": 35.636892,
+              "r2": -0.01754,
+              "mape": 866.77343649801,
+              "mape_n": 32327,
+              "mape_coverage": 0.995289
+            },
+            "truck_017": {
+              "count": 37073,
+              "mae": 38.39475,
+              "rmse": 42.197669,
+              "r2": -0.00058,
+              "mape": 746.983330493695,
+              "mape_n": 36759,
+              "mape_coverage": 0.99153
+            },
+            "truck_020": {
+              "count": 33901,
+              "mae": 39.630864,
+              "rmse": 44.093619,
+              "r2": -0.000703,
+              "mape": 789.4045205938947,
+              "mape_n": 33571,
+              "mape_coverage": 0.990266
+            },
+            "truck_028": {
+              "count": 39018,
+              "mae": 40.631083,
+              "rmse": 45.576498,
+              "r2": -2.6e-05,
+              "mape": 810.5837243888839,
+              "mape_n": 38805,
+              "mape_coverage": 0.994541
+            }
+          },
+          "per_class_metrics": {
+            "32T": {
+              "count": 63297,
+              "mae": 33.04547,
+              "rmse": 35.402338,
+              "r2": -0.034864,
+              "mape": 898.7277822199511,
+              "mape_n": 62922,
+              "mape_coverage": 0.994076
+            },
+            "40T": {
+              "count": 70974,
+              "mae": 38.985185,
+              "rmse": 43.113679,
+              "r2": -0.000638,
+              "mape": 767.2324670336322,
+              "mape_n": 70330,
+              "mape_coverage": 0.990926
+            },
+            "49T": {
+              "count": 39018,
+              "mae": 40.631083,
+              "rmse": 45.576498,
+              "r2": -2.6e-05,
+              "mape": 810.5837243888839,
+              "mape_n": 38805,
+              "mape_coverage": 0.994541
+            }
+          },
+          "macro_average_across_test_trucks": {
+            "mae": 36.94696,
+            "rmse": 40.531622,
+            "r2": -0.015928,
+            "mape": 829.247219,
+            "basis": "descriptive macro-average over 5 test trucks (not robust)"
+          },
+          "conditions": {
+            "all": {
+              "count": 173289,
+              "mae": 37.186187,
+              "rmse": 41.070842,
+              "r2": -0.004915,
+              "mape": 825.0981380834826,
+              "mape_n": 172057,
+              "mape_coverage": 0.99289
+            },
+            "engine_on": {
+              "count": 172057,
+              "mae": 37.154968,
+              "rmse": 41.067418,
+              "r2": -0.00401,
+              "mape": 825.0981380834826,
+              "mape_n": 172057,
+              "mape_coverage": 1.0
+            },
+            "engine_off": {
+              "count": 1232,
+              "mae": 41.546185,
+              "rmse": 41.546185,
+              "r2": 0.0,
+              "mape": NaN,
+              "mape_n": 0,
+              "mape_coverage": 0.0
+            },
+            "speed_0_0.5_stopped": {
+              "count": 9276,
+              "mae": 40.445178,
+              "rmse": 40.447656,
+              "r2": -8161.701295,
+              "mape": 3211.192330418741,
+              "mape_n": 8044,
+              "mape_coverage": 0.867184
+            },
+            "speed_0.5_20_slow": {
+              "count": 6224,
+              "mae": 31.026886,
+              "rmse": 33.157668,
+              "r2": -4.086778,
+              "mape": 1511.7598155308222,
+              "mape_n": 6224,
+              "mape_coverage": 1.0
+            },
+            "speed_20_40_urban": {
+              "count": 41069,
+              "mae": 32.051412,
+              "rmse": 35.147591,
+              "r2": -0.216649,
+              "mape": 839.983198345278,
+              "mape_n": 41069,
+              "mape_coverage": 1.0
+            },
+            "speed_40_60_suburban": {
+              "count": 92275,
+              "mae": 38.049847,
+              "rmse": 42.265258,
+              "r2": -0.004126,
+              "mape": 654.8806361202148,
+              "mape_n": 92275,
+              "mape_coverage": 1.0
+            },
+            "speed_ge_60_highway": {
+              "count": 24445,
+              "mae": 42.884326,
+              "rmse": 47.311633,
+              "r2": -0.153225,
+              "mape": 482.61425549775146,
+              "mape_n": 24445,
+              "mape_coverage": 1.0
+            },
+            "grade_le_-1.5_steep_downhill": {
+              "count": 3680,
+              "mae": 36.999635,
+              "rmse": 40.432459,
+              "r2": -0.046238,
+              "mape": 868.6392832387637,
+              "mape_n": 3680,
+              "mape_coverage": 1.0
+            },
+            "grade_-1.5_-0.3_downhill": {
+              "count": 9472,
+              "mae": 38.765052,
+              "rmse": 42.922235,
+              "r2": -0.000652,
+              "mape": 730.7332059459809,
+              "mape_n": 9472,
+              "mape_coverage": 1.0
+            },
+            "grade_-0.3_0.3_flat": {
+              "count": 147449,
+              "mae": 36.365727,
+              "rmse": 40.091601,
+              "r2": -0.020615,
+              "mape": 872.3070775825757,
+              "mape_n": 146217,
+              "mape_coverage": 0.991645
+            },
+            "grade_0.3_1.5_uphill": {
+              "count": 9660,
+              "mae": 43.632414,
+              "rmse": 48.335967,
+              "r2": -0.284778,
+              "mape": 406.7776884631652,
+              "mape_n": 9660,
+              "mape_coverage": 1.0
+            },
+            "grade_ge_1.5_steep_uphill": {
+              "count": 3028,
+              "mae": 51.861565,
+              "rmse": 55.33145,
+              "r2": -2.752514,
+              "mape": 122.26434007435525,
+              "mape_n": 3028,
+              "mape_coverage": 1.0
+            },
+            "accel_le_-0.5_braking": {
+              "count": 27117,
+              "mae": 39.231547,
+              "rmse": 39.233282,
+              "r2": -11307.490316,
+              "mape": 1755.633477544014,
+              "mape_n": 27117,
+              "mape_coverage": 1.0
+            },
+            "accel_-0.5_0.5_cruise": {
+              "count": 115971,
+              "mae": 33.735938,
+              "rmse": 38.095806,
+              "r2": -0.03854,
+              "mape": 807.5528748640736,
+              "mape_n": 114739,
+              "mape_coverage": 0.989377
+            },
+            "accel_ge_0.5_accelerating": {
+              "count": 30201,
+              "mae": 48.598553,
+              "rmse": 52.189207,
+              "r2": -4.221028,
+              "mape": 56.242774233959715,
+              "mape_n": 30201,
+              "mape_coverage": 1.0
+            },
+            "class_32T": {
+              "count": 63297,
+              "mae": 33.04547,
+              "rmse": 35.402338,
+              "r2": -0.034864,
+              "mape": 898.7277822199511,
+              "mape_n": 62922,
+              "mape_coverage": 0.994076
+            },
+            "class_40T": {
+              "count": 70974,
+              "mae": 38.985185,
+              "rmse": 43.113679,
+              "r2": -0.000638,
+              "mape": 767.2324670336322,
+              "mape_n": 70330,
+              "mape_coverage": 0.990926
+            },
+            "class_49T": {
+              "count": 39018,
+              "mae": 40.631083,
+              "rmse": 45.576498,
+              "r2": -2.6e-05,
+              "mape": 810.5837243888839,
+              "mape_n": 38805,
+              "mape_coverage": 0.994541
+            }
+          },
+          "residual_stats": {
+            "mean_residual": -2.87218,
+            "median_residual": -21.933238,
+            "std_residual": 40.97029,
+            "max_abs_residual": 77.619096,
+            "fraction_underpredicted": 0.394889,
+            "fraction_overpredicted": 0.605111,
+            "n": 173289
+          },
+          "note": "feature-independent prediction (constant); metrics are identical across feature sets by design"
+        },
+        "median_dummy": {
+          "artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\full_operational\\median_dummy.joblib",
+          "artifact_size_bytes": 588,
+          "pooled": {
+            "mae": 34.837045,
+            "rmse": 44.713726,
+            "r2": -0.191087,
+            "mape": 408.18798864357444,
+            "mape_n": 172057,
+            "mape_coverage": 0.99289,
+            "count": 173289
+          },
+          "per_truck_metrics": {
+            "truck_001": {
+              "count": 30817,
+              "mae": 29.668274,
+              "rmse": 36.302607,
+              "r2": -0.131277,
+              "mape": 460.1339198378069,
+              "mape_n": 30595,
+              "mape_coverage": 0.992796
+            },
+            "truck_004": {
+              "count": 32480,
+              "mae": 32.025505,
+              "rmse": 38.825218,
+              "r2": -0.207758,
+              "mape": 431.6223676928982,
+              "mape_n": 32327,
+              "mape_coverage": 0.995289
+            },
+            "truck_017": {
+              "count": 37073,
+              "mae": 36.429713,
+              "rmse": 46.586522,
+              "r2": -0.219538,
+              "mape": 370.09128084743753,
+              "mape_n": 36759,
+              "mape_coverage": 0.99153
+            },
+            "truck_020": {
+              "count": 33901,
+              "mae": 36.938254,
+              "rmse": 48.244729,
+              "r2": -0.197991,
+              "mape": 389.578063072494,
+              "mape_n": 33571,
+              "mape_coverage": 0.990266
+            },
+            "truck_028": {
+              "count": 39018,
+              "mae": 37.920922,
+              "rmse": 49.993655,
+              "r2": -0.20326,
+              "mape": 399.897865123665,
+              "mape_n": 38805,
+              "mape_coverage": 0.994541
+            }
+          },
+          "per_class_metrics": {
+            "32T": {
+              "count": 63297,
+              "mae": 30.877856,
+              "rmse": 37.618188,
+              "r2": -0.168463,
+              "mape": 445.48573722777445,
+              "mape_n": 62922,
+              "mape_coverage": 0.994076
+            },
+            "40T": {
+              "count": 70974,
+              "mae": 36.67262,
+              "rmse": 47.38581,
+              "r2": -0.20877,
+              "mape": 379.3930122007344,
+              "mape_n": 70330,
+              "mape_coverage": 0.990926
+            },
+            "49T": {
+              "count": 39018,
+              "mae": 37.920922,
+              "rmse": 49.993655,
+              "r2": -0.20326,
+              "mape": 399.897865123665,
+              "mape_n": 38805,
+              "mape_coverage": 0.994541
+            }
+          },
+          "macro_average_across_test_trucks": {
+            "mae": 34.596534,
+            "rmse": 43.990546,
+            "r2": -0.191965,
+            "mape": 410.264699,
+            "basis": "descriptive macro-average over 5 test trucks (not robust)"
+          },
+          "conditions": {
+            "all": {
+              "count": 173289,
+              "mae": 34.837045,
+              "rmse": 44.713726,
+              "r2": -0.191087,
+              "mape": 408.18798864357444,
+              "mape_n": 172057,
+              "mape_coverage": 0.99289
+            },
+            "engine_on": {
+              "count": 172057,
+              "mae": 34.937811,
+              "rmse": 44.839112,
+              "r2": -0.196898,
+              "mape": 408.18798864357444,
+              "mape_n": 172057,
+              "mape_coverage": 1.0
+            },
+            "engine_off": {
+              "count": 1232,
+              "mae": 20.764437,
+              "rmse": 20.764437,
+              "r2": 0.0,
+              "mape": NaN,
+              "mape_n": 0,
+              "mape_coverage": 0.0
+            },
+            "speed_0_0.5_stopped": {
+              "count": 9276,
+              "mae": 19.66343,
+              "rmse": 19.668526,
+              "r2": -1929.14889,
+              "mape": 1554.9063249322785,
+              "mape_n": 8044,
+              "mape_coverage": 0.867184
+            },
+            "speed_0.5_20_slow": {
+              "count": 6224,
+              "mae": 15.508079,
+              "rmse": 17.2056,
+              "r2": -0.369665,
+              "mape": 719.7654048623535,
+              "mape_n": 6224,
+              "mape_coverage": 1.0
+            },
+            "speed_20_40_urban": {
+              "count": 41069,
+              "mae": 25.321024,
+              "rmse": 32.415677,
+              "r2": -0.034867,
+              "mape": 405.1758322299182,
+              "mape_n": 41069,
+              "mape_coverage": 1.0
+            },
+            "speed_40_60_suburban": {
+              "count": 92275,
+              "mae": 38.233191,
+              "rmse": 48.278733,
+              "r2": -0.310185,
+              "mape": 328.8646972022769,
+              "mape_n": 92275,
+              "mape_coverage": 1.0
+            },
+            "speed_ge_60_highway": {
+              "count": 24445,
+              "mae": 48.683968,
+              "rmse": 58.198402,
+              "r2": -0.745019,
+              "mape": 256.00156335603765,
+              "mape_n": 24445,
+              "mape_coverage": 1.0
+            },
+            "grade_le_-1.5_steep_downhill": {
+              "count": 3680,
+              "mae": 31.843008,
+              "rmse": 41.392976,
+              "r2": -0.096538,
+              "mape": 422.8123301647501,
+              "mape_n": 3680,
+              "mape_coverage": 1.0
+            },
+            "grade_-1.5_-0.3_downhill": {
+              "count": 9472,
+              "mae": 37.842341,
+              "rmse": 48.163657,
+              "r2": -0.259962,
+              "mape": 363.9838754284013,
+              "mape_n": 9472,
+              "mape_coverage": 1.0
+            },
+            "grade_-0.3_0.3_flat": {
+              "count": 147449,
+              "mae": 32.880223,
+              "rmse": 42.454635,
+              "r2": -0.144472,
+              "mape": 429.12722259507217,
+              "mape_n": 146217,
+              "mape_coverage": 0.991645
+            },
+            "grade_0.3_1.5_uphill": {
+              "count": 9660,
+              "mae": 51.944183,
+              "rmse": 60.943376,
+              "r2": -1.042397,
+              "mape": 224.182358423187,
+              "mape_n": 9660,
+              "mape_coverage": 1.0
+            },
+            "grade_ge_1.5_steep_uphill": {
+              "count": 3028,
+              "mae": 69.786983,
+              "rmse": 73.912748,
+              "r2": -5.696023,
+              "mape": 104.59030067098409,
+              "mape_n": 3028,
+              "mape_coverage": 1.0
+            },
+            "accel_le_-0.5_braking": {
+              "count": 27117,
+              "mae": 18.449799,
+              "rmse": 18.453488,
+              "r2": -2500.798138,
+              "mape": 827.4301436773726,
+              "mape_n": 27117,
+              "mape_coverage": 1.0
+            },
+            "accel_-0.5_0.5_cruise": {
+              "count": 115971,
+              "mae": 30.027964,
+              "rmse": 39.725905,
+              "r2": -0.129319,
+              "mape": 396.7657600313327,
+              "mape_n": 114739,
+              "mape_coverage": 0.989377
+            },
+            "accel_ge_0.5_accelerating": {
+              "count": 30201,
+              "mae": 68.017631,
+              "rmse": 71.456247,
+              "r2": -8.787574,
+              "mape": 75.15218091166147,
+              "mape_n": 30201,
+              "mape_coverage": 1.0
+            },
+            "class_32T": {
+              "count": 63297,
+              "mae": 30.877856,
+              "rmse": 37.618188,
+              "r2": -0.168463,
+              "mape": 445.48573722777445,
+              "mape_n": 62922,
+              "mape_coverage": 0.994076
+            },
+            "class_40T": {
+              "count": 70974,
+              "mae": 36.67262,
+              "rmse": 47.38581,
+              "r2": -0.20877,
+              "mape": 379.3930122007344,
+              "mape_n": 70330,
+              "mape_coverage": 0.990926
+            },
+            "class_49T": {
+              "count": 39018,
+              "mae": 37.920922,
+              "rmse": 49.993655,
+              "r2": -0.20326,
+              "mape": 399.897865123665,
+              "mape_n": 38805,
+              "mape_coverage": 0.994541
+            }
+          },
+          "residual_stats": {
+            "mean_residual": 17.909568,
+            "median_residual": -1.15149,
+            "std_residual": 40.97029,
+            "max_abs_residual": 98.400844,
+            "fraction_underpredicted": 0.494157,
+            "fraction_overpredicted": 0.505843,
+            "n": 173289
+          },
+          "note": "feature-independent prediction (constant); metrics are identical across feature sets by design"
+        },
+        "ridge": {
+          "artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\full_operational\\ridge.joblib",
+          "artifact_size_bytes": 851,
+          "pooled": {
+            "mae": 3.861351,
+            "rmse": 5.46966,
+            "r2": 0.982177,
+            "mape": 65.99962941810007,
+            "mape_n": 172057,
+            "mape_coverage": 0.99289,
+            "count": 173289
+          },
+          "per_truck_metrics": {
+            "truck_001": {
+              "count": 30817,
+              "mae": 3.208252,
+              "rmse": 4.085961,
+              "r2": 0.985669,
+              "mape": 97.63338315753278,
+              "mape_n": 30595,
+              "mape_coverage": 0.992796
+            },
+            "truck_004": {
+              "count": 32480,
+              "mae": 3.394397,
+              "rmse": 4.337147,
+              "r2": 0.984928,
+              "mape": 94.00049534935803,
+              "mape_n": 32327,
+              "mape_coverage": 0.995289
+            },
+            "truck_017": {
+              "count": 37073,
+              "mae": 3.213646,
+              "rmse": 4.76182,
+              "r2": 0.987258,
+              "mape": 45.90517488120071,
+              "mape_n": 36759,
+              "mape_coverage": 0.99153
+            },
+            "truck_020": {
+              "count": 33901,
+              "mae": 4.295186,
+              "rmse": 6.295092,
+              "r2": 0.979603,
+              "mape": 52.21685070609351,
+              "mape_n": 33571,
+              "mape_coverage": 0.990266
+            },
+            "truck_028": {
+              "count": 39018,
+              "mae": 5.004366,
+              "rmse": 6.931761,
+              "r2": 0.976868,
+              "mape": 48.69090708450744,
+              "mape_n": 38805,
+              "mape_coverage": 0.994541
+            }
+          },
+          "per_class_metrics": {
+            "32T": {
+              "count": 63297,
+              "mae": 3.30377,
+              "rmse": 4.216723,
+              "r2": 0.985319,
+              "mape": 95.76693955791951,
+              "mape_n": 62922,
+              "mape_coverage": 0.994076
+            },
+            "40T": {
+              "count": 70974,
+              "mae": 3.730248,
+              "rmse": 5.547316,
+              "r2": 0.983434,
+              "mape": 48.91796130402846,
+              "mape_n": 70330,
+              "mape_coverage": 0.990926
+            },
+            "49T": {
+              "count": 39018,
+              "mae": 5.004366,
+              "rmse": 6.931761,
+              "r2": 0.976868,
+              "mape": 48.69090708450744,
+              "mape_n": 38805,
+              "mape_coverage": 0.994541
+            }
+          },
+          "macro_average_across_test_trucks": {
+            "mae": 3.823169,
+            "rmse": 5.282356,
+            "r2": 0.982865,
+            "mape": 67.689362,
+            "basis": "descriptive macro-average over 5 test trucks (not robust)"
+          },
+          "conditions": {
+            "all": {
+              "count": 173289,
+              "mae": 3.861351,
+              "rmse": 5.46966,
+              "r2": 0.982177,
+              "mape": 65.99962941810007,
+              "mape_n": 172057,
+              "mape_coverage": 0.99289
+            },
+            "engine_on": {
+              "count": 172057,
+              "mae": 3.870616,
+              "rmse": 5.483464,
+              "r2": 0.9821,
+              "mape": 65.99962941810007,
+              "mape_n": 172057,
+              "mape_coverage": 1.0
+            },
+            "engine_off": {
+              "count": 1232,
+              "mae": 2.567407,
+              "rmse": 2.96693,
+              "r2": 0.0,
+              "mape": NaN,
+              "mape_n": 0,
+              "mape_coverage": 0.0
+            },
+            "speed_0_0.5_stopped": {
+              "count": 9276,
+              "mae": 4.306227,
+              "rmse": 4.827647,
+              "r2": -115.283517,
+              "mape": 379.89684663005977,
+              "mape_n": 8044,
+              "mape_coverage": 0.867184
+            },
+            "speed_0.5_20_slow": {
+              "count": 6224,
+              "mae": 7.352084,
+              "rmse": 11.103755,
+              "r2": 0.429554,
+              "mape": 142.24789708833174,
+              "mape_n": 6224,
+              "mape_coverage": 1.0
+            },
+            "speed_20_40_urban": {
+              "count": 41069,
+              "mae": 3.586912,
+              "rmse": 5.319216,
+              "r2": 0.972134,
+              "mape": 51.67813332106769,
+              "mape_n": 41069,
+              "mape_coverage": 1.0
+            },
+            "speed_40_60_suburban": {
+              "count": 92275,
+              "mae": 3.619686,
+              "rmse": 4.92657,
+              "r2": 0.986357,
+              "mape": 46.56131680383036,
+              "mape_n": 92275,
+              "mape_coverage": 1.0
+            },
+            "speed_ge_60_highway": {
+              "count": 24445,
+              "mae": 4.177064,
+              "rmse": 5.717597,
+              "r2": 0.983158,
+              "mape": 40.729896812587086,
+              "mape_n": 24445,
+              "mape_coverage": 1.0
+            },
+            "grade_le_-1.5_steep_downhill": {
+              "count": 3680,
+              "mae": 3.63795,
+              "rmse": 5.028248,
+              "r2": 0.983819,
+              "mape": 68.25927893243053,
+              "mape_n": 3680,
+              "mape_coverage": 1.0
+            },
+            "grade_-1.5_-0.3_downhill": {
+              "count": 9472,
+              "mae": 4.034908,
+              "rmse": 5.642967,
+              "r2": 0.982704,
+              "mape": 56.99866293386858,
+              "mape_n": 9472,
+              "mape_coverage": 1.0
+            },
+            "grade_-0.3_0.3_flat": {
+              "count": 147449,
+              "mae": 3.806442,
+              "rmse": 5.383892,
+              "r2": 0.981595,
+              "mape": 69.59141019901011,
+              "mape_n": 146217,
+              "mape_coverage": 0.991645
+            },
+            "grade_0.3_1.5_uphill": {
+              "count": 9660,
+              "mae": 4.570522,
+              "rmse": 6.485666,
+              "r2": 0.976869,
+              "mape": 36.74830493721048,
+              "mape_n": 9660,
+              "mape_coverage": 1.0
+            },
+            "grade_ge_1.5_steep_uphill": {
+              "count": 3028,
+              "mae": 4.001362,
+              "rmse": 6.008641,
+              "r2": 0.955748,
+              "mape": 11.286957148937281,
+              "mape_n": 3028,
+              "mape_coverage": 1.0
+            },
+            "accel_le_-0.5_braking": {
+              "count": 27117,
+              "mae": 2.000293,
+              "rmse": 2.431142,
+              "r2": -42.422601,
+              "mape": 91.39590590648605,
+              "mape_n": 27117,
+              "mape_coverage": 1.0
+            },
+            "accel_-0.5_0.5_cruise": {
+              "count": 115971,
+              "mae": 3.892653,
+              "rmse": 5.179797,
+              "r2": 0.9808,
+              "mape": 75.25713411857635,
+              "mape_n": 114739,
+              "mape_coverage": 0.989377
+            },
+            "accel_ge_0.5_accelerating": {
+              "count": 30201,
+              "mae": 5.412166,
+              "rmse": 7.957764,
+              "r2": 0.878612,
+              "mape": 8.025798705093578,
+              "mape_n": 30201,
+              "mape_coverage": 1.0
+            },
+            "class_32T": {
+              "count": 63297,
+              "mae": 3.30377,
+              "rmse": 4.216723,
+              "r2": 0.985319,
+              "mape": 95.76693955791951,
+              "mape_n": 62922,
+              "mape_coverage": 0.994076
+            },
+            "class_40T": {
+              "count": 70974,
+              "mae": 3.730248,
+              "rmse": 5.547316,
+              "r2": 0.983434,
+              "mape": 48.91796130402846,
+              "mape_n": 70330,
+              "mape_coverage": 0.990926
+            },
+            "class_49T": {
+              "count": 39018,
+              "mae": 5.004366,
+              "rmse": 6.931761,
+              "r2": 0.976868,
+              "mape": 48.69090708450744,
+              "mape_n": 38805,
+              "mape_coverage": 0.994541
+            }
+          },
+          "residual_stats": {
+            "mean_residual": -0.342569,
+            "median_residual": 0.26661,
+            "std_residual": 5.458922,
+            "max_abs_residual": 55.393809,
+            "fraction_underpredicted": 0.528926,
+            "fraction_overpredicted": 0.471074,
+            "n": 173289
+          }
+        },
+        "random_forest": {
+          "artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\full_operational\\random_forest.joblib",
+          "artifact_size_bytes": 171409056,
+          "pooled": {
+            "mae": 2.33722,
+            "rmse": 4.038898,
+            "r2": 0.990282,
+            "mape": 6.886244809649907,
+            "mape_n": 172057,
+            "mape_coverage": 0.99289,
+            "count": 173289
+          },
+          "per_truck_metrics": {
+            "truck_001": {
+              "count": 30817,
+              "mae": 1.394568,
+              "rmse": 2.231988,
+              "r2": 0.995724,
+              "mape": 4.023205378964363,
+              "mape_n": 30595,
+              "mape_coverage": 0.992796
+            },
+            "truck_004": {
+              "count": 32480,
+              "mae": 1.06783,
+              "rmse": 1.71468,
+              "r2": 0.997644,
+              "mape": 2.7191532461197374,
+              "mape_n": 32327,
+              "mape_coverage": 0.995289
+            },
+            "truck_017": {
+              "count": 37073,
+              "mae": 1.401852,
+              "rmse": 2.266089,
+              "r2": 0.997114,
+              "mape": 3.1820943569970535,
+              "mape_n": 36759,
+              "mape_coverage": 0.99153
+            },
+            "truck_020": {
+              "count": 33901,
+              "mae": 3.152389,
+              "rmse": 4.959836,
+              "r2": 0.987338,
+              "mape": 8.831065874746448,
+              "mape_n": 33571,
+              "mape_coverage": 0.990266
+            },
+            "truck_028": {
+              "count": 39018,
+              "mae": 4.318904,
+              "rmse": 6.309814,
+              "r2": 0.980833,
+              "mape": 14.441341804077798,
+              "mape_n": 38805,
+              "mape_coverage": 0.994541
+            }
+          },
+          "per_class_metrics": {
+            "32T": {
+              "count": 63297,
+              "mae": 1.226907,
+              "rmse": 1.983464,
+              "r2": 0.996752,
+              "mape": 3.3532315494855136,
+              "mape_n": 62922,
+              "mape_coverage": 0.994076
+            },
+            "40T": {
+              "count": 70974,
+              "mae": 2.238002,
+              "rmse": 3.799027,
+              "r2": 0.992231,
+              "mape": 5.878548541873563,
+              "mape_n": 70330,
+              "mape_coverage": 0.990926
+            },
+            "49T": {
+              "count": 39018,
+              "mae": 4.318904,
+              "rmse": 6.309814,
+              "r2": 0.980833,
+              "mape": 14.441341804077798,
+              "mape_n": 38805,
+              "mape_coverage": 0.994541
+            }
+          },
+          "macro_average_across_test_trucks": {
+            "mae": 2.267109,
+            "rmse": 3.496481,
+            "r2": 0.991731,
+            "mape": 6.639372,
+            "basis": "descriptive macro-average over 5 test trucks (not robust)"
+          },
+          "conditions": {
+            "all": {
+              "count": 173289,
+              "mae": 2.33722,
+              "rmse": 4.038898,
+              "r2": 0.990282,
+              "mape": 6.886244809649907,
+              "mape_n": 172057,
+              "mape_coverage": 0.99289
+            },
+            "engine_on": {
+              "count": 172057,
+              "mae": 2.353955,
+              "rmse": 4.053332,
+              "r2": 0.990219,
+              "mape": 6.886244809649907,
+              "mape_n": 172057,
+              "mape_coverage": 1.0
+            },
+            "engine_off": {
+              "count": 1232,
+              "mae": 5.4e-05,
+              "rmse": 0.000346,
+              "r2": 0.0,
+              "mape": NaN,
+              "mape_n": 0,
+              "mape_coverage": 0.0
+            },
+            "speed_0_0.5_stopped": {
+              "count": 9276,
+              "mae": 0.105879,
+              "rmse": 0.176397,
+              "r2": 0.844752,
+              "mape": 9.277123049249877,
+              "mape_n": 8044,
+              "mape_coverage": 0.867184
+            },
+            "speed_0.5_20_slow": {
+              "count": 6224,
+              "mae": 0.789284,
+              "rmse": 1.682917,
+              "r2": 0.986896,
+              "mape": 6.252473023420177,
+              "mape_n": 6224,
+              "mape_coverage": 1.0
+            },
+            "speed_20_40_urban": {
+              "count": 41069,
+              "mae": 2.181732,
+              "rmse": 4.076136,
+              "r2": 0.983637,
+              "mape": 8.97736267542366,
+              "mape_n": 41069,
+              "mape_coverage": 1.0
+            },
+            "speed_40_60_suburban": {
+              "count": 92275,
+              "mae": 2.542014,
+              "rmse": 4.185003,
+              "r2": 0.990155,
+              "mape": 6.16233808157279,
+              "mape_n": 92275,
+              "mape_coverage": 1.0
+            },
+            "speed_ge_60_highway": {
+              "count": 24445,
+              "mae": 3.066226,
+              "rmse": 4.569461,
+              "r2": 0.989243,
+              "mape": 5.480261775982705,
+              "mape_n": 24445,
+              "mape_coverage": 1.0
+            },
+            "grade_le_-1.5_steep_downhill": {
+              "count": 3680,
+              "mae": 1.783548,
+              "rmse": 3.346415,
+              "r2": 0.992833,
+              "mape": 6.06489511027908,
+              "mape_n": 3680,
+              "mape_coverage": 1.0
+            },
+            "grade_-1.5_-0.3_downhill": {
+              "count": 9472,
+              "mae": 2.432579,
+              "rmse": 4.092475,
+              "r2": 0.990903,
+              "mape": 6.276477806072904,
+              "mape_n": 9472,
+              "mape_coverage": 1.0
+            },
+            "grade_-0.3_0.3_flat": {
+              "count": 147449,
+              "mae": 2.231304,
+              "rmse": 3.949903,
+              "r2": 0.990093,
+              "mape": 7.057184851879264,
+              "mape_n": 146217,
+              "mape_coverage": 0.991645
+            },
+            "grade_0.3_1.5_uphill": {
+              "count": 9660,
+              "mae": 3.46131,
+              "rmse": 4.968724,
+              "r2": 0.986424,
+              "mape": 5.789058539435015,
+              "mape_n": 9660,
+              "mape_coverage": 1.0
+            },
+            "grade_ge_1.5_steep_uphill": {
+              "count": 3028,
+              "mae": 4.283326,
+              "rmse": 5.39129,
+              "r2": 0.964374,
+              "mape": 5.037750479132065,
+              "mape_n": 3028,
+              "mape_coverage": 1.0
+            },
+            "accel_le_-0.5_braking": {
+              "count": 27117,
+              "mae": 0.205557,
+              "rmse": 0.27,
+              "r2": 0.464422,
+              "mape": 8.445641373756573,
+              "mape_n": 27117,
+              "mape_coverage": 1.0
+            },
+            "accel_-0.5_0.5_cruise": {
+              "count": 115971,
+              "mae": 1.992322,
+              "rmse": 3.442901,
+              "r2": 0.991518,
+              "mape": 6.708326110132869,
+              "mape_n": 114739,
+              "mape_coverage": 0.989377
+            },
+            "accel_ge_0.5_accelerating": {
+              "count": 30201,
+              "mae": 5.575603,
+              "rmse": 6.929437,
+              "r2": 0.907957,
+              "mape": 6.162032268177935,
+              "mape_n": 30201,
+              "mape_coverage": 1.0
+            },
+            "class_32T": {
+              "count": 63297,
+              "mae": 1.226907,
+              "rmse": 1.983464,
+              "r2": 0.996752,
+              "mape": 3.3532315494855136,
+              "mape_n": 62922,
+              "mape_coverage": 0.994076
+            },
+            "class_40T": {
+              "count": 70974,
+              "mae": 2.238002,
+              "rmse": 3.799027,
+              "r2": 0.992231,
+              "mape": 5.878548541873563,
+              "mape_n": 70330,
+              "mape_coverage": 0.990926
+            },
+            "class_49T": {
+              "count": 39018,
+              "mae": 4.318904,
+              "rmse": 6.309814,
+              "r2": 0.980833,
+              "mape": 14.441341804077798,
+              "mape_n": 38805,
+              "mape_coverage": 0.994541
+            }
+          },
+          "residual_stats": {
+            "mean_residual": -0.501928,
+            "median_residual": -0.009471,
+            "std_residual": 4.007589,
+            "max_abs_residual": 20.917681,
+            "fraction_underpredicted": 0.487711,
+            "fraction_overpredicted": 0.505739,
+            "n": 173289
+          }
+        },
+        "xgboost": {
+          "artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\full_operational\\xgboost.joblib",
+          "artifact_size_bytes": 469059,
+          "pooled": {
+            "mae": 2.568427,
+            "rmse": 4.527482,
+            "r2": 0.987788,
+            "mape": 7.3793179685603185,
+            "mape_n": 172057,
+            "mape_coverage": 0.99289,
+            "count": 173289
+          },
+          "per_truck_metrics": {
+            "truck_001": {
+              "count": 30817,
+              "mae": 1.302266,
+              "rmse": 2.122795,
+              "r2": 0.996132,
+              "mape": 4.346672627453013,
+              "mape_n": 30595,
+              "mape_coverage": 0.992796
+            },
+            "truck_004": {
+              "count": 32480,
+              "mae": 1.549199,
+              "rmse": 2.489746,
+              "r2": 0.995033,
+              "mape": 5.122219805302883,
+              "mape_n": 32327,
+              "mape_coverage": 0.995289
+            },
+            "truck_017": {
+              "count": 37073,
+              "mae": 2.245159,
+              "rmse": 3.667431,
+              "r2": 0.992442,
+              "mape": 5.800259841072356,
+              "mape_n": 36759,
+              "mape_coverage": 0.99153
+            },
+            "truck_020": {
+              "count": 33901,
+              "mae": 3.866037,
+              "rmse": 6.304166,
+              "r2": 0.979545,
+              "mape": 8.82911762479944,
+              "mape_n": 33571,
+              "mape_coverage": 0.990266
+            },
+            "truck_028": {
+              "count": 39018,
+              "mae": 3.596619,
+              "rmse": 5.916755,
+              "r2": 0.983146,
+              "mape": 11.892199555560126,
+              "mape_n": 38805,
+              "mape_coverage": 0.994541
+            }
+          },
+          "per_class_metrics": {
+            "32T": {
+              "count": 63297,
+              "mae": 1.428977,
+              "rmse": 2.318358,
+              "r2": 0.995562,
+              "mape": 4.745120127824151,
+              "mape_n": 62922,
+              "mape_coverage": 0.994076
+            },
+            "40T": {
+              "count": 70974,
+              "mae": 3.019377,
+              "rmse": 5.099877,
+              "r2": 0.985999,
+              "mape": 7.246040939572312,
+              "mape_n": 70330,
+              "mape_coverage": 0.990926
+            },
+            "49T": {
+              "count": 39018,
+              "mae": 3.596619,
+              "rmse": 5.916755,
+              "r2": 0.983146,
+              "mape": 11.892199555560126,
+              "mape_n": 38805,
+              "mape_coverage": 0.994541
+            }
+          },
+          "macro_average_across_test_trucks": {
+            "mae": 2.511856,
+            "rmse": 4.100179,
+            "r2": 0.98926,
+            "mape": 7.198094,
+            "basis": "descriptive macro-average over 5 test trucks (not robust)"
+          },
+          "conditions": {
+            "all": {
+              "count": 173289,
+              "mae": 2.568427,
+              "rmse": 4.527482,
+              "r2": 0.987788,
+              "mape": 7.3793179685603185,
+              "mape_n": 172057,
+              "mape_coverage": 0.99289
+            },
+            "engine_on": {
+              "count": 172057,
+              "mae": 2.585928,
+              "rmse": 4.54364,
+              "r2": 0.98771,
+              "mape": 7.3793179685603185,
+              "mape_n": 172057,
+              "mape_coverage": 1.0
+            },
+            "engine_off": {
+              "count": 1232,
+              "mae": 0.124233,
+              "rmse": 0.168578,
+              "r2": 0.0,
+              "mape": NaN,
+              "mape_n": 0,
+              "mape_coverage": 0.0
+            },
+            "speed_0_0.5_stopped": {
+              "count": 9276,
+              "mae": 0.15171,
+              "rmse": 0.196423,
+              "r2": 0.8075,
+              "mape": 12.18927600482397,
+              "mape_n": 8044,
+              "mape_coverage": 0.867184
+            },
+            "speed_0.5_20_slow": {
+              "count": 6224,
+              "mae": 0.818787,
+              "rmse": 1.605773,
+              "r2": 0.98807,
+              "mape": 9.011186061946391,
+              "mape_n": 6224,
+              "mape_coverage": 1.0
+            },
+            "speed_20_40_urban": {
+              "count": 41069,
+              "mae": 1.945111,
+              "rmse": 4.025995,
+              "r2": 0.984037,
+              "mape": 8.090410010676784,
+              "mape_n": 41069,
+              "mape_coverage": 1.0
+            },
+            "speed_40_60_suburban": {
+              "count": 92275,
+              "mae": 2.918166,
+              "rmse": 4.853973,
+              "r2": 0.986756,
+              "mape": 6.789565668978313,
+              "mape_n": 92275,
+              "mape_coverage": 1.0
+            },
+            "speed_ge_60_highway": {
+              "count": 24445,
+              "mae": 3.657974,
+              "rmse": 5.335614,
+              "r2": 0.985333,
+              "mape": 6.412556050348354,
+              "mape_n": 24445,
+              "mape_coverage": 1.0
+            },
+            "grade_le_-1.5_steep_downhill": {
+              "count": 3680,
+              "mae": 2.023793,
+              "rmse": 3.789603,
+              "r2": 0.990809,
+              "mape": 6.816669245088688,
+              "mape_n": 3680,
+              "mape_coverage": 1.0
+            },
+            "grade_-1.5_-0.3_downhill": {
+              "count": 9472,
+              "mae": 2.821659,
+              "rmse": 4.77296,
+              "r2": 0.987626,
+              "mape": 7.433790904365911,
+              "mape_n": 9472,
+              "mape_coverage": 1.0
+            },
+            "grade_-0.3_0.3_flat": {
+              "count": 147449,
+              "mae": 2.402702,
+              "rmse": 4.38091,
+              "r2": 0.987813,
+              "mape": 7.4516960091586455,
+              "mape_n": 146217,
+              "mape_coverage": 0.991645
+            },
+            "grade_0.3_1.5_uphill": {
+              "count": 9660,
+              "mae": 4.24335,
+              "rmse": 5.931688,
+              "r2": 0.980652,
+              "mape": 6.9507185325541245,
+              "mape_n": 9660,
+              "mape_coverage": 1.0
+            },
+            "grade_ge_1.5_steep_uphill": {
+              "count": 3028,
+              "mae": 5.164791,
+              "rmse": 6.127211,
+              "r2": 0.953985,
+              "mape": 5.76503469381769,
+              "mape_n": 3028,
+              "mape_coverage": 1.0
+            },
+            "accel_le_-0.5_braking": {
+              "count": 27117,
+              "mae": 0.201828,
+              "rmse": 0.269764,
+              "r2": 0.46536,
+              "mape": 8.586939863453647,
+              "mape_n": 27117,
+              "mape_coverage": 1.0
+            },
+            "accel_-0.5_0.5_cruise": {
+              "count": 115971,
+              "mae": 2.083564,
+              "rmse": 3.733102,
+              "r2": 0.990027,
+              "mape": 7.182114366594675,
+              "mape_n": 114739,
+              "mape_coverage": 0.989377
+            },
+            "accel_ge_0.5_accelerating": {
+              "count": 30201,
+              "mae": 6.555219,
+              "rmse": 8.002232,
+              "r2": 0.877251,
+              "mape": 7.0442251293203455,
+              "mape_n": 30201,
+              "mape_coverage": 1.0
+            },
+            "class_32T": {
+              "count": 63297,
+              "mae": 1.428977,
+              "rmse": 2.318358,
+              "r2": 0.995562,
+              "mape": 4.745120127824151,
+              "mape_n": 62922,
+              "mape_coverage": 0.994076
+            },
+            "class_40T": {
+              "count": 70974,
+              "mae": 3.019377,
+              "rmse": 5.099877,
+              "r2": 0.985999,
+              "mape": 7.246040939572312,
+              "mape_n": 70330,
+              "mape_coverage": 0.990926
+            },
+            "class_49T": {
+              "count": 39018,
+              "mae": 3.596619,
+              "rmse": 5.916755,
+              "r2": 0.983146,
+              "mape": 11.892199555560126,
+              "mape_n": 38805,
+              "mape_coverage": 0.994541
+            }
+          },
+          "residual_stats": {
+            "mean_residual": -0.525151,
+            "median_residual": -0.102423,
+            "std_residual": 4.496922,
+            "max_abs_residual": 25.982282,
+            "fraction_underpredicted": 0.411942,
+            "fraction_overpredicted": 0.588058,
+            "n": 173289
+          }
+        }
+      },
+      "plots": {
+        "files": [
+          "residuals_hist_full_operational.png",
+          "residual_vs_actual_full_operational.png",
+          "error_vs_speed_full_operational.png",
+          "error_vs_engine_load_full_operational.png",
+          "per_truck_mean_residual_full_operational.png"
+        ]
+      }
+    },
+    "telematics_only": {
+      "feature_set": "telematics_only",
+      "columns": [
+        "gross_vehicle_weight_kg",
+        "payload_kg",
+        "vehicle_mass_kg",
+        "speed_kph",
+        "acceleration_mps2",
+        "road_grade_pct",
+        "ignition_status",
+        "coolant_temp_c",
+        "intake_air_temp_c",
+        "ambient_temp_c",
+        "vehicle_class_40T",
+        "vehicle_class_49T"
+      ],
+      "n_features": 12,
+      "test_n_rows": 173289,
+      "models": {
+        "mean_dummy": {
+          "artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\telematics_only\\mean_dummy.joblib",
+          "artifact_size_bytes": 557,
+          "pooled": {
+            "mae": 37.186187,
+            "rmse": 41.070842,
+            "r2": -0.004915,
+            "mape": 825.0981380834826,
+            "mape_n": 172057,
+            "mape_coverage": 0.99289,
+            "count": 173289
+          },
+          "per_truck_metrics": {
+            "truck_001": {
+              "count": 30817,
+              "mae": 32.794764,
+              "rmse": 35.153432,
+              "r2": -0.060789,
+              "mape": 932.491081260748,
+              "mape_n": 30595,
+              "mape_coverage": 0.992796
+            },
+            "truck_004": {
+              "count": 32480,
+              "mae": 33.283339,
+              "rmse": 35.636892,
+              "r2": -0.01754,
+              "mape": 866.77343649801,
+              "mape_n": 32327,
+              "mape_coverage": 0.995289
+            },
+            "truck_017": {
+              "count": 37073,
+              "mae": 38.39475,
+              "rmse": 42.197669,
+              "r2": -0.00058,
+              "mape": 746.983330493695,
+              "mape_n": 36759,
+              "mape_coverage": 0.99153
+            },
+            "truck_020": {
+              "count": 33901,
+              "mae": 39.630864,
+              "rmse": 44.093619,
+              "r2": -0.000703,
+              "mape": 789.4045205938947,
+              "mape_n": 33571,
+              "mape_coverage": 0.990266
+            },
+            "truck_028": {
+              "count": 39018,
+              "mae": 40.631083,
+              "rmse": 45.576498,
+              "r2": -2.6e-05,
+              "mape": 810.5837243888839,
+              "mape_n": 38805,
+              "mape_coverage": 0.994541
+            }
+          },
+          "per_class_metrics": {
+            "32T": {
+              "count": 63297,
+              "mae": 33.04547,
+              "rmse": 35.402338,
+              "r2": -0.034864,
+              "mape": 898.7277822199511,
+              "mape_n": 62922,
+              "mape_coverage": 0.994076
+            },
+            "40T": {
+              "count": 70974,
+              "mae": 38.985185,
+              "rmse": 43.113679,
+              "r2": -0.000638,
+              "mape": 767.2324670336322,
+              "mape_n": 70330,
+              "mape_coverage": 0.990926
+            },
+            "49T": {
+              "count": 39018,
+              "mae": 40.631083,
+              "rmse": 45.576498,
+              "r2": -2.6e-05,
+              "mape": 810.5837243888839,
+              "mape_n": 38805,
+              "mape_coverage": 0.994541
+            }
+          },
+          "macro_average_across_test_trucks": {
+            "mae": 36.94696,
+            "rmse": 40.531622,
+            "r2": -0.015928,
+            "mape": 829.247219,
+            "basis": "descriptive macro-average over 5 test trucks (not robust)"
+          },
+          "conditions": {
+            "all": {
+              "count": 173289,
+              "mae": 37.186187,
+              "rmse": 41.070842,
+              "r2": -0.004915,
+              "mape": 825.0981380834826,
+              "mape_n": 172057,
+              "mape_coverage": 0.99289
+            },
+            "engine_on": {
+              "count": 172057,
+              "mae": 37.154968,
+              "rmse": 41.067418,
+              "r2": -0.00401,
+              "mape": 825.0981380834826,
+              "mape_n": 172057,
+              "mape_coverage": 1.0
+            },
+            "engine_off": {
+              "count": 1232,
+              "mae": 41.546185,
+              "rmse": 41.546185,
+              "r2": 0.0,
+              "mape": NaN,
+              "mape_n": 0,
+              "mape_coverage": 0.0
+            },
+            "speed_0_0.5_stopped": {
+              "count": 9276,
+              "mae": 40.445178,
+              "rmse": 40.447656,
+              "r2": -8161.701295,
+              "mape": 3211.192330418741,
+              "mape_n": 8044,
+              "mape_coverage": 0.867184
+            },
+            "speed_0.5_20_slow": {
+              "count": 6224,
+              "mae": 31.026886,
+              "rmse": 33.157668,
+              "r2": -4.086778,
+              "mape": 1511.7598155308222,
+              "mape_n": 6224,
+              "mape_coverage": 1.0
+            },
+            "speed_20_40_urban": {
+              "count": 41069,
+              "mae": 32.051412,
+              "rmse": 35.147591,
+              "r2": -0.216649,
+              "mape": 839.983198345278,
+              "mape_n": 41069,
+              "mape_coverage": 1.0
+            },
+            "speed_40_60_suburban": {
+              "count": 92275,
+              "mae": 38.049847,
+              "rmse": 42.265258,
+              "r2": -0.004126,
+              "mape": 654.8806361202148,
+              "mape_n": 92275,
+              "mape_coverage": 1.0
+            },
+            "speed_ge_60_highway": {
+              "count": 24445,
+              "mae": 42.884326,
+              "rmse": 47.311633,
+              "r2": -0.153225,
+              "mape": 482.61425549775146,
+              "mape_n": 24445,
+              "mape_coverage": 1.0
+            },
+            "grade_le_-1.5_steep_downhill": {
+              "count": 3680,
+              "mae": 36.999635,
+              "rmse": 40.432459,
+              "r2": -0.046238,
+              "mape": 868.6392832387637,
+              "mape_n": 3680,
+              "mape_coverage": 1.0
+            },
+            "grade_-1.5_-0.3_downhill": {
+              "count": 9472,
+              "mae": 38.765052,
+              "rmse": 42.922235,
+              "r2": -0.000652,
+              "mape": 730.7332059459809,
+              "mape_n": 9472,
+              "mape_coverage": 1.0
+            },
+            "grade_-0.3_0.3_flat": {
+              "count": 147449,
+              "mae": 36.365727,
+              "rmse": 40.091601,
+              "r2": -0.020615,
+              "mape": 872.3070775825757,
+              "mape_n": 146217,
+              "mape_coverage": 0.991645
+            },
+            "grade_0.3_1.5_uphill": {
+              "count": 9660,
+              "mae": 43.632414,
+              "rmse": 48.335967,
+              "r2": -0.284778,
+              "mape": 406.7776884631652,
+              "mape_n": 9660,
+              "mape_coverage": 1.0
+            },
+            "grade_ge_1.5_steep_uphill": {
+              "count": 3028,
+              "mae": 51.861565,
+              "rmse": 55.33145,
+              "r2": -2.752514,
+              "mape": 122.26434007435525,
+              "mape_n": 3028,
+              "mape_coverage": 1.0
+            },
+            "accel_le_-0.5_braking": {
+              "count": 27117,
+              "mae": 39.231547,
+              "rmse": 39.233282,
+              "r2": -11307.490316,
+              "mape": 1755.633477544014,
+              "mape_n": 27117,
+              "mape_coverage": 1.0
+            },
+            "accel_-0.5_0.5_cruise": {
+              "count": 115971,
+              "mae": 33.735938,
+              "rmse": 38.095806,
+              "r2": -0.03854,
+              "mape": 807.5528748640736,
+              "mape_n": 114739,
+              "mape_coverage": 0.989377
+            },
+            "accel_ge_0.5_accelerating": {
+              "count": 30201,
+              "mae": 48.598553,
+              "rmse": 52.189207,
+              "r2": -4.221028,
+              "mape": 56.242774233959715,
+              "mape_n": 30201,
+              "mape_coverage": 1.0
+            },
+            "class_32T": {
+              "count": 63297,
+              "mae": 33.04547,
+              "rmse": 35.402338,
+              "r2": -0.034864,
+              "mape": 898.7277822199511,
+              "mape_n": 62922,
+              "mape_coverage": 0.994076
+            },
+            "class_40T": {
+              "count": 70974,
+              "mae": 38.985185,
+              "rmse": 43.113679,
+              "r2": -0.000638,
+              "mape": 767.2324670336322,
+              "mape_n": 70330,
+              "mape_coverage": 0.990926
+            },
+            "class_49T": {
+              "count": 39018,
+              "mae": 40.631083,
+              "rmse": 45.576498,
+              "r2": -2.6e-05,
+              "mape": 810.5837243888839,
+              "mape_n": 38805,
+              "mape_coverage": 0.994541
+            }
+          },
+          "residual_stats": {
+            "mean_residual": -2.87218,
+            "median_residual": -21.933238,
+            "std_residual": 40.97029,
+            "max_abs_residual": 77.619096,
+            "fraction_underpredicted": 0.394889,
+            "fraction_overpredicted": 0.605111,
+            "n": 173289
+          },
+          "note": "feature-independent prediction (constant); metrics are identical across feature sets by design"
+        },
+        "median_dummy": {
+          "artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\telematics_only\\median_dummy.joblib",
+          "artifact_size_bytes": 554,
+          "pooled": {
+            "mae": 34.837045,
+            "rmse": 44.713726,
+            "r2": -0.191087,
+            "mape": 408.18798864357444,
+            "mape_n": 172057,
+            "mape_coverage": 0.99289,
+            "count": 173289
+          },
+          "per_truck_metrics": {
+            "truck_001": {
+              "count": 30817,
+              "mae": 29.668274,
+              "rmse": 36.302607,
+              "r2": -0.131277,
+              "mape": 460.1339198378069,
+              "mape_n": 30595,
+              "mape_coverage": 0.992796
+            },
+            "truck_004": {
+              "count": 32480,
+              "mae": 32.025505,
+              "rmse": 38.825218,
+              "r2": -0.207758,
+              "mape": 431.6223676928982,
+              "mape_n": 32327,
+              "mape_coverage": 0.995289
+            },
+            "truck_017": {
+              "count": 37073,
+              "mae": 36.429713,
+              "rmse": 46.586522,
+              "r2": -0.219538,
+              "mape": 370.09128084743753,
+              "mape_n": 36759,
+              "mape_coverage": 0.99153
+            },
+            "truck_020": {
+              "count": 33901,
+              "mae": 36.938254,
+              "rmse": 48.244729,
+              "r2": -0.197991,
+              "mape": 389.578063072494,
+              "mape_n": 33571,
+              "mape_coverage": 0.990266
+            },
+            "truck_028": {
+              "count": 39018,
+              "mae": 37.920922,
+              "rmse": 49.993655,
+              "r2": -0.20326,
+              "mape": 399.897865123665,
+              "mape_n": 38805,
+              "mape_coverage": 0.994541
+            }
+          },
+          "per_class_metrics": {
+            "32T": {
+              "count": 63297,
+              "mae": 30.877856,
+              "rmse": 37.618188,
+              "r2": -0.168463,
+              "mape": 445.48573722777445,
+              "mape_n": 62922,
+              "mape_coverage": 0.994076
+            },
+            "40T": {
+              "count": 70974,
+              "mae": 36.67262,
+              "rmse": 47.38581,
+              "r2": -0.20877,
+              "mape": 379.3930122007344,
+              "mape_n": 70330,
+              "mape_coverage": 0.990926
+            },
+            "49T": {
+              "count": 39018,
+              "mae": 37.920922,
+              "rmse": 49.993655,
+              "r2": -0.20326,
+              "mape": 399.897865123665,
+              "mape_n": 38805,
+              "mape_coverage": 0.994541
+            }
+          },
+          "macro_average_across_test_trucks": {
+            "mae": 34.596534,
+            "rmse": 43.990546,
+            "r2": -0.191965,
+            "mape": 410.264699,
+            "basis": "descriptive macro-average over 5 test trucks (not robust)"
+          },
+          "conditions": {
+            "all": {
+              "count": 173289,
+              "mae": 34.837045,
+              "rmse": 44.713726,
+              "r2": -0.191087,
+              "mape": 408.18798864357444,
+              "mape_n": 172057,
+              "mape_coverage": 0.99289
+            },
+            "engine_on": {
+              "count": 172057,
+              "mae": 34.937811,
+              "rmse": 44.839112,
+              "r2": -0.196898,
+              "mape": 408.18798864357444,
+              "mape_n": 172057,
+              "mape_coverage": 1.0
+            },
+            "engine_off": {
+              "count": 1232,
+              "mae": 20.764437,
+              "rmse": 20.764437,
+              "r2": 0.0,
+              "mape": NaN,
+              "mape_n": 0,
+              "mape_coverage": 0.0
+            },
+            "speed_0_0.5_stopped": {
+              "count": 9276,
+              "mae": 19.66343,
+              "rmse": 19.668526,
+              "r2": -1929.14889,
+              "mape": 1554.9063249322785,
+              "mape_n": 8044,
+              "mape_coverage": 0.867184
+            },
+            "speed_0.5_20_slow": {
+              "count": 6224,
+              "mae": 15.508079,
+              "rmse": 17.2056,
+              "r2": -0.369665,
+              "mape": 719.7654048623535,
+              "mape_n": 6224,
+              "mape_coverage": 1.0
+            },
+            "speed_20_40_urban": {
+              "count": 41069,
+              "mae": 25.321024,
+              "rmse": 32.415677,
+              "r2": -0.034867,
+              "mape": 405.1758322299182,
+              "mape_n": 41069,
+              "mape_coverage": 1.0
+            },
+            "speed_40_60_suburban": {
+              "count": 92275,
+              "mae": 38.233191,
+              "rmse": 48.278733,
+              "r2": -0.310185,
+              "mape": 328.8646972022769,
+              "mape_n": 92275,
+              "mape_coverage": 1.0
+            },
+            "speed_ge_60_highway": {
+              "count": 24445,
+              "mae": 48.683968,
+              "rmse": 58.198402,
+              "r2": -0.745019,
+              "mape": 256.00156335603765,
+              "mape_n": 24445,
+              "mape_coverage": 1.0
+            },
+            "grade_le_-1.5_steep_downhill": {
+              "count": 3680,
+              "mae": 31.843008,
+              "rmse": 41.392976,
+              "r2": -0.096538,
+              "mape": 422.8123301647501,
+              "mape_n": 3680,
+              "mape_coverage": 1.0
+            },
+            "grade_-1.5_-0.3_downhill": {
+              "count": 9472,
+              "mae": 37.842341,
+              "rmse": 48.163657,
+              "r2": -0.259962,
+              "mape": 363.9838754284013,
+              "mape_n": 9472,
+              "mape_coverage": 1.0
+            },
+            "grade_-0.3_0.3_flat": {
+              "count": 147449,
+              "mae": 32.880223,
+              "rmse": 42.454635,
+              "r2": -0.144472,
+              "mape": 429.12722259507217,
+              "mape_n": 146217,
+              "mape_coverage": 0.991645
+            },
+            "grade_0.3_1.5_uphill": {
+              "count": 9660,
+              "mae": 51.944183,
+              "rmse": 60.943376,
+              "r2": -1.042397,
+              "mape": 224.182358423187,
+              "mape_n": 9660,
+              "mape_coverage": 1.0
+            },
+            "grade_ge_1.5_steep_uphill": {
+              "count": 3028,
+              "mae": 69.786983,
+              "rmse": 73.912748,
+              "r2": -5.696023,
+              "mape": 104.59030067098409,
+              "mape_n": 3028,
+              "mape_coverage": 1.0
+            },
+            "accel_le_-0.5_braking": {
+              "count": 27117,
+              "mae": 18.449799,
+              "rmse": 18.453488,
+              "r2": -2500.798138,
+              "mape": 827.4301436773726,
+              "mape_n": 27117,
+              "mape_coverage": 1.0
+            },
+            "accel_-0.5_0.5_cruise": {
+              "count": 115971,
+              "mae": 30.027964,
+              "rmse": 39.725905,
+              "r2": -0.129319,
+              "mape": 396.7657600313327,
+              "mape_n": 114739,
+              "mape_coverage": 0.989377
+            },
+            "accel_ge_0.5_accelerating": {
+              "count": 30201,
+              "mae": 68.017631,
+              "rmse": 71.456247,
+              "r2": -8.787574,
+              "mape": 75.15218091166147,
+              "mape_n": 30201,
+              "mape_coverage": 1.0
+            },
+            "class_32T": {
+              "count": 63297,
+              "mae": 30.877856,
+              "rmse": 37.618188,
+              "r2": -0.168463,
+              "mape": 445.48573722777445,
+              "mape_n": 62922,
+              "mape_coverage": 0.994076
+            },
+            "class_40T": {
+              "count": 70974,
+              "mae": 36.67262,
+              "rmse": 47.38581,
+              "r2": -0.20877,
+              "mape": 379.3930122007344,
+              "mape_n": 70330,
+              "mape_coverage": 0.990926
+            },
+            "class_49T": {
+              "count": 39018,
+              "mae": 37.920922,
+              "rmse": 49.993655,
+              "r2": -0.20326,
+              "mape": 399.897865123665,
+              "mape_n": 38805,
+              "mape_coverage": 0.994541
+            }
+          },
+          "residual_stats": {
+            "mean_residual": 17.909568,
+            "median_residual": -1.15149,
+            "std_residual": 40.97029,
+            "max_abs_residual": 98.400844,
+            "fraction_underpredicted": 0.494157,
+            "fraction_overpredicted": 0.505843,
+            "n": 173289
+          },
+          "note": "feature-independent prediction (constant); metrics are identical across feature sets by design"
+        },
+        "ridge": {
+          "artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\telematics_only\\ridge.joblib",
+          "artifact_size_bytes": 766,
+          "pooled": {
+            "mae": 18.421317,
+            "rmse": 22.955854,
+            "r2": 0.686058,
+            "mape": 414.62662179427696,
+            "mape_n": 172057,
+            "mape_coverage": 0.99289,
+            "count": 173289
+          },
+          "per_truck_metrics": {
+            "truck_001": {
+              "count": 30817,
+              "mae": 15.404511,
+              "rmse": 20.271974,
+              "r2": 0.647235,
+              "mape": 452.776471549649,
+              "mape_n": 30595,
+              "mape_coverage": 0.992796
+            },
+            "truck_004": {
+              "count": 32480,
+              "mae": 15.380072,
+              "rmse": 19.721283,
+              "r2": 0.688382,
+              "mape": 429.45385656809856,
+              "mape_n": 32327,
+              "mape_coverage": 0.995289
+            },
+            "truck_017": {
+              "count": 37073,
+              "mae": 18.615583,
+              "rmse": 22.726345,
+              "r2": 0.709776,
+              "mape": 368.7814349542222,
+              "mape_n": 36759,
+              "mape_coverage": 0.99153
+            },
+            "truck_020": {
+              "count": 33901,
+              "mae": 19.604526,
+              "rmse": 24.399768,
+              "r2": 0.693574,
+              "mape": 356.9089263078952,
+              "mape_n": 33571,
+              "mape_coverage": 0.990266
+            },
+            "truck_028": {
+              "count": 39018,
+              "mae": 22.123058,
+              "rmse": 26.154678,
+              "r2": 0.670672,
+              "mape": 465.55689640909355,
+              "mape_n": 38805,
+              "mape_coverage": 0.994541
+            }
+          },
+          "per_class_metrics": {
+            "32T": {
+              "count": 63297,
+              "mae": 15.39197,
+              "rmse": 19.991289,
+              "r2": 0.67001,
+              "mape": 440.79417323572727,
+              "mape_n": 62922,
+              "mape_coverage": 0.994076
+            },
+            "40T": {
+              "count": 70974,
+              "mae": 19.087955,
+              "rmse": 23.540507,
+              "r2": 0.701683,
+              "mape": 363.11426606803076,
+              "mape_n": 70330,
+              "mape_coverage": 0.990926
+            },
+            "49T": {
+              "count": 39018,
+              "mae": 22.123058,
+              "rmse": 26.154678,
+              "r2": 0.670672,
+              "mape": 465.55689640909355,
+              "mape_n": 38805,
+              "mape_coverage": 0.994541
+            }
+          },
+          "macro_average_across_test_trucks": {
+            "mae": 18.22555,
+            "rmse": 22.65481,
+            "r2": 0.681928,
+            "mape": 414.695517,
+            "basis": "descriptive macro-average over 5 test trucks (not robust)"
+          },
+          "conditions": {
+            "all": {
+              "count": 173289,
+              "mae": 18.421317,
+              "rmse": 22.955854,
+              "r2": 0.686058,
+              "mape": 414.62662179427696,
+              "mape_n": 172057,
+              "mape_coverage": 0.99289
+            },
+            "engine_on": {
+              "count": 172057,
+              "mae": 18.510076,
+              "rmse": 23.029449,
+              "r2": 0.684274,
+              "mape": 414.62662179427696,
+              "mape_n": 172057,
+              "mape_coverage": 1.0
+            },
+            "engine_off": {
+              "count": 1232,
+              "mae": 6.025443,
+              "rmse": 7.370753,
+              "r2": 0.0,
+              "mape": NaN,
+              "mape_n": 0,
+              "mape_coverage": 0.0
+            },
+            "speed_0_0.5_stopped": {
+              "count": 9276,
+              "mae": 7.307628,
+              "rmse": 9.005438,
+              "r2": -403.62887,
+              "mape": 611.1975811881584,
+              "mape_n": 8044,
+              "mape_coverage": 0.867184
+            },
+            "speed_0.5_20_slow": {
+              "count": 6224,
+              "mae": 31.284205,
+              "rmse": 42.034133,
+              "r2": -7.174835,
+              "mape": 1473.654798813172,
+              "mape_n": 6224,
+              "mape_coverage": 1.0
+            },
+            "speed_20_40_urban": {
+              "count": 41069,
+              "mae": 16.977276,
+              "rmse": 21.856616,
+              "r2": 0.529521,
+              "mape": 454.7913378299552,
+              "mape_n": 41069,
+              "mape_coverage": 1.0
+            },
+            "speed_40_60_suburban": {
+              "count": 92275,
+              "mae": 18.304562,
+              "rmse": 21.504857,
+              "r2": 0.740047,
+              "mape": 325.72869105780785,
+              "mape_n": 92275,
+              "mape_coverage": 1.0
+            },
+            "speed_ge_60_highway": {
+              "count": 24445,
+              "mae": 22.230309,
+              "rmse": 26.584788,
+              "r2": 0.63588,
+              "mape": 348.3931861104332,
+              "mape_n": 24445,
+              "mape_coverage": 1.0
+            },
+            "grade_le_-1.5_steep_downhill": {
+              "count": 3680,
+              "mae": 22.070633,
+              "rmse": 26.38533,
+              "r2": 0.554451,
+              "mape": 436.3030952239959,
+              "mape_n": 3680,
+              "mape_coverage": 1.0
+            },
+            "grade_-1.5_-0.3_downhill": {
+              "count": 9472,
+              "mae": 23.203058,
+              "rmse": 27.182577,
+              "r2": 0.598672,
+              "mape": 454.4668245795538,
+              "mape_n": 9472,
+              "mape_coverage": 1.0
+            },
+            "grade_-0.3_0.3_flat": {
+              "count": 147449,
+              "mae": 17.975032,
+              "rmse": 22.46225,
+              "r2": 0.679623,
+              "mape": 424.0578412404392,
+              "mape_n": 146217,
+              "mape_coverage": 0.991645
+            },
+            "grade_0.3_1.5_uphill": {
+              "count": 9660,
+              "mae": 21.230203,
+              "rmse": 25.759321,
+              "r2": 0.635115,
+              "mape": 323.37226727305256,
+              "mape_n": 9660,
+              "mape_coverage": 1.0
+            },
+            "grade_ge_1.5_steep_uphill": {
+              "count": 3028,
+              "mae": 11.799232,
+              "rmse": 17.730869,
+              "r2": 0.614665,
+              "mape": 99.36130736627783,
+              "mape_n": 3028,
+              "mape_coverage": 1.0
+            },
+            "accel_le_-0.5_braking": {
+              "count": 27117,
+              "mae": 23.226396,
+              "rmse": 32.190868,
+              "r2": -7612.085748,
+              "mape": 1157.4537747484255,
+              "mape_n": 27117,
+              "mape_coverage": 1.0
+            },
+            "accel_-0.5_0.5_cruise": {
+              "count": 115971,
+              "mae": 17.433359,
+              "rmse": 20.813704,
+              "r2": 0.689996,
+              "mape": 340.87124991151904,
+              "mape_n": 114739,
+              "mape_coverage": 0.989377
+            },
+            "accel_ge_0.5_accelerating": {
+              "count": 30201,
+              "mae": 17.900643,
+              "rmse": 20.730062,
+              "r2": 0.176249,
+              "mape": 27.86372347296689,
+              "mape_n": 30201,
+              "mape_coverage": 1.0
+            },
+            "class_32T": {
+              "count": 63297,
+              "mae": 15.39197,
+              "rmse": 19.991289,
+              "r2": 0.67001,
+              "mape": 440.79417323572727,
+              "mape_n": 62922,
+              "mape_coverage": 0.994076
+            },
+            "class_40T": {
+              "count": 70974,
+              "mae": 19.087955,
+              "rmse": 23.540507,
+              "r2": 0.701683,
+              "mape": 363.11426606803076,
+              "mape_n": 70330,
+              "mape_coverage": 0.990926
+            },
+            "class_49T": {
+              "count": 39018,
+              "mae": 22.123058,
+              "rmse": 26.154678,
+              "r2": 0.670672,
+              "mape": 465.55689640909355,
+              "mape_n": 38805,
+              "mape_coverage": 0.994541
+            }
+          },
+          "residual_stats": {
+            "mean_residual": -0.498751,
+            "median_residual": -2.901576,
+            "std_residual": 22.950435,
+            "max_abs_residual": 121.717078,
+            "fraction_underpredicted": 0.455713,
+            "fraction_overpredicted": 0.544287,
+            "n": 173289
+          }
+        },
+        "random_forest": {
+          "artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\telematics_only\\random_forest.joblib",
+          "artifact_size_bytes": 160179732,
+          "pooled": {
+            "mae": 3.497256,
+            "rmse": 5.578961,
+            "r2": 0.981457,
+            "mape": 20.752328334018035,
+            "mape_n": 172057,
+            "mape_coverage": 0.99289,
+            "count": 173289
+          },
+          "per_truck_metrics": {
+            "truck_001": {
+              "count": 30817,
+              "mae": 2.73286,
+              "rmse": 4.508668,
+              "r2": 0.98255,
+              "mape": 11.5686790927596,
+              "mape_n": 30595,
+              "mape_coverage": 0.992796
+            },
+            "truck_004": {
+              "count": 32480,
+              "mae": 3.853272,
+              "rmse": 6.064815,
+              "r2": 0.97053,
+              "mape": 20.681353923612583,
+              "mape_n": 32327,
+              "mape_coverage": 0.995289
+            },
+            "truck_017": {
+              "count": 37073,
+              "mae": 2.700072,
+              "rmse": 4.639448,
+              "r2": 0.987905,
+              "mape": 14.987167399460667,
+              "mape_n": 36759,
+              "mape_coverage": 0.99153
+            },
+            "truck_020": {
+              "count": 33901,
+              "mae": 3.28768,
+              "rmse": 5.719436,
+              "r2": 0.983163,
+              "mape": 13.139385877737341,
+              "mape_n": 33571,
+              "mape_coverage": 0.990266
+            },
+            "truck_028": {
+              "count": 39018,
+              "mae": 4.744165,
+              "rmse": 6.533434,
+              "r2": 0.97945,
+              "mape": 40.099417118831134,
+              "mape_n": 38805,
+              "mape_coverage": 0.994541
+            }
+          },
+          "per_class_metrics": {
+            "32T": {
+              "count": 63297,
+              "mae": 3.307784,
+              "rmse": 5.363877,
+              "r2": 0.976244,
+              "mape": 16.250434905622896,
+              "mape_n": 62922,
+              "mape_coverage": 0.994076
+            },
+            "40T": {
+              "count": 70974,
+              "mae": 2.980745,
+              "rmse": 5.183456,
+              "r2": 0.985536,
+              "mape": 14.105155833048414,
+              "mape_n": 70330,
+              "mape_coverage": 0.990926
+            },
+            "49T": {
+              "count": 39018,
+              "mae": 4.744165,
+              "rmse": 6.533434,
+              "r2": 0.97945,
+              "mape": 40.099417118831134,
+              "mape_n": 38805,
+              "mape_coverage": 0.994541
+            }
+          },
+          "macro_average_across_test_trucks": {
+            "mae": 3.46361,
+            "rmse": 5.49316,
+            "r2": 0.98072,
+            "mape": 20.095201,
+            "basis": "descriptive macro-average over 5 test trucks (not robust)"
+          },
+          "conditions": {
+            "all": {
+              "count": 173289,
+              "mae": 3.497256,
+              "rmse": 5.578961,
+              "r2": 0.981457,
+              "mape": 20.752328334018035,
+              "mape_n": 172057,
+              "mape_coverage": 0.99289
+            },
+            "engine_on": {
+              "count": 172057,
+              "mae": 3.52216,
+              "rmse": 5.598897,
+              "r2": 0.981338,
+              "mape": 20.752328334018035,
+              "mape_n": 172057,
+              "mape_coverage": 1.0
+            },
+            "engine_off": {
+              "count": 1232,
+              "mae": 0.019291,
+              "rmse": 0.059923,
+              "r2": 0.0,
+              "mape": NaN,
+              "mape_n": 0,
+              "mape_coverage": 0.0
+            },
+            "speed_0_0.5_stopped": {
+              "count": 9276,
+              "mae": 0.474499,
+              "rmse": 1.442631,
+              "r2": -9.383838,
+              "mape": 41.28329949977791,
+              "mape_n": 8044,
+              "mape_coverage": 0.867184
+            },
+            "speed_0.5_20_slow": {
+              "count": 6224,
+              "mae": 1.794737,
+              "rmse": 3.245692,
+              "r2": 0.95126,
+              "mape": 22.712010975403434,
+              "mape_n": 6224,
+              "mape_coverage": 1.0
+            },
+            "speed_20_40_urban": {
+              "count": 41069,
+              "mae": 2.880445,
+              "rmse": 4.786227,
+              "r2": 0.977439,
+              "mape": 21.69811150596237,
+              "mape_n": 41069,
+              "mape_coverage": 1.0
+            },
+            "speed_40_60_suburban": {
+              "count": 92275,
+              "mae": 3.48053,
+              "rmse": 5.417012,
+              "r2": 0.983505,
+              "mape": 15.068803967509378,
+              "mape_n": 92275,
+              "mape_coverage": 1.0
+            },
+            "speed_ge_60_highway": {
+              "count": 24445,
+              "mae": 6.177182,
+              "rmse": 8.241071,
+              "r2": 0.96501,
+              "mape": 33.362540852473714,
+              "mape_n": 24445,
+              "mape_coverage": 1.0
+            },
+            "grade_le_-1.5_steep_downhill": {
+              "count": 3680,
+              "mae": 5.120873,
+              "rmse": 7.258897,
+              "r2": 0.966278,
+              "mape": 64.75567656009848,
+              "mape_n": 3680,
+              "mape_coverage": 1.0
+            },
+            "grade_-1.5_-0.3_downhill": {
+              "count": 9472,
+              "mae": 4.44289,
+              "rmse": 6.719364,
+              "r2": 0.975477,
+              "mape": 29.846113199268004,
+              "mape_n": 9472,
+              "mape_coverage": 1.0
+            },
+            "grade_-0.3_0.3_flat": {
+              "count": 147449,
+              "mae": 3.123799,
+              "rmse": 5.113346,
+              "r2": 0.983398,
+              "mape": 18.26967202608429,
+              "mape_n": 146217,
+              "mape_coverage": 0.991645
+            },
+            "grade_0.3_1.5_uphill": {
+              "count": 9660,
+              "mae": 5.806883,
+              "rmse": 7.606613,
+              "r2": 0.968182,
+              "mape": 30.481499038609666,
+              "mape_n": 9660,
+              "mape_coverage": 1.0
+            },
+            "grade_ge_1.5_steep_uphill": {
+              "count": 3028,
+              "mae": 9.38329,
+              "rmse": 10.870977,
+              "r2": 0.855151,
+              "mape": 27.672446119740968,
+              "mape_n": 3028,
+              "mape_coverage": 1.0
+            },
+            "accel_le_-0.5_braking": {
+              "count": 27117,
+              "mae": 0.689235,
+              "rmse": 1.080855,
+              "r2": -7.582827,
+              "mape": 29.518027436060507,
+              "mape_n": 27117,
+              "mape_coverage": 1.0
+            },
+            "accel_-0.5_0.5_cruise": {
+              "count": 115971,
+              "mae": 3.343541,
+              "rmse": 5.463048,
+              "r2": 0.978643,
+              "mape": 21.980550892960878,
+              "mape_n": 114739,
+              "mape_coverage": 0.989377
+            },
+            "accel_ge_0.5_accelerating": {
+              "count": 30201,
+              "mae": 6.608798,
+              "rmse": 7.933294,
+              "r2": 0.879357,
+              "mape": 8.215508667761009,
+              "mape_n": 30201,
+              "mape_coverage": 1.0
+            },
+            "class_32T": {
+              "count": 63297,
+              "mae": 3.307784,
+              "rmse": 5.363877,
+              "r2": 0.976244,
+              "mape": 16.250434905622896,
+              "mape_n": 62922,
+              "mape_coverage": 0.994076
+            },
+            "class_40T": {
+              "count": 70974,
+              "mae": 2.980745,
+              "rmse": 5.183456,
+              "r2": 0.985536,
+              "mape": 14.105155833048414,
+              "mape_n": 70330,
+              "mape_coverage": 0.990926
+            },
+            "class_49T": {
+              "count": 39018,
+              "mae": 4.744165,
+              "rmse": 6.533434,
+              "r2": 0.97945,
+              "mape": 40.099417118831134,
+              "mape_n": 38805,
+              "mape_coverage": 0.994541
+            }
+          },
+          "residual_stats": {
+            "mean_residual": 0.253372,
+            "median_residual": -0.274859,
+            "std_residual": 5.573205,
+            "max_abs_residual": 37.076467,
+            "fraction_underpredicted": 0.385426,
+            "fraction_overpredicted": 0.613836,
+            "n": 173289
+          }
+        },
+        "xgboost": {
+          "artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\telematics_only\\xgboost.joblib",
+          "artifact_size_bytes": 468595,
+          "pooled": {
+            "mae": 2.56596,
+            "rmse": 4.371276,
+            "r2": 0.988616,
+            "mape": 15.359953367382056,
+            "mape_n": 172057,
+            "mape_coverage": 0.99289,
+            "count": 173289
+          },
+          "per_truck_metrics": {
+            "truck_001": {
+              "count": 30817,
+              "mae": 1.883201,
+              "rmse": 2.972032,
+              "r2": 0.992418,
+              "mape": 12.145062308589576,
+              "mape_n": 30595,
+              "mape_coverage": 0.992796
+            },
+            "truck_004": {
+              "count": 32480,
+              "mae": 1.535812,
+              "rmse": 2.324249,
+              "r2": 0.995672,
+              "mape": 12.221339980977762,
+              "mape_n": 32327,
+              "mape_coverage": 0.995289
+            },
+            "truck_017": {
+              "count": 37073,
+              "mae": 2.052657,
+              "rmse": 3.326418,
+              "r2": 0.993782,
+              "mape": 12.612808664285968,
+              "mape_n": 36759,
+              "mape_coverage": 0.99153
+            },
+            "truck_020": {
+              "count": 33901,
+              "mae": 2.930522,
+              "rmse": 4.544597,
+              "r2": 0.98937,
+              "mape": 13.953771419423669,
+              "mape_n": 33571,
+              "mape_coverage": 0.990266
+            },
+            "truck_028": {
+              "count": 39018,
+              "mae": 4.133711,
+              "rmse": 6.703149,
+              "r2": 0.978368,
+              "mape": 24.328147497057824,
+              "mape_n": 38805,
+              "mape_coverage": 0.994541
+            }
+          },
+          "per_class_metrics": {
+            "32T": {
+              "count": 63297,
+              "mae": 1.704943,
+              "rmse": 2.659414,
+              "r2": 0.99416,
+              "mape": 12.18425095986088,
+              "mape_n": 62922,
+              "mape_coverage": 0.994076
+            },
+            "40T": {
+              "count": 70974,
+              "mae": 2.471972,
+              "rmse": 3.955369,
+              "r2": 0.991578,
+              "mape": 13.252897682524667,
+              "mape_n": 70330,
+              "mape_coverage": 0.990926
+            },
+            "49T": {
+              "count": 39018,
+              "mae": 4.133711,
+              "rmse": 6.703149,
+              "r2": 0.978368,
+              "mape": 24.328147497057824,
+              "mape_n": 38805,
+              "mape_coverage": 0.994541
+            }
+          },
+          "macro_average_across_test_trucks": {
+            "mae": 2.507181,
+            "rmse": 3.974089,
+            "r2": 0.989922,
+            "mape": 15.052226,
+            "basis": "descriptive macro-average over 5 test trucks (not robust)"
+          },
+          "conditions": {
+            "all": {
+              "count": 173289,
+              "mae": 2.56596,
+              "rmse": 4.371276,
+              "r2": 0.988616,
+              "mape": 15.359953367382056,
+              "mape_n": 172057,
+              "mape_coverage": 0.99289
+            },
+            "engine_on": {
+              "count": 172057,
+              "mae": 2.581941,
+              "rmse": 4.386741,
+              "r2": 0.988544,
+              "mape": 15.359953367382056,
+              "mape_n": 172057,
+              "mape_coverage": 1.0
+            },
+            "engine_off": {
+              "count": 1232,
+              "mae": 0.334102,
+              "rmse": 0.438992,
+              "r2": 0.0,
+              "mape": NaN,
+              "mape_n": 0,
+              "mape_coverage": 0.0
+            },
+            "speed_0_0.5_stopped": {
+              "count": 9276,
+              "mae": 0.450794,
+              "rmse": 1.105651,
+              "r2": -5.099351,
+              "mape": 36.226553052519996,
+              "mape_n": 8044,
+              "mape_coverage": 0.867184
+            },
+            "speed_0.5_20_slow": {
+              "count": 6224,
+              "mae": 1.374315,
+              "rmse": 2.171773,
+              "r2": 0.978178,
+              "mape": 24.454197304355723,
+              "mape_n": 6224,
+              "mape_coverage": 1.0
+            },
+            "speed_20_40_urban": {
+              "count": 41069,
+              "mae": 2.127659,
+              "rmse": 3.579007,
+              "r2": 0.987385,
+              "mape": 17.647922949325647,
+              "mape_n": 41069,
+              "mape_coverage": 1.0
+            },
+            "speed_40_60_suburban": {
+              "count": 92275,
+              "mae": 2.744885,
+              "rmse": 4.697266,
+              "r2": 0.987597,
+              "mape": 11.657696325820313,
+              "mape_n": 92275,
+              "mape_coverage": 1.0
+            },
+            "speed_ge_60_highway": {
+              "count": 24445,
+              "mae": 3.732962,
+              "rmse": 5.38352,
+              "r2": 0.985068,
+              "mape": 16.309335393084474,
+              "mape_n": 24445,
+              "mape_coverage": 1.0
+            },
+            "grade_le_-1.5_steep_downhill": {
+              "count": 3680,
+              "mae": 2.93065,
+              "rmse": 4.558823,
+              "r2": 0.986699,
+              "mape": 31.460420778769834,
+              "mape_n": 3680,
+              "mape_coverage": 1.0
+            },
+            "grade_-1.5_-0.3_downhill": {
+              "count": 9472,
+              "mae": 3.261241,
+              "rmse": 5.330501,
+              "r2": 0.984567,
+              "mape": 19.382746818314338,
+              "mape_n": 9472,
+              "mape_coverage": 1.0
+            },
+            "grade_-0.3_0.3_flat": {
+              "count": 147449,
+              "mae": 2.373011,
+              "rmse": 4.13061,
+              "r2": 0.989166,
+              "mape": 14.902619890856766,
+              "mape_n": 146217,
+              "mape_coverage": 0.991645
+            },
+            "grade_0.3_1.5_uphill": {
+              "count": 9660,
+              "mae": 4.060254,
+              "rmse": 5.869687,
+              "r2": 0.981054,
+              "mape": 13.531351810549069,
+              "mape_n": 9660,
+              "mape_coverage": 1.0
+            },
+            "grade_ge_1.5_steep_uphill": {
+              "count": 3028,
+              "mae": 4.576376,
+              "rmse": 6.216342,
+              "r2": 0.952636,
+              "mape": 11.126333927146788,
+              "mape_n": 3028,
+              "mape_coverage": 1.0
+            },
+            "accel_le_-0.5_braking": {
+              "count": 27117,
+              "mae": 0.532843,
+              "rmse": 0.739052,
+              "r2": -3.012776,
+              "mape": 23.366289134388374,
+              "mape_n": 27117,
+              "mape_coverage": 1.0
+            },
+            "accel_-0.5_0.5_cruise": {
+              "count": 115971,
+              "mae": 2.275948,
+              "rmse": 3.683971,
+              "r2": 0.990288,
+              "mape": 15.887737289176906,
+              "mape_n": 114739,
+              "mape_coverage": 0.989377
+            },
+            "accel_ge_0.5_accelerating": {
+              "count": 30201,
+              "mae": 5.505101,
+              "rmse": 7.552094,
+              "r2": 0.890672,
+              "mape": 6.166045669069792,
+              "mape_n": 30201,
+              "mape_coverage": 1.0
+            },
+            "class_32T": {
+              "count": 63297,
+              "mae": 1.704943,
+              "rmse": 2.659414,
+              "r2": 0.99416,
+              "mape": 12.18425095986088,
+              "mape_n": 62922,
+              "mape_coverage": 0.994076
+            },
+            "class_40T": {
+              "count": 70974,
+              "mae": 2.471972,
+              "rmse": 3.955369,
+              "r2": 0.991578,
+              "mape": 13.252897682524667,
+              "mape_n": 70330,
+              "mape_coverage": 0.990926
+            },
+            "class_49T": {
+              "count": 39018,
+              "mae": 4.133711,
+              "rmse": 6.703149,
+              "r2": 0.978368,
+              "mape": 24.328147497057824,
+              "mape_n": 38805,
+              "mape_coverage": 0.994541
+            }
+          },
+          "residual_stats": {
+            "mean_residual": -0.165987,
+            "median_residual": 0.049166,
+            "std_residual": 4.368124,
+            "max_abs_residual": 46.664666,
+            "fraction_underpredicted": 0.518204,
+            "fraction_overpredicted": 0.481796,
+            "n": 173289
+          }
+        }
+      },
+      "plots": {
+        "files": [
+          "residuals_hist_telematics_only.png",
+          "residual_vs_actual_telematics_only.png",
+          "error_vs_speed_telematics_only.png",
+          "error_vs_engine_load_telematics_only.png",
+          "per_truck_mean_residual_telematics_only.png"
+        ]
+      }
+    }
+  },
+  "total_clock_seconds": 27.268
+}

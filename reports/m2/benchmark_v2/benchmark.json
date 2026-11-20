@@ -1,0 +1,281 @@
+{
+  "meta": {
+    "name": "M2.1-B RAG Benchmark v2",
+    "description": "Diverse retrieval benchmark over the synthetic RAG corpus. Built to complement, not modify, the original 55-case topic-level baseline.",
+    "corpus_path": "data/synthetic_heavy_truck_research/rag_knowledge_corpus.jsonl",
+    "baseline_preserved": {
+      "n_queries": 55,
+      "unique_query_strings": 2,
+      "road_grade_effects_count": 28,
+      "engine_load_fuel_demand_count": 27
+    },
+    "synthetic_notice": "All corpus content is synthetic educational material, not OEM/manufacturer documentation.",
+    "query_count": 28,
+    "unique_query_count": 28,
+    "answerable_count": 24,
+    "unanswerable_count": 4,
+    "categories": [
+      "conceptual",
+      "cause_effect",
+      "operational",
+      "comparison",
+      "practical_driver",
+      "multi_doc",
+      "unanswerable"
+    ]
+  },
+  "queries": [
+    {
+      "query_id": "bq_01",
+      "user_query": "What factors determine how much fuel a heavy-duty truck consumes at any given moment?",
+      "category": "conceptual",
+      "topic": "fuel_consumption_fundamentals",
+      "answerable": true,
+      "relevant_document_ids": ["doc_001"],
+      "explanation": "doc_001 explicitly enumerates the drivers of fuel consumption (power demanded at the wheels: vehicle mass, speed, acceleration, aerodynamic drag, rolling resistance, road gradient) and states fuel rate is a proxy for engine load and driver demand."
+    },
+    {
+      "query_id": "bq_02",
+      "user_query": "Why should a single instantaneous fuel-rate reading not be used to judge a driver or a truck?",
+      "category": "conceptual",
+      "topic": "fuel_rate_interpretation",
+      "answerable": true,
+      "relevant_document_ids": ["doc_013"],
+      "explanation": "doc_013 states a single fuel-rate reading is only meaningful in context and warns against judging a driver/truck on one instantaneous value, recommending trip-level statistics under fixed conditions."
+    },
+    {
+      "query_id": "bq_03",
+      "user_query": "What is the difference between instantaneous fuel rate and the total fuel used over a trip?",
+      "category": "conceptual",
+      "topic": "fuel_consumption_fundamentals",
+      "answerable": true,
+      "relevant_document_ids": ["doc_002"],
+      "explanation": "doc_002 contrasts instantaneous fuel rate (L/h) with total fuel used as an integral of the rate over time, and advises summing per-second consumption increments when analysing a trip."
+    },
+    {
+      "query_id": "bq_04",
+      "user_query": "Why does fuel rate go up when engine load increases?",
+      "category": "cause_effect",
+      "topic": "engine_load_fuel_demand",
+      "answerable": true,
+      "relevant_document_ids": ["doc_003"],
+      "explanation": "doc_003 says higher engine load means the engine must inject more fuel to produce more torque and power, so fuel rate generally rises with engine load."
+    },
+    {
+      "query_id": "bq_05",
+      "user_query": "Why does running an engine at very high RPM waste fuel even when the road speed is unchanged?",
+      "category": "cause_effect",
+      "topic": "rpm_torque_relationships",
+      "answerable": true,
+      "relevant_document_ids": ["doc_006"],
+      "explanation": "doc_006 says higher engine RPM usually increases internal friction and pumping losses, raising fuel use for the same output power, so cruising at moderate RPM in the correct gear uses less fuel."
+    },
+    {
+      "query_id": "bq_06",
+      "user_query": "Why does a heavier payload increase fuel consumption?",
+      "category": "cause_effect",
+      "topic": "payload_effects",
+      "answerable": true,
+      "relevant_document_ids": ["doc_007"],
+      "explanation": "doc_007 states adding payload increases vehicle mass, which raises rolling resistance and the force needed to accelerate and climb, so heavier loads increase fuel rate especially during acceleration and on grades."
+    },
+    {
+      "query_id": "bq_07",
+      "user_query": "Why does climbing an uphill grade demand more fuel?",
+      "category": "cause_effect",
+      "topic": "road_grade_effects",
+      "answerable": true,
+      "relevant_document_ids": ["doc_009", "doc_010"],
+      "explanation": "doc_009 explains climbing requires extra force equal to the component of vehicle weight along the slope, directly increasing engine load and fuel rate; doc_010 adds that drivers shift down and increase throttle on uphill sections, spiking fuel rate."
+    },
+    {
+      "query_id": "bq_08",
+      "user_query": "Why does a truck consume fuel while idling even when it is stationary?",
+      "category": "cause_effect",
+      "topic": "engine_load_fuel_demand",
+      "answerable": true,
+      "relevant_document_ids": ["doc_004"],
+      "explanation": "doc_004 states fuel rate does not drop to zero at idle because the engine must keep rotating and support auxiliaries, and that long idling is a real source of fuel loss in haulage operations."
+    },
+    {
+      "query_id": "bq_09",
+      "user_query": "A driver is approaching a long uphill grade with a heavy load. What behaviour reduces peak fuel demand on the climb?",
+      "category": "operational",
+      "topic": "road_grade_effects",
+      "answerable": true,
+      "relevant_document_ids": ["doc_010", "doc_009"],
+      "explanation": "doc_010 recommends predictive control that 'rolls into' a hill with momentum to reduce peak fuel demand; doc_009 provides the underlying physics of why climbing raises fuel rate."
+    },
+    {
+      "query_id": "bq_10",
+      "user_query": "A truck idles for a long period during loading. What does the corpus say about fuel use in this situation?",
+      "category": "operational",
+      "topic": "engine_load_fuel_demand",
+      "answerable": true,
+      "relevant_document_ids": ["doc_004"],
+      "explanation": "doc_004 states idle fuel rate remains above zero and that long idling is a real source of fuel loss in haulage operations."
+    },
+    {
+      "query_id": "bq_11",
+      "user_query": "A fleet manager sees a highway trip with a high average speed. What explains the disproportionately high fuel use compared with moderate speed?",
+      "category": "operational",
+      "topic": "speed_variability_driving_behaviour",
+      "answerable": true,
+      "relevant_document_ids": ["doc_012"],
+      "explanation": "doc_012 states aerodynamic drag rises with the square of speed, so fuel cost per kilometre climbs quickly above about 70-80 kph and high-speed cruising consumes disproportionately more fuel."
+    },
+    {
+      "query_id": "bq_12",
+      "user_query": "City driving with frequent acceleration followed immediately by hard braking is observed. How does this affect fuel economy?",
+      "category": "operational",
+      "topic": "speed_variability_driving_behaviour",
+      "answerable": true,
+      "relevant_document_ids": ["doc_011"],
+      "explanation": "doc_011 states frequent acceleration and braking wastes fuel because the energy put into accelerating is then dissipated as heat in braking, so aggressive stop-and-go driving raises average fuel use."
+    },
+    {
+      "query_id": "bq_13",
+      "user_query": "Which gear/RPM strategy reduces fuel use when cruising at a set road speed?",
+      "category": "operational",
+      "topic": "rpm_torque_relationships",
+      "answerable": true,
+      "relevant_document_ids": ["doc_006", "doc_005"],
+      "explanation": "doc_006 recommends cruising at a moderate RPM in the correct gear (lower friction/pumping losses); doc_005 explains power is torque times speed and that a favourable torque band around rated RPM gives best efficiency."
+    },
+    {
+      "query_id": "bq_14",
+      "user_query": "Compare fuel use on level, flat ground versus on an uphill grade for the same truck and payload.",
+      "category": "comparison",
+      "topic": "road_grade_effects",
+      "answerable": true,
+      "relevant_document_ids": ["doc_007", "doc_009"],
+      "explanation": "doc_007 says the payload effect is roughly proportional to mass on flat ground and stronger on gradients; doc_009 explains climbing directly raises engine load and fuel rate."
+    },
+    {
+      "query_id": "bq_15",
+      "user_query": "Compare aggressive stop-and-go urban driving with steady highway cruising in terms of fuel use.",
+      "category": "comparison",
+      "topic": "speed_variability_driving_behaviour",
+      "answerable": true,
+      "relevant_document_ids": ["doc_011", "doc_012"],
+      "explanation": "doc_011 covers the braking/acceleration waste of stop-and-go driving; doc_012 covers the speed/aerodynamic cost of high-speed highway cruising."
+    },
+    {
+      "query_id": "bq_16",
+      "user_query": "Compare operating a truck near its gross vehicle weight limit versus running it lightly loaded.",
+      "category": "comparison",
+      "topic": "payload_effects",
+      "answerable": true,
+      "relevant_document_ids": ["doc_008"],
+      "explanation": "doc_008 states operating near GVW increases fuel use and drivetrain stress while very low load improves fuel economy but reduces productivity per trip."
+    },
+    {
+      "query_id": "bq_17",
+      "user_query": "How should a driver be advised about fuel use on a long descent without encouraging unsafe behaviour?",
+      "category": "practical_driver",
+      "topic": "driver_feedback_safety",
+      "answerable": true,
+      "relevant_document_ids": ["doc_017"],
+      "explanation": "doc_017 states driver feedback must never encourage unsafe behaviour such as aggressive coasting downhill, exceeding speed limits, or shutting off the engine in traffic, and that safety always outranks fuel economy."
+    },
+    {
+      "query_id": "bq_18",
+      "user_query": "What makes a piece of driver feedback actionable and non-judgemental?",
+      "category": "practical_driver",
+      "topic": "driver_feedback_safety",
+      "answerable": true,
+      "relevant_document_ids": ["doc_018", "doc_017"],
+      "explanation": "doc_018 says actionable feedback ties an observation to a specific, safe behaviour and references concrete measured evidence; doc_017 adds that feedback should be constructive, specific and non-judgemental."
+    },
+    {
+      "query_id": "bq_19",
+      "user_query": "A SHAP explanation shows a large positive attribution for engine load on a fuel-rate prediction. What does this tell you, and can you conclude engine load caused the high fuel rate?",
+      "category": "multi_doc",
+      "topic": "shap_interpretation",
+      "answerable": true,
+      "relevant_document_ids": ["doc_015", "doc_016"],
+      "explanation": "doc_015 says large positive attributions usually come from high engine load, steep uphill grade, heavy payload and high throttle/speed; doc_016 warns SHAP reflects the model's learned associations, not guaranteed physical causation."
+    },
+    {
+      "query_id": "bq_20",
+      "user_query": "Can a fuel-rate model trained on this synthetic dataset be trusted to predict fuel use on real, unseen trucks?",
+      "category": "multi_doc",
+      "topic": "model_limitations",
+      "answerable": true,
+      "relevant_document_ids": ["doc_019", "doc_020"],
+      "explanation": "doc_019 states accuracy on real trucks is not established because synthetic targets are formula-generated; doc_020 adds that unseen-truck results depend on fleet representativeness and cannot guarantee performance on other fleets, routes or weather."
+    },
+    {
+      "query_id": "bq_21",
+      "user_query": "Should consumed-fuel increments or cumulative trip fuel be used as features in a model that predicts instantaneous fuel rate?",
+      "category": "multi_doc",
+      "topic": "model_limitations",
+      "answerable": true,
+      "relevant_document_ids": ["doc_021"],
+      "explanation": "doc_021 states these are integrals of the target and leak the answer, so they must be excluded, along with future timestamps or future telemetry."
+    },
+    {
+      "query_id": "bq_22",
+      "user_query": "What does a negative SHAP attribution on a fuel-rate prediction mean?",
+      "category": "conceptual",
+      "topic": "shap_interpretation",
+      "answerable": true,
+      "relevant_document_ids": ["doc_015"],
+      "explanation": "doc_015 states negative attributions indicate conditions that lower fuel demand."
+    },
+    {
+      "query_id": "bq_23",
+      "user_query": "At roughly what speeds does the fuel cost per kilometre start to climb steeply because of air resistance?",
+      "category": "conceptual",
+      "topic": "speed_variability_driving_behaviour",
+      "answerable": true,
+      "relevant_document_ids": ["doc_012"],
+      "explanation": "doc_012 states aerodynamic drag rises with the square of speed and the fuel cost per kilometre climbs quickly above about 70-80 kph."
+    },
+    {
+      "query_id": "bq_24",
+      "user_query": "Why does a model that looks internally consistent on synthetic data not guarantee real-world accuracy?",
+      "category": "cause_effect",
+      "topic": "model_limitations",
+      "answerable": true,
+      "relevant_document_ids": ["doc_019"],
+      "explanation": "doc_019 states synthetic targets are formula-generated, so performance on this dataset does not predict real-world fuel-prediction accuracy."
+    },
+    {
+      "query_id": "bq_25",
+      "user_query": "What is the recommended tyre pressure for maximum fuel economy on this truck class?",
+      "category": "unanswerable",
+      "topic": "unanswerable",
+      "answerable": false,
+      "relevant_document_ids": [],
+      "explanation": "No corpus document discusses tyre pressure, maintenance, or vehicle setup specifications; there is no sufficient answer in the corpus."
+    },
+    {
+      "query_id": "bq_26",
+      "user_query": "How should missing engine-RPM telemetry be handled in this pipeline?",
+      "category": "unanswerable",
+      "topic": "unanswerable",
+      "answerable": false,
+      "relevant_document_ids": [],
+      "explanation": "The corpus contains no data-quality or missing-value handling guidance; no document is sufficient to answer this."
+    },
+    {
+      "query_id": "bq_27",
+      "user_query": "What is the expected fuel consumption in litres per 100 km for an average loaded truck?",
+      "category": "unanswerable",
+      "topic": "unanswerable",
+      "answerable": false,
+      "relevant_document_ids": [],
+      "explanation": "The corpus discusses fuel rate qualitatively and in L/h but gives no L/100km figures or fleet benchmarks, so no sufficient answer exists."
+    },
+    {
+      "query_id": "bq_28",
+      "user_query": "Which engine oil or coolant specification should be used in this truck?",
+      "category": "unanswerable",
+      "topic": "unanswerable",
+      "answerable": false,
+      "relevant_document_ids": [],
+      "explanation": "The corpus contains no maintenance or fluids specification documents; there is no sufficient answer."
+    }
+  ]
+}

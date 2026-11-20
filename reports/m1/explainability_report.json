@@ -1,0 +1,2802 @@
+{
+  "experiment": "M1.4_explainability_feature_analysis",
+  "milestone": "M1.4",
+  "protocol": "explain validation-selected XGBoost models on a deterministic sample of the 5 held-out test trucks; preprocessors loaded from disk, never refitted; no retraining; results are model explanations on synthetic data, not causal/real-world claims",
+  "sampling": {
+    "method": "deterministic per-truck uniform subsample with a fixed np.random.RandomState seed",
+    "sample_per_truck": 500,
+    "seed": 20240617,
+    "all_five_test_trucks_represented": true
+  },
+  "verification": {
+    "all_five_test_trucks_represented": true,
+    "no_train_or_val_truck_in_sample": true,
+    "preprocessors_loaded_never_refitted": true,
+    "models_loaded_not_retrained": true,
+    "source_of_truth_for_truck_split": "split manifest",
+    "test_trucks": [
+      "truck_001",
+      "truck_004",
+      "truck_017",
+      "truck_020",
+      "truck_028"
+    ]
+  },
+  "environment": {
+    "python": "3.13.14",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "numpy": "2.3.2",
+    "pandas": "3.1.0",
+    "xgboost": "3.4.1",
+    "shap": "0.54.1"
+  },
+  "feature_sets": {
+    "full_operational": {
+      "feature_set": "full_operational",
+      "features_transformed": [
+        "gross_vehicle_weight_kg",
+        "payload_kg",
+        "vehicle_mass_kg",
+        "speed_kph",
+        "acceleration_mps2",
+        "road_grade_pct",
+        "ignition_status",
+        "engine_rpm",
+        "engine_load_pct",
+        "throttle_position_pct",
+        "torque_nm",
+        "coolant_temp_c",
+        "intake_air_temp_c",
+        "ambient_temp_c",
+        "vehicle_class_40T",
+        "vehicle_class_49T"
+      ],
+      "n_features": 16,
+      "readable_feature_names": {
+        "gross_vehicle_weight_kg": "Gross vehicle weight (kg)",
+        "payload_kg": "Payload (kg)",
+        "vehicle_mass_kg": "Vehicle mass (kg)",
+        "speed_kph": "Speed (kph)",
+        "acceleration_mps2": "Acceleration (m/s\u00b2)",
+        "road_grade_pct": "Road grade (%)",
+        "ignition_status": "Ignition status",
+        "engine_rpm": "Engine speed (rpm)",
+        "engine_load_pct": "Engine load (%)",
+        "throttle_position_pct": "Throttle position (%)",
+        "torque_nm": "Torque (N\u00b7m)",
+        "coolant_temp_c": "Coolant temp (\u00b0C)",
+        "intake_air_temp_c": "Intake air temp (\u00b0C)",
+        "ambient_temp_c": "Ambient temp (\u00b0C)",
+        "vehicle_class_40T": "Vehicle class (40T)",
+        "vehicle_class_49T": "Vehicle class (49T)"
+      },
+      "sample": {
+        "n_rows_used": 2500,
+        "per_truck_used": {
+          "truck_001": 500,
+          "truck_004": 500,
+          "truck_017": 500,
+          "truck_020": 500,
+          "truck_028": 500
+        },
+        "seed": 20240617,
+        "method": "deterministic per-truck uniform subsample with a fixed np.random.RandomState seed"
+      },
+      "reconstruction_validation": {
+        "max_abs_deviation": 0.00015727488789707422,
+        "mean_abs_deviation": 2.1238988916047676e-05,
+        "fraction_within_tolerance": 1.0,
+        "tolerance": 0.001,
+        "pass": true
+      },
+      "global_importance_mean_abs_shap": [
+        {
+          "column": "torque_nm",
+          "readable_label": "Torque (N\u00b7m)",
+          "mean_abs_shap": 31.724153613328934
+        },
+        {
+          "column": "engine_load_pct",
+          "readable_label": "Engine load (%)",
+          "mean_abs_shap": 4.936451784377545
+        },
+        {
+          "column": "engine_rpm",
+          "readable_label": "Engine speed (rpm)",
+          "mean_abs_shap": 1.2965841417955817
+        },
+        {
+          "column": "vehicle_mass_kg",
+          "readable_label": "Vehicle mass (kg)",
+          "mean_abs_shap": 0.5797666751341196
+        },
+        {
+          "column": "gross_vehicle_weight_kg",
+          "readable_label": "Gross vehicle weight (kg)",
+          "mean_abs_shap": 0.4866801008618495
+        },
+        {
+          "column": "payload_kg",
+          "readable_label": "Payload (kg)",
+          "mean_abs_shap": 0.3697098178938191
+        },
+        {
+          "column": "speed_kph",
+          "readable_label": "Speed (kph)",
+          "mean_abs_shap": 0.2703658663940034
+        },
+        {
+          "column": "throttle_position_pct",
+          "readable_label": "Throttle position (%)",
+          "mean_abs_shap": 0.24916513594990247
+        },
+        {
+          "column": "intake_air_temp_c",
+          "readable_label": "Intake air temp (\u00b0C)",
+          "mean_abs_shap": 0.17286607355693123
+        },
+        {
+          "column": "ambient_temp_c",
+          "readable_label": "Ambient temp (\u00b0C)",
+          "mean_abs_shap": 0.11162878982591792
+        },
+        {
+          "column": "acceleration_mps2",
+          "readable_label": "Acceleration (m/s\u00b2)",
+          "mean_abs_shap": 0.07076310507527087
+        },
+        {
+          "column": "coolant_temp_c",
+          "readable_label": "Coolant temp (\u00b0C)",
+          "mean_abs_shap": 0.021524605002996213
+        },
+        {
+          "column": "vehicle_class_40T",
+          "readable_label": "Vehicle class (40T)",
+          "mean_abs_shap": 0.013932184161414625
+        },
+        {
+          "column": "vehicle_class_49T",
+          "readable_label": "Vehicle class (49T)",
+          "mean_abs_shap": 0.012336885673266079
+        },
+        {
+          "column": "ignition_status",
+          "readable_label": "Ignition status",
+          "mean_abs_shap": 0.006243223150447011
+        },
+        {
+          "column": "road_grade_pct",
+          "readable_label": "Road grade (%)",
+          "mean_abs_shap": 0.005392043249637573
+        }
+      ],
+      "per_truck_mean_abs_shap": {
+        "truck_001": [
+          {
+            "column": "torque_nm",
+            "mean_abs_shap": 25.851665849894285
+          },
+          {
+            "column": "engine_load_pct",
+            "mean_abs_shap": 4.648705282442272
+          },
+          {
+            "column": "engine_rpm",
+            "mean_abs_shap": 1.4179576620571315
+          },
+          {
+            "column": "gross_vehicle_weight_kg",
+            "mean_abs_shap": 0.832165523827076
+          },
+          {
+            "column": "vehicle_mass_kg",
+            "mean_abs_shap": 0.3242413427671418
+          },
+          {
+            "column": "payload_kg",
+            "mean_abs_shap": 0.2972415528651327
+          },
+          {
+            "column": "speed_kph",
+            "mean_abs_shap": 0.2902352253730642
+          },
+          {
+            "column": "throttle_position_pct",
+            "mean_abs_shap": 0.23909416515287013
+          },
+          {
+            "column": "intake_air_temp_c",
+            "mean_abs_shap": 0.1064515087454347
+          },
+          {
+            "column": "ambient_temp_c",
+            "mean_abs_shap": 0.07560499720589724
+          },
+          {
+            "column": "acceleration_mps2",
+            "mean_abs_shap": 0.04304088042472722
+          },
+          {
+            "column": "coolant_temp_c",
+            "mean_abs_shap": 0.023444124307119635
+          },
+          {
+            "column": "vehicle_class_49T",
+            "mean_abs_shap": 0.010649440635905194
+          },
+          {
+            "column": "vehicle_class_40T",
+            "mean_abs_shap": 0.007356756720342673
+          },
+          {
+            "column": "ignition_status",
+            "mean_abs_shap": 0.006627932364819572
+          },
+          {
+            "column": "road_grade_pct",
+            "mean_abs_shap": 0.004325067076759296
+          }
+        ],
+        "truck_004": [
+          {
+            "column": "torque_nm",
+            "mean_abs_shap": 28.495593861430883
+          },
+          {
+            "column": "engine_load_pct",
+            "mean_abs_shap": 4.929770992252975
+          },
+          {
+            "column": "engine_rpm",
+            "mean_abs_shap": 0.9333954477370134
+          },
+          {
+            "column": "gross_vehicle_weight_kg",
+            "mean_abs_shap": 0.7871131237149238
+          },
+          {
+            "column": "payload_kg",
+            "mean_abs_shap": 0.34613788687437774
+          },
+          {
+            "column": "vehicle_mass_kg",
+            "mean_abs_shap": 0.2956144984313287
+          },
+          {
+            "column": "speed_kph",
+            "mean_abs_shap": 0.23954652490862646
+          },
+          {
+            "column": "throttle_position_pct",
+            "mean_abs_shap": 0.23439285293477588
+          },
+          {
+            "column": "intake_air_temp_c",
+            "mean_abs_shap": 0.22571168471383862
+          },
+          {
+            "column": "ambient_temp_c",
+            "mean_abs_shap": 0.11445505333947949
+          },
+          {
+            "column": "acceleration_mps2",
+            "mean_abs_shap": 0.05024634448465076
+          },
+          {
+            "column": "coolant_temp_c",
+            "mean_abs_shap": 0.022285896506757125
+          },
+          {
+            "column": "vehicle_class_40T",
+            "mean_abs_shap": 0.01320717237275676
+          },
+          {
+            "column": "vehicle_class_49T",
+            "mean_abs_shap": 0.010523961825558217
+          },
+          {
+            "column": "ignition_status",
+            "mean_abs_shap": 0.005351929960073903
+          },
+          {
+            "column": "road_grade_pct",
+            "mean_abs_shap": 0.004718485781730124
+          }
+        ],
+        "truck_017": [
+          {
+            "column": "torque_nm",
+            "mean_abs_shap": 34.02614590317011
+          },
+          {
+            "column": "engine_load_pct",
+            "mean_abs_shap": 4.958825878635049
+          },
+          {
+            "column": "engine_rpm",
+            "mean_abs_shap": 1.3224428076075856
+          },
+          {
+            "column": "vehicle_mass_kg",
+            "mean_abs_shap": 0.4938325260282727
+          },
+          {
+            "column": "payload_kg",
+            "mean_abs_shap": 0.34892222633399067
+          },
+          {
+            "column": "speed_kph",
+            "mean_abs_shap": 0.2579808041760698
+          },
+          {
+            "column": "throttle_position_pct",
+            "mean_abs_shap": 0.24517595538825845
+          },
+          {
+            "column": "intake_air_temp_c",
+            "mean_abs_shap": 0.2189699513562955
+          },
+          {
+            "column": "ambient_temp_c",
+            "mean_abs_shap": 0.15016557328897762
+          },
+          {
+            "column": "acceleration_mps2",
+            "mean_abs_shap": 0.07316805976547766
+          },
+          {
+            "column": "gross_vehicle_weight_kg",
+            "mean_abs_shap": 0.07097765413232264
+          },
+          {
+            "column": "coolant_temp_c",
+            "mean_abs_shap": 0.025120031944155925
+          },
+          {
+            "column": "vehicle_class_40T",
+            "mean_abs_shap": 0.018053042080486192
+          },
+          {
+            "column": "vehicle_class_49T",
+            "mean_abs_shap": 0.012665823011600878
+          },
+          {
+            "column": "ignition_status",
+            "mean_abs_shap": 0.006967178629012779
+          },
+          {
+            "column": "road_grade_pct",
+            "mean_abs_shap": 0.006052833671024928
+          }
+        ],
+        "truck_020": [
+          {
+            "column": "torque_nm",
+            "mean_abs_shap": 31.163639348506926
+          },
+          {
+            "column": "engine_load_pct",
+            "mean_abs_shap": 5.104133387342095
+          },
+          {
+            "column": "engine_rpm",
+            "mean_abs_shap": 1.3112399005935294
+          },
+          {
+            "column": "vehicle_mass_kg",
+            "mean_abs_shap": 0.42067795773083344
+          },
+          {
+            "column": "payload_kg",
+            "mean_abs_shap": 0.31276799703583674
+          },
+          {
+            "column": "throttle_position_pct",
+            "mean_abs_shap": 0.2874527760716155
+          },
+          {
+            "column": "speed_kph",
+            "mean_abs_shap": 0.24941867549793095
+          },
+          {
+            "column": "intake_air_temp_c",
+            "mean_abs_shap": 0.12171721850970062
+          },
+          {
+            "column": "ambient_temp_c",
+            "mean_abs_shap": 0.07674542894228943
+          },
+          {
+            "column": "acceleration_mps2",
+            "mean_abs_shap": 0.07646646733547095
+          },
+          {
+            "column": "gross_vehicle_weight_kg",
+            "mean_abs_shap": 0.062236634835833686
+          },
+          {
+            "column": "vehicle_class_40T",
+            "mean_abs_shap": 0.01766662671515951
+          },
+          {
+            "column": "coolant_temp_c",
+            "mean_abs_shap": 0.016675739579163747
+          },
+          {
+            "column": "vehicle_class_49T",
+            "mean_abs_shap": 0.011843394148934748
+          },
+          {
+            "column": "ignition_status",
+            "mean_abs_shap": 0.005571583682438359
+          },
+          {
+            "column": "road_grade_pct",
+            "mean_abs_shap": 0.004940600631594861
+          }
+        ],
+        "truck_028": [
+          {
+            "column": "torque_nm",
+            "mean_abs_shap": 39.08372310364246
+          },
+          {
+            "column": "engine_load_pct",
+            "mean_abs_shap": 5.040823381215334
+          },
+          {
+            "column": "engine_rpm",
+            "mean_abs_shap": 1.4978848909826483
+          },
+          {
+            "column": "vehicle_mass_kg",
+            "mean_abs_shap": 1.3644670507130212
+          },
+          {
+            "column": "gross_vehicle_weight_kg",
+            "mean_abs_shap": 0.6809075677990913
+          },
+          {
+            "column": "payload_kg",
+            "mean_abs_shap": 0.5434794263597578
+          },
+          {
+            "column": "speed_kph",
+            "mean_abs_shap": 0.3146481020143256
+          },
+          {
+            "column": "throttle_position_pct",
+            "mean_abs_shap": 0.23970993020199238
+          },
+          {
+            "column": "intake_air_temp_c",
+            "mean_abs_shap": 0.1914800044593867
+          },
+          {
+            "column": "ambient_temp_c",
+            "mean_abs_shap": 0.14117289635294583
+          },
+          {
+            "column": "acceleration_mps2",
+            "mean_abs_shap": 0.11089377336602775
+          },
+          {
+            "column": "coolant_temp_c",
+            "mean_abs_shap": 0.020097232677784634
+          },
+          {
+            "column": "vehicle_class_49T",
+            "mean_abs_shap": 0.016001808744331356
+          },
+          {
+            "column": "vehicle_class_40T",
+            "mean_abs_shap": 0.01337732291832799
+          },
+          {
+            "column": "road_grade_pct",
+            "mean_abs_shap": 0.006923229087078653
+          },
+          {
+            "column": "ignition_status",
+            "mean_abs_shap": 0.006697491115890443
+          }
+        ]
+      },
+      "individual_explanations": [
+        {
+          "truck_id": "truck_001",
+          "index": 21204,
+          "rule": "largest_abs_residual",
+          "actual_fuel_rate": 60.82839420941463,
+          "predicted_fuel_rate": 51.71077346801758,
+          "residual": 9.117620741397054,
+          "sign_convention": "residual = actual \u2212 predicted; positive = underpredicted, negative = overpredicted",
+          "top_positive_shap": [
+            {
+              "column": "torque_nm",
+              "readable_label": "Torque (N\u00b7m)",
+              "shap": 26.907087326049805
+            },
+            {
+              "column": "throttle_position_pct",
+              "readable_label": "Throttle position (%)",
+              "shap": 0.2157641500234604
+            },
+            {
+              "column": "vehicle_mass_kg",
+              "readable_label": "Vehicle mass (kg)",
+              "shap": 0.177297443151474
+            },
+            {
+              "column": "ambient_temp_c",
+              "readable_label": "Ambient temp (\u00b0C)",
+              "shap": 0.08125001192092896
+            },
+            {
+              "column": "vehicle_class_40T",
+              "readable_label": "Vehicle class (40T)",
+              "shap": 0.06290943920612335
+            }
+          ],
+          "top_negative_shap": [
+            {
+              "column": "engine_rpm",
+              "readable_label": "Engine speed (rpm)",
+              "shap": -14.885704040527344
+            },
+            {
+              "column": "gross_vehicle_weight_kg",
+              "readable_label": "Gross vehicle weight (kg)",
+              "shap": -0.886481523513794
+            },
+            {
+              "column": "engine_load_pct",
+              "readable_label": "Engine load (%)",
+              "shap": -0.6189624667167664
+            },
+            {
+              "column": "coolant_temp_c",
+              "readable_label": "Coolant temp (\u00b0C)",
+              "shap": -0.5088016986846924
+            },
+            {
+              "column": "payload_kg",
+              "readable_label": "Payload (kg)",
+              "shap": -0.2717076241970062
+            }
+          ]
+        },
+        {
+          "truck_id": "truck_001",
+          "index": 15010,
+          "rule": "median_abs_residual",
+          "actual_fuel_rate": 2.0871122502750943,
+          "predicted_fuel_rate": 1.815900444984436,
+          "residual": 0.27121180529065825,
+          "sign_convention": "residual = actual \u2212 predicted; positive = underpredicted, negative = overpredicted",
+          "top_positive_shap": [
+            {
+              "column": "speed_kph",
+              "readable_label": "Speed (kph)",
+              "shap": 0.09646546840667725
+            },
+            {
+              "column": "coolant_temp_c",
+              "readable_label": "Coolant temp (\u00b0C)",
+              "shap": 0.02256513573229313
+            },
+            {
+              "column": "vehicle_class_40T",
+              "readable_label": "Vehicle class (40T)",
+              "shap": 0.004668955225497484
+            },
+            {
+              "column": "ignition_status",
+              "readable_label": "Ignition status",
+              "shap": 0.004131272900849581
+            },
+            {
+              "column": "road_grade_pct",
+              "readable_label": "Road grade (%)",
+              "shap": -0.006068456452339888
+            }
+          ],
+          "top_negative_shap": [
+            {
+              "column": "torque_nm",
+              "readable_label": "Torque (N\u00b7m)",
+              "shap": -32.582122802734375
+            },
+            {
+              "column": "engine_load_pct",
+              "readable_label": "Engine load (%)",
+              "shap": -5.916098594665527
+            },
+            {
+              "column": "gross_vehicle_weight_kg",
+              "readable_label": "Gross vehicle weight (kg)",
+              "shap": -0.4586884081363678
+            },
+            {
+              "column": "engine_rpm",
+              "readable_label": "Engine speed (rpm)",
+              "shap": -0.275050550699234
+            },
+            {
+              "column": "throttle_position_pct",
+              "readable_label": "Throttle position (%)",
+              "shap": -0.27090176939964294
+            }
+          ]
+        },
+        {
+          "truck_id": "truck_001",
+          "index": 6695,
+          "rule": "closest_to_zero_residual",
+          "actual_fuel_rate": 1.0904275153588,
+          "predicted_fuel_rate": 1.0942046642303467,
+          "residual": -0.003777148871546787,
+          "sign_convention": "residual = actual \u2212 predicted; positive = underpredicted, negative = overpredicted",
+          "top_positive_shap": [
+            {
+              "column": "vehicle_mass_kg",
+              "readable_label": "Vehicle mass (kg)",
+              "shap": 0.09082347899675369
+            },
+            {
+              "column": "ignition_status",
+              "readable_label": "Ignition status",
+              "shap": 0.028713755309581757
+            },
+            {
+              "column": "ambient_temp_c",
+              "readable_label": "Ambient temp (\u00b0C)",
+              "shap": 0.02795272134244442
+            },
+            {
+              "column": "coolant_temp_c",
+              "readable_label": "Coolant temp (\u00b0C)",
+              "shap": 0.0051881433464586735
+            },
+            {
+              "column": "vehicle_class_40T",
+              "readable_label": "Vehicle class (40T)",
+              "shap": 0.003391744801774621
+            }
+          ],
+          "top_negative_shap": [
+            {
+              "column": "torque_nm",
+              "readable_label": "Torque (N\u00b7m)",
+              "shap": -26.752824783325195
+            },
+            {
+              "column": "engine_load_pct",
+              "readable_label": "Engine load (%)",
+              "shap": -6.9383111000061035
+            },
+            {
+              "column": "engine_rpm",
+              "readable_label": "Engine speed (rpm)",
+              "shap": -5.1628098487854
+            },
+            {
+              "column": "speed_kph",
+              "readable_label": "Speed (kph)",
+              "shap": -1.000153660774231
+            },
+            {
+              "column": "gross_vehicle_weight_kg",
+              "readable_label": "Gross vehicle weight (kg)",
+              "shap": -0.4852133095264435
+            }
+          ]
+        },
+        {
+          "truck_id": "truck_004",
+          "index": 101869,
+          "rule": "largest_abs_residual",
+          "actual_fuel_rate": 82.1504689900005,
+          "predicted_fuel_rate": 89.1269760131836,
+          "residual": -6.976507023183089,
+          "sign_convention": "residual = actual \u2212 predicted; positive = underpredicted, negative = overpredicted",
+          "top_positive_shap": [
+            {
+              "column": "torque_nm",
+              "readable_label": "Torque (N\u00b7m)",
+              "shap": 40.704708099365234
+            },
+            {
+              "column": "engine_load_pct",
+              "readable_label": "Engine load (%)",
+              "shap": 5.063665866851807
+            },
+            {
+              "column": "payload_kg",
+              "readable_label": "Payload (kg)",
+              "shap": 1.487974762916565
+            },
+            {
+              "column": "engine_rpm",
+              "readable_label": "Engine speed (rpm)",
+              "shap": 1.257430911064148
+            },
+            {
+              "column": "throttle_position_pct",
+              "readable_label": "Throttle position (%)",
+              "shap": 0.3577514588832855
+            }
+          ],
+          "top_negative_shap": [
+            {
+              "column": "gross_vehicle_weight_kg",
+              "readable_label": "Gross vehicle weight (kg)",
+              "shap": -1.4347703456878662
+            },
+            {
+              "column": "vehicle_mass_kg",
+              "readable_label": "Vehicle mass (kg)",
+              "shap": -0.06405718624591827
+            },
+            {
+              "column": "ambient_temp_c",
+              "readable_label": "Ambient temp (\u00b0C)",
+              "shap": -0.05477418377995491
+            },
+            {
+              "column": "speed_kph",
+              "readable_label": "Speed (kph)",
+              "shap": -0.02178102917969227
+            },
+            {
+              "column": "vehicle_class_49T",
+              "readable_label": "Vehicle class (49T)",
+              "shap": -0.012897497974336147
+            }
+          ]
+        },
+        {
+          "truck_id": "truck_004",
+          "index": 103032,
+          "rule": "median_abs_residual",
+          "actual_fuel_rate": 13.95796394324467,
+          "predicted_fuel_rate": 14.335000038146973,
+          "residual": -0.3770360949023033,
+          "sign_convention": "residual = actual \u2212 predicted; positive = underpredicted, negative = overpredicted",
+          "top_positive_shap": [
+            {
+              "column": "payload_kg",
+              "readable_label": "Payload (kg)",
+              "shap": 0.7621185779571533
+            },
+            {
+              "column": "engine_rpm",
+              "readable_label": "Engine speed (rpm)",
+              "shap": 0.31705814599990845
+            },
+            {
+              "column": "speed_kph",
+              "readable_label": "Speed (kph)",
+              "shap": 0.15361185371875763
+            },
+            {
+              "column": "vehicle_class_49T",
+              "readable_label": "Vehicle class (49T)",
+              "shap": 0.023913303390145302
+            },
+            {
+              "column": "coolant_temp_c",
+              "readable_label": "Coolant temp (\u00b0C)",
+              "shap": 0.011703357100486755
+            }
+          ],
+          "top_negative_shap": [
+            {
+              "column": "torque_nm",
+              "readable_label": "Torque (N\u00b7m)",
+              "shap": -25.393991470336914
+            },
+            {
+              "column": "engine_load_pct",
+              "readable_label": "Engine load (%)",
+              "shap": -2.0569355487823486
+            },
+            {
+              "column": "gross_vehicle_weight_kg",
+              "readable_label": "Gross vehicle weight (kg)",
+              "shap": -0.7082396149635315
+            },
+            {
+              "column": "throttle_position_pct",
+              "readable_label": "Throttle position (%)",
+              "shap": -0.18725232779979706
+            },
+            {
+              "column": "intake_air_temp_c",
+              "readable_label": "Intake air temp (\u00b0C)",
+              "shap": -0.09004301577806473
+            }
+          ]
+        },
+        {
+          "truck_id": "truck_004",
+          "index": 108818,
+          "rule": "closest_to_zero_residual",
+          "actual_fuel_rate": 2.0536779611209277,
+          "predicted_fuel_rate": 2.0539751052856445,
+          "residual": -0.0002971441647168227,
+          "sign_convention": "residual = actual \u2212 predicted; positive = underpredicted, negative = overpredicted",
+          "top_positive_shap": [
+            {
+              "column": "payload_kg",
+              "readable_label": "Payload (kg)",
+              "shap": 0.3406754732131958
+            },
+            {
+              "column": "engine_rpm",
+              "readable_label": "Engine speed (rpm)",
+              "shap": 0.1409710943698883
+            },
+            {
+              "column": "speed_kph",
+              "readable_label": "Speed (kph)",
+              "shap": 0.08481503278017044
+            },
+            {
+              "column": "coolant_temp_c",
+              "readable_label": "Coolant temp (\u00b0C)",
+              "shap": 0.008138056844472885
+            },
+            {
+              "column": "vehicle_class_40T",
+              "readable_label": "Vehicle class (40T)",
+              "shap": 0.0037313427310436964
+            }
+          ],
+          "top_negative_shap": [
+            {
+              "column": "torque_nm",
+              "readable_label": "Torque (N\u00b7m)",
+              "shap": -32.716705322265625
+            },
+            {
+              "column": "engine_load_pct",
+              "readable_label": "Engine load (%)",
+              "shap": -5.997307777404785
+            },
+            {
+              "column": "gross_vehicle_weight_kg",
+              "readable_label": "Gross vehicle weight (kg)",
+              "shap": -0.46719610691070557
+            },
+            {
+              "column": "throttle_position_pct",
+              "readable_label": "Throttle position (%)",
+              "shap": -0.30145397782325745
+            },
+            {
+              "column": "intake_air_temp_c",
+              "readable_label": "Intake air temp (\u00b0C)",
+              "shap": -0.18622028827667236
+            }
+          ]
+        },
+        {
+          "truck_id": "truck_017",
+          "index": 524568,
+          "rule": "largest_abs_residual",
+          "actual_fuel_rate": 101.68057344059217,
+          "predicted_fuel_rate": 112.95719909667969,
+          "residual": -11.276625656087518,
+          "sign_convention": "residual = actual \u2212 predicted; positive = underpredicted, negative = overpredicted",
+          "top_positive_shap": [
+            {
+              "column": "torque_nm",
+              "readable_label": "Torque (N\u00b7m)",
+              "shap": 62.52222442626953
+            },
+            {
+              "column": "engine_load_pct",
+              "readable_label": "Engine load (%)",
+              "shap": 4.364461898803711
+            },
+            {
+              "column": "engine_rpm",
+              "readable_label": "Engine speed (rpm)",
+              "shap": 2.064534902572632
+            },
+            {
+              "column": "payload_kg",
+              "readable_label": "Payload (kg)",
+              "shap": 2.012968063354492
+            },
+            {
+              "column": "throttle_position_pct",
+              "readable_label": "Throttle position (%)",
+              "shap": 0.6091590523719788
+            }
+          ],
+          "top_negative_shap": [
+            {
+              "column": "vehicle_mass_kg",
+              "readable_label": "Vehicle mass (kg)",
+              "shap": -0.26948174834251404
+            },
+            {
+              "column": "gross_vehicle_weight_kg",
+              "readable_label": "Gross vehicle weight (kg)",
+              "shap": -0.26132991909980774
+            },
+            {
+              "column": "intake_air_temp_c",
+              "readable_label": "Intake air temp (\u00b0C)",
+              "shap": -0.05976109951734543
+            },
+            {
+              "column": "vehicle_class_40T",
+              "readable_label": "Vehicle class (40T)",
+              "shap": -0.02493678778409958
+            },
+            {
+              "column": "vehicle_class_49T",
+              "readable_label": "Vehicle class (49T)",
+              "shap": -0.012886807322502136
+            }
+          ]
+        },
+        {
+          "truck_id": "truck_017",
+          "index": 512837,
+          "rule": "median_abs_residual",
+          "actual_fuel_rate": 10.47840727037122,
+          "predicted_fuel_rate": 11.013448715209961,
+          "residual": -0.5350414448387415,
+          "sign_convention": "residual = actual \u2212 predicted; positive = underpredicted, negative = overpredicted",
+          "top_positive_shap": [
+            {
+              "column": "speed_kph",
+              "readable_label": "Speed (kph)",
+              "shap": 0.1353791207075119
+            },
+            {
+              "column": "payload_kg",
+              "readable_label": "Payload (kg)",
+              "shap": 0.12717707455158234
+            },
+            {
+              "column": "engine_rpm",
+              "readable_label": "Engine speed (rpm)",
+              "shap": 0.12102562934160233
+            },
+            {
+              "column": "gross_vehicle_weight_kg",
+              "readable_label": "Gross vehicle weight (kg)",
+              "shap": 0.05322892591357231
+            },
+            {
+              "column": "coolant_temp_c",
+              "readable_label": "Coolant temp (\u00b0C)",
+              "shap": 0.007052464876323938
+            }
+          ],
+          "top_negative_shap": [
+            {
+              "column": "torque_nm",
+              "readable_label": "Torque (N\u00b7m)",
+              "shap": -27.61454200744629
+            },
+            {
+              "column": "engine_load_pct",
+              "readable_label": "Engine load (%)",
+              "shap": -2.9796791076660156
+            },
+            {
+              "column": "throttle_position_pct",
+              "readable_label": "Throttle position (%)",
+              "shap": -0.2659202814102173
+            },
+            {
+              "column": "vehicle_mass_kg",
+              "readable_label": "Vehicle mass (kg)",
+              "shap": -0.03913435339927673
+            },
+            {
+              "column": "acceleration_mps2",
+              "readable_label": "Acceleration (m/s\u00b2)",
+              "shap": -0.028256062418222427
+            }
+          ]
+        },
+        {
+          "truck_id": "truck_017",
+          "index": 512344,
+          "rule": "closest_to_zero_residual",
+          "actual_fuel_rate": 1.3714029587401597,
+          "predicted_fuel_rate": 1.3710911273956299,
+          "residual": 0.00031183134452983374,
+          "sign_convention": "residual = actual \u2212 predicted; positive = underpredicted, negative = overpredicted",
+          "top_positive_shap": [
+            {
+              "column": "payload_kg",
+              "readable_label": "Payload (kg)",
+              "shap": 0.056234076619148254
+            },
+            {
+              "column": "ignition_status",
+              "readable_label": "Ignition status",
+              "shap": 0.028718553483486176
+            },
+            {
+              "column": "vehicle_mass_kg",
+              "readable_label": "Vehicle mass (kg)",
+              "shap": 0.025311991572380066
+            },
+            {
+              "column": "ambient_temp_c",
+              "readable_label": "Ambient temp (\u00b0C)",
+              "shap": 0.003768283175304532
+            },
+            {
+              "column": "gross_vehicle_weight_kg",
+              "readable_label": "Gross vehicle weight (kg)",
+              "shap": 0.003631819039583206
+            }
+          ],
+          "top_negative_shap": [
+            {
+              "column": "torque_nm",
+              "readable_label": "Torque (N\u00b7m)",
+              "shap": -26.592138290405273
+            },
+            {
+              "column": "engine_load_pct",
+              "readable_label": "Engine load (%)",
+              "shap": -7.194540977478027
+            },
+            {
+              "column": "engine_rpm",
+              "readable_label": "Engine speed (rpm)",
+              "shap": -5.179385185241699
+            },
+            {
+              "column": "speed_kph",
+              "readable_label": "Speed (kph)",
+              "shap": -0.9345191121101379
+            },
+            {
+              "column": "throttle_position_pct",
+              "readable_label": "Throttle position (%)",
+              "shap": -0.180148646235466
+            }
+          ]
+        },
+        {
+          "truck_id": "truck_020",
+          "index": 619972,
+          "rule": "largest_abs_residual",
+          "actual_fuel_rate": 94.3180432910208,
+          "predicted_fuel_rate": 77.01549530029297,
+          "residual": 17.30254799072783,
+          "sign_convention": "residual = actual \u2212 predicted; positive = underpredicted, negative = overpredicted",
+          "top_positive_shap": [
+            {
+              "column": "torque_nm",
+              "readable_label": "Torque (N\u00b7m)",
+              "shap": 44.39510726928711
+            },
+            {
+              "column": "engine_load_pct",
+              "readable_label": "Engine load (%)",
+              "shap": 2.3517937660217285
+            },
+            {
+              "column": "throttle_position_pct",
+              "readable_label": "Throttle position (%)",
+              "shap": 0.8551400303840637
+            },
+            {
+              "column": "vehicle_mass_kg",
+              "readable_label": "Vehicle mass (kg)",
+              "shap": 0.498417466878891
+            },
+            {
+              "column": "payload_kg",
+              "readable_label": "Payload (kg)",
+              "shap": 0.32145562767982483
+            }
+          ],
+          "top_negative_shap": [
+            {
+              "column": "engine_rpm",
+              "readable_label": "Engine speed (rpm)",
+              "shap": -11.734682083129883
+            },
+            {
+              "column": "intake_air_temp_c",
+              "readable_label": "Intake air temp (\u00b0C)",
+              "shap": -0.4897773265838623
+            },
+            {
+              "column": "speed_kph",
+              "readable_label": "Speed (kph)",
+              "shap": -0.4365592896938324
+            },
+            {
+              "column": "gross_vehicle_weight_kg",
+              "readable_label": "Gross vehicle weight (kg)",
+              "shap": -0.29554858803749084
+            },
+            {
+              "column": "ambient_temp_c",
+              "readable_label": "Ambient temp (\u00b0C)",
+              "shap": -0.2267380803823471
+            }
+          ]
+        },
+        {
+          "truck_id": "truck_020",
+          "index": 646530,
+          "rule": "median_abs_residual",
+          "actual_fuel_rate": 2.6904538852002102,
+          "predicted_fuel_rate": 1.8304654359817505,
+          "residual": 0.8599884492184597,
+          "sign_convention": "residual = actual \u2212 predicted; positive = underpredicted, negative = overpredicted",
+          "top_positive_shap": [
+            {
+              "column": "speed_kph",
+              "readable_label": "Speed (kph)",
+              "shap": 0.15484076738357544
+            },
+            {
+              "column": "gross_vehicle_weight_kg",
+              "readable_label": "Gross vehicle weight (kg)",
+              "shap": 0.01740807108581066
+            },
+            {
+              "column": "coolant_temp_c",
+              "readable_label": "Coolant temp (\u00b0C)",
+              "shap": 0.007374525535851717
+            },
+            {
+              "column": "ignition_status",
+              "readable_label": "Ignition status",
+              "shap": 0.0033276015892624855
+            },
+            {
+              "column": "acceleration_mps2",
+              "readable_label": "Acceleration (m/s\u00b2)",
+              "shap": 0.002375462558120489
+            }
+          ],
+          "top_negative_shap": [
+            {
+              "column": "torque_nm",
+              "readable_label": "Torque (N\u00b7m)",
+              "shap": -32.358802795410156
+            },
+            {
+              "column": "engine_load_pct",
+              "readable_label": "Engine load (%)",
+              "shap": -6.1698431968688965
+            },
+            {
+              "column": "vehicle_mass_kg",
+              "readable_label": "Vehicle mass (kg)",
+              "shap": -0.6447087526321411
+            },
+            {
+              "column": "throttle_position_pct",
+              "readable_label": "Throttle position (%)",
+              "shap": -0.24870286881923676
+            },
+            {
+              "column": "intake_air_temp_c",
+              "readable_label": "Intake air temp (\u00b0C)",
+              "shap": -0.1727152317762375
+            }
+          ]
+        },
+        {
+          "truck_id": "truck_020",
+          "index": 623945,
+          "rule": "closest_to_zero_residual",
+          "actual_fuel_rate": 2.6484736159738067,
+          "predicted_fuel_rate": 2.6504223346710205,
+          "residual": -0.0019487186972138026,
+          "sign_convention": "residual = actual \u2212 predicted; positive = underpredicted, negative = overpredicted",
+          "top_positive_shap": [
+            {
+              "column": "payload_kg",
+              "readable_label": "Payload (kg)",
+              "shap": 0.4328056573867798
+            },
+            {
+              "column": "vehicle_mass_kg",
+              "readable_label": "Vehicle mass (kg)",
+              "shap": 0.16356705129146576
+            },
+            {
+              "column": "speed_kph",
+              "readable_label": "Speed (kph)",
+              "shap": 0.13756704330444336
+            },
+            {
+              "column": "intake_air_temp_c",
+              "readable_label": "Intake air temp (\u00b0C)",
+              "shap": 0.08742957562208176
+            },
+            {
+              "column": "ambient_temp_c",
+              "readable_label": "Ambient temp (\u00b0C)",
+              "shap": 0.02132127806544304
+            }
+          ],
+          "top_negative_shap": [
+            {
+              "column": "torque_nm",
+              "readable_label": "Torque (N\u00b7m)",
+              "shap": -32.6113166809082
+            },
+            {
+              "column": "engine_load_pct",
+              "readable_label": "Engine load (%)",
+              "shap": -6.377636432647705
+            },
+            {
+              "column": "throttle_position_pct",
+              "readable_label": "Throttle position (%)",
+              "shap": -0.3313784599304199
+            },
+            {
+              "column": "engine_rpm",
+              "readable_label": "Engine speed (rpm)",
+              "shap": -0.2771952748298645
+            },
+            {
+              "column": "acceleration_mps2",
+              "readable_label": "Acceleration (m/s\u00b2)",
+              "shap": -0.1260816603899002
+            }
+          ]
+        },
+        {
+          "truck_id": "truck_028",
+          "index": 919662,
+          "rule": "largest_abs_residual",
+          "actual_fuel_rate": 107.3168974964051,
+          "predicted_fuel_rate": 131.2150421142578,
+          "residual": -23.898144617852708,
+          "sign_convention": "residual = actual \u2212 predicted; positive = underpredicted, negative = overpredicted",
+          "top_positive_shap": [
+            {
+              "column": "torque_nm",
+              "readable_label": "Torque (N\u00b7m)",
+              "shap": 67.625732421875
+            },
+            {
+              "column": "engine_rpm",
+              "readable_label": "Engine speed (rpm)",
+              "shap": 7.173719882965088
+            },
+            {
+              "column": "vehicle_mass_kg",
+              "readable_label": "Vehicle mass (kg)",
+              "shap": 5.78088903427124
+            },
+            {
+              "column": "engine_load_pct",
+              "readable_label": "Engine load (%)",
+              "shap": 5.421872615814209
+            },
+            {
+              "column": "gross_vehicle_weight_kg",
+              "readable_label": "Gross vehicle weight (kg)",
+              "shap": 1.144602656364441
+            }
+          ],
+          "top_negative_shap": [
+            {
+              "column": "speed_kph",
+              "readable_label": "Speed (kph)",
+              "shap": -0.025419611483812332
+            },
+            {
+              "column": "coolant_temp_c",
+              "readable_label": "Coolant temp (\u00b0C)",
+              "shap": -0.019311998039484024
+            },
+            {
+              "column": "vehicle_class_49T",
+              "readable_label": "Vehicle class (49T)",
+              "shap": -0.011668928898870945
+            },
+            {
+              "column": "ignition_status",
+              "readable_label": "Ignition status",
+              "shap": 0.0014942589914426208
+            },
+            {
+              "column": "road_grade_pct",
+              "readable_label": "Road grade (%)",
+              "shap": 0.0129221947863698
+            }
+          ]
+        },
+        {
+          "truck_id": "truck_028",
+          "index": 900641,
+          "rule": "median_abs_residual",
+          "actual_fuel_rate": 6.903404360206005,
+          "predicted_fuel_rate": 8.443171501159668,
+          "residual": -1.5397671409536633,
+          "sign_convention": "residual = actual \u2212 predicted; positive = underpredicted, negative = overpredicted",
+          "top_positive_shap": [
+            {
+              "column": "vehicle_mass_kg",
+              "readable_label": "Vehicle mass (kg)",
+              "shap": 0.7258269190788269
+            },
+            {
+              "column": "gross_vehicle_weight_kg",
+              "readable_label": "Gross vehicle weight (kg)",
+              "shap": 0.5055434703826904
+            },
+            {
+              "column": "payload_kg",
+              "readable_label": "Payload (kg)",
+              "shap": 0.29289087653160095
+            },
+            {
+              "column": "ambient_temp_c",
+              "readable_label": "Ambient temp (\u00b0C)",
+              "shap": 0.1153206154704094
+            },
+            {
+              "column": "vehicle_class_49T",
+              "readable_label": "Vehicle class (49T)",
+              "shap": 0.0551752895116806
+            }
+          ],
+          "top_negative_shap": [
+            {
+              "column": "torque_nm",
+              "readable_label": "Torque (N\u00b7m)",
+              "shap": -29.947872161865234
+            },
+            {
+              "column": "engine_load_pct",
+              "readable_label": "Engine load (%)",
+              "shap": -4.237259387969971
+            },
+            {
+              "column": "throttle_position_pct",
+              "readable_label": "Throttle position (%)",
+              "shap": -0.28894028067588806
+            },
+            {
+              "column": "engine_rpm",
+              "readable_label": "Engine speed (rpm)",
+              "shap": -0.2715533673763275
+            },
+            {
+              "column": "acceleration_mps2",
+              "readable_label": "Acceleration (m/s\u00b2)",
+              "shap": -0.08547800779342651
+            }
+          ]
+        },
+        {
+          "truck_id": "truck_028",
+          "index": 916540,
+          "rule": "closest_to_zero_residual",
+          "actual_fuel_rate": 12.045493168444748,
+          "predicted_fuel_rate": 12.054948806762695,
+          "residual": -0.009455638317946935,
+          "sign_convention": "residual = actual \u2212 predicted; positive = underpredicted, negative = overpredicted",
+          "top_positive_shap": [
+            {
+              "column": "gross_vehicle_weight_kg",
+              "readable_label": "Gross vehicle weight (kg)",
+              "shap": 0.5185980200767517
+            },
+            {
+              "column": "engine_rpm",
+              "readable_label": "Engine speed (rpm)",
+              "shap": 0.23697875440120697
+            },
+            {
+              "column": "ambient_temp_c",
+              "readable_label": "Ambient temp (\u00b0C)",
+              "shap": 0.11633175611495972
+            },
+            {
+              "column": "acceleration_mps2",
+              "readable_label": "Acceleration (m/s\u00b2)",
+              "shap": 0.09311449527740479
+            },
+            {
+              "column": "intake_air_temp_c",
+              "readable_label": "Intake air temp (\u00b0C)",
+              "shap": 0.019634565338492393
+            }
+          ],
+          "top_negative_shap": [
+            {
+              "column": "torque_nm",
+              "readable_label": "Torque (N\u00b7m)",
+              "shap": -25.367919921875
+            },
+            {
+              "column": "engine_load_pct",
+              "readable_label": "Engine load (%)",
+              "shap": -2.5646746158599854
+            },
+            {
+              "column": "vehicle_mass_kg",
+              "readable_label": "Vehicle mass (kg)",
+              "shap": -1.3562378883361816
+            },
+            {
+              "column": "payload_kg",
+              "readable_label": "Payload (kg)",
+              "shap": -0.6159809231758118
+            },
+            {
+              "column": "speed_kph",
+              "readable_label": "Speed (kph)",
+              "shap": -0.39309558272361755
+            }
+          ]
+        }
+      ],
+      "plots": {
+        "files": [
+          "global_importance_full_operational.png",
+          "summary_beeswarm_full_operational.png",
+          "dependence_full_operational_torque_nm.png",
+          "dependence_full_operational_engine_load_pct.png",
+          "dependence_full_operational_engine_rpm.png",
+          "per_truck_importance_full_operational.png",
+          "waterfall_full_operational_truck_001_largest_abs_residual.png",
+          "waterfall_full_operational_truck_001_median_abs_residual.png"
+        ],
+        "dir": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\plots\\explainability"
+      },
+      "model_artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\full_operational\\xgboost.joblib",
+      "model_artifact_size_bytes": 469059,
+      "preprocessor_artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\full_operational\\preprocessor.joblib",
+      "preprocessor_artifact_size_bytes": 865
+    },
+    "telematics_only": {
+      "feature_set": "telematics_only",
+      "features_transformed": [
+        "gross_vehicle_weight_kg",
+        "payload_kg",
+        "vehicle_mass_kg",
+        "speed_kph",
+        "acceleration_mps2",
+        "road_grade_pct",
+        "ignition_status",
+        "coolant_temp_c",
+        "intake_air_temp_c",
+        "ambient_temp_c",
+        "vehicle_class_40T",
+        "vehicle_class_49T"
+      ],
+      "n_features": 12,
+      "readable_feature_names": {
+        "gross_vehicle_weight_kg": "Gross vehicle weight (kg)",
+        "payload_kg": "Payload (kg)",
+        "vehicle_mass_kg": "Vehicle mass (kg)",
+        "speed_kph": "Speed (kph)",
+        "acceleration_mps2": "Acceleration (m/s\u00b2)",
+        "road_grade_pct": "Road grade (%)",
+        "ignition_status": "Ignition status",
+        "coolant_temp_c": "Coolant temp (\u00b0C)",
+        "intake_air_temp_c": "Intake air temp (\u00b0C)",
+        "ambient_temp_c": "Ambient temp (\u00b0C)",
+        "vehicle_class_40T": "Vehicle class (40T)",
+        "vehicle_class_49T": "Vehicle class (49T)"
+      },
+      "sample": {
+        "n_rows_used": 2500,
+        "per_truck_used": {
+          "truck_001": 500,
+          "truck_004": 500,
+          "truck_017": 500,
+          "truck_020": 500,
+          "truck_028": 500
+        },
+        "seed": 20240617,
+        "method": "deterministic per-truck uniform subsample with a fixed np.random.RandomState seed"
+      },
+      "reconstruction_validation": {
+        "max_abs_deviation": 0.00014411075972020626,
+        "mean_abs_deviation": 2.0911542217072565e-05,
+        "fraction_within_tolerance": 1.0,
+        "tolerance": 0.001,
+        "pass": true
+      },
+      "global_importance_mean_abs_shap": [
+        {
+          "column": "acceleration_mps2",
+          "readable_label": "Acceleration (m/s\u00b2)",
+          "mean_abs_shap": 32.23378006681725
+        },
+        {
+          "column": "speed_kph",
+          "readable_label": "Speed (kph)",
+          "mean_abs_shap": 10.264942024054635
+        },
+        {
+          "column": "vehicle_mass_kg",
+          "readable_label": "Vehicle mass (kg)",
+          "mean_abs_shap": 3.5021975287765263
+        },
+        {
+          "column": "road_grade_pct",
+          "readable_label": "Road grade (%)",
+          "mean_abs_shap": 2.9529904263038187
+        },
+        {
+          "column": "gross_vehicle_weight_kg",
+          "readable_label": "Gross vehicle weight (kg)",
+          "mean_abs_shap": 1.9570320043214888
+        },
+        {
+          "column": "payload_kg",
+          "readable_label": "Payload (kg)",
+          "mean_abs_shap": 0.9817165575789055
+        },
+        {
+          "column": "vehicle_class_49T",
+          "readable_label": "Vehicle class (49T)",
+          "mean_abs_shap": 0.879087931227684
+        },
+        {
+          "column": "intake_air_temp_c",
+          "readable_label": "Intake air temp (\u00b0C)",
+          "mean_abs_shap": 0.2742445078934426
+        },
+        {
+          "column": "vehicle_class_40T",
+          "readable_label": "Vehicle class (40T)",
+          "mean_abs_shap": 0.2585658595726942
+        },
+        {
+          "column": "ambient_temp_c",
+          "readable_label": "Ambient temp (\u00b0C)",
+          "mean_abs_shap": 0.1613642756805435
+        },
+        {
+          "column": "coolant_temp_c",
+          "readable_label": "Coolant temp (\u00b0C)",
+          "mean_abs_shap": 0.10942334883791772
+        },
+        {
+          "column": "ignition_status",
+          "readable_label": "Ignition status",
+          "mean_abs_shap": 0.00529159487048164
+        }
+      ],
+      "per_truck_mean_abs_shap": {
+        "truck_001": [
+          {
+            "column": "acceleration_mps2",
+            "mean_abs_shap": 28.557255829196425
+          },
+          {
+            "column": "speed_kph",
+            "mean_abs_shap": 9.598774040773511
+          },
+          {
+            "column": "vehicle_mass_kg",
+            "mean_abs_shap": 4.4137188031673436
+          },
+          {
+            "column": "gross_vehicle_weight_kg",
+            "mean_abs_shap": 3.3166077342033384
+          },
+          {
+            "column": "road_grade_pct",
+            "mean_abs_shap": 3.2980672176736405
+          },
+          {
+            "column": "payload_kg",
+            "mean_abs_shap": 0.9925830945447087
+          },
+          {
+            "column": "vehicle_class_49T",
+            "mean_abs_shap": 0.7132735803723336
+          },
+          {
+            "column": "vehicle_class_40T",
+            "mean_abs_shap": 0.32361933089792727
+          },
+          {
+            "column": "intake_air_temp_c",
+            "mean_abs_shap": 0.18338158633327112
+          },
+          {
+            "column": "ambient_temp_c",
+            "mean_abs_shap": 0.1241432332751865
+          },
+          {
+            "column": "coolant_temp_c",
+            "mean_abs_shap": 0.09158544033329963
+          },
+          {
+            "column": "ignition_status",
+            "mean_abs_shap": 0.004846253062132746
+          }
+        ],
+        "truck_004": [
+          {
+            "column": "acceleration_mps2",
+            "mean_abs_shap": 30.137274734795092
+          },
+          {
+            "column": "speed_kph",
+            "mean_abs_shap": 7.6367400239793355
+          },
+          {
+            "column": "vehicle_mass_kg",
+            "mean_abs_shap": 4.406642574310303
+          },
+          {
+            "column": "gross_vehicle_weight_kg",
+            "mean_abs_shap": 3.5482447695732118
+          },
+          {
+            "column": "road_grade_pct",
+            "mean_abs_shap": 3.0299379097465424
+          },
+          {
+            "column": "payload_kg",
+            "mean_abs_shap": 0.9772900021473179
+          },
+          {
+            "column": "vehicle_class_49T",
+            "mean_abs_shap": 0.7997904702425003
+          },
+          {
+            "column": "intake_air_temp_c",
+            "mean_abs_shap": 0.3927116711772978
+          },
+          {
+            "column": "vehicle_class_40T",
+            "mean_abs_shap": 0.3703112847805023
+          },
+          {
+            "column": "ambient_temp_c",
+            "mean_abs_shap": 0.20745275040848354
+          },
+          {
+            "column": "coolant_temp_c",
+            "mean_abs_shap": 0.0892060443109367
+          },
+          {
+            "column": "ignition_status",
+            "mean_abs_shap": 0.0035807823587674648
+          }
+        ],
+        "truck_017": [
+          {
+            "column": "acceleration_mps2",
+            "mean_abs_shap": 33.78720959647
+          },
+          {
+            "column": "speed_kph",
+            "mean_abs_shap": 10.14320217446983
+          },
+          {
+            "column": "road_grade_pct",
+            "mean_abs_shap": 2.772510702597443
+          },
+          {
+            "column": "vehicle_mass_kg",
+            "mean_abs_shap": 2.108404469743371
+          },
+          {
+            "column": "payload_kg",
+            "mean_abs_shap": 0.9679546318610665
+          },
+          {
+            "column": "vehicle_class_49T",
+            "mean_abs_shap": 0.6914921891093254
+          },
+          {
+            "column": "intake_air_temp_c",
+            "mean_abs_shap": 0.258164013676811
+          },
+          {
+            "column": "vehicle_class_40T",
+            "mean_abs_shap": 0.2561429194244556
+          },
+          {
+            "column": "gross_vehicle_weight_kg",
+            "mean_abs_shap": 0.23770450479330613
+          },
+          {
+            "column": "ambient_temp_c",
+            "mean_abs_shap": 0.17752981064398773
+          },
+          {
+            "column": "coolant_temp_c",
+            "mean_abs_shap": 0.1230060266481014
+          },
+          {
+            "column": "ignition_status",
+            "mean_abs_shap": 0.008702785411849618
+          }
+        ],
+        "truck_020": [
+          {
+            "column": "acceleration_mps2",
+            "mean_abs_shap": 32.94654011157155
+          },
+          {
+            "column": "speed_kph",
+            "mean_abs_shap": 10.985446240041405
+          },
+          {
+            "column": "road_grade_pct",
+            "mean_abs_shap": 2.4386952616199853
+          },
+          {
+            "column": "vehicle_mass_kg",
+            "mean_abs_shap": 2.0377961194217207
+          },
+          {
+            "column": "payload_kg",
+            "mean_abs_shap": 0.7323221014514566
+          },
+          {
+            "column": "vehicle_class_49T",
+            "mean_abs_shap": 0.667882027387619
+          },
+          {
+            "column": "vehicle_class_40T",
+            "mean_abs_shap": 0.2502074671890587
+          },
+          {
+            "column": "gross_vehicle_weight_kg",
+            "mean_abs_shap": 0.23444854354753625
+          },
+          {
+            "column": "intake_air_temp_c",
+            "mean_abs_shap": 0.20905918922350974
+          },
+          {
+            "column": "ambient_temp_c",
+            "mean_abs_shap": 0.16018731432920322
+          },
+          {
+            "column": "coolant_temp_c",
+            "mean_abs_shap": 0.11645429320784752
+          },
+          {
+            "column": "ignition_status",
+            "mean_abs_shap": 0.004462838470935822
+          }
+        ],
+        "truck_028": [
+          {
+            "column": "acceleration_mps2",
+            "mean_abs_shap": 35.7406200620532
+          },
+          {
+            "column": "speed_kph",
+            "mean_abs_shap": 12.960547641009093
+          },
+          {
+            "column": "vehicle_mass_kg",
+            "mean_abs_shap": 4.544425677239895
+          },
+          {
+            "column": "road_grade_pct",
+            "mean_abs_shap": 3.2257410398814828
+          },
+          {
+            "column": "gross_vehicle_weight_kg",
+            "mean_abs_shap": 2.4481544694900514
+          },
+          {
+            "column": "vehicle_class_49T",
+            "mean_abs_shap": 1.5230013890266418
+          },
+          {
+            "column": "payload_kg",
+            "mean_abs_shap": 1.2384329578899778
+          },
+          {
+            "column": "intake_air_temp_c",
+            "mean_abs_shap": 0.3279060790563235
+          },
+          {
+            "column": "ambient_temp_c",
+            "mean_abs_shap": 0.13750826974585653
+          },
+          {
+            "column": "coolant_temp_c",
+            "mean_abs_shap": 0.1268649396894034
+          },
+          {
+            "column": "vehicle_class_40T",
+            "mean_abs_shap": 0.09254829557152698
+          },
+          {
+            "column": "ignition_status",
+            "mean_abs_shap": 0.0048653150487225506
+          }
+        ]
+      },
+      "individual_explanations": [
+        {
+          "truck_id": "truck_001",
+          "index": 19948,
+          "rule": "largest_abs_residual",
+          "actual_fuel_rate": 85.47877738325475,
+          "predicted_fuel_rate": 74.13028717041016,
+          "residual": 11.348490212844595,
+          "sign_convention": "residual = actual \u2212 predicted; positive = underpredicted, negative = overpredicted",
+          "top_positive_shap": [
+            {
+              "column": "acceleration_mps2",
+              "readable_label": "Acceleration (m/s\u00b2)",
+              "shap": 43.40131378173828
+            },
+            {
+              "column": "speed_kph",
+              "readable_label": "Speed (kph)",
+              "shap": 5.737857818603516
+            },
+            {
+              "column": "coolant_temp_c",
+              "readable_label": "Coolant temp (\u00b0C)",
+              "shap": 0.030302267521619797
+            },
+            {
+              "column": "ignition_status",
+              "readable_label": "Ignition status",
+              "shap": 0.0015365226427093148
+            },
+            {
+              "column": "road_grade_pct",
+              "readable_label": "Road grade (%)",
+              "shap": -0.317859023809433
+            }
+          ],
+          "top_negative_shap": [
+            {
+              "column": "gross_vehicle_weight_kg",
+              "readable_label": "Gross vehicle weight (kg)",
+              "shap": -5.62065315246582
+            },
+            {
+              "column": "vehicle_mass_kg",
+              "readable_label": "Vehicle mass (kg)",
+              "shap": -4.788061618804932
+            },
+            {
+              "column": "payload_kg",
+              "readable_label": "Payload (kg)",
+              "shap": -2.068857192993164
+            },
+            {
+              "column": "vehicle_class_49T",
+              "readable_label": "Vehicle class (49T)",
+              "shap": -1.342092752456665
+            },
+            {
+              "column": "intake_air_temp_c",
+              "readable_label": "Intake air temp (\u00b0C)",
+              "shap": -1.043111801147461
+            }
+          ]
+        },
+        {
+          "truck_id": "truck_001",
+          "index": 2391,
+          "rule": "median_abs_residual",
+          "actual_fuel_rate": 2.181089246294137,
+          "predicted_fuel_rate": 1.2956262826919556,
+          "residual": 0.8854629636021816,
+          "sign_convention": "residual = actual \u2212 predicted; positive = underpredicted, negative = overpredicted",
+          "top_positive_shap": [
+            {
+              "column": "speed_kph",
+              "readable_label": "Speed (kph)",
+              "shap": 6.073870658874512
+            },
+            {
+              "column": "coolant_temp_c",
+              "readable_label": "Coolant temp (\u00b0C)",
+              "shap": 0.029129665344953537
+            },
+            {
+              "column": "ignition_status",
+              "readable_label": "Ignition status",
+              "shap": 0.0014968198956921697
+            },
+            {
+              "column": "intake_air_temp_c",
+              "readable_label": "Intake air temp (\u00b0C)",
+              "shap": -0.003537307493388653
+            },
+            {
+              "column": "ambient_temp_c",
+              "readable_label": "Ambient temp (\u00b0C)",
+              "shap": -0.05954046547412872
+            }
+          ],
+          "top_negative_shap": [
+            {
+              "column": "acceleration_mps2",
+              "readable_label": "Acceleration (m/s\u00b2)",
+              "shap": -31.770509719848633
+            },
+            {
+              "column": "road_grade_pct",
+              "readable_label": "Road grade (%)",
+              "shap": -8.240416526794434
+            },
+            {
+              "column": "vehicle_mass_kg",
+              "readable_label": "Vehicle mass (kg)",
+              "shap": -3.1569695472717285
+            },
+            {
+              "column": "gross_vehicle_weight_kg",
+              "readable_label": "Gross vehicle weight (kg)",
+              "shap": -1.9907408952713013
+            },
+            {
+              "column": "payload_kg",
+              "readable_label": "Payload (kg)",
+              "shap": -0.5173115134239197
+            }
+          ]
+        },
+        {
+          "truck_id": "truck_001",
+          "index": 20856,
+          "rule": "closest_to_zero_residual",
+          "actual_fuel_rate": 1.0896302426891697,
+          "predicted_fuel_rate": 1.089560627937317,
+          "residual": 6.961475185285337e-05,
+          "sign_convention": "residual = actual \u2212 predicted; positive = underpredicted, negative = overpredicted",
+          "top_positive_shap": [
+            {
+              "column": "coolant_temp_c",
+              "readable_label": "Coolant temp (\u00b0C)",
+              "shap": 0.0397196039557457
+            },
+            {
+              "column": "ignition_status",
+              "readable_label": "Ignition status",
+              "shap": 0.028485869988799095
+            },
+            {
+              "column": "vehicle_class_40T",
+              "readable_label": "Vehicle class (40T)",
+              "shap": -0.12214633077383041
+            },
+            {
+              "column": "ambient_temp_c",
+              "readable_label": "Ambient temp (\u00b0C)",
+              "shap": -0.19043685495853424
+            },
+            {
+              "column": "intake_air_temp_c",
+              "readable_label": "Intake air temp (\u00b0C)",
+              "shap": -0.2525787353515625
+            }
+          ],
+          "top_negative_shap": [
+            {
+              "column": "speed_kph",
+              "readable_label": "Speed (kph)",
+              "shap": -22.1673641204834
+            },
+            {
+              "column": "acceleration_mps2",
+              "readable_label": "Acceleration (m/s\u00b2)",
+              "shap": -13.263078689575195
+            },
+            {
+              "column": "gross_vehicle_weight_kg",
+              "readable_label": "Gross vehicle weight (kg)",
+              "shap": -1.3118643760681152
+            },
+            {
+              "column": "vehicle_mass_kg",
+              "readable_label": "Vehicle mass (kg)",
+              "shap": -1.2551404237747192
+            },
+            {
+              "column": "road_grade_pct",
+              "readable_label": "Road grade (%)",
+              "shap": -0.9211607575416565
+            }
+          ]
+        },
+        {
+          "truck_id": "truck_004",
+          "index": 112346,
+          "rule": "largest_abs_residual",
+          "actual_fuel_rate": 85.19641356802889,
+          "predicted_fuel_rate": 69.24315643310547,
+          "residual": 15.953257134923419,
+          "sign_convention": "residual = actual \u2212 predicted; positive = underpredicted, negative = overpredicted",
+          "top_positive_shap": [
+            {
+              "column": "acceleration_mps2",
+              "readable_label": "Acceleration (m/s\u00b2)",
+              "shap": 26.4907283782959
+            },
+            {
+              "column": "speed_kph",
+              "readable_label": "Speed (kph)",
+              "shap": 11.887561798095703
+            },
+            {
+              "column": "road_grade_pct",
+              "readable_label": "Road grade (%)",
+              "shap": 10.856056213378906
+            },
+            {
+              "column": "ignition_status",
+              "readable_label": "Ignition status",
+              "shap": -0.003167583607137203
+            },
+            {
+              "column": "coolant_temp_c",
+              "readable_label": "Coolant temp (\u00b0C)",
+              "shap": -0.011884836480021477
+            }
+          ],
+          "top_negative_shap": [
+            {
+              "column": "vehicle_mass_kg",
+              "readable_label": "Vehicle mass (kg)",
+              "shap": -8.553729057312012
+            },
+            {
+              "column": "gross_vehicle_weight_kg",
+              "readable_label": "Gross vehicle weight (kg)",
+              "shap": -6.516239166259766
+            },
+            {
+              "column": "vehicle_class_49T",
+              "readable_label": "Vehicle class (49T)",
+              "shap": -2.085083246231079
+            },
+            {
+              "column": "payload_kg",
+              "readable_label": "Payload (kg)",
+              "shap": -2.0221681594848633
+            },
+            {
+              "column": "intake_air_temp_c",
+              "readable_label": "Intake air temp (\u00b0C)",
+              "shap": -0.9194753170013428
+            }
+          ]
+        },
+        {
+          "truck_id": "truck_004",
+          "index": 105480,
+          "rule": "median_abs_residual",
+          "actual_fuel_rate": 1.9947732584217088,
+          "predicted_fuel_rate": 2.800305128097534,
+          "residual": -0.8055318696758254,
+          "sign_convention": "residual = actual \u2212 predicted; positive = underpredicted, negative = overpredicted",
+          "top_positive_shap": [
+            {
+              "column": "ambient_temp_c",
+              "readable_label": "Ambient temp (\u00b0C)",
+              "shap": 0.05637505650520325
+            },
+            {
+              "column": "ignition_status",
+              "readable_label": "Ignition status",
+              "shap": 0.001586778205819428
+            },
+            {
+              "column": "coolant_temp_c",
+              "readable_label": "Coolant temp (\u00b0C)",
+              "shap": -0.006164610851556063
+            },
+            {
+              "column": "payload_kg",
+              "readable_label": "Payload (kg)",
+              "shap": -0.02291407808661461
+            },
+            {
+              "column": "speed_kph",
+              "readable_label": "Speed (kph)",
+              "shap": -0.09944704920053482
+            }
+          ],
+          "top_negative_shap": [
+            {
+              "column": "acceleration_mps2",
+              "readable_label": "Acceleration (m/s\u00b2)",
+              "shap": -33.84294891357422
+            },
+            {
+              "column": "vehicle_mass_kg",
+              "readable_label": "Vehicle mass (kg)",
+              "shap": -1.8618360757827759
+            },
+            {
+              "column": "gross_vehicle_weight_kg",
+              "readable_label": "Gross vehicle weight (kg)",
+              "shap": -1.7513905763626099
+            },
+            {
+              "column": "road_grade_pct",
+              "readable_label": "Road grade (%)",
+              "shap": -0.4392394423484802
+            },
+            {
+              "column": "vehicle_class_49T",
+              "readable_label": "Vehicle class (49T)",
+              "shap": -0.3927699327468872
+            }
+          ]
+        },
+        {
+          "truck_id": "truck_004",
+          "index": 103707,
+          "rule": "closest_to_zero_residual",
+          "actual_fuel_rate": 2.045445039692123,
+          "predicted_fuel_rate": 2.0421297550201416,
+          "residual": 0.003315284671981278,
+          "sign_convention": "residual = actual \u2212 predicted; positive = underpredicted, negative = overpredicted",
+          "top_positive_shap": [
+            {
+              "column": "speed_kph",
+              "readable_label": "Speed (kph)",
+              "shap": 1.7167940139770508
+            },
+            {
+              "column": "intake_air_temp_c",
+              "readable_label": "Intake air temp (\u00b0C)",
+              "shap": 0.14875920116901398
+            },
+            {
+              "column": "ambient_temp_c",
+              "readable_label": "Ambient temp (\u00b0C)",
+              "shap": 0.11375389993190765
+            },
+            {
+              "column": "ignition_status",
+              "readable_label": "Ignition status",
+              "shap": 0.0015594442375004292
+            },
+            {
+              "column": "coolant_temp_c",
+              "readable_label": "Coolant temp (\u00b0C)",
+              "shap": -0.008435315452516079
+            }
+          ],
+          "top_negative_shap": [
+            {
+              "column": "acceleration_mps2",
+              "readable_label": "Acceleration (m/s\u00b2)",
+              "shap": -35.866973876953125
+            },
+            {
+              "column": "vehicle_mass_kg",
+              "readable_label": "Vehicle mass (kg)",
+              "shap": -2.5573244094848633
+            },
+            {
+              "column": "gross_vehicle_weight_kg",
+              "readable_label": "Gross vehicle weight (kg)",
+              "shap": -2.0890281200408936
+            },
+            {
+              "column": "vehicle_class_49T",
+              "readable_label": "Vehicle class (49T)",
+              "shap": -0.4166398048400879
+            },
+            {
+              "column": "payload_kg",
+              "readable_label": "Payload (kg)",
+              "shap": -0.20762988924980164
+            }
+          ]
+        },
+        {
+          "truck_id": "truck_017",
+          "index": 520976,
+          "rule": "largest_abs_residual",
+          "actual_fuel_rate": 95.8195332374621,
+          "predicted_fuel_rate": 111.4869155883789,
+          "residual": -15.66738235091681,
+          "sign_convention": "residual = actual \u2212 predicted; positive = underpredicted, negative = overpredicted",
+          "top_positive_shap": [
+            {
+              "column": "acceleration_mps2",
+              "readable_label": "Acceleration (m/s\u00b2)",
+              "shap": 69.90266418457031
+            },
+            {
+              "column": "speed_kph",
+              "readable_label": "Speed (kph)",
+              "shap": 5.780652046203613
+            },
+            {
+              "column": "vehicle_class_40T",
+              "readable_label": "Vehicle class (40T)",
+              "shap": 1.174371600151062
+            },
+            {
+              "column": "gross_vehicle_weight_kg",
+              "readable_label": "Gross vehicle weight (kg)",
+              "shap": 1.0081607103347778
+            },
+            {
+              "column": "ignition_status",
+              "readable_label": "Ignition status",
+              "shap": 0.0015074295224621892
+            }
+          ],
+          "top_negative_shap": [
+            {
+              "column": "vehicle_mass_kg",
+              "readable_label": "Vehicle mass (kg)",
+              "shap": -3.7705252170562744
+            },
+            {
+              "column": "vehicle_class_49T",
+              "readable_label": "Vehicle class (49T)",
+              "shap": -1.1186555624008179
+            },
+            {
+              "column": "payload_kg",
+              "readable_label": "Payload (kg)",
+              "shap": -1.1120048761367798
+            },
+            {
+              "column": "road_grade_pct",
+              "readable_label": "Road grade (%)",
+              "shap": -1.0732139348983765
+            },
+            {
+              "column": "intake_air_temp_c",
+              "readable_label": "Intake air temp (\u00b0C)",
+              "shap": -0.5441190004348755
+            }
+          ]
+        },
+        {
+          "truck_id": "truck_017",
+          "index": 529162,
+          "rule": "median_abs_residual",
+          "actual_fuel_rate": 2.650693084838114,
+          "predicted_fuel_rate": 3.5227365493774414,
+          "residual": -0.8720434645393276,
+          "sign_convention": "residual = actual \u2212 predicted; positive = underpredicted, negative = overpredicted",
+          "top_positive_shap": [
+            {
+              "column": "vehicle_mass_kg",
+              "readable_label": "Vehicle mass (kg)",
+              "shap": 2.0435609817504883
+            },
+            {
+              "column": "payload_kg",
+              "readable_label": "Payload (kg)",
+              "shap": 1.0739197731018066
+            },
+            {
+              "column": "coolant_temp_c",
+              "readable_label": "Coolant temp (\u00b0C)",
+              "shap": 0.20821304619312286
+            },
+            {
+              "column": "gross_vehicle_weight_kg",
+              "readable_label": "Gross vehicle weight (kg)",
+              "shap": 0.10882696509361267
+            },
+            {
+              "column": "vehicle_class_40T",
+              "readable_label": "Vehicle class (40T)",
+              "shap": 0.06925244629383087
+            }
+          ],
+          "top_negative_shap": [
+            {
+              "column": "acceleration_mps2",
+              "readable_label": "Acceleration (m/s\u00b2)",
+              "shap": -32.4904670715332
+            },
+            {
+              "column": "speed_kph",
+              "readable_label": "Speed (kph)",
+              "shap": -7.391010761260986
+            },
+            {
+              "column": "road_grade_pct",
+              "readable_label": "Road grade (%)",
+              "shap": -0.5533991456031799
+            },
+            {
+              "column": "ambient_temp_c",
+              "readable_label": "Ambient temp (\u00b0C)",
+              "shap": -0.48381873965263367
+            },
+            {
+              "column": "intake_air_temp_c",
+              "readable_label": "Intake air temp (\u00b0C)",
+              "shap": -0.36502209305763245
+            }
+          ]
+        },
+        {
+          "truck_id": "truck_017",
+          "index": 536173,
+          "rule": "closest_to_zero_residual",
+          "actual_fuel_rate": 71.12646942447789,
+          "predicted_fuel_rate": 71.12672424316406,
+          "residual": -0.0002548186861730528,
+          "sign_convention": "residual = actual \u2212 predicted; positive = underpredicted, negative = overpredicted",
+          "top_positive_shap": [
+            {
+              "column": "acceleration_mps2",
+              "readable_label": "Acceleration (m/s\u00b2)",
+              "shap": 57.22602462768555
+            },
+            {
+              "column": "gross_vehicle_weight_kg",
+              "readable_label": "Gross vehicle weight (kg)",
+              "shap": 0.38174059987068176
+            },
+            {
+              "column": "coolant_temp_c",
+              "readable_label": "Coolant temp (\u00b0C)",
+              "shap": 0.1909041553735733
+            },
+            {
+              "column": "vehicle_class_40T",
+              "readable_label": "Vehicle class (40T)",
+              "shap": 0.17958536744117737
+            },
+            {
+              "column": "ambient_temp_c",
+              "readable_label": "Ambient temp (\u00b0C)",
+              "shap": 0.14410588145256042
+            }
+          ],
+          "top_negative_shap": [
+            {
+              "column": "speed_kph",
+              "readable_label": "Speed (kph)",
+              "shap": -24.93597984313965
+            },
+            {
+              "column": "vehicle_mass_kg",
+              "readable_label": "Vehicle mass (kg)",
+              "shap": -1.0640838146209717
+            },
+            {
+              "column": "payload_kg",
+              "readable_label": "Payload (kg)",
+              "shap": -0.6704912781715393
+            },
+            {
+              "column": "intake_air_temp_c",
+              "readable_label": "Intake air temp (\u00b0C)",
+              "shap": -0.6499322652816772
+            },
+            {
+              "column": "vehicle_class_49T",
+              "readable_label": "Vehicle class (49T)",
+              "shap": -0.636343240737915
+            }
+          ]
+        },
+        {
+          "truck_id": "truck_020",
+          "index": 635671,
+          "rule": "largest_abs_residual",
+          "actual_fuel_rate": 112.80936212185443,
+          "predicted_fuel_rate": 93.28063201904297,
+          "residual": 19.528730102811465,
+          "sign_convention": "residual = actual \u2212 predicted; positive = underpredicted, negative = overpredicted",
+          "top_positive_shap": [
+            {
+              "column": "acceleration_mps2",
+              "readable_label": "Acceleration (m/s\u00b2)",
+              "shap": 58.09845733642578
+            },
+            {
+              "column": "speed_kph",
+              "readable_label": "Speed (kph)",
+              "shap": 1.0797703266143799
+            },
+            {
+              "column": "vehicle_class_40T",
+              "readable_label": "Vehicle class (40T)",
+              "shap": 0.7171703577041626
+            },
+            {
+              "column": "ignition_status",
+              "readable_label": "Ignition status",
+              "shap": 0.013264384120702744
+            },
+            {
+              "column": "coolant_temp_c",
+              "readable_label": "Coolant temp (\u00b0C)",
+              "shap": -0.0297950878739357
+            }
+          ],
+          "top_negative_shap": [
+            {
+              "column": "vehicle_mass_kg",
+              "readable_label": "Vehicle mass (kg)",
+              "shap": -2.0423996448516846
+            },
+            {
+              "column": "road_grade_pct",
+              "readable_label": "Road grade (%)",
+              "shap": -1.753859519958496
+            },
+            {
+              "column": "ambient_temp_c",
+              "readable_label": "Ambient temp (\u00b0C)",
+              "shap": -1.5504213571548462
+            },
+            {
+              "column": "vehicle_class_49T",
+              "readable_label": "Vehicle class (49T)",
+              "shap": -1.2998403310775757
+            },
+            {
+              "column": "intake_air_temp_c",
+              "readable_label": "Intake air temp (\u00b0C)",
+              "shap": -1.2339080572128296
+            }
+          ]
+        },
+        {
+          "truck_id": "truck_020",
+          "index": 636365,
+          "rule": "median_abs_residual",
+          "actual_fuel_rate": 56.88944906069718,
+          "predicted_fuel_rate": 55.549224853515625,
+          "residual": 1.3402242071815564,
+          "sign_convention": "residual = actual \u2212 predicted; positive = underpredicted, negative = overpredicted",
+          "top_positive_shap": [
+            {
+              "column": "acceleration_mps2",
+              "readable_label": "Acceleration (m/s\u00b2)",
+              "shap": 15.276208877563477
+            },
+            {
+              "column": "speed_kph",
+              "readable_label": "Speed (kph)",
+              "shap": 2.7060048580169678
+            },
+            {
+              "column": "gross_vehicle_weight_kg",
+              "readable_label": "Gross vehicle weight (kg)",
+              "shap": 0.8765632510185242
+            },
+            {
+              "column": "ambient_temp_c",
+              "readable_label": "Ambient temp (\u00b0C)",
+              "shap": 0.3574025630950928
+            },
+            {
+              "column": "vehicle_class_40T",
+              "readable_label": "Vehicle class (40T)",
+              "shap": 0.24565252661705017
+            }
+          ],
+          "top_negative_shap": [
+            {
+              "column": "vehicle_mass_kg",
+              "readable_label": "Vehicle mass (kg)",
+              "shap": -3.0889511108398438
+            },
+            {
+              "column": "payload_kg",
+              "readable_label": "Payload (kg)",
+              "shap": -0.9972904920578003
+            },
+            {
+              "column": "road_grade_pct",
+              "readable_label": "Road grade (%)",
+              "shap": -0.7972171306610107
+            },
+            {
+              "column": "vehicle_class_49T",
+              "readable_label": "Vehicle class (49T)",
+              "shap": -0.714229166507721
+            },
+            {
+              "column": "ignition_status",
+              "readable_label": "Ignition status",
+              "shap": 0.0014962019631639123
+            }
+          ]
+        },
+        {
+          "truck_id": "truck_020",
+          "index": 627834,
+          "rule": "closest_to_zero_residual",
+          "actual_fuel_rate": 2.6090506775552096,
+          "predicted_fuel_rate": 2.6077029705047607,
+          "residual": 0.001347707050448843,
+          "sign_convention": "residual = actual \u2212 predicted; positive = underpredicted, negative = overpredicted",
+          "top_positive_shap": [
+            {
+              "column": "vehicle_mass_kg",
+              "readable_label": "Vehicle mass (kg)",
+              "shap": 2.07273268699646
+            },
+            {
+              "column": "speed_kph",
+              "readable_label": "Speed (kph)",
+              "shap": 1.2831230163574219
+            },
+            {
+              "column": "payload_kg",
+              "readable_label": "Payload (kg)",
+              "shap": 0.7564742565155029
+            },
+            {
+              "column": "vehicle_class_40T",
+              "readable_label": "Vehicle class (40T)",
+              "shap": 0.12149026244878769
+            },
+            {
+              "column": "intake_air_temp_c",
+              "readable_label": "Intake air temp (\u00b0C)",
+              "shap": 0.04655510559678078
+            }
+          ],
+          "top_negative_shap": [
+            {
+              "column": "acceleration_mps2",
+              "readable_label": "Acceleration (m/s\u00b2)",
+              "shap": -41.41619873046875
+            },
+            {
+              "column": "road_grade_pct",
+              "readable_label": "Road grade (%)",
+              "shap": -1.0749889612197876
+            },
+            {
+              "column": "vehicle_class_49T",
+              "readable_label": "Vehicle class (49T)",
+              "shap": -0.40700122714042664
+            },
+            {
+              "column": "ambient_temp_c",
+              "readable_label": "Ambient temp (\u00b0C)",
+              "shap": -0.3211119472980499
+            },
+            {
+              "column": "gross_vehicle_weight_kg",
+              "readable_label": "Gross vehicle weight (kg)",
+              "shap": -0.007043295074254274
+            }
+          ]
+        },
+        {
+          "truck_id": "truck_028",
+          "index": 922918,
+          "rule": "largest_abs_residual",
+          "actual_fuel_rate": 90.1336149911932,
+          "predicted_fuel_rate": 119.7858657836914,
+          "residual": -29.652250792498208,
+          "sign_convention": "residual = actual \u2212 predicted; positive = underpredicted, negative = overpredicted",
+          "top_positive_shap": [
+            {
+              "column": "acceleration_mps2",
+              "readable_label": "Acceleration (m/s\u00b2)",
+              "shap": 77.38020324707031
+            },
+            {
+              "column": "vehicle_mass_kg",
+              "readable_label": "Vehicle mass (kg)",
+              "shap": 14.315984725952148
+            },
+            {
+              "column": "gross_vehicle_weight_kg",
+              "readable_label": "Gross vehicle weight (kg)",
+              "shap": 3.3005640506744385
+            },
+            {
+              "column": "vehicle_class_49T",
+              "readable_label": "Vehicle class (49T)",
+              "shap": 2.780752420425415
+            },
+            {
+              "column": "payload_kg",
+              "readable_label": "Payload (kg)",
+              "shap": 1.8184103965759277
+            }
+          ],
+          "top_negative_shap": [
+            {
+              "column": "speed_kph",
+              "readable_label": "Speed (kph)",
+              "shap": -10.288118362426758
+            },
+            {
+              "column": "road_grade_pct",
+              "readable_label": "Road grade (%)",
+              "shap": -8.790842056274414
+            },
+            {
+              "column": "intake_air_temp_c",
+              "readable_label": "Intake air temp (\u00b0C)",
+              "shap": -2.1190969944000244
+            },
+            {
+              "column": "coolant_temp_c",
+              "readable_label": "Coolant temp (\u00b0C)",
+              "shap": -0.22860249876976013
+            },
+            {
+              "column": "vehicle_class_40T",
+              "readable_label": "Vehicle class (40T)",
+              "shap": -0.019574139267206192
+            }
+          ]
+        },
+        {
+          "truck_id": "truck_028",
+          "index": 927800,
+          "rule": "median_abs_residual",
+          "actual_fuel_rate": 118.93640091520066,
+          "predicted_fuel_rate": 117.15554809570312,
+          "residual": 1.7808528194975395,
+          "sign_convention": "residual = actual \u2212 predicted; positive = underpredicted, negative = overpredicted",
+          "top_positive_shap": [
+            {
+              "column": "acceleration_mps2",
+              "readable_label": "Acceleration (m/s\u00b2)",
+              "shap": 47.1886100769043
+            },
+            {
+              "column": "speed_kph",
+              "readable_label": "Speed (kph)",
+              "shap": 11.619373321533203
+            },
+            {
+              "column": "vehicle_mass_kg",
+              "readable_label": "Vehicle mass (kg)",
+              "shap": 7.762384414672852
+            },
+            {
+              "column": "gross_vehicle_weight_kg",
+              "readable_label": "Gross vehicle weight (kg)",
+              "shap": 3.146904945373535
+            },
+            {
+              "column": "vehicle_class_49T",
+              "readable_label": "Vehicle class (49T)",
+              "shap": 2.9422950744628906
+            }
+          ],
+          "top_negative_shap": [
+            {
+              "column": "vehicle_class_40T",
+              "readable_label": "Vehicle class (40T)",
+              "shap": -0.24507099390029907
+            },
+            {
+              "column": "coolant_temp_c",
+              "readable_label": "Coolant temp (\u00b0C)",
+              "shap": -0.02625882439315319
+            },
+            {
+              "column": "ignition_status",
+              "readable_label": "Ignition status",
+              "shap": 0.0015749640297144651
+            },
+            {
+              "column": "intake_air_temp_c",
+              "readable_label": "Intake air temp (\u00b0C)",
+              "shap": 0.017000241205096245
+            },
+            {
+              "column": "ambient_temp_c",
+              "readable_label": "Ambient temp (\u00b0C)",
+              "shap": 0.3212336301803589
+            }
+          ]
+        },
+        {
+          "truck_id": "truck_028",
+          "index": 909187,
+          "rule": "closest_to_zero_residual",
+          "actual_fuel_rate": 1.3372073121624266,
+          "predicted_fuel_rate": 1.3347681760787964,
+          "residual": 0.0024391360836302223,
+          "sign_convention": "residual = actual \u2212 predicted; positive = underpredicted, negative = overpredicted",
+          "top_positive_shap": [
+            {
+              "column": "gross_vehicle_weight_kg",
+              "readable_label": "Gross vehicle weight (kg)",
+              "shap": 0.8665087819099426
+            },
+            {
+              "column": "vehicle_class_49T",
+              "readable_label": "Vehicle class (49T)",
+              "shap": 0.5301491618156433
+            },
+            {
+              "column": "vehicle_mass_kg",
+              "readable_label": "Vehicle mass (kg)",
+              "shap": 0.5110901594161987
+            },
+            {
+              "column": "coolant_temp_c",
+              "readable_label": "Coolant temp (\u00b0C)",
+              "shap": 0.2920667231082916
+            },
+            {
+              "column": "ambient_temp_c",
+              "readable_label": "Ambient temp (\u00b0C)",
+              "shap": 0.1587892472743988
+            }
+          ],
+          "top_negative_shap": [
+            {
+              "column": "acceleration_mps2",
+              "readable_label": "Acceleration (m/s\u00b2)",
+              "shap": -21.97536849975586
+            },
+            {
+              "column": "speed_kph",
+              "readable_label": "Speed (kph)",
+              "shap": -19.01988983154297
+            },
+            {
+              "column": "payload_kg",
+              "readable_label": "Payload (kg)",
+              "shap": -0.8677999973297119
+            },
+            {
+              "column": "road_grade_pct",
+              "readable_label": "Road grade (%)",
+              "shap": -0.6100814938545227
+            },
+            {
+              "column": "intake_air_temp_c",
+              "readable_label": "Intake air temp (\u00b0C)",
+              "shap": -0.07187273353338242
+            }
+          ]
+        }
+      ],
+      "plots": {
+        "files": [
+          "global_importance_telematics_only.png",
+          "summary_beeswarm_telematics_only.png",
+          "dependence_telematics_only_acceleration_mps2.png",
+          "dependence_telematics_only_speed_kph.png",
+          "dependence_telematics_only_vehicle_mass_kg.png",
+          "per_truck_importance_telematics_only.png",
+          "waterfall_telematics_only_truck_001_largest_abs_residual.png",
+          "waterfall_telematics_only_truck_001_median_abs_residual.png"
+        ],
+        "dir": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\plots\\explainability"
+      },
+      "model_artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\telematics_only\\xgboost.joblib",
+      "model_artifact_size_bytes": 468595,
+      "preprocessor_artifact": "C:\\Users\\ansha\\Desktop\\truck-fuel-agentic-research\\reports\\m1\\artifacts\\telematics_only\\preprocessor.joblib",
+      "preprocessor_artifact_size_bytes": 813
+    }
+  },
+  "total_clock_seconds": 35.231
+}

@@ -1,0 +1,1555 @@
+{
+  "pipeline": "M5.2 retrieval quality and answer-grounding evaluation",
+  "generated_at": "2026-11-20T01:55:30+05:30",
+  "query_set": {
+    "n_queries": 26,
+    "n_answerable": 19,
+    "n_unanswerable": 7,
+    "validation_passed": true,
+    "validation_errors": []
+  },
+  "corpus": {
+    "path": "data/synthetic_heavy_truck_research/rag_knowledge_corpus.jsonl",
+    "valid_documents": 21,
+    "chunk_count": 21,
+    "synthetic": true,
+    "oem_manual_count": 0
+  },
+  "embedding": {
+    "model": "sentence-transformers/all-MiniLM-L6-v2",
+    "dimension": 384,
+    "normalization": "L2 (cosine similarity)",
+    "local": true
+  },
+  "retrieval": {
+    "kind": "document-level, reusing M2.1-B evaluator",
+    "metrics_are_separate_from_grounding": true,
+    "metrics": {
+      "n_query_total": 26,
+      "n_answerable": 19,
+      "n_unanswerable": 7,
+      "recall@1": 0.8158,
+      "recall@3": 0.9211,
+      "recall@5": 0.9737,
+      "precision@1": 1.0,
+      "precision@3": 0.4035,
+      "precision@5": 0.2632,
+      "ndcg@1": 1.0,
+      "ndcg@3": 0.9389,
+      "ndcg@5": 0.9667,
+      "mrr": 1.0,
+      "zero_relevant": 0,
+      "per_query": [
+        {
+          "query_id": "m52_q01",
+          "topic": "fuel_consumption_fundamentals",
+          "answerable": true,
+          "n_relevant": 1,
+          "retrieved_doc_ids": [
+            "doc_001",
+            "doc_012",
+            "doc_013",
+            "doc_008",
+            "doc_004"
+          ],
+          "scores": [
+            0.6419,
+            0.5422,
+            0.5145,
+            0.5011,
+            0.4871
+          ],
+          "scored": true,
+          "first_relevant_rank": 1,
+          "matched": true,
+          "recall@1": 1.0,
+          "precision@1": 1.0,
+          "ndcg@1": 1.0,
+          "recall@3": 1.0,
+          "precision@3": 0.3333,
+          "ndcg@3": 1.0,
+          "recall@5": 1.0,
+          "precision@5": 0.2,
+          "ndcg@5": 1.0
+        },
+        {
+          "query_id": "m52_q02",
+          "topic": "fuel_rate_interpretation",
+          "answerable": true,
+          "n_relevant": 1,
+          "retrieved_doc_ids": [
+            "doc_013",
+            "doc_021",
+            "doc_001",
+            "doc_004",
+            "doc_002"
+          ],
+          "scores": [
+            0.7791,
+            0.5449,
+            0.5311,
+            0.5285,
+            0.5245
+          ],
+          "scored": true,
+          "first_relevant_rank": 1,
+          "matched": true,
+          "recall@1": 1.0,
+          "precision@1": 1.0,
+          "ndcg@1": 1.0,
+          "recall@3": 1.0,
+          "precision@3": 0.3333,
+          "ndcg@3": 1.0,
+          "recall@5": 1.0,
+          "precision@5": 0.2,
+          "ndcg@5": 1.0
+        },
+        {
+          "query_id": "m52_q03",
+          "topic": "fuel_consumption_fundamentals",
+          "answerable": true,
+          "n_relevant": 1,
+          "retrieved_doc_ids": [
+            "doc_002",
+            "doc_021",
+            "doc_013",
+            "doc_001",
+            "doc_014"
+          ],
+          "scores": [
+            0.836,
+            0.6329,
+            0.6128,
+            0.5619,
+            0.5549
+          ],
+          "scored": true,
+          "first_relevant_rank": 1,
+          "matched": true,
+          "recall@1": 1.0,
+          "precision@1": 1.0,
+          "ndcg@1": 1.0,
+          "recall@3": 1.0,
+          "precision@3": 0.3333,
+          "ndcg@3": 1.0,
+          "recall@5": 1.0,
+          "precision@5": 0.2,
+          "ndcg@5": 1.0
+        },
+        {
+          "query_id": "m52_q04",
+          "topic": "engine_load_fuel_demand",
+          "answerable": true,
+          "n_relevant": 1,
+          "retrieved_doc_ids": [
+            "doc_003",
+            "doc_007",
+            "doc_001",
+            "doc_009",
+            "doc_010"
+          ],
+          "scores": [
+            0.7108,
+            0.6061,
+            0.5988,
+            0.4908,
+            0.487
+          ],
+          "scored": true,
+          "first_relevant_rank": 1,
+          "matched": true,
+          "recall@1": 1.0,
+          "precision@1": 1.0,
+          "ndcg@1": 1.0,
+          "recall@3": 1.0,
+          "precision@3": 0.3333,
+          "ndcg@3": 1.0,
+          "recall@5": 1.0,
+          "precision@5": 0.2,
+          "ndcg@5": 1.0
+        },
+        {
+          "query_id": "m52_q05",
+          "topic": "rpm_torque_relationships",
+          "answerable": true,
+          "n_relevant": 1,
+          "retrieved_doc_ids": [
+            "doc_006",
+            "doc_012",
+            "doc_011",
+            "doc_001",
+            "doc_010"
+          ],
+          "scores": [
+            0.6978,
+            0.5557,
+            0.5435,
+            0.5366,
+            0.4836
+          ],
+          "scored": true,
+          "first_relevant_rank": 1,
+          "matched": true,
+          "recall@1": 1.0,
+          "precision@1": 1.0,
+          "ndcg@1": 1.0,
+          "recall@3": 1.0,
+          "precision@3": 0.3333,
+          "ndcg@3": 1.0,
+          "recall@5": 1.0,
+          "precision@5": 0.2,
+          "ndcg@5": 1.0
+        },
+        {
+          "query_id": "m52_q06",
+          "topic": "payload_effects",
+          "answerable": true,
+          "n_relevant": 1,
+          "retrieved_doc_ids": [
+            "doc_007",
+            "doc_001",
+            "doc_012",
+            "doc_003",
+            "doc_008"
+          ],
+          "scores": [
+            0.773,
+            0.5566,
+            0.5474,
+            0.4799,
+            0.4654
+          ],
+          "scored": true,
+          "first_relevant_rank": 1,
+          "matched": true,
+          "recall@1": 1.0,
+          "precision@1": 1.0,
+          "ndcg@1": 1.0,
+          "recall@3": 1.0,
+          "precision@3": 0.3333,
+          "ndcg@3": 1.0,
+          "recall@5": 1.0,
+          "precision@5": 0.2,
+          "ndcg@5": 1.0
+        },
+        {
+          "query_id": "m52_q07",
+          "topic": "road_grade_effects",
+          "answerable": true,
+          "n_relevant": 2,
+          "retrieved_doc_ids": [
+            "doc_009",
+            "doc_007",
+            "doc_012",
+            "doc_010",
+            "doc_001"
+          ],
+          "scores": [
+            0.8344,
+            0.6195,
+            0.5741,
+            0.5584,
+            0.5262
+          ],
+          "scored": true,
+          "first_relevant_rank": 1,
+          "matched": true,
+          "recall@1": 0.5,
+          "precision@1": 1.0,
+          "ndcg@1": 1.0,
+          "recall@3": 0.5,
+          "precision@3": 0.3333,
+          "ndcg@3": 0.6131,
+          "recall@5": 1.0,
+          "precision@5": 0.4,
+          "ndcg@5": 0.8772
+        },
+        {
+          "query_id": "m52_q08",
+          "topic": "road_grade_effects",
+          "answerable": true,
+          "n_relevant": 2,
+          "retrieved_doc_ids": [
+            "doc_009",
+            "doc_010",
+            "doc_012",
+            "doc_001",
+            "doc_007"
+          ],
+          "scores": [
+            0.6808,
+            0.6231,
+            0.572,
+            0.536,
+            0.5265
+          ],
+          "scored": true,
+          "first_relevant_rank": 1,
+          "matched": true,
+          "recall@1": 0.5,
+          "precision@1": 1.0,
+          "ndcg@1": 1.0,
+          "recall@3": 1.0,
+          "precision@3": 0.6667,
+          "ndcg@3": 1.0,
+          "recall@5": 1.0,
+          "precision@5": 0.4,
+          "ndcg@5": 1.0
+        },
+        {
+          "query_id": "m52_q09",
+          "topic": "engine_load_fuel_demand",
+          "answerable": true,
+          "n_relevant": 1,
+          "retrieved_doc_ids": [
+            "doc_004",
+            "doc_001",
+            "doc_002",
+            "doc_021",
+            "doc_014"
+          ],
+          "scores": [
+            0.6508,
+            0.5656,
+            0.4713,
+            0.4594,
+            0.4553
+          ],
+          "scored": true,
+          "first_relevant_rank": 1,
+          "matched": true,
+          "recall@1": 1.0,
+          "precision@1": 1.0,
+          "ndcg@1": 1.0,
+          "recall@3": 1.0,
+          "precision@3": 0.3333,
+          "ndcg@3": 1.0,
+          "recall@5": 1.0,
+          "precision@5": 0.2,
+          "ndcg@5": 1.0
+        },
+        {
+          "query_id": "m52_q10",
+          "topic": "speed_variability_driving_behaviour",
+          "answerable": true,
+          "n_relevant": 1,
+          "retrieved_doc_ids": [
+            "doc_012",
+            "doc_001",
+            "doc_011",
+            "doc_006",
+            "doc_007"
+          ],
+          "scores": [
+            0.7259,
+            0.6059,
+            0.6024,
+            0.5521,
+            0.5143
+          ],
+          "scored": true,
+          "first_relevant_rank": 1,
+          "matched": true,
+          "recall@1": 1.0,
+          "precision@1": 1.0,
+          "ndcg@1": 1.0,
+          "recall@3": 1.0,
+          "precision@3": 0.3333,
+          "ndcg@3": 1.0,
+          "recall@5": 1.0,
+          "precision@5": 0.2,
+          "ndcg@5": 1.0
+        },
+        {
+          "query_id": "m52_q11",
+          "topic": "speed_variability_driving_behaviour",
+          "answerable": true,
+          "n_relevant": 1,
+          "retrieved_doc_ids": [
+            "doc_011",
+            "doc_010",
+            "doc_001",
+            "doc_009",
+            "doc_012"
+          ],
+          "scores": [
+            0.5804,
+            0.3681,
+            0.2984,
+            0.2819,
+            0.2766
+          ],
+          "scored": true,
+          "first_relevant_rank": 1,
+          "matched": true,
+          "recall@1": 1.0,
+          "precision@1": 1.0,
+          "ndcg@1": 1.0,
+          "recall@3": 1.0,
+          "precision@3": 0.3333,
+          "ndcg@3": 1.0,
+          "recall@5": 1.0,
+          "precision@5": 0.2,
+          "ndcg@5": 1.0
+        },
+        {
+          "query_id": "m52_q12",
+          "topic": "rpm_torque_relationships",
+          "answerable": true,
+          "n_relevant": 2,
+          "retrieved_doc_ids": [
+            "doc_006",
+            "doc_010",
+            "doc_011",
+            "doc_012",
+            "doc_017"
+          ],
+          "scores": [
+            0.6046,
+            0.5339,
+            0.5035,
+            0.4751,
+            0.4443
+          ],
+          "scored": true,
+          "first_relevant_rank": 1,
+          "matched": true,
+          "recall@1": 0.5,
+          "precision@1": 1.0,
+          "ndcg@1": 1.0,
+          "recall@3": 0.5,
+          "precision@3": 0.3333,
+          "ndcg@3": 0.6131,
+          "recall@5": 0.5,
+          "precision@5": 0.2,
+          "ndcg@5": 0.6131
+        },
+        {
+          "query_id": "m52_q13",
+          "topic": "road_grade_effects",
+          "answerable": true,
+          "n_relevant": 2,
+          "retrieved_doc_ids": [
+            "doc_009",
+            "doc_007",
+            "doc_001",
+            "doc_012",
+            "doc_008"
+          ],
+          "scores": [
+            0.6681,
+            0.6366,
+            0.5868,
+            0.5672,
+            0.5671
+          ],
+          "scored": true,
+          "first_relevant_rank": 1,
+          "matched": true,
+          "recall@1": 0.5,
+          "precision@1": 1.0,
+          "ndcg@1": 1.0,
+          "recall@3": 1.0,
+          "precision@3": 0.6667,
+          "ndcg@3": 1.0,
+          "recall@5": 1.0,
+          "precision@5": 0.4,
+          "ndcg@5": 1.0
+        },
+        {
+          "query_id": "m52_q14",
+          "topic": "driver_feedback_safety",
+          "answerable": true,
+          "n_relevant": 2,
+          "retrieved_doc_ids": [
+            "doc_017",
+            "doc_018",
+            "doc_010",
+            "doc_011",
+            "doc_020"
+          ],
+          "scores": [
+            0.6723,
+            0.6383,
+            0.4026,
+            0.3147,
+            0.3039
+          ],
+          "scored": true,
+          "first_relevant_rank": 1,
+          "matched": true,
+          "recall@1": 0.5,
+          "precision@1": 1.0,
+          "ndcg@1": 1.0,
+          "recall@3": 1.0,
+          "precision@3": 0.6667,
+          "ndcg@3": 1.0,
+          "recall@5": 1.0,
+          "precision@5": 0.4,
+          "ndcg@5": 1.0
+        },
+        {
+          "query_id": "m52_q15",
+          "topic": "shap_interpretation",
+          "answerable": true,
+          "n_relevant": 2,
+          "retrieved_doc_ids": [
+            "doc_015",
+            "doc_003",
+            "doc_001",
+            "doc_016",
+            "doc_007"
+          ],
+          "scores": [
+            0.7327,
+            0.5557,
+            0.4919,
+            0.4838,
+            0.4406
+          ],
+          "scored": true,
+          "first_relevant_rank": 1,
+          "matched": true,
+          "recall@1": 0.5,
+          "precision@1": 1.0,
+          "ndcg@1": 1.0,
+          "recall@3": 0.5,
+          "precision@3": 0.3333,
+          "ndcg@3": 0.6131,
+          "recall@5": 1.0,
+          "precision@5": 0.4,
+          "ndcg@5": 0.8772
+        },
+        {
+          "query_id": "m52_q16",
+          "topic": "model_limitations",
+          "answerable": true,
+          "n_relevant": 2,
+          "retrieved_doc_ids": [
+            "doc_019",
+            "doc_020",
+            "doc_021",
+            "doc_013",
+            "doc_017"
+          ],
+          "scores": [
+            0.7948,
+            0.4884,
+            0.4538,
+            0.4466,
+            0.4212
+          ],
+          "scored": true,
+          "first_relevant_rank": 1,
+          "matched": true,
+          "recall@1": 0.5,
+          "precision@1": 1.0,
+          "ndcg@1": 1.0,
+          "recall@3": 1.0,
+          "precision@3": 0.6667,
+          "ndcg@3": 1.0,
+          "recall@5": 1.0,
+          "precision@5": 0.4,
+          "ndcg@5": 1.0
+        },
+        {
+          "query_id": "m52_q17",
+          "topic": "shap_interpretation",
+          "answerable": true,
+          "n_relevant": 1,
+          "retrieved_doc_ids": [
+            "doc_015",
+            "doc_016",
+            "doc_017",
+            "doc_021",
+            "doc_013"
+          ],
+          "scores": [
+            0.8684,
+            0.6201,
+            0.3769,
+            0.3737,
+            0.3514
+          ],
+          "scored": true,
+          "first_relevant_rank": 1,
+          "matched": true,
+          "recall@1": 1.0,
+          "precision@1": 1.0,
+          "ndcg@1": 1.0,
+          "recall@3": 1.0,
+          "precision@3": 0.3333,
+          "ndcg@3": 1.0,
+          "recall@5": 1.0,
+          "precision@5": 0.2,
+          "ndcg@5": 1.0
+        },
+        {
+          "query_id": "m52_q18",
+          "topic": "speed_variability_driving_behaviour",
+          "answerable": true,
+          "n_relevant": 1,
+          "retrieved_doc_ids": [
+            "doc_012",
+            "doc_009",
+            "doc_014",
+            "doc_021",
+            "doc_001"
+          ],
+          "scores": [
+            0.6722,
+            0.5123,
+            0.4615,
+            0.3825,
+            0.376
+          ],
+          "scored": true,
+          "first_relevant_rank": 1,
+          "matched": true,
+          "recall@1": 1.0,
+          "precision@1": 1.0,
+          "ndcg@1": 1.0,
+          "recall@3": 1.0,
+          "precision@3": 0.3333,
+          "ndcg@3": 1.0,
+          "recall@5": 1.0,
+          "precision@5": 0.2,
+          "ndcg@5": 1.0
+        },
+        {
+          "query_id": "m52_q19",
+          "topic": "model_limitations",
+          "answerable": true,
+          "n_relevant": 1,
+          "retrieved_doc_ids": [
+            "doc_021",
+            "doc_002",
+            "doc_013",
+            "doc_014",
+            "doc_001"
+          ],
+          "scores": [
+            0.7897,
+            0.6516,
+            0.6261,
+            0.5291,
+            0.5034
+          ],
+          "scored": true,
+          "first_relevant_rank": 1,
+          "matched": true,
+          "recall@1": 1.0,
+          "precision@1": 1.0,
+          "ndcg@1": 1.0,
+          "recall@3": 1.0,
+          "precision@3": 0.3333,
+          "ndcg@3": 1.0,
+          "recall@5": 1.0,
+          "precision@5": 0.2,
+          "ndcg@5": 1.0
+        },
+        {
+          "query_id": "m52_q20",
+          "topic": "unanswerable",
+          "answerable": false,
+          "n_relevant": 0,
+          "retrieved_doc_ids": [
+            "doc_001",
+            "doc_014",
+            "doc_008",
+            "doc_012",
+            "doc_013"
+          ],
+          "scores": [
+            0.4383,
+            0.4125,
+            0.4062,
+            0.3857,
+            0.3681
+          ],
+          "scored": false
+        },
+        {
+          "query_id": "m52_q21",
+          "topic": "unanswerable",
+          "answerable": false,
+          "n_relevant": 0,
+          "retrieved_doc_ids": [
+            "doc_014",
+            "doc_001",
+            "doc_004",
+            "doc_008",
+            "doc_002"
+          ],
+          "scores": [
+            0.2749,
+            0.2601,
+            0.2055,
+            0.2031,
+            0.1956
+          ],
+          "scored": false
+        },
+        {
+          "query_id": "m52_q22",
+          "topic": "unanswerable",
+          "answerable": false,
+          "n_relevant": 0,
+          "retrieved_doc_ids": [
+            "doc_006",
+            "doc_005",
+            "doc_021",
+            "doc_020",
+            "doc_013"
+          ],
+          "scores": [
+            0.2716,
+            0.2615,
+            0.2152,
+            0.1593,
+            0.1551
+          ],
+          "scored": false
+        },
+        {
+          "query_id": "m52_q23",
+          "topic": "unanswerable",
+          "answerable": false,
+          "n_relevant": 0,
+          "retrieved_doc_ids": [
+            "doc_012",
+            "doc_014",
+            "doc_001",
+            "doc_008",
+            "doc_013"
+          ],
+          "scores": [
+            0.575,
+            0.5724,
+            0.5381,
+            0.4294,
+            0.3996
+          ],
+          "scored": false
+        },
+        {
+          "query_id": "m52_q24",
+          "topic": "abstention_guarantee",
+          "answerable": false,
+          "n_relevant": 0,
+          "retrieved_doc_ids": [
+            "doc_021",
+            "doc_017",
+            "doc_014",
+            "doc_013",
+            "doc_002"
+          ],
+          "scores": [
+            0.5364,
+            0.4637,
+            0.3999,
+            0.3903,
+            0.3606
+          ],
+          "scored": false
+        },
+        {
+          "query_id": "m52_q25",
+          "topic": "abstention_real_world",
+          "answerable": false,
+          "n_relevant": 0,
+          "retrieved_doc_ids": [
+            "doc_019",
+            "doc_020",
+            "doc_013",
+            "doc_004",
+            "doc_008"
+          ],
+          "scores": [
+            0.4993,
+            0.4912,
+            0.3379,
+            0.2938,
+            0.2784
+          ],
+          "scored": false
+        },
+        {
+          "query_id": "m52_q26",
+          "topic": "unanswerable",
+          "answerable": false,
+          "n_relevant": 0,
+          "retrieved_doc_ids": [
+            "doc_014",
+            "doc_013",
+            "doc_018",
+            "doc_015",
+            "doc_021"
+          ],
+          "scores": [
+            0.1393,
+            0.1121,
+            0.1004,
+            0.0599,
+            0.0568
+          ],
+          "scored": false
+        }
+      ]
+    }
+  },
+  "grounding": {
+    "dimension": "answer-grounding (separate from retrieval metrics)",
+    "labeling_notice": "Grounding/relevance labels are curated for the synthetic environment; not an independent external human review.",
+    "grounding": [
+      {
+        "query_id": "m52_q01",
+        "user_query": "What actually determines how much fuel a heavy-duty truck burns in a given moment?",
+        "answerable": true,
+        "manual_label": {
+          "supported_by_evidence": true,
+          "source_attribution_correct": true,
+          "oem_mislabeling": false,
+          "uncertainty_communicated": true,
+          "claim_absent_from_evidence": false
+        },
+        "grounding_check": {
+          "claim_support": {
+            "n_sentences": 3,
+            "n_claims": 2,
+            "n_provenance": 1,
+            "n_grounded": 2,
+            "n_ungrounded": 0,
+            "grounded_fraction": 1.0,
+            "ungrounded_sentences": []
+          },
+          "oem_mislabeling_ok": true,
+          "source_attribution_ok": true,
+          "uncertainty_communicated": false
+        },
+        "retrieved_doc_ids": [
+          "doc_001",
+          "doc_004",
+          "doc_008",
+          "doc_012",
+          "doc_013"
+        ]
+      },
+      {
+        "query_id": "m52_q02",
+        "user_query": "Why should one instantaneous fuel-rate reading never be used to judge me or my truck?",
+        "answerable": true,
+        "manual_label": {
+          "supported_by_evidence": true,
+          "source_attribution_correct": true,
+          "oem_mislabeling": false,
+          "uncertainty_communicated": true,
+          "claim_absent_from_evidence": false
+        },
+        "grounding_check": {
+          "claim_support": {
+            "n_sentences": 3,
+            "n_claims": 2,
+            "n_provenance": 1,
+            "n_grounded": 2,
+            "n_ungrounded": 0,
+            "grounded_fraction": 1.0,
+            "ungrounded_sentences": []
+          },
+          "oem_mislabeling_ok": true,
+          "source_attribution_ok": true,
+          "uncertainty_communicated": false
+        },
+        "retrieved_doc_ids": [
+          "doc_001",
+          "doc_002",
+          "doc_004",
+          "doc_013",
+          "doc_021"
+        ]
+      },
+      {
+        "query_id": "m52_q03",
+        "user_query": "What is the difference between instantaneous fuel rate and total fuel used over a trip?",
+        "answerable": true,
+        "manual_label": {
+          "supported_by_evidence": true,
+          "source_attribution_correct": true,
+          "oem_mislabeling": false,
+          "uncertainty_communicated": false,
+          "claim_absent_from_evidence": false
+        },
+        "grounding_check": {
+          "claim_support": {
+            "n_sentences": 3,
+            "n_claims": 2,
+            "n_provenance": 1,
+            "n_grounded": 2,
+            "n_ungrounded": 0,
+            "grounded_fraction": 1.0,
+            "ungrounded_sentences": []
+          },
+          "oem_mislabeling_ok": true,
+          "source_attribution_ok": true,
+          "uncertainty_communicated": false
+        },
+        "retrieved_doc_ids": [
+          "doc_001",
+          "doc_002",
+          "doc_013",
+          "doc_014",
+          "doc_021"
+        ]
+      },
+      {
+        "query_id": "m52_q04",
+        "user_query": "Why does fuel rate go up when the engine load increases?",
+        "answerable": true,
+        "manual_label": {
+          "supported_by_evidence": true,
+          "source_attribution_correct": true,
+          "oem_mislabeling": false,
+          "uncertainty_communicated": true,
+          "claim_absent_from_evidence": false
+        },
+        "grounding_check": {
+          "claim_support": {
+            "n_sentences": 3,
+            "n_claims": 1,
+            "n_provenance": 2,
+            "n_grounded": 1,
+            "n_ungrounded": 0,
+            "grounded_fraction": 1.0,
+            "ungrounded_sentences": []
+          },
+          "oem_mislabeling_ok": true,
+          "source_attribution_ok": true,
+          "uncertainty_communicated": true
+        },
+        "retrieved_doc_ids": [
+          "doc_001",
+          "doc_003",
+          "doc_007",
+          "doc_009",
+          "doc_010"
+        ]
+      },
+      {
+        "query_id": "m52_q05",
+        "user_query": "Why does running at very high RPM waste fuel even at the same road speed?",
+        "answerable": true,
+        "manual_label": {
+          "supported_by_evidence": true,
+          "source_attribution_correct": true,
+          "oem_mislabeling": false,
+          "uncertainty_communicated": true,
+          "claim_absent_from_evidence": false
+        },
+        "grounding_check": {
+          "claim_support": {
+            "n_sentences": 3,
+            "n_claims": 2,
+            "n_provenance": 1,
+            "n_grounded": 2,
+            "n_ungrounded": 0,
+            "grounded_fraction": 1.0,
+            "ungrounded_sentences": []
+          },
+          "oem_mislabeling_ok": true,
+          "source_attribution_ok": true,
+          "uncertainty_communicated": true
+        },
+        "retrieved_doc_ids": [
+          "doc_001",
+          "doc_006",
+          "doc_010",
+          "doc_011",
+          "doc_012"
+        ]
+      },
+      {
+        "query_id": "m52_q06",
+        "user_query": "Why does a heavier payload increase my fuel consumption?",
+        "answerable": true,
+        "manual_label": {
+          "supported_by_evidence": true,
+          "source_attribution_correct": true,
+          "oem_mislabeling": false,
+          "uncertainty_communicated": false,
+          "claim_absent_from_evidence": false
+        },
+        "grounding_check": {
+          "claim_support": {
+            "n_sentences": 2,
+            "n_claims": 1,
+            "n_provenance": 1,
+            "n_grounded": 1,
+            "n_ungrounded": 0,
+            "grounded_fraction": 1.0,
+            "ungrounded_sentences": []
+          },
+          "oem_mislabeling_ok": true,
+          "source_attribution_ok": true,
+          "uncertainty_communicated": false
+        },
+        "retrieved_doc_ids": [
+          "doc_001",
+          "doc_003",
+          "doc_007",
+          "doc_008",
+          "doc_012"
+        ]
+      },
+      {
+        "query_id": "m52_q07",
+        "user_query": "Why does climbing an uphill grade demand more fuel?",
+        "answerable": true,
+        "manual_label": {
+          "supported_by_evidence": true,
+          "source_attribution_correct": true,
+          "oem_mislabeling": false,
+          "uncertainty_communicated": false,
+          "claim_absent_from_evidence": false
+        },
+        "grounding_check": {
+          "claim_support": {
+            "n_sentences": 3,
+            "n_claims": 2,
+            "n_provenance": 1,
+            "n_grounded": 2,
+            "n_ungrounded": 0,
+            "grounded_fraction": 1.0,
+            "ungrounded_sentences": []
+          },
+          "oem_mislabeling_ok": true,
+          "source_attribution_ok": true,
+          "uncertainty_communicated": false
+        },
+        "retrieved_doc_ids": [
+          "doc_001",
+          "doc_007",
+          "doc_009",
+          "doc_010",
+          "doc_012"
+        ]
+      },
+      {
+        "query_id": "m52_q08",
+        "user_query": "How can a driver reduce peak fuel demand on a long uphill climb with a heavy load?",
+        "answerable": true,
+        "manual_label": {
+          "supported_by_evidence": true,
+          "source_attribution_correct": true,
+          "oem_mislabeling": false,
+          "uncertainty_communicated": true,
+          "claim_absent_from_evidence": false
+        },
+        "grounding_check": {
+          "claim_support": {
+            "n_sentences": 2,
+            "n_claims": 1,
+            "n_provenance": 1,
+            "n_grounded": 1,
+            "n_ungrounded": 0,
+            "grounded_fraction": 1.0,
+            "ungrounded_sentences": []
+          },
+          "oem_mislabeling_ok": true,
+          "source_attribution_ok": true,
+          "uncertainty_communicated": false
+        },
+        "retrieved_doc_ids": [
+          "doc_001",
+          "doc_007",
+          "doc_009",
+          "doc_010",
+          "doc_012"
+        ]
+      },
+      {
+        "query_id": "m52_q09",
+        "user_query": "A truck idles for a long time during loading. What does the material say about fuel use?",
+        "answerable": true,
+        "manual_label": {
+          "supported_by_evidence": true,
+          "source_attribution_correct": true,
+          "oem_mislabeling": false,
+          "uncertainty_communicated": false,
+          "claim_absent_from_evidence": false
+        },
+        "grounding_check": {
+          "claim_support": {
+            "n_sentences": 2,
+            "n_claims": 1,
+            "n_provenance": 1,
+            "n_grounded": 1,
+            "n_ungrounded": 0,
+            "grounded_fraction": 1.0,
+            "ungrounded_sentences": []
+          },
+          "oem_mislabeling_ok": true,
+          "source_attribution_ok": true,
+          "uncertainty_communicated": false
+        },
+        "retrieved_doc_ids": [
+          "doc_001",
+          "doc_002",
+          "doc_004",
+          "doc_014",
+          "doc_021"
+        ]
+      },
+      {
+        "query_id": "m52_q10",
+        "user_query": "Why does a highway trip at high average speed use disproportionately more fuel?",
+        "answerable": true,
+        "manual_label": {
+          "supported_by_evidence": true,
+          "source_attribution_correct": true,
+          "oem_mislabeling": false,
+          "uncertainty_communicated": false,
+          "claim_absent_from_evidence": false
+        },
+        "grounding_check": {
+          "claim_support": {
+            "n_sentences": 3,
+            "n_claims": 2,
+            "n_provenance": 1,
+            "n_grounded": 2,
+            "n_ungrounded": 0,
+            "grounded_fraction": 1.0,
+            "ungrounded_sentences": []
+          },
+          "oem_mislabeling_ok": true,
+          "source_attribution_ok": true,
+          "uncertainty_communicated": true
+        },
+        "retrieved_doc_ids": [
+          "doc_001",
+          "doc_006",
+          "doc_007",
+          "doc_011",
+          "doc_012"
+        ]
+      },
+      {
+        "query_id": "m52_q11",
+        "user_query": "Frequent acceleration followed by hard braking is hurting my economy. Why?",
+        "answerable": true,
+        "manual_label": {
+          "supported_by_evidence": true,
+          "source_attribution_correct": true,
+          "oem_mislabeling": false,
+          "uncertainty_communicated": false,
+          "claim_absent_from_evidence": false
+        },
+        "grounding_check": {
+          "claim_support": {
+            "n_sentences": 2,
+            "n_claims": 1,
+            "n_provenance": 1,
+            "n_grounded": 1,
+            "n_ungrounded": 0,
+            "grounded_fraction": 1.0,
+            "ungrounded_sentences": []
+          },
+          "oem_mislabeling_ok": true,
+          "source_attribution_ok": true,
+          "uncertainty_communicated": false
+        },
+        "retrieved_doc_ids": [
+          "doc_001",
+          "doc_009",
+          "doc_010",
+          "doc_011",
+          "doc_012"
+        ]
+      },
+      {
+        "query_id": "m52_q12",
+        "user_query": "Which gear and RPM strategy saves fuel when cruising at a set road speed?",
+        "answerable": true,
+        "manual_label": {
+          "supported_by_evidence": true,
+          "source_attribution_correct": true,
+          "oem_mislabeling": false,
+          "uncertainty_communicated": true,
+          "claim_absent_from_evidence": false
+        },
+        "grounding_check": {
+          "claim_support": {
+            "n_sentences": 2,
+            "n_claims": 1,
+            "n_provenance": 1,
+            "n_grounded": 0,
+            "n_ungrounded": 1,
+            "grounded_fraction": 0.0,
+            "ungrounded_sentences": [
+              "Cruise at a moderate RPM in the correct gear to lower friction and pumping losses, and operate in the favourable torque band around rated RPM for best efficiency."
+            ]
+          },
+          "oem_mislabeling_ok": true,
+          "source_attribution_ok": true,
+          "uncertainty_communicated": false
+        },
+        "retrieved_doc_ids": [
+          "doc_006",
+          "doc_010",
+          "doc_011",
+          "doc_012",
+          "doc_017"
+        ]
+      },
+      {
+        "query_id": "m52_q13",
+        "user_query": "Compare fuel use on level ground versus on an uphill grade for the same truck and payload.",
+        "answerable": true,
+        "manual_label": {
+          "supported_by_evidence": true,
+          "source_attribution_correct": true,
+          "oem_mislabeling": false,
+          "uncertainty_communicated": true,
+          "claim_absent_from_evidence": false
+        },
+        "grounding_check": {
+          "claim_support": {
+            "n_sentences": 2,
+            "n_claims": 1,
+            "n_provenance": 1,
+            "n_grounded": 1,
+            "n_ungrounded": 0,
+            "grounded_fraction": 1.0,
+            "ungrounded_sentences": []
+          },
+          "oem_mislabeling_ok": true,
+          "source_attribution_ok": true,
+          "uncertainty_communicated": true
+        },
+        "retrieved_doc_ids": [
+          "doc_001",
+          "doc_007",
+          "doc_008",
+          "doc_009",
+          "doc_012"
+        ]
+      },
+      {
+        "query_id": "m52_q14",
+        "user_query": "What should driver feedback do to be actionable and non-judgemental?",
+        "answerable": true,
+        "manual_label": {
+          "supported_by_evidence": true,
+          "source_attribution_correct": true,
+          "oem_mislabeling": false,
+          "uncertainty_communicated": false,
+          "claim_absent_from_evidence": false
+        },
+        "grounding_check": {
+          "claim_support": {
+            "n_sentences": 2,
+            "n_claims": 1,
+            "n_provenance": 1,
+            "n_grounded": 1,
+            "n_ungrounded": 0,
+            "grounded_fraction": 1.0,
+            "ungrounded_sentences": []
+          },
+          "oem_mislabeling_ok": true,
+          "source_attribution_ok": true,
+          "uncertainty_communicated": false
+        },
+        "retrieved_doc_ids": [
+          "doc_010",
+          "doc_011",
+          "doc_017",
+          "doc_018",
+          "doc_020"
+        ]
+      },
+      {
+        "query_id": "m52_q15",
+        "user_query": "A SHAP explanation shows a large positive attribution for engine load. Does that mean engine load caused the high fuel rate?",
+        "answerable": true,
+        "manual_label": {
+          "supported_by_evidence": true,
+          "source_attribution_correct": true,
+          "oem_mislabeling": false,
+          "uncertainty_communicated": true,
+          "claim_absent_from_evidence": false
+        },
+        "grounding_check": {
+          "claim_support": {
+            "n_sentences": 3,
+            "n_claims": 1,
+            "n_provenance": 2,
+            "n_grounded": 1,
+            "n_ungrounded": 0,
+            "grounded_fraction": 1.0,
+            "ungrounded_sentences": []
+          },
+          "oem_mislabeling_ok": true,
+          "source_attribution_ok": true,
+          "uncertainty_communicated": true
+        },
+        "retrieved_doc_ids": [
+          "doc_001",
+          "doc_003",
+          "doc_007",
+          "doc_015",
+          "doc_016"
+        ]
+      },
+      {
+        "query_id": "m52_q16",
+        "user_query": "Can a fuel-rate model trained on this synthetic dataset be trusted on real, unseen trucks?",
+        "answerable": true,
+        "manual_label": {
+          "supported_by_evidence": true,
+          "source_attribution_correct": true,
+          "oem_mislabeling": false,
+          "uncertainty_communicated": true,
+          "claim_absent_from_evidence": false
+        },
+        "grounding_check": {
+          "claim_support": {
+            "n_sentences": 2,
+            "n_claims": 1,
+            "n_provenance": 1,
+            "n_grounded": 1,
+            "n_ungrounded": 0,
+            "grounded_fraction": 1.0,
+            "ungrounded_sentences": []
+          },
+          "oem_mislabeling_ok": true,
+          "source_attribution_ok": true,
+          "uncertainty_communicated": true
+        },
+        "retrieved_doc_ids": [
+          "doc_013",
+          "doc_017",
+          "doc_019",
+          "doc_020",
+          "doc_021"
+        ]
+      },
+      {
+        "query_id": "m52_q17",
+        "user_query": "What does a negative SHAP attribution on a fuel-rate prediction mean?",
+        "answerable": true,
+        "manual_label": {
+          "supported_by_evidence": true,
+          "source_attribution_correct": true,
+          "oem_mislabeling": false,
+          "uncertainty_communicated": true,
+          "claim_absent_from_evidence": false
+        },
+        "grounding_check": {
+          "claim_support": {
+            "n_sentences": 2,
+            "n_claims": 1,
+            "n_provenance": 1,
+            "n_grounded": 1,
+            "n_ungrounded": 0,
+            "grounded_fraction": 1.0,
+            "ungrounded_sentences": []
+          },
+          "oem_mislabeling_ok": true,
+          "source_attribution_ok": true,
+          "uncertainty_communicated": false
+        },
+        "retrieved_doc_ids": [
+          "doc_013",
+          "doc_015",
+          "doc_016",
+          "doc_017",
+          "doc_021"
+        ]
+      },
+      {
+        "query_id": "m52_q18",
+        "user_query": "At roughly what speed does the fuel cost per kilometre start to climb steeply from air resistance?",
+        "answerable": true,
+        "manual_label": {
+          "supported_by_evidence": true,
+          "source_attribution_correct": true,
+          "oem_mislabeling": false,
+          "uncertainty_communicated": true,
+          "claim_absent_from_evidence": false
+        },
+        "grounding_check": {
+          "claim_support": {
+            "n_sentences": 2,
+            "n_claims": 1,
+            "n_provenance": 1,
+            "n_grounded": 1,
+            "n_ungrounded": 0,
+            "grounded_fraction": 1.0,
+            "ungrounded_sentences": []
+          },
+          "oem_mislabeling_ok": true,
+          "source_attribution_ok": true,
+          "uncertainty_communicated": true
+        },
+        "retrieved_doc_ids": [
+          "doc_001",
+          "doc_009",
+          "doc_012",
+          "doc_014",
+          "doc_021"
+        ]
+      },
+      {
+        "query_id": "m52_q19",
+        "user_query": "Should consumed-fuel increments be used as features in a model that predicts instantaneous fuel rate?",
+        "answerable": true,
+        "manual_label": {
+          "supported_by_evidence": true,
+          "source_attribution_correct": true,
+          "oem_mislabeling": false,
+          "uncertainty_communicated": false,
+          "claim_absent_from_evidence": false
+        },
+        "grounding_check": {
+          "claim_support": {
+            "n_sentences": 2,
+            "n_claims": 1,
+            "n_provenance": 1,
+            "n_grounded": 1,
+            "n_ungrounded": 0,
+            "grounded_fraction": 1.0,
+            "ungrounded_sentences": []
+          },
+          "oem_mislabeling_ok": true,
+          "source_attribution_ok": true,
+          "uncertainty_communicated": false
+        },
+        "retrieved_doc_ids": [
+          "doc_001",
+          "doc_002",
+          "doc_013",
+          "doc_014",
+          "doc_021"
+        ]
+      }
+    ],
+    "abstention": [
+      {
+        "query_id": "m52_q20",
+        "user_query": "What is the recommended tyre pressure for maximum fuel economy on this truck class?",
+        "abstention_category": "unsupported_technical_spec",
+        "category_valid": true,
+        "abstains_no_fabrication": true,
+        "retrieved_doc_ids": [
+          "doc_001",
+          "doc_008",
+          "doc_012",
+          "doc_013",
+          "doc_014"
+        ]
+      },
+      {
+        "query_id": "m52_q21",
+        "user_query": "Which engine oil or coolant specification should I use in this truck?",
+        "abstention_category": "unsupported_technical_spec",
+        "category_valid": true,
+        "abstains_no_fabrication": true,
+        "retrieved_doc_ids": [
+          "doc_001",
+          "doc_002",
+          "doc_004",
+          "doc_008",
+          "doc_014"
+        ]
+      },
+      {
+        "query_id": "m52_q22",
+        "user_query": "How should missing engine-RPM telemetry be handled in this pipeline?",
+        "abstention_category": "unanswerable_general",
+        "category_valid": true,
+        "abstains_no_fabrication": true,
+        "retrieved_doc_ids": [
+          "doc_005",
+          "doc_006",
+          "doc_013",
+          "doc_020",
+          "doc_021"
+        ]
+      },
+      {
+        "query_id": "m52_q23",
+        "user_query": "What is the expected fuel consumption in litres per 100 km for an average loaded truck?",
+        "abstention_category": "unanswerable_general",
+        "category_valid": true,
+        "abstains_no_fabrication": true,
+        "retrieved_doc_ids": [
+          "doc_001",
+          "doc_008",
+          "doc_012",
+          "doc_013",
+          "doc_014"
+        ]
+      },
+      {
+        "query_id": "m52_q24",
+        "user_query": "Can you guarantee I will save 10% fuel if I follow this guidance?",
+        "abstention_category": "guaranteed_fuel_savings",
+        "category_valid": true,
+        "abstains_no_fabrication": true,
+        "retrieved_doc_ids": [
+          "doc_002",
+          "doc_013",
+          "doc_014",
+          "doc_017",
+          "doc_021"
+        ]
+      },
+      {
+        "query_id": "m52_q25",
+        "user_query": "How accurate is your model in the real world on my actual truck model?",
+        "abstention_category": "real_world_validation",
+        "category_valid": true,
+        "abstains_no_fabrication": true,
+        "retrieved_doc_ids": [
+          "doc_004",
+          "doc_008",
+          "doc_013",
+          "doc_019",
+          "doc_020"
+        ]
+      },
+      {
+        "query_id": "m52_q26",
+        "user_query": "How should I inspect my air filter for blockages?",
+        "abstention_category": "insufficient_evidence",
+        "category_valid": true,
+        "abstains_no_fabrication": true,
+        "retrieved_doc_ids": [
+          "doc_013",
+          "doc_014",
+          "doc_015",
+          "doc_018",
+          "doc_021"
+        ]
+      }
+    ],
+    "summary": {
+      "n_answerable_grounded": 19,
+      "n_abstention": 7,
+      "n_abstention_correct": 7,
+      "n_abstention_invalid_category": 0,
+      "n_answers_fully_grounded": 18,
+      "n_claims_total": 25,
+      "n_claims_ungrounded": 1,
+      "n_answers_oem_ok": 19,
+      "n_answers_attribution_ok": 19,
+      "n_answers_uncertainty": 7
+    }
+  },
+  "caveats": {
+    "corpus_is_synthetic": "All documents are synthetic educational texts (is_oem_manual=false).",
+    "retrieval_relevance_document_level": "Relevance is document-level, assigned from content.",
+    "grounding_heuristic": "Claim support uses a token-overlap heuristic, reported alongside manual labels.",
+    "not_real_world": "No claim describes real-world validation; results are limited to the synthetic research environment.",
+    "historical_reports_preserved": "M2.1, M2.4 and M5.1 reports are untouched."
+  }
+}
