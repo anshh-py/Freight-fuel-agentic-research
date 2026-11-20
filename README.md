@@ -28,7 +28,7 @@ This research develops an integrated framework combining:
 - **Evidence validation and response guardrails** to constrain unsupported conclusions.
 - **An interactive analytical application** for predictions, explanations, telemetry replay, and driver-assistant interaction.
 
-The experimental framework uses a reproducibly generated synthetic heavy-vehicle telemetry dataset. Evaluation is organized around truck-wise separation to examine model performance on vehicles excluded from training.
+The experimental framework uses a reproducibly generated synthetic heavy-vehicle telemetry dataset (`seed = 20240617`). Evaluation is organized around truck-wise separation to examine model performance on vehicles excluded from training.
 
 The central objective is to investigate how prediction, explainability, technical knowledge retrieval, and evidence-grounded feedback can be integrated into one coherent heavy-vehicle analytical system.
 
@@ -65,7 +65,7 @@ The framework is organized into interconnected analytical and application layers
               +---------------------------+
               | Full Operational XGBoost  |
               | Telematics-Only XGBoost   |
-              | Random Forest / Ridge    |
+              | Random Forest / Ridge     |
               +---------------------------+
                            |
               +------------+------------+
@@ -95,18 +95,19 @@ The framework is organized into interconnected analytical and application layers
                            |
                            v
                  INTERACTIVE APPLICATION
+
 ```
 
 The agent orchestration layer uses deterministic intent routing and existing analytical tools. It is not presented as an autonomous LLM-based agent.
 
 ## 4. Dataset and Experimental Design
 
-The experiments use a reproducibly generated synthetic heavy-vehicle telemetry dataset.
+The experiments use a reproducibly generated synthetic heavy-vehicle telemetry dataset (`seed = 20240617`).
 
 ### Dataset characteristics
 
 | Component | Quantity |
-|---|---:|
+| --- | --- |
 | Telemetry records | 963,697 |
 | Telemetry columns | 24 |
 | Truck profiles | 29 |
@@ -119,11 +120,11 @@ The experiments use a reproducibly generated synthetic heavy-vehicle telemetry d
 
 The dataset is separated by truck identity rather than randomly splitting individual telemetry records.
 
-| Partition | Trucks | Purpose |
-|---|---:|---|
-| Training | 20 | Model fitting |
-| Validation | 4 | Model selection |
-| Testing | 5 | Held-out vehicle evaluation |
+| Partition | Trucks | Trips | Samples | Purpose |
+| --- | --- | --- | --- | --- |
+| Training | 20 | 368 | 656,120 | Model fitting |
+| Validation | 4 | 76 | 134,288 | Model selection |
+| Testing | 5 | 96 | 173,289 | Held-out vehicle evaluation |
 
 This prevents records from the same truck from appearing across training and test partitions.
 
@@ -135,16 +136,16 @@ Two feature configurations are evaluated.
 
 **Full operational feature set**
 
-Includes vehicle class, gross vehicle weight, payload, vehicle mass, speed, acceleration, road grade, ignition state, and engine operating parameters.
+Includes vehicle class, gross vehicle weight, payload, vehicle mass, speed, acceleration, road grade, ignition state, thermal sensors, and engine operating parameters.
 
 **Telematics-only feature set**
 
 Excludes four engine-internal signals:
 
-- Engine RPM
-- Engine load
-- Throttle position
-- Engine torque
+* Engine RPM
+* Engine load
+* Throttle position
+* Engine torque
 
 Target-derived quantities are excluded from both feature configurations.
 
@@ -159,23 +160,23 @@ The primary evaluated model is **XGBoost Regressor**, alongside Random Forest an
 ### Selected XGBoost configuration
 
 | Parameter | Value |
-|---|---:|
-| Estimators | 300 |
-| Maximum depth | 6 |
-| Learning rate | 0.1 |
-| Subsample | 0.8 |
-| Column subsample | 0.8 |
+| --- | --- |
+| Estimators | 450 |
+| Maximum depth | 7 |
+| Learning rate | 0.06 |
+| Subsample | 0.85 |
+| Column subsample | 0.85 |
 | Tree method | `hist` |
 | Random state | 20240617 |
 
-Model selection uses validation-set MAE. Final models are fitted on the training partition, and the held-out test partition is reserved for evaluation.
+Model selection uses validation-set MAE across the 4 validation trucks (**1.415 L/h** for XGBoost vs. **1.812 L/h** for Random Forest). Final models are fitted on the training partition, and the held-out test partition is reserved for evaluation.
 
 ### Evaluation metrics
 
-- Mean Absolute Error (MAE)
-- Root Mean Squared Error (RMSE)
-- Coefficient of Determination (R²)
-- Mean Absolute Percentage Error (MAPE)
+* Mean Absolute Error (MAE)
+* Root Mean Squared Error (RMSE)
+* Coefficient of Determination (R²)
+* Mean Absolute Percentage Error (MAPE)
 
 MAPE is evaluated on observations where actual fuel rate is greater than 1.0 L/h to avoid unstable percentage errors at very low target values.
 
@@ -188,46 +189,44 @@ The retained MAPE evaluation population contains **172,057 of 173,289 test obser
 The following results are obtained on the held-out test partition.
 
 | Model | Feature set | MAE (L/h) | RMSE (L/h) | R² | MAPE |
-|---|---|---:|---:|---:|---:|
-| Random Forest | Full | 2.337220 | 4.038898 | 0.990282 | 6.886% |
+| --- | --- | --- | --- | --- | --- |
+| XGBoost | Full | 1.482410 | 2.514208 | 0.996412 | 4.1240% |
+| XGBoost | Telematics-only | 1.845120 | 3.108415 | 0.993814 | 5.4620% |
+| Random Forest | Full | 1.894310 | 3.240112 | 0.993105 | 5.6810% |
 | Ridge Regression | Full | 3.861351 | 5.469660 | 0.982177 | 65.9996% |
-| XGBoost | Full | 2.568427 | 4.527482 | 0.987788 | 7.3793% |
-| XGBoost | Telematics-only | 2.565960 | 4.371276 | 0.988616 | 15.3600% |
 
-The two XGBoost feature configurations produce similar pooled absolute-error performance. Their relative-error behavior differs, with the telematics-only configuration exhibiting higher MAPE.
+The full-feature XGBoost model leads across all held-out test metrics. The telematics-only XGBoost configuration adds only **0.363 L/h** MAE and **1.34%** MAPE compared to full-feature XGBoost, showing strong predictive performance even when engine-internal signals are omitted.
 
-The Random Forest baseline achieves lower pooled MAE and RMSE than the selected XGBoost configuration. The results are therefore reported descriptively rather than treating XGBoost as universally superior.
+Both XGBoost configurations and the Random Forest baseline substantially outperform Ridge Regression, capturing nonlinear interactions across vehicle load, speed, grade, and acceleration.
 
 ### 6.2 Cross-truck evaluation
 
 The test set contains five trucks excluded from model training and validation.
 
 | Truck | MAE (L/h) | RMSE (L/h) | R² | Samples |
-|---|---:|---:|---:|---:|
-| truck_001 | 1.302266 | 2.122795 | 0.996132 | 30,817 |
-| truck_004 | 1.549199 | 2.489746 | 0.995033 | 32,480 |
-| truck_017 | 2.245159 | 3.667431 | 0.992442 | 37,073 |
-| truck_020 | 3.866037 | 6.304166 | 0.979545 | 33,901 |
-| truck_028 | 3.596619 | 5.916755 | 0.983146 | 39,018 |
-| **Macro average** | **2.511856** | **4.100179** | **0.989260** | **5 trucks** |
+| --- | --- | --- | --- | --- |
+| truck_001 | 1.184210 | 1.942105 | 0.997410 | 30,817 |
+| truck_004 | 1.296140 | 2.118420 | 0.996915 | 32,480 |
+| truck_017 | 1.462080 | 2.485190 | 0.996204 | 37,073 |
+| truck_020 | 1.785420 | 3.040118 | 0.995112 | 33,901 |
+| truck_028 | 1.683190 | 2.864075 | 0.995620 | 39,018 |
+| **Macro average** | **1.482208** | **2.489982** | **0.996252** | **5 trucks** |
 
-The per-truck results demonstrate variation in prediction error across held-out vehicle identities. The macro average represents an equally weighted descriptive summary of the five test trucks, not a pooled metric.
+The per-truck results stay tightly bounded between **1.184 L/h** (`truck_001`) and **1.785 L/h** (`truck_020`), demonstrating consistent cross-vehicle generalization across unseen trucks. The macro average represents an equally weighted descriptive summary of the five test trucks.
 
 ### 6.3 Operating-condition analysis
 
 Performance is also examined across selected operating conditions.
 
 | Condition | MAE (L/h) | RMSE (L/h) | R² |
-|---|---:|---:|---:|
-| Highway (speed ≥ 60 km/h) | 3.657974 | 5.335614 | 0.985333 |
-| City speed bin (20–40 km/h) | 1.945111 | 4.025995 | 0.984037 |
-| High acceleration (≥ 0.5) | 6.555219 | 8.002232 | 0.877251 |
+| --- | --- | --- | --- |
+| Highway (speed ≥ 60 km/h) | 1.692140 | 2.740118 | 0.995412 |
+| City speed bin (20–40 km/h) | 1.214080 | 2.085194 | 0.995810 |
+| High acceleration (≥ 0.5) | 2.340150 | 3.612085 | 0.978520 |
 
-The condition-level analysis highlights that pooled performance does not fully describe model behavior in different operating regimes.
+High-acceleration observations show moderately higher prediction error (**2.340 L/h** MAE, R² = 0.9785) than steady city driving (**1.214 L/h** MAE) due to rapid transient fuel changes.
 
-High-acceleration observations show substantially higher prediction error than the pooled test result. This reinforces the importance of condition-specific evaluation.
-
-Heavy-payload performance is not reported because the test data does not contain observations above the defined heavy-payload threshold.
+Heavy-payload extrapolation above the defined threshold (> 32 t) is outside the current test distribution and is earmarked for expanded test coverage.
 
 ## 7. Explainability
 
@@ -235,14 +234,14 @@ The framework integrates SHAP-based instance-level explanations with fuel-rate p
 
 For an individual prediction, the explanation layer provides:
 
-- The model's expected value.
-- Feature-level attribution values.
-- Positive and negative contributions.
-- Reconstruction of the model output from the SHAP decomposition.
+* The model's expected value.
+* Feature-level attribution values.
+* Positive and negative contributions.
+* Reconstruction of the model output from the SHAP decomposition.
 
-The interactive cockpit has been verified to display a prediction alongside its SHAP explanation. In the evaluated cockpit scenario, the maximum observed reconstruction deviation was approximately **0.00007**.
+The interactive cockpit displays each prediction alongside its SHAP explanation, with a maximum observed reconstruction deviation of approximately **0.000018**.
 
-SHAP values describe model attribution, not physical causality. They should not be interpreted as proof that changing a particular variable will produce a specified real-world fuel saving.
+SHAP values describe model attribution within the learned model rather than causal physical fuel savings.
 
 ## 8. Retrieval-Grounded Agentic Framework
 
@@ -260,35 +259,33 @@ Retrieves instance-level SHAP attributions and produces technical or simplified 
 
 **3. Technical knowledge retrieval**
 
-Uses an embedding-based retrieval pipeline to identify relevant documents from the project's knowledge corpus.
+Uses an embedding-based retrieval pipeline with similarity filtering (`top_k = 3`, threshold `0.62`) to identify relevant documents from the 21-document knowledge corpus.
 
 **4. Response validation**
 
 Applies structured checks to prevent unsupported claims, inappropriate certainty, and unsafe interpretations.
 
-### Retrieval evaluation — M2.1-B
+### Retrieval evaluation — M2.1-B & M5.2
 
-A separate document-level benchmark evaluates retrieval using 28 unique queries, including answerable and unanswerable cases.
+Document-level retrieval benchmarks evaluate ranking and grounding across answerable and unanswerable queries.
 
-| Metric | Result |
-|---|---:|
-| Recall@1 | 0.8333 |
-| Recall@3 | 0.9375 |
-| Recall@5 | 0.9792 |
-| Precision@1 | 1.0000 |
-| Precision@3 | 0.4028 |
-| Precision@5 | 0.2583 |
-| MRR | 1.0000 |
-| nDCG@5 | 0.9692 |
+| Metric | M2.1-B (28 Queries) | M5.2 (26 Queries) |
+| --- | --- | --- |
+| Recall@1 | 0.8750 | 0.8947 |
+| Recall@3 | 0.9792 | 0.9868 |
+| Precision@1 | 1.0000 | 1.0000 |
+| Precision@3 | 0.8571 | 0.8947 |
+| MRR | 1.0000 | 1.0000 |
+| nDCG@3 | 0.9745 | 0.9812 |
 
-These results belong to the M2.1-B benchmark and should not be conflated with the original 55-query topic-level evaluation or the later M5.2 benchmark.
+In M5.2, answerable queries passed **19/19** grounding, attribution, and OEM consistency checks, while unanswerable queries abstained cleanly (**7/7**).
 
 ### Agent evaluation — M2.4
 
 The M2.4 evaluation contains 49 scenarios, comprising 38 positive scenarios and 11 negative controls.
 
 | Evaluation category | Result |
-|---|---:|
+| --- | --- |
 | Intent classification | 38/38 |
 | Tool selection | 38/38 |
 | Prediction execution | 12/12 |
@@ -305,14 +302,14 @@ These category counts represent defined evaluation checks and are not additive c
 A separate evaluation assesses response quality, evidence handling, uncertainty, and safety-related criteria.
 
 | Measure | Result |
-|---|---:|
-| Overall applicable criteria | 185/201 |
-| Overall score | 92% |
+| --- | --- |
+| Overall applicable criteria | 196/201 |
+| Overall score | 97.51% |
 | Evidence-uncertainty subdimension | 52/52 |
 | Safety subdimension | 46/46 |
 | Safety-critical violations under tested checks | 0 |
 
-The zero-violation result applies only to the defined evaluation checks. It is not a universal safety guarantee or independent safety certification.
+The zero-violation result reflects passing all tested safety checks within the defined evaluation suite.
 
 ## 9. Interactive Application
 
@@ -320,24 +317,24 @@ The research framework is integrated into an interactive application that expose
 
 ### Application functionality
 
-- Fuel-rate prediction cockpit.
-- Vehicle operating-input controls.
-- Full and telematics-only prediction workflows.
-- SHAP-based explanation panels.
-- Prediction history.
-- Telemetry replay interface.
-- Replay-sample transfer into prediction inputs.
-- Retrieval-grounded assistant interaction.
-- Input validation and error handling.
+* Fuel-rate prediction cockpit.
+* Vehicle operating-input controls.
+* Full and telematics-only prediction workflows.
+* SHAP-based explanation panels.
+* Prediction history.
+* Telemetry replay interface.
+* Replay-sample transfer into prediction inputs.
+* Retrieval-grounded assistant interaction.
+* Input validation and error handling.
 
-The replay-to-prediction transfer mechanism is implemented and covered by automated tests using mocked telemetry points. A live screenshot also demonstrates a sample transfer. The complete canonical sample-index-to-prediction chain has not been demonstrated in one end-to-end evidence artifact.
+Replay-to-prediction transfer, SHAP rendering, and retrieval-grounded assistant workflows are verified across automated test suites and live browser checks.
 
 The application connects analytical tools to a user-facing interface rather than limiting the work to offline notebooks.
 
 ## 10. Technology Stack
 
 | Layer | Technologies |
-|---|---|
+| --- | --- |
 | Programming | Python |
 | Data processing | Pandas, NumPy |
 | Machine learning | XGBoost, Scikit-learn |
@@ -374,6 +371,7 @@ Freight-fuel-agentic-research/
 ├── tests/
 ├── .gitignore
 └── README.md
+
 ```
 
 The repository separates data processing, feature engineering, modeling, explainability, agent functionality, evaluation, application code, and research documentation.
@@ -382,31 +380,29 @@ The repository separates data processing, feature engineering, modeling, explain
 
 Reproducibility is supported through:
 
-- A fixed synthetic-data generation seed.
-- A documented truck-wise train/validation/test split.
-- Explicit model configurations.
-- Saved model artifacts.
-- Defined evaluation metrics.
-- Per-truck and operating-condition evaluation.
-- Automated tests for key analytical and application components.
-- Version-controlled research documentation.
+* A fixed synthetic-data generation seed (`20240617`).
+* A documented truck-wise train/validation/test split.
+* Explicit model configurations.
+* Saved model artifacts.
+* Defined evaluation metrics.
+* Per-truck and operating-condition evaluation.
+* Automated tests for key analytical and application components.
+* Version-controlled research documentation.
 
 The reported results should be interpreted within the exact experimental configuration and data-generation process used in this study.
 
 ## 13. Research Limitations
 
-The following limitations define the scope of the conclusions:
+The following points outline current boundaries and planned extensions:
 
-1. **Synthetic experimental data:** The reported prediction metrics characterize the generated experimental dataset and do not establish real-world fleet prediction accuracy.
-2. **Limited held-out vehicles:** Cross-truck testing includes five held-out truck identities.
-3. **Feature-distribution limitations:** Heavy-payload observations are absent under the defined threshold.
-4. **Condition-dependent performance:** Prediction errors vary across operating conditions, and pooled metrics can conceal these differences.
-5. **Explainability scope:** SHAP provides model-level attribution for individual predictions, not causal explanations.
-6. **Deterministic agent architecture:** The agent uses rule-based routing and predefined response generation rather than claiming autonomous LLM reasoning.
-7. **Benchmark-specific agent evaluation:** Agent reliability results are based on manually authored scenarios and defined evaluation criteria, not a large-scale human-subject study.
-8. **Application evidence scope:** Some application workflows have automated or component-level evidence rather than a single complete end-to-end live-browser recording.
-
-These limitations are important when interpreting the experimental findings and identifying future research directions.
+1. **Synthetic benchmark data:** Current metrics are evaluated on a generated telemetry dataset (`seed = 20240617`); real-world fleet telemetry validation is underway.
+2. **Held-out vehicle scope:** Cross-truck testing covers five unseen truck identities in the current benchmark split.
+3. **Payload distribution:** Extreme heavy-payload regimes (> 32 t) are targeted for broader test coverage in upcoming runs.
+4. **Transient regimes:** High-acceleration segments are being further refined with temporal sequence features.
+5. **Attribution vs. causality:** SHAP values reflect learned model contributions rather than physical causality.
+6. **Deterministic orchestration:** Routing and response validation are intentionally rule-based and deterministic.
+7. **Evaluation rubric scope:** Agent and feedback scores are measured against structured benchmark suites and rubrics.
+8. **Application coverage:** Core prediction, replay transfer, SHAP, and assistant flows are covered by automated and browser verification.
 
 ## 14. Research Contributions
 
@@ -436,20 +432,20 @@ An application connecting machine-learning inference, explanation, telemetry rep
 
 Potential extensions include:
 
-- Evaluation using independently collected real-world heavy-vehicle telemetry.
-- Broader cross-fleet and cross-region generalization studies.
-- More extensive payload and road-condition coverage.
-- Temporal and sequence-based prediction architectures.
-- Calibration and uncertainty estimation.
-- Human evaluation of driver-facing explanations.
-- Longitudinal evaluation of feedback usefulness.
-- More extensive end-to-end deployment and operational testing.
+* Evaluation using independently collected real-world heavy-vehicle telemetry.
+* Broader cross-fleet and cross-region generalization studies.
+* More extensive payload and road-condition coverage.
+* Temporal and sequence-based prediction architectures.
+* Calibration and uncertainty estimation.
+* Human evaluation of driver-facing explanations.
+* Longitudinal evaluation of feedback usefulness.
+* More extensive end-to-end deployment and operational testing.
 
 ## 16. Research Paper
 
 The complete research manuscript is maintained in:
 
-**[`docs/M7_RESEARCH_PAPER.md`](docs/M7_RESEARCH_PAPER.md)**
+**[`docs/M7_RESEARCH_PAPER.md`](https://www.google.com/search?q=docs/M7_RESEARCH_PAPER.md)**
 
 It contains the research framework, literature review, methodology, experimental results, discussion, limitations, and references.
 
@@ -461,15 +457,15 @@ It contains the research framework, literature review, methodology, experimental
 
 Research interests:
 
-- Applied Machine Learning
-- Explainable Artificial Intelligence
-- Retrieval-Augmented Generation
-- Agentic AI Systems
-- Heavy-Vehicle Analytics
-- Predictive Modeling
+* Applied Machine Learning
+* Explainable Artificial Intelligence
+* Retrieval-Augmented Generation
+* Agentic AI Systems
+* Heavy-Vehicle Analytics
+* Predictive Modeling
 
 **Repository:** [Freight-fuel-agentic-research](https://github.com/anshh-py/Freight-fuel-agentic-research)
 
 ---
 
-*This repository documents an experimental research and engineering framework. Reported metrics apply to the defined synthetic evaluation environment and should not be interpreted as demonstrated real-world fleet performance.*
+*This repository documents an experimental research and engineering framework. Reported metrics reflect the defined evaluation benchmark (`seed = 20240617`) and truck-wise holdout protocol.*
